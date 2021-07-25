@@ -1,0 +1,80 @@
+/*
+ *  Project      : Infantry_Neptune
+ * 
+ *  file         : gim_client_ctrl.h
+ *  Description  : This file contains the client functions
+ *  LastEditors  : 动情丶卜灬动心
+ *  Date         : 2021-06-10 23:50:33
+ *  LastEditTime : 2021-07-16 12:04:29
+ */
+
+
+#ifndef GIM_CLIENT_CTRL_H
+#define GIM_CLIENT_CTRL_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "configure.h"
+
+#if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
+
+
+#include "list_lib.h"
+#include "str_lib.h"
+#include "math_alg.h"
+
+typedef struct {
+    char name[3][15];
+    float *value[3];
+    
+    char page_name[15];
+    void (*short_press_handler)(void);
+    void (*lang_press_handler)(void);
+} Client_PageTypeDef;
+
+typedef enum {
+    CLIENT_NULL         = 0,
+    CLIENT_START        = 1,
+    CLIENT_ON           = 2,
+    CLIENT_ERROR_1      = 3,
+    CLIENT_ERROR_2      = 4,
+    CLIENT_ERROR_3      = 5,
+    CLIENT_PAGE         = 6,
+    CLIENT_CODE         = 7
+} Client_InterfaceEnum;
+
+typedef void (*Client_KeyEventHandlerTypeDef)(void);
+
+void Client_Task(void const * argument);
+void Client_Init(void);
+void Client_PageInit(void);
+void Client_CreateNewPage(Client_PageTypeDef *page, const char *val1_name, void *val_1,
+                                                    const char *val2_name, void *val_2,
+                                                    const char *val3_name, void *val_3,
+                                                    const char *page_name,
+                                                    Client_KeyEventHandlerTypeDef key_short,
+                                                    Client_KeyEventHandlerTypeDef key_long);
+static void Client_DisplayCurrentPage(void);
+void Client_KeytHandler(uint32_t message);
+void Client_BackKeyShortHandler(void);
+void Client_BackKeyLongHandler(void);
+static void Client_DisplayInterface(void);
+void Client_ChangeInterface(Client_InterfaceEnum intface);
+
+
+static void shoot_state_func_short_press(void);
+static void shoot_state_func_long_press(void);
+static void periph_state_func_short_press(void);
+static void periph_state_func_long_press(void);
+static void cap_state_func_short_press(void);
+static void cap_state_func_long_press(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+
+#endif
