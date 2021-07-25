@@ -505,7 +505,6 @@ void Motor_SendMotorPWMOutput(Motor_MotorTypeDef* pmotor) {
     //float duty = output * 0.00011136f + 0.53522f;
     float duty = output * 0.00011136f + 0.47522f;
 
-    // float duty = 1000 * 0.00011136f + 0.47522f;
     pmotor->duty = duty;
     //if (duty < 0.58f) duty = 0.58f;
     if (duty < 0.5f)

@@ -141,55 +141,55 @@ void MX_FREERTOS_Init(void) {
 
     /* Create the thread(s) */
     /* definition and creation of defaultTask */
-    osThreadDef(defaultTask, osPriorityNormal, StartDefaultTask, 0, 128);
+    osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
     defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
     /* definition and creation of Gimbal */
-    osThreadDef(Gimbal, osPriorityNormal, Gimbal_Task, 0, 128);
+    osThreadDef(Gimbal, Gimbal_Task, osPriorityNormal, 0, 128);
     GimbalHandle = osThreadCreate(osThread(Gimbal), NULL);
 
     /* definition and creation of BusComm */
-    osThreadDef(BusComm, osPriorityNormal, BusComm_Task, 0, 128);
+    osThreadDef(BusComm, BusComm_Task, osPriorityNormal, 0, 128);
     BusCommHandle = osThreadCreate(osThread(BusComm), NULL);
 
     /* definition and creation of Remote */
-    osThreadDef(Remote, osPriorityNormal, Remote_Task, 0, 128);
+    osThreadDef(Remote, Remote_Task, osPriorityNormal, 0, 128);
     RemoteHandle = osThreadCreate(osThread(Remote), NULL);
 
     /* definition and creation of Chassis */
-    osThreadDef(Chassis, osPriorityNormal, Chassis_Task, 0, 128);
+    osThreadDef(Chassis, Chassis_Task, osPriorityNormal, 0, 128);
     ChassisHandle = osThreadCreate(osThread(Chassis), NULL);
 
     /* definition and creation of SuperCap */
-    osThreadDef(SuperCap, osPriorityNormal, SuperCap_Task, 0, 128);
+    osThreadDef(SuperCap, SuperCap_Task, osPriorityNormal, 0, 128);
     SuperCapHandle = osThreadCreate(osThread(SuperCap), NULL);
 
     /* definition and creation of Shoot */
-    osThreadDef(Shoot, osPriorityHigh, Shoot_Task, 0, 128);
+    osThreadDef(Shoot, Shoot_Task, osPriorityHigh, 0, 128);
     ShootHandle = osThreadCreate(osThread(Shoot), NULL);
 
     /* definition and creation of MiniPC */
-    osThreadDef(MiniPC, osPriorityNormal, MiniPC_Task, 0, 128);
+    osThreadDef(MiniPC, MiniPC_Task, osPriorityNormal, 0, 128);
     MiniPCHandle = osThreadCreate(osThread(MiniPC), NULL);
 
     /* definition and creation of Referee */
-    osThreadDef(Referee, osPriorityNormal, Referee_Task, 0, 128);
+    osThreadDef(Referee, Referee_Task, osPriorityNormal, 0, 128);
     RefereeHandle = osThreadCreate(osThread(Referee), NULL);
 
     /* definition and creation of WatchDog */
-    osThreadDef(WatchDog, osPriorityNormal, WatchDog_Task, 0, 128);
+    osThreadDef(WatchDog, WatchDog_Task, osPriorityNormal, 0, 128);
     WatchDogHandle = osThreadCreate(osThread(WatchDog), NULL);
 
     /* definition and creation of Client */
-    osThreadDef(Client, osPriorityNormal, Client_Task, 0, 128);
+    osThreadDef(Client, Client_Task, osPriorityNormal, 0, 128);
     ClientHandle = osThreadCreate(osThread(Client), NULL);
 
     /* definition and creation of Ins */
-    osThreadDef(Ins, osPriorityNormal, Ins_Task, 0, 128);
+    osThreadDef(Ins, Ins_Task, osPriorityNormal, 0, 128);
     InsHandle = osThreadCreate(osThread(Ins), NULL);
 
     /* definition and creation of Init */
-    osThreadDef(Init, osPriorityNormal, Init_Task, 0, 128);
+    osThreadDef(Init, Init_Task, osPriorityNormal, 0, 128);
     InitHandle = osThreadCreate(osThread(Init), NULL);
 
     /* USER CODE BEGIN RTOS_THREADS */

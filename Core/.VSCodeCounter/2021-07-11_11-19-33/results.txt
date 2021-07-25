@@ -1,0 +1,185 @@
+Date : 2021-07-11 11:19:33
+Directory : e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core
+Total : 140 files,  12973 codes, 6587 comments, 4318 blanks, all 23878 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| C        |         69 |      9,321 |      5,234 |      3,072 |     17,627 |
+| C++      |         71 |      3,652 |      1,353 |      1,246 |      6,251 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                  | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                     |        140 |     12,973 |      6,587 |      4,318 |     23,878 |
+| Inc                                                                                                                   |         71 |      3,652 |      1,353 |      1,246 |      6,251 |
+| Inc\Algorithm                                                                                                         |          7 |        284 |         83 |         98 |        465 |
+| Inc\Chassis_Control                                                                                                   |          4 |        201 |         36 |         67 |        304 |
+| Inc\Common_Contrrol                                                                                                   |          4 |        146 |         45 |         56 |        247 |
+| Inc\Const                                                                                                             |          7 |        218 |         83 |        100 |        401 |
+| Inc\Gimbal_Control                                                                                                    |          7 |        385 |         63 |        133 |        581 |
+| Inc\Library                                                                                                           |          4 |         77 |         36 |         40 |        153 |
+| Inc\Peripheral                                                                                                        |         13 |      1,336 |        162 |        313 |      1,811 |
+| Inc\SuperCap_Control                                                                                                  |          1 |         45 |          9 |         16 |         70 |
+| Inc\Utility                                                                                                           |          9 |        256 |         82 |        122 |        460 |
+| Src                                                                                                                   |         69 |      9,321 |      5,234 |      3,072 |     17,627 |
+| Src\Algorithm                                                                                                         |          7 |        873 |        500 |        225 |      1,598 |
+| Src\Chassis_Control                                                                                                   |          4 |        576 |        356 |        227 |      1,159 |
+| Src\Common_Contrrol                                                                                                   |          4 |        640 |        121 |        149 |        910 |
+| Src\Const                                                                                                             |          7 |        709 |        215 |        231 |      1,155 |
+| Src\Gimbal_Control                                                                                                    |          7 |      1,638 |        609 |        468 |      2,715 |
+| Src\Library                                                                                                           |          4 |        181 |        138 |         85 |        404 |
+| Src\Peripheral                                                                                                        |         11 |      2,004 |      1,018 |        655 |      3,677 |
+| Src\SuperCap_Control                                                                                                  |          1 |        101 |         54 |         38 |        193 |
+| Src\Utility                                                                                                           |          9 |        656 |        444 |        238 |      1,338 |
++-----------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                                              | language | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\adrc_alg.h               | C++      |         43 |          9 |         18 |         70 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\ahrs_alg.h               | C++      |         18 |          9 |         10 |         37 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\crc_alg.h                | C++      |         26 |          9 |         12 |         47 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\filter_alg.h             | C++      |         35 |          9 |         12 |         56 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\kalman_alg.h             | C++      |         59 |         14 |         15 |         88 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\math_alg.h               | C++      |         45 |         22 |         13 |         80 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Algorithm\pid_alg.h                | C++      |         58 |         11 |         18 |         87 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Chassis_Control\cha_chassis_ctrl.h | C++      |         65 |          9 |         18 |         92 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Chassis_Control\cha_gimbal_ctrl.h  | C++      |         56 |          9 |         17 |         82 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Chassis_Control\cha_power_ctrl.h   | C++      |         39 |          9 |         16 |         64 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Chassis_Control\cha_referee_ctrl.h | C++      |         41 |          9 |         16 |         66 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Code_specification.h               | C++      |          0 |        181 |          2 |        183 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Common_Contrrol\buscomm_cmd.h      | C++      |         33 |          9 |         16 |         58 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Common_Contrrol\buscomm_ctrl.h     | C++      |         89 |         18 |         22 |        129 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Common_Contrrol\init_ctrl.h        | C++      |         12 |          9 |          8 |         29 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Common_Contrrol\watchdog_ctrl.h    | C++      |         12 |          9 |         10 |         31 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\const.h                      | C++      |        140 |         29 |         45 |        214 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\infantry3_const.h            | C++      |         13 |          9 |         10 |         32 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\infantry4_const.h            | C++      |         13 |          9 |          9 |         31 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\infantry5_const.h            | C++      |         13 |          9 |          8 |         30 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\infantry6_const.h            | C++      |         13 |          9 |          9 |         31 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\infantry7_const.h            | C++      |         13 |          9 |          9 |         31 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Const\infantry8_const.h            | C++      |         13 |          9 |         10 |         32 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\FreeRTOSConfig.h                   | C++      |         57 |         74 |         18 |        149 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_client_ctrl.h   | C++      |         41 |          9 |         14 |         64 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_gimbal_ctrl.h   | C++      |         68 |          9 |         20 |         97 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_ins_ctrl.h      | C++      |         51 |          9 |         25 |         85 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_login_ctrl.h    | C++      |         41 |          9 |         16 |         66 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_miniPC_ctrl.h   | C++      |         54 |          9 |         20 |         83 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_remote_ctrl.h   | C++      |         40 |          9 |         13 |         62 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Gimbal_Control\gim_shoot_ctrl.h    | C++      |         90 |          9 |         25 |        124 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Library\buff_lib.h                 | C++      |         18 |          9 |         10 |         37 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Library\list_lib.h                 | C++      |         34 |          9 |         12 |         55 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Library\log_lib.h                  | C++      |         10 |          9 |         10 |         29 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Library\str_lib.h                  | C++      |         15 |          9 |          8 |         32 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\BMI0xx_reg.h            | C++      |        206 |         17 |         54 |        277 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\imu_periph.h            | C++      |        121 |          9 |         25 |        155 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\key_periph.h            | C++      |         21 |          9 |         11 |         41 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\led_periph.h            | C++      |         29 |          9 |         14 |         52 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\magnetic_periph.h       | C++      |         43 |          9 |         14 |         66 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\miniPC_periph.h         | C++      |         49 |         11 |         18 |         78 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\motor_periph.h          | C++      |         98 |         14 |         27 |        139 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\oled_font.h             | C++      |        236 |         11 |          9 |        256 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\oled_periph.h           | C++      |         45 |          9 |         20 |         74 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\referee_periph.h        | C++      |        356 |         34 |         71 |        461 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\remote_periph.h         | C++      |         64 |          9 |         19 |         92 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\sensor_periph.h         | C++      |         38 |         12 |         16 |         66 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Peripheral\servo_periph.h          | C++      |         30 |          9 |         15 |         54 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\SuperCap_Control\supercap_ctrl.h   | C++      |         45 |          9 |         16 |         70 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\adc_util.h                 | C++      |         19 |          9 |         14 |         42 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\can_util.h                 | C++      |         19 |          9 |         10 |         38 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\dac_util.h                 | C++      |         30 |          9 |         14 |         53 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\flash_util.h               | C++      |         39 |         10 |         14 |         63 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\gpio_util.h                | C++      |         54 |          9 |         25 |         88 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\i2c_util.h                 | C++      |         19 |          9 |          9 |         37 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\pwm_util.h                 | C++      |         32 |          9 |         13 |         54 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\spi_util.h                 | C++      |         22 |          9 |         12 |         43 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\Utility\uart_util.h                | C++      |         22 |          9 |         11 |         42 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\adc.h                              | C++      |         12 |         27 |         14 |         53 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\can.h                              | C++      |         14 |         27 |         14 |         55 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\configure.h                        | C++      |        104 |         48 |         35 |        187 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\dac.h                              | C++      |         12 |         27 |         14 |         53 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\dma.h                              | C++      |         11 |         28 |         14 |         53 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\gpio.h                             | C++      |         11 |         27 |         12 |         50 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\i2c.h                              | C++      |         14 |         27 |         14 |         55 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\main.h                             | C++      |         98 |         41 |         19 |        158 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\spi.h                              | C++      |         12 |         27 |         14 |         53 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\stm32f4xx_hal_conf.h               | C++      |        277 |        130 |         86 |        493 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\stm32f4xx_it.h                     | C++      |         29 |         36 |         16 |         81 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\tim.h                              | C++      |         33 |         27 |         15 |         75 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Inc\usart.h                            | C++      |         20 |         27 |         14 |         61 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\adrc_alg.c               | C        |         84 |         39 |         28 |        151 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\ahrs_alg.c               | C        |        143 |         68 |         35 |        246 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\crc_alg.c                | C        |        133 |         63 |         23 |        219 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\filter_alg.c             | C        |         44 |         35 |         11 |         90 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\kalman_alg.c             | C        |        274 |        155 |         60 |        489 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\math_alg.c               | C        |         96 |         59 |         18 |        173 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Algorithm\pid_alg.c                | C        |         99 |         81 |         50 |        230 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Chassis_Control\cha_chassis_ctrl.c | C        |        188 |        104 |         64 |        356 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Chassis_Control\cha_gimbal_ctrl.c  | C        |        106 |         72 |         52 |        230 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Chassis_Control\cha_power_ctrl.c   | C        |         72 |         40 |         24 |        136 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Chassis_Control\cha_referee_ctrl.c | C        |        210 |        140 |         87 |        437 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Common_Contrrol\buscomm_cmd.c      | C        |        223 |         11 |         38 |        272 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Common_Contrrol\buscomm_ctrl.c     | C        |        314 |         72 |         72 |        458 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Common_Contrrol\init_ctrl.c        | C        |         68 |         22 |         29 |        119 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Common_Contrrol\watchdog_ctrl.c    | C        |         35 |         16 |         10 |         61 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\const.c                      | C        |        169 |         41 |         54 |        264 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\infantry3_const.c            | C        |         90 |         29 |         27 |        146 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\infantry4_const.c            | C        |         90 |         29 |         30 |        149 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\infantry5_const.c            | C        |         90 |         29 |         30 |        149 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\infantry6_const.c            | C        |         90 |         29 |         30 |        149 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\infantry7_const.c            | C        |         90 |         29 |         30 |        149 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Const\infantry8_const.c            | C        |         90 |         29 |         30 |        149 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_client_ctrl.c   | C        |        201 |         59 |         57 |        317 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_gimbal_ctrl.c   | C        |        170 |         78 |         59 |        307 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_ins_ctrl.c      | C        |        176 |         43 |         48 |        267 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_login_ctrl.c    | C        |        223 |         43 |         54 |        320 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_miniPC_ctrl.c   | C        |        226 |        121 |         62 |        409 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_remote_ctrl.c   | C        |        341 |        120 |         94 |        555 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Gimbal_Control\gim_shoot_ctrl.c    | C        |        301 |        145 |         94 |        540 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Library\buff_lib.c                 | C        |         36 |         47 |         15 |         98 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Library\list_lib.c                 | C        |         98 |         62 |         54 |        214 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Library\log_lib.c                  | C        |          1 |          9 |          2 |         12 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Library\str_lib.c                  | C        |         46 |         20 |         14 |         80 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\imu_periph.c            | C        |        321 |        118 |        125 |        564 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\key_periph.c            | C        |         43 |         19 |         12 |         74 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\led_periph.c            | C        |         29 |         42 |         15 |         86 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\magnetic_periph.c       | C        |         71 |         34 |         29 |        134 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\miniPC_periph.c         | C        |        177 |         75 |         63 |        315 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\motor_periph.c          | C        |        369 |        174 |         85 |        628 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\oled_periph.c           | C        |        199 |         96 |         51 |        346 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\referee_periph.c        | C        |        598 |        296 |        194 |      1,088 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\remote_periph.c         | C        |        128 |         79 |         36 |        243 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\sensor_periph.c         | C        |         36 |         37 |         22 |         95 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Peripheral\servo_periph.c          | C        |         33 |         48 |         23 |        104 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\SuperCap_Control\supercap_ctrl.c   | C        |        101 |         54 |         38 |        193 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\adc_util.c                 | C        |         17 |         26 |         14 |         57 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\can_util.c                 | C        |         71 |         49 |         27 |        147 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\dac_util.c                 | C        |         34 |         33 |         19 |         86 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\flash_util.c               | C        |        159 |         47 |         34 |        240 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\gpio_util.c                | C        |         93 |         34 |         29 |        156 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\i2c_util.c                 | C        |         53 |         56 |         22 |        131 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\pwm_util.c                 | C        |         50 |         38 |         23 |        111 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\spi_util.c                 | C        |         92 |         67 |         36 |        195 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\Utility\uart_util.c                | C        |         87 |         94 |         34 |        215 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\adc.c                              | C        |         82 |         62 |         30 |        174 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\can.c                              | C        |        101 |         78 |         42 |        221 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\dac.c                              | C        |         38 |         51 |         28 |        117 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\dma.c                              | C        |         20 |         41 |         14 |         75 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\freertos.c                         | C        |        162 |        203 |         54 |        419 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\gpio.c                             | C        |         42 |         46 |         22 |        110 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\i2c.c                              | C        |         76 |         74 |         43 |        193 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\main.c                             | C        |        123 |        114 |         38 |        275 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\spi.c                              | C        |         78 |         55 |         31 |        164 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\stm32f4xx_hal_msp.c                | C        |          7 |         55 |         25 |         87 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\stm32f4xx_hal_timebase_tim.c       | C        |         34 |         65 |         13 |        112 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\stm32f4xx_it.c                     | C        |        105 |        196 |         75 |        376 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\system_stm32f4xx.c                 | C        |        346 |        321 |         83 |        750 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\tim.c                              | C        |        473 |        249 |        157 |        879 |
+| e:\robomaster\RM2021\Infantry_code\Infantry_Neptune_Code\Infantry_Neptune\Core\Src\usart.c                            | C        |        256 |        169 |        101 |        526 |
+| Total                                                                                                                 |          |     12,973 |      6,587 |      4,318 |     23,878 |
++-----------------------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
