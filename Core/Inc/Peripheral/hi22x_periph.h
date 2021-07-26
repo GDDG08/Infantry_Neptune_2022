@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-14 11:13:01
  */
 
-
 #ifndef HI22X_PERIPH_H
 #define HI22X_PERIPH_H
 
@@ -22,14 +21,12 @@ extern "C" {
 
 #include "main.h"
 
-
-
 typedef enum {
-    HI22X_STATE_NULL      = 0,
+    HI22X_STATE_NULL = 0,
     HI22X_STATE_CONNECTED = 1,
-    HI22X_STATE_LOST      = 2,
-    HI22X_STATE_ERROR     = 3,
-    HI22X_STATE_PENDING   = 4
+    HI22X_STATE_LOST = 2,
+    HI22X_STATE_ERROR = 3,
+    HI22X_STATE_PENDING = 4
 } HI22X_HI22XStateEnum;
 
 typedef struct {
@@ -64,11 +61,10 @@ typedef struct {
 
     float yaw_angle_offset;
     float pitch_angle_offset;
-    
+
     HI22X_HI22XStateEnum state;
     uint32_t last_update_time;
 } HI22X_HI22XDataTypeDef;
-
 
 HI22X_HI22XDataTypeDef* HI22X_GetHI22XDataPtr(void);
 uint8_t HI22X_Init(void);

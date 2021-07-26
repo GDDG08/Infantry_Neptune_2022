@@ -12,7 +12,6 @@
 
 #if __FN_IF_ENABLE(__FN_UTIL_I2C)
 
-
 /**
   * @brief          Write data or command to i2c address
   * @param          hi2c: The i2c handle
@@ -21,8 +20,7 @@
   * @param          len: The data length
   * @retval         NULL
   */
-void I2c_MasterSendMessage(I2C_HandleTypeDef *hi2c, uint16_t address, uint8_t *pData, uint16_t len) {
-    
+void I2c_MasterSendMessage(I2C_HandleTypeDef* hi2c, uint16_t address, uint8_t* pData, uint16_t len) {
     if ((hi2c == NULL) || (pData == NULL)) {
         I2c_ErrorHandler(HAL_ERROR);
     }
@@ -32,7 +30,6 @@ void I2c_MasterSendMessage(I2C_HandleTypeDef *hi2c, uint16_t address, uint8_t *p
     }
 }
 
-
 /**
   * @brief          Write a byte to register by i2c
   * @param          hi2c: The i2c handle
@@ -41,8 +38,7 @@ void I2c_MasterSendMessage(I2C_HandleTypeDef *hi2c, uint16_t address, uint8_t *p
   * @param          data: To be sent data
   * @retval         NULL
   */
-void I2c_WriteSingleReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, uint8_t data) {
-
+void I2c_WriteSingleReg(I2C_HandleTypeDef* hi2c, uint16_t address, uint16_t reg, uint8_t data) {
     if (hi2c == NULL) {
         I2c_ErrorHandler(HAL_ERROR);
     }
@@ -52,7 +48,6 @@ void I2c_WriteSingleReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg,
     }
 }
 
-
 /**
   * @brief          Write a data or command to i2c by register address
   * @param          hi2c: The i2c handle
@@ -61,8 +56,7 @@ void I2c_WriteSingleReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg,
   * @param          res: The returned register data
   * @retval         NULL
   */
-void I2c_ReadSingleReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, uint8_t *res) {
-
+void I2c_ReadSingleReg(I2C_HandleTypeDef* hi2c, uint16_t address, uint16_t reg, uint8_t* res) {
     if ((hi2c == NULL) || (res == NULL)) {
         I2c_ErrorHandler(HAL_ERROR);
     }
@@ -71,7 +65,6 @@ void I2c_ReadSingleReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, 
         I2c_ErrorHandler(ret);
     }
 }
-
 
 /**
   * @brief          Write multiple data or command to i2c by register address
@@ -82,8 +75,7 @@ void I2c_ReadSingleReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, 
   * @param          res: The returned register data
   * @retval         NULL
   */
-void I2c_ReadMuliReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, uint8_t len, uint8_t *res) {
-
+void I2c_ReadMuliReg(I2C_HandleTypeDef* hi2c, uint16_t address, uint16_t reg, uint8_t len, uint8_t* res) {
     if ((hi2c == NULL) || (res == NULL)) {
         I2c_ErrorHandler(HAL_ERROR);
     }
@@ -92,7 +84,6 @@ void I2c_ReadMuliReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, ui
         I2c_ErrorHandler(ret);
     }
 }
-
 
 /**
   * @brief          write multiple byte of ist8310 by i2c
@@ -103,8 +94,7 @@ void I2c_ReadMuliReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint16_t reg, ui
   * @param          len: The data length
   * @retval         NULL
   */
-void I2c_WriteMuliReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint8_t reg, uint8_t *pData, uint8_t len) {
-
+void I2c_WriteMuliReg(I2C_HandleTypeDef* hi2c, uint16_t address, uint8_t reg, uint8_t* pData, uint8_t len) {
     if ((hi2c == NULL) || (pData == NULL)) {
         I2c_ErrorHandler(HAL_ERROR);
     }
@@ -113,7 +103,6 @@ void I2c_WriteMuliReg(I2C_HandleTypeDef *hi2c, uint16_t address, uint8_t reg, ui
         I2c_ErrorHandler(ret);
     }
 }
-
 
 /**
   * @brief      I2C error handler
@@ -125,6 +114,5 @@ void I2c_ErrorHandler(uint32_t ret) {
         return;
     }
 }
-
 
 #endif

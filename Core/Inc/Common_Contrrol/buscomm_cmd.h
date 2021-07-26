@@ -13,7 +13,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -48,7 +48,6 @@ extern BusCmd_TableEntry Buscmd_Receive[8];
 extern BusCmd_TableEntry Buscmd_GimSend[4];
 extern BusCmd_TableEntry Buscmd_ChaSend[2];
 extern BusCmd_TableEntry Buscmd_CapSend[1];
-
 
 #endif
 

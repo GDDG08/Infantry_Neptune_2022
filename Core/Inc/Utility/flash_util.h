@@ -8,13 +8,12 @@
  *  LastEditTime : 2021-07-16 04:12:33
  */
 
-
 #ifndef FLASH_UTIL_H
 #define FLASH_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -42,15 +41,15 @@ extern "C" {
 #define ADDR_FLASH_SECTOR_10 ((uint32_t)0x080C0000) /* Base address of Sector 10, 128 Kbytes */
 #define ADDR_FLASH_SECTOR_11 ((uint32_t)0x080E0000) /* Base address of Sector 11, 128 Kbytes */
 
-#define FLASH_END_ADDR ((uint32_t)0x08100000)       /* Base address of Sector 23, 128 Kbytes */
+#define FLASH_END_ADDR ((uint32_t)0x08100000) /* Base address of Sector 23, 128 Kbytes */
 
 #define FLASH_READDATA(add, x) Flash_ReadData((add), (&(x)), sizeof(x))
 #define FLASH_WRITEDATA(add, x) Flash_WriteSingleAddress((add), (&(x)), sizeof(x))
 
 void Flash_EraseAddress(uint32_t address, uint16_t page);
-uint8_t Flash_WriteSingleAddress(uint32_t start_address, uint32_t *buff, uint32_t len);
-uint8_t Flash_WriteMuliAddress(uint32_t start_address, uint32_t end_address, uint32_t *buff, uint32_t len);
-void Flash_ReadData(uint32_t address, uint32_t *buff, uint32_t len);
+uint8_t Flash_WriteSingleAddress(uint32_t start_address, uint32_t* buff, uint32_t len);
+uint8_t Flash_WriteMuliAddress(uint32_t start_address, uint32_t end_address, uint32_t* buff, uint32_t len);
+void Flash_ReadData(uint32_t address, uint32_t* buff, uint32_t len);
 uint32_t Flash_GetSector(uint32_t address);
 uint32_t Flash_GetNextSector(uint32_t address);
 

@@ -22,8 +22,8 @@ extern "C" {
 #include "pwm_util.h"
 
 typedef enum {
-    Servo_OFF   = 0,
-    Servo_ON    = 1
+    Servo_OFF = 0,
+    Servo_ON = 1
 } Servo_ServoStateEnum;
 
 typedef struct {
@@ -32,9 +32,7 @@ typedef struct {
     Servo_ServoStateEnum state;
 } Servo_ServoTypeDef;
 
-
 extern Servo_ServoTypeDef Servo_ammoContainerCapServo;
-
 
 void Servo_InitAllServos(void);
 Servo_ServoStateEnum Servo_GetServoState(Servo_ServoTypeDef* servo);

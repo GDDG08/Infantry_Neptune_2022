@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-09 05:28:19
  */
 
-
 #ifndef ADRC_ALG_H
 #define ADRC_ALG_H
 
@@ -43,27 +42,24 @@ typedef struct {
 
     float beta_0;
     float beta_1;
-    float beta_2;       // u0=beta_1*e1+beta_2*e2+(beta_0*e0);
+    float beta_2;  // u0=beta_1*e1+beta_2*e2+(beta_0*e0);
 
-    float alpha1;       // u0=beta_1*fal(e1,alpha1,zeta)+beta_2*fal(e2,alpha2,zeta)
-    float alpha2;       // 0<alpha1<1<alpha2
+    float alpha1;  // u0=beta_1*fal(e1,alpha1,zeta)+beta_2*fal(e2,alpha2,zeta)
+    float alpha2;  // 0<alpha1<1<alpha2
     float zeta;
 
-    float h1;           // u0=-fhan(e1,e2,r,h1);
+    float h1;  // u0=-fhan(e1,e2,r,h1);
     uint16_t N1;
 
-    float c;            // u0=-fhan(e1,c*e2*e2,r,h1);
+    float c;  // u0=-fhan(e1,c*e2*e2,r,h1);
     float b0;
 
 } ADRC_FhanDataTypeDef;
 
-
-
-void ADRC_Init(ADRC_FhanDataTypeDef *fhan_input1, ADRC_FhanDataTypeDef *fhan_input2, float adrc_unit[][15]);
-void Fhan_ADRC(ADRC_FhanDataTypeDef *fhan_input, float expect_ADRC);
-void ADRS_ESO(ADRC_FhanDataTypeDef *fhan_input);
-void ADRC_NolinearConbination(ADRC_FhanDataTypeDef *fhan_input);
-float ADRC_Calc(ADRC_FhanDataTypeDef *fhan_input, float expect_ADRC, float feedback_ADRC);
+void ADRC_Init(ADRC_FhanDataTypeDef* fhan_input1, ADRC_FhanDataTypeDef* fhan_input2, float adrc_unit[][15]);
+void Fhan_ADRC(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC);
+void ADRS_ESO(ADRC_FhanDataTypeDef* fhan_input);
+void ADRC_NolinearConbination(ADRC_FhanDataTypeDef* fhan_input);
+float ADRC_Calc(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC, float feedback_ADRC);
 
 #endif
-

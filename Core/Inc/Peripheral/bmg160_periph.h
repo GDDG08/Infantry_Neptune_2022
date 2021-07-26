@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-16 02:50:51
  */
 
-
 #ifndef BMG160_PERIPH_H
 #define BMG160_PERIPH_H
 
@@ -17,15 +16,15 @@
 #include <stddef.h>
 
 /*signed integer types*/
-typedef signed char int8_t; /**< used for signed 8bit */
+typedef signed char int8_t;       /**< used for signed 8bit */
 typedef signed short int int16_t; /**< used for signed 16bit */
-typedef signed int int32_t; /**< used for signed 32bit */
+typedef signed int int32_t;       /**< used for signed 32bit */
 typedef signed long long int s64; /**< used for signed 64bit */
 /*unsigned integer types*/
-typedef unsigned char uint8_t; /**< used for unsigned 8bit */
+typedef unsigned char uint8_t;       /**< used for unsigned 8bit */
 typedef unsigned short int uint16_t; /**< used for unsigned 16bit */
-typedef unsigned int uint32_t; /**< used for unsigned 32bit */
-typedef unsigned long long int u64; /**< used for unsigned 64bit */
+typedef unsigned int uint32_t;       /**< used for unsigned 32bit */
+typedef unsigned long long int u64;  /**< used for unsigned 64bit */
 
 /***************************************************************/
 /**\name    BUS READ AND WRITE FUNCTION POINTERS        */
@@ -59,7 +58,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
  * BMG160_BUS_WR_PARAM_TYPE to function calls used inside the API
  */
 #define BMG160_BUS_WR_PARAM_TYPES uint8_t, uint8_t, \
-    uint8_t *, uint8_t
+                                  uint8_t*, uint8_t
 
 /* links the order of parameters defined in
  * BMG160_BUS_WR_PARAM_TYPE to function calls used inside the API
@@ -68,7 +67,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
                                   register_data, wr_len)
 
 /* never change this line */
-#define BMG160_BUS_WRITE_FUNC(device_addr, register_addr, \
+#define BMG160_BUS_WRITE_FUNC(device_addr, register_addr,                                  \
                               register_data, wr_len) bus_write(device_addr, register_addr, \
                                                                register_data, wr_len)
 
@@ -103,7 +102,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /* defines the calling parameter types of the BMG160_RD_FUNCTION
  */
 #define BMG160_BUS_RD_PARAM_TYPES uint8_t, uint8_t, \
-    uint8_t *, uint8_t
+                                  uint8_t*, uint8_t
 
 /* links the order of parameters defined in \
  * BMG160_BUS_RD_PARAM_TYPE to function calls used inside the API
@@ -112,9 +111,9 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
                                    register_data)
 
 /* never change this line */
-#define BMG160_BUS_READ_FUNC(device_addr, register_addr, \
-                             register_data, rd_len)bus_read(device_addr, register_addr, \
-                                                            register_data, rd_len)
+#define BMG160_BUS_READ_FUNC(device_addr, register_addr,                                 \
+                             register_data, rd_len) bus_read(device_addr, register_addr, \
+                                                             register_data, rd_len)
 
 /* defines the return parameter type of the BMG160_RD_FUNCTION
  */
@@ -123,7 +122,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /* defines the calling parameter types of the BMG160_RD_FUNCTION
  */
 #define BMG160_BURST_RD_PARAM_TYPES uint8_t, \
-    uint8_t, uint8_t *, int32_t
+                                    uint8_t, uint8_t*, int32_t
 
 /* links the order of parameters defined in \
  * BMG160_BURST_RD_PARAM_TYPE to function calls used inside the API
@@ -132,14 +131,14 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
                                      register_data)
 
 /* never change this line */
-#define BMG160_BURST_READ_FUNC(device_addr, register_addr, \
+#define BMG160_BURST_READ_FUNC(device_addr, register_addr,                    \
                                register_data, rd_len) burst_read(device_addr, \
                                                                  register_addr, register_data, rd_len)
 
 /*!
  * @brief defines the return parameter type of the BMG160_DELAY_FUNCTION
  */
-#define BMG160_DELAY_RETURN_TYPE    void
+#define BMG160_DELAY_RETURN_TYPE void
 
 /* never change this line */
 #define BMG160_DELAY_FUNC(delay_in_msec) \
@@ -184,7 +183,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_RATE_Z_MSB_ADDR (0x07)
 
 /**<        Address of Z axis Rate MSB Register       */
-#define BMG160_TEMP_ADDR       (0x08)
+#define BMG160_TEMP_ADDR (0x08)
 
 /**<        Address of Temperature Data LSB Register  */
 /*******************************************/
@@ -202,25 +201,25 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_STAT3_ADDR (0x0C)
 
 /**<        Address of Interrupt status Register     */
-#define BMG160_FIFO_STAT_ADDR  (0x0E)
+#define BMG160_FIFO_STAT_ADDR (0x0E)
 
 /**<        Address of FIFO status Register           */
 /*******************************************/
 /**\name    CONTROL REGISTER    */
 /*******************************************/
-#define BMG160_RANGE_ADDR        (0x0F)
+#define BMG160_RANGE_ADDR (0x0F)
 
 /**<        Address of Range address Register     */
-#define BMG160_BW_ADDR           (0x10)
+#define BMG160_BW_ADDR (0x10)
 
 /**<        Address of Bandwidth Register         */
-#define BMG160_MODE_LPM1_ADDR    (0x11)
+#define BMG160_MODE_LPM1_ADDR (0x11)
 
 /**<        Address of Mode LPM1 Register         */
-#define BMG160_MODE_LPM2_ADDR    (0x12)
+#define BMG160_MODE_LPM2_ADDR (0x12)
 
 /**<        Address of Mode LPM2 Register         */
-#define BMG160_HIGH_BW_ADDR      (0x13)
+#define BMG160_HIGH_BW_ADDR (0x13)
 
 /**<        Address of Rate HIGH_BW Register       */
 #define BMG160_BGW_SOFT_RST_ADDR (0x14)
@@ -229,34 +228,34 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /*******************************************/
 /**\name    INTERRUPT STATUS REGISTERS    */
 /*******************************************/
-#define BMG160_INTR_ENABLE0_ADDR  (0x15)
+#define BMG160_INTR_ENABLE0_ADDR (0x15)
 
 /**<        Address of Interrupt Enable             */
-#define BMG160_INTR_ENABLE1_ADDR  (0x16)
+#define BMG160_INTR_ENABLE1_ADDR (0x16)
 
 /**<        Address of Interrupt Enable             */
 #define BMG160_INTR_MAP_ZERO_ADDR (0x17)
 
 /**<        Address of Interrupt MAP                */
-#define BMG160_INTR_MAP_ONE_ADDR  (0x18)
+#define BMG160_INTR_MAP_ONE_ADDR (0x18)
 
 /**<        Address of Interrupt MAP                */
-#define BMG160_INTR_MAP_TWO_ADDR  (0x19)
+#define BMG160_INTR_MAP_TWO_ADDR (0x19)
 
 /**<        Address of Interrupt MAP                */
-#define BMG160_INTR_ZERO_ADDR     (0x1A)
+#define BMG160_INTR_ZERO_ADDR (0x1A)
 
 /**<        Address of Interrupt  register   */
-#define BMG160_INTR_ONE_ADDR      (0x1B)
+#define BMG160_INTR_ONE_ADDR (0x1B)
 
 /**<        Address of Interrupt  register   */
-#define BMG160_INTR_TWO_ADDR      (0x1C)
+#define BMG160_INTR_TWO_ADDR (0x1C)
 
 /**<        Address of Interrupt  register   */
-#define BMG160_INTR_4_ADDR        (0x1E)
+#define BMG160_INTR_4_ADDR (0x1E)
 
 /**<        Address of Interrupt register   */
-#define BMG160_RST_LATCH_ADDR     (0x21)
+#define BMG160_RST_LATCH_ADDR (0x21)
 
 /**<        Address of Reset Latch Register           */
 /***********************************************/
@@ -265,22 +264,22 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_HIGHRATE_THRES_X_ADDR (0x22)
 
 /**<        Address of High Th x Address register     */
-#define BMG160_HIGHRATE_DURN_X_ADDR  (0x23)
+#define BMG160_HIGHRATE_DURN_X_ADDR (0x23)
 
 /**<        Address of High Dur x Address register    */
 #define BMG160_HIGHRATE_THRES_Y_ADDR (0x24)
 
 /**<        Address of High Th y  Address register    */
-#define BMG160_HIGHRATE_DURN_Y_ADDR  (0x25)
+#define BMG160_HIGHRATE_DURN_Y_ADDR (0x25)
 
 /**<        Address of High Dur y Address register    */
 #define BMG160_HIGHRATE_THRES_Z_ADDR (0x26)
 
 /**<        Address of High Th z Address register  */
-#define BMG160_HIGHRATE_DURN_Z_ADDR  (0x27)
+#define BMG160_HIGHRATE_DURN_Z_ADDR (0x27)
 
 /**<        Address of High Dur z Address register  */
-#define BMG160_SOC_ADDR              (0x31)
+#define BMG160_SOC_ADDR (0x31)
 
 /**<        Address of SOC register        */
 /***********************************************/
@@ -295,7 +294,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_TRIM_NVM_CTRL_ADDR (0x33)
 
 /**<        Address of Trim NVM control register    */
-#define BMG160_BGW_SPI3_WDT_ADDR  (0x34)
+#define BMG160_BGW_SPI3_WDT_ADDR (0x34)
 
 /**<        Address of BGW SPI3,WDT Register           */
 /***********************************************/
@@ -305,19 +304,19 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_OFFSET_OFC1_ADDR (0x36)
 
 /**<        Address of OFC1 Register          */
-#define BMG160_OFC2_ADDR        (0x37)
+#define BMG160_OFC2_ADDR (0x37)
 
 /**<        Address of OFC2 Register          */
-#define BMG160_OFC3_ADDR        (0x38)
+#define BMG160_OFC3_ADDR (0x38)
 
 /**<        Address of OFC3 Register          */
-#define BMG160_OFC4_ADDR        (0x39)
+#define BMG160_OFC4_ADDR (0x39)
 
 /**<        Address of OFC4 Register          */
-#define BMG160_TRIM_GP0_ADDR    (0x3A)
+#define BMG160_TRIM_GP0_ADDR (0x3A)
 
 /**<        Address of Trim GP0 Register              */
-#define BMG160_TRIM_GP1_ADDR    (0x3B)
+#define BMG160_TRIM_GP1_ADDR (0x3B)
 
 /**<        Address of Trim GP1 Register              */
 /***********************************************/
@@ -343,12 +342,12 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /**\name    FIFO DEFINITIONS  */
 /***********************************************/
-#define BMG160_FIFO_XYZ_DATA_ENABLED           (0x00)
-#define BMG160_FIFO_TAG_ENABLED                (0x01)
-#define BMG160_FIFO_XYZ_AXES_TAG_FRAME_SIZE    (8)
-#define BMG160_FIFO_XYZ_AXES_FRAME_SIZE        (6)
+#define BMG160_FIFO_XYZ_DATA_ENABLED (0x00)
+#define BMG160_FIFO_TAG_ENABLED (0x01)
+#define BMG160_FIFO_XYZ_AXES_TAG_FRAME_SIZE (8)
+#define BMG160_FIFO_XYZ_AXES_FRAME_SIZE (6)
 #define BMG160_FIFO_SINGLE_AXIS_TAG_FRAME_SIZE (4)
-#define BMG160_FIFO_SINGLE_AXIS_FRAME_SIZE     (2)
+#define BMG160_FIFO_SINGLE_AXIS_FRAME_SIZE (2)
 
 /***********************************************/
 /**\name    BIT LENGTH, MASK, POSITION FOR THE DATA REGISTERS  */
@@ -390,23 +389,23 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_STAT0_ANY_MOTION_INTR__REG (BMG160_INTR_STAT0_ADDR)
 
 /**< 1st bit of Interrupt status register */
-#define BMG160_INTR_STAT0_HIGHRATE_INTR__POS   (1)
-#define BMG160_INTR_STAT0_HIGHRATE_INTR__LEN   (1)
-#define BMG160_INTR_STAT0_HIGHRATE_INTR__MSK   (0x02)
-#define BMG160_INTR_STAT0_HIGHRATE_INTR__REG   (BMG160_INTR_STAT0_ADDR)
+#define BMG160_INTR_STAT0_HIGHRATE_INTR__POS (1)
+#define BMG160_INTR_STAT0_HIGHRATE_INTR__LEN (1)
+#define BMG160_INTR_STAT0_HIGHRATE_INTR__MSK (0x02)
+#define BMG160_INTR_STAT0_HIGHRATE_INTR__REG (BMG160_INTR_STAT0_ADDR)
 
 /**< 1st and 2nd bit of Interrupt status  register */
-#define BMG160_INTR_STAT_ZERO__POS             (1)
-#define BMG160_INTR_STAT_ZERO__LEN             (2)
-#define BMG160_INTR_STAT_ZERO__MSK             (0x06)
-#define BMG160_INTR_STAT_ZERO__REG             (BMG160_INTR_STAT0_ADDR)
+#define BMG160_INTR_STAT_ZERO__POS (1)
+#define BMG160_INTR_STAT_ZERO__LEN (2)
+#define BMG160_INTR_STAT_ZERO__MSK (0x06)
+#define BMG160_INTR_STAT_ZERO__REG (BMG160_INTR_STAT0_ADDR)
 
 /* Interrupt status (1) Register */
 /**< 7th bit of Interrupt status  register */
-#define BMG160_INTR_STAT1_DATA_INTR__POS       (7)
-#define BMG160_INTR_STAT1_DATA_INTR__LEN       (1)
-#define BMG160_INTR_STAT1_DATA_INTR__MSK       (0x80)
-#define BMG160_INTR_STAT1_DATA_INTR__REG       (BMG160_INTR_STAT1_ADDR)
+#define BMG160_INTR_STAT1_DATA_INTR__POS (7)
+#define BMG160_INTR_STAT1_DATA_INTR__LEN (1)
+#define BMG160_INTR_STAT1_DATA_INTR__MSK (0x80)
+#define BMG160_INTR_STAT1_DATA_INTR__REG (BMG160_INTR_STAT1_ADDR)
 
 /***********************************************/
 /**\name    BIT LENGTH, MASK, POSITION FOR THE OFFSET STATUS REGISTERS  */
@@ -433,10 +432,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_STAT1_FIFO_INTR__REG (BMG160_INTR_STAT1_ADDR)
 
 /**< MSB (4) bits of Interrupt status1 register */
-#define BMG160_INTR_STAT_ONE__POS        (4)
-#define BMG160_INTR_STAT_ONE__LEN        (4)
-#define BMG160_INTR_STAT_ONE__MSK        (0xF0)
-#define BMG160_INTR_STAT_ONE__REG        (BMG160_INTR_STAT1_ADDR)
+#define BMG160_INTR_STAT_ONE__POS (4)
+#define BMG160_INTR_STAT_ONE__LEN (4)
+#define BMG160_INTR_STAT_ONE__MSK (0xF0)
+#define BMG160_INTR_STAT_ONE__REG (BMG160_INTR_STAT1_ADDR)
 
 /***********************************************/
 
@@ -447,10 +446,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /* Interrupt status (2) Register */
 /**< 3th bit of Interrupt status  register */
-#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__POS   (3)
-#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__LEN   (1)
-#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__MSK   (0x08)
-#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__REG   (BMG160_INTR_STAT2_ADDR)
+#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__POS (3)
+#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__LEN (1)
+#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__MSK (0x08)
+#define BMG160_INTR_STAT2_ANY_MOTION_SIGN_INTR__REG (BMG160_INTR_STAT2_ADDR)
 
 /**< 2th bit of Interrupt status register */
 #define BMG160_INTR_STAT2_ANY_MOTION_FIRSTZ_INTR__POS (2)
@@ -471,10 +470,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_STAT2_ANY_MOTION_FIRSTX_INTR__REG (BMG160_INTR_STAT2_ADDR)
 
 /**< (4) bits of Interrupt status  register */
-#define BMG160_INTR_STAT_TWO__POS                     (0)
-#define BMG160_INTR_STAT_TWO__LEN                     (4)
-#define BMG160_INTR_STAT_TWO__MSK                     (0x0F)
-#define BMG160_INTR_STAT_TWO__REG                     (BMG160_INTR_STAT2_ADDR)
+#define BMG160_INTR_STAT_TWO__POS (0)
+#define BMG160_INTR_STAT_TWO__LEN (4)
+#define BMG160_INTR_STAT_TWO__MSK (0x0F)
+#define BMG160_INTR_STAT_TWO__REG (BMG160_INTR_STAT2_ADDR)
 
 /***********************************************/
 
@@ -485,10 +484,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /* Interrupt status (3) Register */
 /**< 3th bit of Interrupt status  register */
-#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__POS   (3)
-#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__LEN   (1)
-#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__MSK   (0x08)
-#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__REG   (BMG160_INTR_STAT3_ADDR)
+#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__POS (3)
+#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__LEN (1)
+#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__MSK (0x08)
+#define BMG160_INTR_STAT3_HIGHRATE_SIGN_INTR__REG (BMG160_INTR_STAT3_ADDR)
 
 /**< 2th bit of Interrupt status  register */
 #define BMG160_INTR_STAT3_HIGHRATE_FIRSTZ_INTR__POS (2)
@@ -509,10 +508,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_STAT3_HIGHRATE_FIRSTX_INTR__REG (BMG160_INTR_STAT3_ADDR)
 
 /**< LSB (4) bits of Interrupt status  register */
-#define BMG160_INTR_STAT_THREE__POS                 (0)
-#define BMG160_INTR_STAT_THREE__LEN                 (4)
-#define BMG160_INTR_STAT_THREE__MSK                 (0x0F)
-#define BMG160_INTR_STAT_THREE__REG                 (BMG160_INTR_STAT3_ADDR)
+#define BMG160_INTR_STAT_THREE__POS (0)
+#define BMG160_INTR_STAT_THREE__LEN (4)
+#define BMG160_INTR_STAT_THREE__MSK (0x0F)
+#define BMG160_INTR_STAT_THREE__REG (BMG160_INTR_STAT3_ADDR)
 
 /***********************************************/
 /**\name    BIT LENGTH, MASK, POSITION FOR THE FIFO OVERRUN  */
@@ -546,10 +545,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR THE BANDWIDTH  */
 /***********************************************/
 /**< First (3) bits of Bandwidth Registers */
-#define BMG160_BW_ADDR__POS   (0)
-#define BMG160_BW_ADDR__LEN   (3)
-#define BMG160_BW_ADDR__MSK   (0x07)
-#define BMG160_BW_ADDR__REG   (BMG160_BW_ADDR)
+#define BMG160_BW_ADDR__POS (0)
+#define BMG160_BW_ADDR__LEN (3)
+#define BMG160_BW_ADDR__MSK (0x07)
+#define BMG160_BW_ADDR__REG (BMG160_BW_ADDR)
 
 /**< 5th and 7th bit of LPM1 Register */
 #define BMG160_MODE_LPM1__POS (5)
@@ -561,31 +560,31 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR THE POWER MODE  */
 /***********************************************/
 /**< 1st to 3rd bit of LPM1 Register */
-#define BMG160_MODELPM1_ADDR_SLEEP_DURN__POS       (1)
-#define BMG160_MODELPM1_ADDR_SLEEP_DURN__LEN       (3)
-#define BMG160_MODELPM1_ADDR_SLEEP_DURN__MSK       (0x0E)
-#define BMG160_MODELPM1_ADDR_SLEEP_DURN__REG              \
+#define BMG160_MODELPM1_ADDR_SLEEP_DURN__POS (1)
+#define BMG160_MODELPM1_ADDR_SLEEP_DURN__LEN (3)
+#define BMG160_MODELPM1_ADDR_SLEEP_DURN__MSK (0x0E)
+#define BMG160_MODELPM1_ADDR_SLEEP_DURN__REG \
     (BMG160_MODE_LPM1_ADDR)
 
 /**< 7th bit of Mode LPM2 Register */
-#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__POS    (7)
-#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__LEN    (1)
-#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__MSK    (0x80)
-#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__REG         \
+#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__POS (7)
+#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__LEN (1)
+#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__MSK (0x80)
+#define BMG160_MODE_LPM2_ADDR_FAST_POWERUP__REG \
     (BMG160_MODE_LPM2_ADDR)
 
 /**< 6th bit of Mode LPM2 Register */
 #define BMG160_MODE_LPM2_ADDR_ADV_POWERSAVING__POS (6)
 #define BMG160_MODE_LPM2_ADDR_ADV_POWERSAVING__LEN (1)
 #define BMG160_MODE_LPM2_ADDR_ADV_POWERSAVING__MSK (0x40)
-#define BMG160_MODE_LPM2_ADDR_ADV_POWERSAVING__REG      \
+#define BMG160_MODE_LPM2_ADDR_ADV_POWERSAVING__REG \
     (BMG160_MODE_LPM2_ADDR)
 
 /**< 4th & 5th bit of Mode LPM2 Register */
-#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__POS  (4)
-#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__LEN  (2)
-#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__MSK  (0x30)
-#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__REG          \
+#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__POS (4)
+#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__LEN (2)
+#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__MSK (0x30)
+#define BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__REG \
     (BMG160_MODE_LPM2_ADDR)
 
 /***********************************************/
@@ -601,10 +600,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR THE HIGH BANDWIDTH  */
 /***********************************************/
 /**< 7th bit of HIGH_BW Register */
-#define BMG160_HIGH_BW__POS    (7)
-#define BMG160_HIGH_BW__LEN    (1)
-#define BMG160_HIGH_BW__MSK    (0x80)
-#define BMG160_HIGH_BW__REG    (BMG160_HIGH_BW_ADDR)
+#define BMG160_HIGH_BW__POS (7)
+#define BMG160_HIGH_BW__LEN (1)
+#define BMG160_HIGH_BW__MSK (0x80)
+#define BMG160_HIGH_BW__REG (BMG160_HIGH_BW_ADDR)
 
 /**< 6th bit of HIGH_BW Register */
 #define BMG160_SHADOW_DIS__POS (6)
@@ -650,7 +649,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ENABLE1_IT2_OUTPUT_TYPE__POS (3)
 #define BMG160_INTR_ENABLE1_IT2_OUTPUT_TYPE__LEN (1)
 #define BMG160_INTR_ENABLE1_IT2_OUTPUT_TYPE__MSK (0x08)
-#define BMG160_INTR_ENABLE1_IT2_OUTPUT_TYPE__REG               \
+#define BMG160_INTR_ENABLE1_IT2_OUTPUT_TYPE__REG \
     (BMG160_INTR_ENABLE1_ADDR)
 
 /***********************************************/
@@ -660,7 +659,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ENABLE1_IT2_LEVEL__POS (2)
 #define BMG160_INTR_ENABLE1_IT2_LEVEL__LEN (1)
 #define BMG160_INTR_ENABLE1_IT2_LEVEL__MSK (0x04)
-#define BMG160_INTR_ENABLE1_IT2_LEVEL__REG              \
+#define BMG160_INTR_ENABLE1_IT2_LEVEL__REG \
     (BMG160_INTR_ENABLE1_ADDR)
 
 /***********************************************/
@@ -670,7 +669,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ENABLE1_IT1_OUTPUT_TYPE__POS (1)
 #define BMG160_INTR_ENABLE1_IT1_OUTPUT_TYPE__LEN (1)
 #define BMG160_INTR_ENABLE1_IT1_OUTPUT_TYPE__MSK (0x02)
-#define BMG160_INTR_ENABLE1_IT1_OUTPUT_TYPE__REG               \
+#define BMG160_INTR_ENABLE1_IT1_OUTPUT_TYPE__REG \
     (BMG160_INTR_ENABLE1_ADDR)
 
 /***********************************************/
@@ -680,7 +679,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ENABLE1_IT1_LEVEL__POS (0)
 #define BMG160_INTR_ENABLE1_IT1_LEVEL__LEN (1)
 #define BMG160_INTR_ENABLE1_IT1_LEVEL__MSK (0x01)
-#define BMG160_INTR_ENABLE1_IT1_LEVEL__REG              \
+#define BMG160_INTR_ENABLE1_IT1_LEVEL__REG \
     (BMG160_INTR_ENABLE1_ADDR)
 
 /***********************************************/
@@ -690,7 +689,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__POS (3)
 #define BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__LEN (1)
 #define BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__MSK (0x08)
-#define BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__REG            \
+#define BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__REG \
     (BMG160_INTR_MAP_ZERO_ADDR)
 
 /***********************************************/
@@ -700,14 +699,14 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__POS (1)
 #define BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__LEN (1)
 #define BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__MSK (0x02)
-#define BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__REG             \
+#define BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__REG \
     (BMG160_INTR_MAP_ZERO_ADDR)
 
 /**< 7th bit of MAP_1Registers */
-#define BMG160_MAP_ONE_INTR2_DATA__POS             (7)
-#define BMG160_MAP_ONE_INTR2_DATA__LEN             (1)
-#define BMG160_MAP_ONE_INTR2_DATA__MSK             (0x80)
-#define BMG160_MAP_ONE_INTR2_DATA__REG                  \
+#define BMG160_MAP_ONE_INTR2_DATA__POS (7)
+#define BMG160_MAP_ONE_INTR2_DATA__LEN (1)
+#define BMG160_MAP_ONE_INTR2_DATA__MSK (0x80)
+#define BMG160_MAP_ONE_INTR2_DATA__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -717,7 +716,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_MAP_ONE_INTR2_FAST_OFFSET__POS (6)
 #define BMG160_MAP_ONE_INTR2_FAST_OFFSET__LEN (1)
 #define BMG160_MAP_ONE_INTR2_FAST_OFFSET__MSK (0x40)
-#define BMG160_MAP_ONE_INTR2_FAST_OFFSET__REG           \
+#define BMG160_MAP_ONE_INTR2_FAST_OFFSET__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -727,7 +726,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_MAP_ONE_INTR2_FIFO__POS (5)
 #define BMG160_MAP_ONE_INTR2_FIFO__LEN (1)
 #define BMG160_MAP_ONE_INTR2_FIFO__MSK (0x20)
-#define BMG160_MAP_ONE_INTR2_FIFO__REG                  \
+#define BMG160_MAP_ONE_INTR2_FIFO__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -737,14 +736,14 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_MAP_ONE_INTR2_AUTO_OFFSET__POS (4)
 #define BMG160_MAP_ONE_INTR2_AUTO_OFFSET__LEN (1)
 #define BMG160_MAP_ONE_INTR2_AUTO_OFFSET__MSK (0x10)
-#define BMG160_MAP_ONE_INTR2_AUTO_OFFSET__REG           \
+#define BMG160_MAP_ONE_INTR2_AUTO_OFFSET__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /**< 3rd bit of MAP_1Registers */
 #define BMG160_MAP_ONE_INTR1_AUTO_OFFSET__POS (3)
 #define BMG160_MAP_ONE_INTR1_AUTO_OFFSET__LEN (1)
 #define BMG160_MAP_ONE_INTR1_AUTO_OFFSET__MSK (0x08)
-#define BMG160_MAP_ONE_INTR1_AUTO_OFFSET__REG           \
+#define BMG160_MAP_ONE_INTR1_AUTO_OFFSET__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -754,7 +753,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_MAP_ONE_INTR1_FIFO__POS (2)
 #define BMG160_MAP_ONE_INTR1_FIFO__LEN (1)
 #define BMG160_MAP_ONE_INTR1_FIFO__MSK (0x04)
-#define BMG160_MAP_ONE_INTR1_FIFO__REG                  \
+#define BMG160_MAP_ONE_INTR1_FIFO__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -764,7 +763,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_MAP_ONE_INTR1_FAST_OFFSET__POS (1)
 #define BMG160_MAP_ONE_INTR1_FAST_OFFSET__LEN (1)
 #define BMG160_MAP_ONE_INTR1_FAST_OFFSET__MSK (0x02)
-#define BMG160_MAP_ONE_INTR1_FAST_OFFSET__REG           \
+#define BMG160_MAP_ONE_INTR1_FAST_OFFSET__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -774,7 +773,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_MAP_ONE_INTR1_DATA__POS (0)
 #define BMG160_MAP_ONE_INTR1_DATA__LEN (1)
 #define BMG160_MAP_ONE_INTR1_DATA__MSK (0x01)
-#define BMG160_MAP_ONE_INTR1_DATA__REG                  \
+#define BMG160_MAP_ONE_INTR1_DATA__REG \
     (BMG160_INTR_MAP_ONE_ADDR)
 
 /***********************************************/
@@ -784,7 +783,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__POS (3)
 #define BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__LEN (1)
 #define BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__MSK (0x08)
-#define BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__REG            \
+#define BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__REG \
     (BMG160_INTR_MAP_TWO_ADDR)
 
 /***********************************************/
@@ -794,7 +793,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__POS (1)
 #define BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__LEN (1)
 #define BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__MSK (0x02)
-#define BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__REG             \
+#define BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__REG \
     (BMG160_INTR_MAP_TWO_ADDR)
 
 /***********************************************/
@@ -804,7 +803,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ZERO_ADDR_SLOW_OFFSET_UNFILT__POS (5)
 #define BMG160_INTR_ZERO_ADDR_SLOW_OFFSET_UNFILT__LEN (1)
 #define BMG160_INTR_ZERO_ADDR_SLOW_OFFSET_UNFILT__MSK (0x20)
-#define BMG160_INTR_ZERO_ADDR_SLOW_OFFSET_UNFILT__REG          \
+#define BMG160_INTR_ZERO_ADDR_SLOW_OFFSET_UNFILT__REG \
     (BMG160_INTR_ZERO_ADDR)
 
 /***********************************************/
@@ -814,7 +813,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ZERO_ADDR_HIGHRATE_UNFILT_DATA__POS (3)
 #define BMG160_INTR_ZERO_ADDR_HIGHRATE_UNFILT_DATA__LEN (1)
 #define BMG160_INTR_ZERO_ADDR_HIGHRATE_UNFILT_DATA__MSK (0x08)
-#define BMG160_INTR_ZERO_ADDR_HIGHRATE_UNFILT_DATA__REG            \
+#define BMG160_INTR_ZERO_ADDR_HIGHRATE_UNFILT_DATA__REG \
     (BMG160_INTR_ZERO_ADDR)
 
 /***********************************************/
@@ -824,7 +823,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA__POS (1)
 #define BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA__LEN (1)
 #define BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA__MSK (0x02)
-#define BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA__REG             \
+#define BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA__REG \
     (BMG160_INTR_ZERO_ADDR)
 
 /***********************************************/
@@ -834,7 +833,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ONE_ADDR_FAST_OFFSET_UNFILT__POS (7)
 #define BMG160_INTR_ONE_ADDR_FAST_OFFSET_UNFILT__LEN (1)
 #define BMG160_INTR_ONE_ADDR_FAST_OFFSET_UNFILT__MSK (0x80)
-#define BMG160_INTR_ONE_ADDR_FAST_OFFSET_UNFILT__REG            \
+#define BMG160_INTR_ONE_ADDR_FAST_OFFSET_UNFILT__REG \
     (BMG160_INTR_ONE_ADDR)
 
 /***********************************************/
@@ -844,7 +843,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__POS (0)
 #define BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__LEN (7)
 #define BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__MSK (0x7F)
-#define BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__REG                       \
+#define BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__REG \
     (BMG160_INTR_ONE_ADDR)
 
 /***********************************************/
@@ -863,7 +862,7 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__POS (4)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__LEN (2)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__MSK (0x30)
-#define BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__REG      \
+#define BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__REG \
     (BMG160_INTR_TWO_ADDR)
 
 /***********************************************/
@@ -873,21 +872,21 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z__POS (2)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z__LEN (1)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z__MSK (0x04)
-#define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z__REG           \
+#define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z__REG \
     (BMG160_INTR_TWO_ADDR)
 
 /**< 1st bit of INT 2Registers */
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y__POS (1)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y__LEN (1)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y__MSK (0x02)
-#define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y__REG           \
+#define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y__REG \
     (BMG160_INTR_TWO_ADDR)
 
 /**< 0th bit of INT 2Registers */
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X__POS (0)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X__LEN (1)
 #define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X__MSK (0x01)
-#define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X__REG           \
+#define BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X__REG \
     (BMG160_INTR_TWO_ADDR)
 
 /***********************************************/
@@ -903,10 +902,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR LATCH*/
 /**********************************************/
 /**< Last bit of Reset Latch Registers */
-#define BMG160_RST_LATCH_ADDR_RST_INTR__POS   (7)
-#define BMG160_RST_LATCH_ADDR_RST_INTR__LEN   (1)
-#define BMG160_RST_LATCH_ADDR_RST_INTR__MSK   (0x80)
-#define BMG160_RST_LATCH_ADDR_RST_INTR__REG   (BMG160_RST_LATCH_ADDR)
+#define BMG160_RST_LATCH_ADDR_RST_INTR__POS (7)
+#define BMG160_RST_LATCH_ADDR_RST_INTR__LEN (1)
+#define BMG160_RST_LATCH_ADDR_RST_INTR__MSK (0x80)
+#define BMG160_RST_LATCH_ADDR_RST_INTR__REG (BMG160_RST_LATCH_ADDR)
 
 /**< 6th bit of Reset Latch Registers */
 #define BMG160_RST_LATCH_ADDR_OFFSET_RST__POS (6)
@@ -930,16 +929,16 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR HIGH RATE CONFIGURATION*/
 /**********************************************/
 /**< Last (2) bits of HIGHRATE_THRES_X Registers */
-#define BMG160_HIGHRATE_HYST_X__POS   (6)
-#define BMG160_HIGHRATE_HYST_X__LEN   (2)
-#define BMG160_HIGHRATE_HYST_X__MSK   (0xC0)
-#define BMG160_HIGHRATE_HYST_X__REG   (BMG160_HIGHRATE_THRES_X_ADDR)
+#define BMG160_HIGHRATE_HYST_X__POS (6)
+#define BMG160_HIGHRATE_HYST_X__LEN (2)
+#define BMG160_HIGHRATE_HYST_X__MSK (0xC0)
+#define BMG160_HIGHRATE_HYST_X__REG (BMG160_HIGHRATE_THRES_X_ADDR)
 
 /**< (5) bits of HIGHRATE_THRES_X Registers */
-#define BMG160_HIGHRATE_THRES_X__POS  (1)
-#define BMG160_HIGHRATE_THRES_X__LEN  (5)
-#define BMG160_HIGHRATE_THRES_X__MSK  (0x3E)
-#define BMG160_HIGHRATE_THRES_X__REG  (BMG160_HIGHRATE_THRES_X_ADDR)
+#define BMG160_HIGHRATE_THRES_X__POS (1)
+#define BMG160_HIGHRATE_THRES_X__LEN (5)
+#define BMG160_HIGHRATE_THRES_X__MSK (0x3E)
+#define BMG160_HIGHRATE_THRES_X__REG (BMG160_HIGHRATE_THRES_X_ADDR)
 
 /**< 0th bit of HIGHRATE_THRES_X Registers */
 #define BMG160_HIGHRATE_ENABLE_X__POS (0)
@@ -948,16 +947,16 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_HIGHRATE_ENABLE_X__REG (BMG160_HIGHRATE_THRES_X_ADDR)
 
 /**< Last (2) bits of HIGHRATE_THRES_Y Registers */
-#define BMG160_HIGHRATE_HYST_Y__POS   (6)
-#define BMG160_HIGHRATE_HYST_Y__LEN   (2)
-#define BMG160_HIGHRATE_HYST_Y__MSK   (0xC0)
-#define BMG160_HIGHRATE_HYST_Y__REG   (BMG160_HIGHRATE_THRES_Y_ADDR)
+#define BMG160_HIGHRATE_HYST_Y__POS (6)
+#define BMG160_HIGHRATE_HYST_Y__LEN (2)
+#define BMG160_HIGHRATE_HYST_Y__MSK (0xC0)
+#define BMG160_HIGHRATE_HYST_Y__REG (BMG160_HIGHRATE_THRES_Y_ADDR)
 
 /**< (5) bits of HIGHRATE_THRES_Y Registers */
-#define BMG160_HIGHRATE_THRES_Y__POS  (1)
-#define BMG160_HIGHRATE_THRES_Y__LEN  (5)
-#define BMG160_HIGHRATE_THRES_Y__MSK  (0x3E)
-#define BMG160_HIGHRATE_THRES_Y__REG  (BMG160_HIGHRATE_THRES_Y_ADDR)
+#define BMG160_HIGHRATE_THRES_Y__POS (1)
+#define BMG160_HIGHRATE_THRES_Y__LEN (5)
+#define BMG160_HIGHRATE_THRES_Y__MSK (0x3E)
+#define BMG160_HIGHRATE_THRES_Y__REG (BMG160_HIGHRATE_THRES_Y_ADDR)
 
 /**< 0th bit of HIGHRATE_THRES_Y Registers */
 #define BMG160_HIGHRATE_ENABLE_Y__POS (0)
@@ -966,16 +965,16 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_HIGHRATE_ENABLE_Y__REG (BMG160_HIGHRATE_THRES_Y_ADDR)
 
 /**< Last (2) bits of HIGHRATE_THRES_Z Registers */
-#define BMG160_HIGHRATE_HYST_Z__POS   (6)
-#define BMG160_HIGHRATE_HYST_Z__LEN   (2)
-#define BMG160_HIGHRATE_HYST_Z__MSK   (0xC0)
-#define BMG160_HIGHRATE_HYST_Z__REG   (BMG160_HIGHRATE_THRES_Z_ADDR)
+#define BMG160_HIGHRATE_HYST_Z__POS (6)
+#define BMG160_HIGHRATE_HYST_Z__LEN (2)
+#define BMG160_HIGHRATE_HYST_Z__MSK (0xC0)
+#define BMG160_HIGHRATE_HYST_Z__REG (BMG160_HIGHRATE_THRES_Z_ADDR)
 
 /**< (5) bits of HIGHRATE_THRES_Z Registers */
-#define BMG160_HIGHRATE_THRES_Z__POS  (1)
-#define BMG160_HIGHRATE_THRES_Z__LEN  (5)
-#define BMG160_HIGHRATE_THRES_Z__MSK  (0x3E)
-#define BMG160_HIGHRATE_THRES_Z__REG  (BMG160_HIGHRATE_THRES_Z_ADDR)
+#define BMG160_HIGHRATE_THRES_Z__POS (1)
+#define BMG160_HIGHRATE_THRES_Z__LEN (5)
+#define BMG160_HIGHRATE_THRES_Z__MSK (0x3E)
+#define BMG160_HIGHRATE_THRES_Z__REG (BMG160_HIGHRATE_THRES_Z_ADDR)
 
 /**< 0th bit of HIGHRATE_THRES_Z Registers */
 #define BMG160_HIGHRATE_ENABLE_Z__POS (0)
@@ -987,16 +986,16 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR SLOW OFFSET */
 /**********************************************/
 /**< Last 3 bits of INT OFF0 Registers */
-#define BMG160_SLOW_OFFSET_THRES__POS    (6)
-#define BMG160_SLOW_OFFSET_THRES__LEN    (2)
-#define BMG160_SLOW_OFFSET_THRES__MSK    (0xC0)
-#define BMG160_SLOW_OFFSET_THRES__REG    (BMG160_SOC_ADDR)
+#define BMG160_SLOW_OFFSET_THRES__POS (6)
+#define BMG160_SLOW_OFFSET_THRES__LEN (2)
+#define BMG160_SLOW_OFFSET_THRES__MSK (0xC0)
+#define BMG160_SLOW_OFFSET_THRES__REG (BMG160_SOC_ADDR)
 
 /**< 2  bits of INT OFF0 Registers */
-#define BMG160_SLOW_OFFSET_DURN__POS     (3)
-#define BMG160_SLOW_OFFSET_DURN__LEN     (3)
-#define BMG160_SLOW_OFFSET_DURN__MSK     (0x38)
-#define BMG160_SLOW_OFFSET_DURN__REG     (BMG160_SOC_ADDR)
+#define BMG160_SLOW_OFFSET_DURN__POS (3)
+#define BMG160_SLOW_OFFSET_DURN__LEN (3)
+#define BMG160_SLOW_OFFSET_DURN__MSK (0x38)
+#define BMG160_SLOW_OFFSET_DURN__REG (BMG160_SOC_ADDR)
 
 /**< 2nd bit of INT OFF0 Registers */
 #define BMG160_SLOW_OFFSET_ENABLE_Z__POS (2)
@@ -1035,71 +1034,71 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_FAST_OFFSET_WORD_LENGHTH__REG (BMG160_A_FOC_ADDR)
 
 /**< 3nd bit of INT OFF1 Registers */
-#define BMG160_FAST_OFFSET_ENABLE__POS       (3)
-#define BMG160_FAST_OFFSET_ENABLE__LEN       (1)
-#define BMG160_FAST_OFFSET_ENABLE__MSK       (0x08)
-#define BMG160_FAST_OFFSET_ENABLE__REG       (BMG160_A_FOC_ADDR)
+#define BMG160_FAST_OFFSET_ENABLE__POS (3)
+#define BMG160_FAST_OFFSET_ENABLE__LEN (1)
+#define BMG160_FAST_OFFSET_ENABLE__MSK (0x08)
+#define BMG160_FAST_OFFSET_ENABLE__REG (BMG160_A_FOC_ADDR)
 
 /**< 2nd bit of INT OFF1 Registers */
-#define BMG160_FAST_OFFSET_ENABLE_Z__POS     (2)
-#define BMG160_FAST_OFFSET_ENABLE_Z__LEN     (1)
-#define BMG160_FAST_OFFSET_ENABLE_Z__MSK     (0x04)
-#define BMG160_FAST_OFFSET_ENABLE_Z__REG     (BMG160_A_FOC_ADDR)
+#define BMG160_FAST_OFFSET_ENABLE_Z__POS (2)
+#define BMG160_FAST_OFFSET_ENABLE_Z__LEN (1)
+#define BMG160_FAST_OFFSET_ENABLE_Z__MSK (0x04)
+#define BMG160_FAST_OFFSET_ENABLE_Z__REG (BMG160_A_FOC_ADDR)
 
 /**< 1st bit of INT OFF1 Registers */
-#define BMG160_FAST_OFFSET_ENABLE_Y__POS     (1)
-#define BMG160_FAST_OFFSET_ENABLE_Y__LEN     (1)
-#define BMG160_FAST_OFFSET_ENABLE_Y__MSK     (0x02)
-#define BMG160_FAST_OFFSET_ENABLE_Y__REG     (BMG160_A_FOC_ADDR)
+#define BMG160_FAST_OFFSET_ENABLE_Y__POS (1)
+#define BMG160_FAST_OFFSET_ENABLE_Y__LEN (1)
+#define BMG160_FAST_OFFSET_ENABLE_Y__MSK (0x02)
+#define BMG160_FAST_OFFSET_ENABLE_Y__REG (BMG160_A_FOC_ADDR)
 
 /**< 0th bit of INT OFF1 Registers */
-#define BMG160_FAST_OFFSET_ENABLE_X__POS     (0)
-#define BMG160_FAST_OFFSET_ENABLE_X__LEN     (1)
-#define BMG160_FAST_OFFSET_ENABLE_X__MSK     (0x01)
-#define BMG160_FAST_OFFSET_ENABLE_X__REG     (BMG160_A_FOC_ADDR)
+#define BMG160_FAST_OFFSET_ENABLE_X__POS (0)
+#define BMG160_FAST_OFFSET_ENABLE_X__LEN (1)
+#define BMG160_FAST_OFFSET_ENABLE_X__MSK (0x01)
+#define BMG160_FAST_OFFSET_ENABLE_X__REG (BMG160_A_FOC_ADDR)
 
 /**< 0 to (2) bits of INT OFF1 Registers */
-#define BMG160_FAST_OFFSET_ENABLE_XYZ__POS   (0)
-#define BMG160_FAST_OFFSET_ENABLE_XYZ__LEN   (3)
-#define BMG160_FAST_OFFSET_ENABLE_XYZ__MSK   (0x07)
-#define BMG160_FAST_OFFSET_ENABLE_XYZ__REG   (BMG160_A_FOC_ADDR)
+#define BMG160_FAST_OFFSET_ENABLE_XYZ__POS (0)
+#define BMG160_FAST_OFFSET_ENABLE_XYZ__LEN (3)
+#define BMG160_FAST_OFFSET_ENABLE_XYZ__MSK (0x07)
+#define BMG160_FAST_OFFSET_ENABLE_XYZ__REG (BMG160_A_FOC_ADDR)
 
 /***********************************************/
 /**\name    BIT LENGTH, MASK, POSITION FOR NVM*/
 /**********************************************/
 /**< Last 4 bits of Trim NVM control Registers */
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__POS    (4)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__LEN    (4)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__MSK    (0xF0)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__REG        \
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__POS (4)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__LEN (4)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__MSK (0xF0)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__REG \
     (BMG160_TRIM_NVM_CTRL_ADDR)
 
 /**< 3rd bit of Trim NVM control Registers */
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__POS      (3)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__LEN      (1)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__MSK      (0x08)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__REG          \
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__POS (3)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__LEN (1)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__MSK (0x08)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__REG \
     (BMG160_TRIM_NVM_CTRL_ADDR)
 
 /**< 2nd bit of Trim NVM control Registers */
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__POS       (2)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__LEN       (1)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__MSK       (0x04)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__REG           \
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__POS (2)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__LEN (1)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__MSK (0x04)
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__REG \
     (BMG160_TRIM_NVM_CTRL_ADDR)
 
 /**< 1st bit of Trim NVM control Registers */
 #define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_TRIG__POS (1)
 #define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_TRIG__LEN (1)
 #define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_TRIG__MSK (0x02)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_TRIG__REG     \
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_TRIG__REG \
     (BMG160_TRIM_NVM_CTRL_ADDR)
 
 /**< 0th bit of Trim NVM control Registers */
 #define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__POS (0)
 #define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__LEN (1)
 #define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__MSK (0x01)
-#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__REG     \
+#define BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__REG \
     (BMG160_TRIM_NVM_CTRL_ADDR)
 
 /***********************************************/
@@ -1109,74 +1108,74 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_ENABLE__POS (2)
 #define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_ENABLE__LEN (1)
 #define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_ENABLE__MSK (0x04)
-#define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_ENABLE__REG      \
+#define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_ENABLE__REG \
     (BMG160_BGW_SPI3_WDT_ADDR)
 
 /**< 1st bit of SPI3 WDT Registers */
 #define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_SELECT__POS (1)
 #define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_SELECT__LEN (1)
 #define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_SELECT__MSK (0x02)
-#define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_SELECT__REG     \
+#define BMG160_BGW_SPI3_WDT_ADDR_I2C_WDT_SELECT__REG \
     (BMG160_BGW_SPI3_WDT_ADDR)
 
 /**< 0th bit of SPI3 WDT Registers */
-#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__POS           (0)
-#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__LEN           (1)
-#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__MSK           (0x01)
-#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__REG            \
+#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__POS (0)
+#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__LEN (1)
+#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__MSK (0x01)
+#define BMG160_BGW_SPI3_WDT_ADDR_SPI3__REG \
     (BMG160_BGW_SPI3_WDT_ADDR)
 
 /***********************************************/
 /**\name    BIT LENGTH, MASK, POSITION FOR SELFTEST*/
 /**********************************************/
 /**< 4th bit of Self test Registers */
-#define BMG160_SELFTEST_ADDR_RATEOK__POS   (4)
-#define BMG160_SELFTEST_ADDR_RATEOK__LEN   (1)
-#define BMG160_SELFTEST_ADDR_RATEOK__MSK   (0x10)
-#define BMG160_SELFTEST_ADDR_RATEOK__REG            \
+#define BMG160_SELFTEST_ADDR_RATEOK__POS (4)
+#define BMG160_SELFTEST_ADDR_RATEOK__LEN (1)
+#define BMG160_SELFTEST_ADDR_RATEOK__MSK (0x10)
+#define BMG160_SELFTEST_ADDR_RATEOK__REG \
     (BMG160_SELFTEST_ADDR)
 
 /**< 2nd bit of Self test Registers */
 #define BMG160_SELFTEST_ADDR_BISTFAIL__POS (2)
 #define BMG160_SELFTEST_ADDR_BISTFAIL__LEN (1)
 #define BMG160_SELFTEST_ADDR_BISTFAIL__MSK (0x04)
-#define BMG160_SELFTEST_ADDR_BISTFAIL__REG          \
+#define BMG160_SELFTEST_ADDR_BISTFAIL__REG \
     (BMG160_SELFTEST_ADDR)
 
 /**< 1st bit of Self test Registers */
-#define BMG160_SELFTEST_ADDR_BISTRDY__POS  (1)
-#define BMG160_SELFTEST_ADDR_BISTRDY__LEN  (1)
-#define BMG160_SELFTEST_ADDR_BISTRDY__MSK  (0x02)
-#define BMG160_SELFTEST_ADDR_BISTRDY__REG           \
+#define BMG160_SELFTEST_ADDR_BISTRDY__POS (1)
+#define BMG160_SELFTEST_ADDR_BISTRDY__LEN (1)
+#define BMG160_SELFTEST_ADDR_BISTRDY__MSK (0x02)
+#define BMG160_SELFTEST_ADDR_BISTRDY__REG \
     (BMG160_SELFTEST_ADDR)
 
 /**< 0th bit of Self test Registers */
 #define BMG160_SELFTEST_ADDR_TRIGBIST__POS (0)
 #define BMG160_SELFTEST_ADDR_TRIGBIST__LEN (1)
 #define BMG160_SELFTEST_ADDR_TRIGBIST__MSK (0x01)
-#define BMG160_SELFTEST_ADDR_TRIGBIST__REG          \
+#define BMG160_SELFTEST_ADDR_TRIGBIST__REG \
     (BMG160_SELFTEST_ADDR)
 
 /***********************************************/
 /**\name    BIT LENGTH, MASK, POSITION FOR FIFO CONFIGURATION*/
 /**********************************************/
 /**< 7th bit of FIFO CGF0 Registers */
-#define BMG160_FIFO_CGF0_ADDR_TAG__POS         (7)
-#define BMG160_FIFO_CGF0_ADDR_TAG__LEN         (1)
-#define BMG160_FIFO_CGF0_ADDR_TAG__MSK         (0x80)
-#define BMG160_FIFO_CGF0_ADDR_TAG__REG         (BMG160_FIFO_CGF0_ADDR)
+#define BMG160_FIFO_CGF0_ADDR_TAG__POS (7)
+#define BMG160_FIFO_CGF0_ADDR_TAG__LEN (1)
+#define BMG160_FIFO_CGF0_ADDR_TAG__MSK (0x80)
+#define BMG160_FIFO_CGF0_ADDR_TAG__REG (BMG160_FIFO_CGF0_ADDR)
 
 /**< First 7 bits of FIFO CGF0 Registers */
-#define BMG160_FIFO_CGF0_ADDR_WML__POS         (0)
-#define BMG160_FIFO_CGF0_ADDR_WML__LEN         (7)
-#define BMG160_FIFO_CGF0_ADDR_WML__MSK         (0x7F)
-#define BMG160_FIFO_CGF0_ADDR_WML__REG         (BMG160_FIFO_CGF0_ADDR)
+#define BMG160_FIFO_CGF0_ADDR_WML__POS (0)
+#define BMG160_FIFO_CGF0_ADDR_WML__LEN (7)
+#define BMG160_FIFO_CGF0_ADDR_WML__MSK (0x7F)
+#define BMG160_FIFO_CGF0_ADDR_WML__REG (BMG160_FIFO_CGF0_ADDR)
 
 /**< Last 2 bits of FIFO CGF1 Addr Registers */
-#define BMG160_FIFO_CGF1_ADDR_MODE__POS        (6)
-#define BMG160_FIFO_CGF1_ADDR_MODE__LEN        (2)
-#define BMG160_FIFO_CGF1_ADDR_MODE__MSK        (0xC0)
-#define BMG160_FIFO_CGF1_ADDR_MODE__REG        (BMG160_FIFO_CGF1_ADDR)
+#define BMG160_FIFO_CGF1_ADDR_MODE__POS (6)
+#define BMG160_FIFO_CGF1_ADDR_MODE__LEN (2)
+#define BMG160_FIFO_CGF1_ADDR_MODE__MSK (0xC0)
+#define BMG160_FIFO_CGF1_ADDR_MODE__REG (BMG160_FIFO_CGF1_ADDR)
 
 /**< First 2 bits of FIFO CGF1 Addr Registers */
 #define BMG160_FIFO_CGF1_ADDR_DATA_SELECT__POS (0)
@@ -1188,28 +1187,28 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    BIT LENGTH, MASK, POSITION FOR OFFSET*/
 /**********************************************/
 /**< Last 2 bits of INL Offset MSB Registers */
-#define BMG160_OFC1_ADDR_OFFSET_X__POS     (6)
-#define BMG160_OFC1_ADDR_OFFSET_X__LEN     (2)
-#define BMG160_OFC1_ADDR_OFFSET_X__MSK     (0xC0)
-#define BMG160_OFC1_ADDR_OFFSET_X__REG     (BMG160_OFFSET_OFC1_ADDR)
+#define BMG160_OFC1_ADDR_OFFSET_X__POS (6)
+#define BMG160_OFC1_ADDR_OFFSET_X__LEN (2)
+#define BMG160_OFC1_ADDR_OFFSET_X__MSK (0xC0)
+#define BMG160_OFC1_ADDR_OFFSET_X__REG (BMG160_OFFSET_OFC1_ADDR)
 
 /**< 3 bits of INL Offset MSB Registers */
-#define BMG160_OFC1_ADDR_OFFSET_Y__POS     (3)
-#define BMG160_OFC1_ADDR_OFFSET_Y__LEN     (3)
-#define BMG160_OFC1_ADDR_OFFSET_Y__MSK     (0x38)
-#define BMG160_OFC1_ADDR_OFFSET_Y__REG     (BMG160_OFFSET_OFC1_ADDR)
+#define BMG160_OFC1_ADDR_OFFSET_Y__POS (3)
+#define BMG160_OFC1_ADDR_OFFSET_Y__LEN (3)
+#define BMG160_OFC1_ADDR_OFFSET_Y__MSK (0x38)
+#define BMG160_OFC1_ADDR_OFFSET_Y__REG (BMG160_OFFSET_OFC1_ADDR)
 
 /**< First 3 bits of INL Offset MSB Registers */
-#define BMG160_OFC1_ADDR_OFFSET_Z__POS     (0)
-#define BMG160_OFC1_ADDR_OFFSET_Z__LEN     (3)
-#define BMG160_OFC1_ADDR_OFFSET_Z__MSK     (0x07)
-#define BMG160_OFC1_ADDR_OFFSET_Z__REG     (BMG160_OFFSET_OFC1_ADDR)
+#define BMG160_OFC1_ADDR_OFFSET_Z__POS (0)
+#define BMG160_OFC1_ADDR_OFFSET_Z__LEN (3)
+#define BMG160_OFC1_ADDR_OFFSET_Z__MSK (0x07)
+#define BMG160_OFC1_ADDR_OFFSET_Z__REG (BMG160_OFFSET_OFC1_ADDR)
 
 /**< 4 bits of Trim GP0 Registers */
-#define BMG160_TRIM_GP0_ADDR_GP0__POS      (4)
-#define BMG160_TRIM_GP0_ADDR_GP0__LEN      (4)
-#define BMG160_TRIM_GP0_ADDR_GP0__MSK      (0xF0)
-#define BMG160_TRIM_GP0_ADDR_GP0__REG      (BMG160_TRIM_GP0_ADDR)
+#define BMG160_TRIM_GP0_ADDR_GP0__POS (4)
+#define BMG160_TRIM_GP0_ADDR_GP0__LEN (4)
+#define BMG160_TRIM_GP0_ADDR_GP0__MSK (0xF0)
+#define BMG160_TRIM_GP0_ADDR_GP0__REG (BMG160_TRIM_GP0_ADDR)
 
 /**< 2 bits of Trim GP0 Registers */
 #define BMG160_TRIM_GP0_ADDR_OFFSET_X__POS (2)
@@ -1249,10 +1248,10 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    POWER MODE*/
 /**********************************************/
 /* For Mode Settings    */
-#define BMG160_MODE_NORMAL              (0)
-#define BMG160_MODE_DEEPSUSPEND         (1)
-#define BMG160_MODE_SUSPEND             (2)
-#define BMG160_MODE_FASTPOWERUP         (3)
+#define BMG160_MODE_NORMAL (0)
+#define BMG160_MODE_DEEPSUSPEND (1)
+#define BMG160_MODE_SUSPEND (2)
+#define BMG160_MODE_FASTPOWERUP (3)
 #define BMG160_MODE_ADVANCEDPOWERSAVING (4)
 
 /***********************************************/
@@ -1269,29 +1268,29 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 #define BMG160_GET_BIT_POS0(regvar, bitname) (regvar & (bitname##__MSK))
 
 #define BMG160_SET_BIT_POS0(regavar, bitname, val) \
-    ((regavar & ~(bitname##__MSK)) | \
+    ((regavar & ~(bitname##__MSK)) |               \
      (val & bitname##__MSK))
 
 /****************************************************/
 /**\name    ARRAY SIZE DEFINITIONS      */
 /***************************************************/
-#define BMG160_X_DATA_SIZE           (2)
-#define BMG160_Y_DATA_SIZE           (2)
-#define BMG160_Z_DATA_SIZE           (2)
-#define BMG160_XYZ_DATA_SIZE         (6)
-#define BMG160_XYZ_INTR_DATA_SIZE    (12)
+#define BMG160_X_DATA_SIZE (2)
+#define BMG160_Y_DATA_SIZE (2)
+#define BMG160_Z_DATA_SIZE (2)
+#define BMG160_XYZ_DATA_SIZE (6)
+#define BMG160_XYZ_INTR_DATA_SIZE (12)
 
-#define BMG160_X_LSB_DATA            (0)
-#define BMG160_X_MSB_DATA            (1)
-#define BMG160_Y_LSB_DATA            (0)
-#define BMG160_Y_MSB_DATA            (1)
-#define BMG160_Z_LSB_DATA            (0)
-#define BMG160_Z_MSB_DATA            (1)
-#define BMG160_INTR0_STAT            (0)
-#define BMG160_INTR1_STAT            (1)
-#define BMG160_INTR2_STAT            (2)
-#define BMG160_INTR3_STAT            (3)
-#define BMG160_INTR4_STAT            (4)
+#define BMG160_X_LSB_DATA (0)
+#define BMG160_X_MSB_DATA (1)
+#define BMG160_Y_LSB_DATA (0)
+#define BMG160_Y_MSB_DATA (1)
+#define BMG160_Z_LSB_DATA (0)
+#define BMG160_Z_MSB_DATA (1)
+#define BMG160_INTR0_STAT (0)
+#define BMG160_INTR1_STAT (1)
+#define BMG160_INTR2_STAT (2)
+#define BMG160_INTR3_STAT (3)
+#define BMG160_INTR4_STAT (4)
 
 #define BMG160_DATA_FRAME_X_LSB_BYTE (0)
 #define BMG160_DATA_FRAME_X_MSB_BYTE (1)
@@ -1309,26 +1308,26 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /**\name    COMMON DEFINITIONS*/
 /**********************************************/
 
-#define BMG160_NULL    (0)
+#define BMG160_NULL (0)
 
 /**< constant declaration of NULL */
 #define BMG160_DISABLE (0)
 
 /**< It refers BMG160 disable */
-#define BMG160_ENABLE  (1)
+#define BMG160_ENABLE (1)
 
 /**< It refers BMG160 enable */
-#define BMG160_OFF     (0)
+#define BMG160_OFF (0)
 
 /**< It refers BMG160 OFF state */
-#define BMG160_ON      (1)
+#define BMG160_ON (1)
 
 /**< It refers BMG160 ON state  */
 
-#define BMG160_INTR1   (0)
+#define BMG160_INTR1 (0)
 
 /**< It refers BMG160 INT1 */
-#define BMG160_INTR2   (1)
+#define BMG160_INTR2 (1)
 
 /**< It refers BMG160 INT2 */
 /***********************************************/
@@ -1346,37 +1345,37 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /**\name    INTERRUPT DEFINITIONS*/
 /**********************************************/
-#define BMG160_S_TAP                    (0)
+#define BMG160_S_TAP (0)
 
 /**< It refers BMG160 Single Tap */
-#define BMG160_D_TAP                    (1)
+#define BMG160_D_TAP (1)
 
 /**< It refers BMG160 Double Tap */
-#define BMG160_INTR1_DATA               (0)
+#define BMG160_INTR1_DATA (0)
 
 /**< It refers BMG160 Int1 Data */
-#define BMG160_INTR2_DATA               (1)
+#define BMG160_INTR2_DATA (1)
 
 /**< It refers BMG160 Int2 Data */
-#define BMG160_TAP_UNFILT_DATA          (0)
+#define BMG160_TAP_UNFILT_DATA (0)
 
 /**< It refers BMG160 Tap unfilt data */
-#define BMG160_HIGHRATE_UNFILT_DATA     (1)
+#define BMG160_HIGHRATE_UNFILT_DATA (1)
 
 /**< It refers BMG160 High unfilt data */
-#define BMG160_CONST_UNFILT_DATA        (2)
+#define BMG160_CONST_UNFILT_DATA (2)
 
 /**< It refers BMG160 Const unfilt data */
-#define BMG160_ANY_MOTION_UNFILT_DATA   (3)
+#define BMG160_ANY_MOTION_UNFILT_DATA (3)
 
 /**< It refers BMG160 Any unfilt data */
-#define BMG160_SHAKE_UNFILT_DATA        (4)
+#define BMG160_SHAKE_UNFILT_DATA (4)
 
 /**< It refers BMG160 Shake unfilt data */
-#define BMG160_SHAKE_TH                 (0)
+#define BMG160_SHAKE_TH (0)
 
 /**< It refers BMG160 Shake Threshold */
-#define BMG160_SHAKE_TH2                (1)
+#define BMG160_SHAKE_TH2 (1)
 
 /**< It refers BMG160 Shake Threshold2 */
 #define BMG160_AUTO_OFFSET_WORD_LENGHTH (0)
@@ -1388,110 +1387,110 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /**\name    I2C CONFIGURATION DEFINITIONS*/
 /**********************************************/
-#define BMG160_I2C_WDT_ENABLE   (0)
+#define BMG160_I2C_WDT_ENABLE (0)
 
 /**< It refers BMG160 I2C WDT En */
-#define BMG160_I2C_WDT_SELECT   (1)
+#define BMG160_I2C_WDT_SELECT (1)
 
 /**< It refers BMG160 I2C WDT Sel */
-#define BMG160_EXT_MODE         (0)
+#define BMG160_EXT_MODE (0)
 
 /**< It refers BMG160 Ext Mode */
-#define BMG160_EXT_PAGE         (1)
+#define BMG160_EXT_PAGE (1)
 
 /**< It refers BMG160 Ext page */
-#define BMG160_START_ADDR       (0)
+#define BMG160_START_ADDR (0)
 
 /**< It refers BMG160 Start Address */
-#define BMG160_STOP_ADDR        (1)
+#define BMG160_STOP_ADDR (1)
 
 /**< It refers BMG160 Stop Address */
-#define BMG160_SLOW_CMD         (0)
+#define BMG160_SLOW_CMD (0)
 
 /**< It refers BMG160 Slow Command */
-#define BMG160_FAST_CMD         (1)
+#define BMG160_FAST_CMD (1)
 
 /**< It refers BMG160 Fast Command */
-#define BMG160_TRIM_VRA         (0)
+#define BMG160_TRIM_VRA (0)
 
 /**< It refers BMG160 Trim VRA */
-#define BMG160_TRIM_VRD         (1)
+#define BMG160_TRIM_VRD (1)
 
 /**< It refers BMG160 Trim VRD */
-#define BMG160_LOGBIT_EM        (0)
+#define BMG160_LOGBIT_EM (0)
 
 /**< It refers BMG160 LogBit Em */
-#define BMG160_LOGBIT_VM        (1)
+#define BMG160_LOGBIT_VM (1)
 
 /**< It refers BMG160 LogBit VM */
-#define BMG160_GP0              (0)
+#define BMG160_GP0 (0)
 
 /**< It refers BMG160 GP0 */
-#define BMG160_GP1              (1)
+#define BMG160_GP1 (1)
 
 /**< It refers BMG160 GP1*/
-#define BMG160_LOW_SPEED        (0)
+#define BMG160_LOW_SPEED (0)
 
 /**< It refers BMG160 Low Speed Oscillator */
-#define BMG160_HIGHRATE_SPEED   (1)
+#define BMG160_HIGHRATE_SPEED (1)
 
 /**< It refers BMG160 High Speed Oscillator */
-#define BMG160_DRIVE_OFFSET_P   (0)
+#define BMG160_DRIVE_OFFSET_P (0)
 
 /**< It refers BMG160 Drive Offset P */
-#define BMG160_DRIVE_OFFSET_N   (1)
+#define BMG160_DRIVE_OFFSET_N (1)
 
 /**< It refers BMG160 Drive Offset N */
 #define BMG160_TEST_MODE_ENABLE (0)
 
 /**< It refers BMG160 Test Mode Enable */
-#define BMG160_TEST_MODE_REG    (1)
+#define BMG160_TEST_MODE_REG (1)
 
 /**< It refers BMG160 Test Mode reg */
 #define BMG160_IBIAS_DRIVE_TRIM (0)
 
 /**< It refers BMG160 IBIAS Drive Trim */
-#define BMG160_IBIAS_RATE_TRIM  (1)
+#define BMG160_IBIAS_RATE_TRIM (1)
 
 /**< It refers BMG160 IBIAS Rate Trim */
-#define BMG160_BAA_MODE         (0)
+#define BMG160_BAA_MODE (0)
 
 /**< It refers BMG160 BAA Mode Trim */
-#define BMG160_BMA_MODE         (1)
+#define BMG160_BMA_MODE (1)
 
 /**< It refers BMG160 BMA Mode Trim */
-#define BMG160_PI_KP            (0)
+#define BMG160_PI_KP (0)
 
 /**< It refers BMG160 PI KP */
-#define BMG160_PI_KI            (1)
+#define BMG160_PI_KI (1)
 
 /**< It refers BMG160 PI KI */
 /***********************************************/
 /**\name    ERROR/SUCCESS DEFINITIONS*/
 /**********************************************/
-#define C_BMG160_SUCCESS      (0)
+#define C_BMG160_SUCCESS (0)
 
 /**< It refers BMG160 operation is success */
-#define C_BMG160_FAILURE      (1)
+#define C_BMG160_FAILURE (1)
 
 /**< It refers BMG160 operation is Failure */
-#define E_BMG160_NULL_PTR     ((int8_t) (-127))
-#define E_BMG160_OUT_OF_RANGE ((int8_t) (-2))
+#define E_BMG160_NULL_PTR ((int8_t)(-127))
+#define E_BMG160_OUT_OF_RANGE ((int8_t)(-2))
 //#define ERROR                 ((int8_t) (-1))
 
 /***********************************************/
 /**\name    SPI DEFINITIONS*/
 /**********************************************/
-#define BMG160_SPI_RD_MASK    (0x80)
+#define BMG160_SPI_RD_MASK (0x80)
 
 /**< Read mask **/
-#define BMG160_READ_SET       (0x01)
+#define BMG160_READ_SET (0x01)
 
 /**< Setting for reading data **/
 /***********************************************/
 /**\name    BIT SHIFTING DEFINITIONS*/
 /**********************************************/
-#define BMG160_SHIFT_BIT_POSITION_BY_01_BIT  (1)
+#define BMG160_SHIFT_BIT_POSITION_BY_01_BIT (1)
 
 /**< Shift bit by 1 Position **/
 #define BMG160_SHIFT_BIT_POSITION_BY_02_BITS (4)
@@ -1506,60 +1505,60 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /**\name    NUMERIC DEFINITIONS*/
 /**********************************************/
-#define BMG160_INIT_VALUE                  ((uint8_t)0)
-#define BMG160_GEN_READ_WRITE_DATA_LENGTH  ((uint8_t)1)
-#define BMG160_X_DATA_LENGTH               ((uint8_t)2)
-#define BMG160_Y_DATA_LENGTH               ((uint8_t)2)
-#define BMG160_Z_DATA_LENGTH               ((uint8_t)2)
-#define BMG160_ALL_DATA_FRAME_LENGTH       ((uint8_t)6)
-#define BMG160_BIT_LENGTH_HIGH_BW          ((uint8_t)2)
-#define BMG160_BIT_LENGTH_SHADOW_DIS       ((uint8_t)2)
-#define BMG160_BIT_LENGTH_FIFO             ((uint8_t)2)
-#define BMG160_BIT_LENGTH_FIFO_WM          ((uint8_t)2)
-#define BMG160_BIT_LENGTH_FIFO_TAG         ((uint8_t)2)
-#define BMG160_BIT_LENGTH_FIFO_MODE        ((uint8_t)4)
+#define BMG160_INIT_VALUE ((uint8_t)0)
+#define BMG160_GEN_READ_WRITE_DATA_LENGTH ((uint8_t)1)
+#define BMG160_X_DATA_LENGTH ((uint8_t)2)
+#define BMG160_Y_DATA_LENGTH ((uint8_t)2)
+#define BMG160_Z_DATA_LENGTH ((uint8_t)2)
+#define BMG160_ALL_DATA_FRAME_LENGTH ((uint8_t)6)
+#define BMG160_BIT_LENGTH_HIGH_BW ((uint8_t)2)
+#define BMG160_BIT_LENGTH_SHADOW_DIS ((uint8_t)2)
+#define BMG160_BIT_LENGTH_FIFO ((uint8_t)2)
+#define BMG160_BIT_LENGTH_FIFO_WM ((uint8_t)2)
+#define BMG160_BIT_LENGTH_FIFO_TAG ((uint8_t)2)
+#define BMG160_BIT_LENGTH_FIFO_MODE ((uint8_t)4)
 #define BMG160_BIT_LENGTH_FIFO_DATA_SELECT ((uint8_t)4)
-#define BMG160_BIT_MASK_MODE_LPM1          ((uint8_t)4)
-#define BMG160_BIT_LENGTH_RANGE            ((uint8_t)5)
-#define BMG160_BIT_LENGTH_BW               ((uint8_t)8)
-#define BMG160_BIT_LENGTH_DURN             ((uint8_t)8)
-#define BMG160_BIT_LENGTH_POWER_MODE       ((uint8_t)5)
-#define BMG160_XYZ_AND_INTR_DATA_LENGTH    ((uint8_t)12)
-#define BMG160_FIFO_WM_LENGTH              ((uint8_t)128)
-#define BMG160_POWER_MODE_DELAY            ((uint8_t)1)
-#define BMG160_SELFTEST_DELAY              ((uint8_t)10)
-#define BMG160_SELFTEST_BISTFAIL           ((uint8_t)0x00)
-#define BMG160_SELFTEST_RATEOK             ((uint8_t)0x01)
+#define BMG160_BIT_MASK_MODE_LPM1 ((uint8_t)4)
+#define BMG160_BIT_LENGTH_RANGE ((uint8_t)5)
+#define BMG160_BIT_LENGTH_BW ((uint8_t)8)
+#define BMG160_BIT_LENGTH_DURN ((uint8_t)8)
+#define BMG160_BIT_LENGTH_POWER_MODE ((uint8_t)5)
+#define BMG160_XYZ_AND_INTR_DATA_LENGTH ((uint8_t)12)
+#define BMG160_FIFO_WM_LENGTH ((uint8_t)128)
+#define BMG160_POWER_MODE_DELAY ((uint8_t)1)
+#define BMG160_SELFTEST_DELAY ((uint8_t)10)
+#define BMG160_SELFTEST_BISTFAIL ((uint8_t)0x00)
+#define BMG160_SELFTEST_RATEOK ((uint8_t)0x01)
 
 /***********************************************/
 /**\name    BANDWIDTH DEFINITIONS*/
 /**********************************************/
-#define C_BMG160_NO_FILTER_U8X             (0)
-#define C_BMG160_BW_230HZ_U8X              (1)
-#define C_BMG160_BW_116HZ_U8X              (2)
-#define C_BMG160_BW_47HZ_U8X               (3)
-#define C_BMG160_BW_23HZ_U8X               (4)
-#define C_BMG160_BW_12HZ_U8X               (5)
-#define C_BMG160_BW_64HZ_U8X               (6)
-#define C_BMG160_BW_32HZ_U8X               (7)
+#define C_BMG160_NO_FILTER_U8X (0)
+#define C_BMG160_BW_230HZ_U8X (1)
+#define C_BMG160_BW_116HZ_U8X (2)
+#define C_BMG160_BW_47HZ_U8X (3)
+#define C_BMG160_BW_23HZ_U8X (4)
+#define C_BMG160_BW_12HZ_U8X (5)
+#define C_BMG160_BW_64HZ_U8X (6)
+#define C_BMG160_BW_32HZ_U8X (7)
 
-#define BMG160_BW_500_HZ                   (0x01)
-#define BMG160_BW_230_HZ                   (0x01)
-#define BMG160_BW_116_HZ                   (0x02)
-#define BMG160_BW_47_HZ                    (0x03)
-#define BMG160_BW_23_HZ                    (0x04)
-#define BMG160_BW_12_HZ                    (0x05)
-#define BMG160_BW_64_HZ                    (0x06)
-#define BMG160_BW_32_HZ                    (0x07)
+#define BMG160_BW_500_HZ (0x01)
+#define BMG160_BW_230_HZ (0x01)
+#define BMG160_BW_116_HZ (0x02)
+#define BMG160_BW_47_HZ (0x03)
+#define BMG160_BW_23_HZ (0x04)
+#define BMG160_BW_12_HZ (0x05)
+#define BMG160_BW_64_HZ (0x06)
+#define BMG160_BW_32_HZ (0x07)
 
 /***********************************************/
 /**\name    SLEEP DURATION DEFINITIONS*/
 /**********************************************/
 
-#define C_BMG160_NO_AUTO_SLEEP_DURN_U8X   (0)
-#define C_BMG160_4MS_AUTO_SLEEP_DURN_U8X  (1)
-#define C_BMG160_5MS_AUTO_SLEEP_DURN_U8X  (2)
-#define C_BMG160_8MS_AUTO_SLEEP_DURN_U8X  (3)
+#define C_BMG160_NO_AUTO_SLEEP_DURN_U8X (0)
+#define C_BMG160_4MS_AUTO_SLEEP_DURN_U8X (1)
+#define C_BMG160_5MS_AUTO_SLEEP_DURN_U8X (2)
+#define C_BMG160_8MS_AUTO_SLEEP_DURN_U8X (3)
 #define C_BMG160_10MS_AUTO_SLEEP_DURN_U8X (4)
 #define C_BMG160_15MS_AUTO_SLEEP_DURN_U8X (5)
 #define C_BMG160_20MS_AUTO_SLEEP_DURN_U8X (6)
@@ -1568,58 +1567,54 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /***********************************************/
 /**\name    RANGE DEFINITIONS*/
 /**********************************************/
-#define BMG160_RANGE_2000                 (0x00)
-#define BMG160_RANGE_1000                 (0x01)
-#define BMG160_RANGE_500                  (0x02)
-#define BMG160_RANGE_250                  (0x03)
-#define BMG160_RANGE_125                  (0x04)
+#define BMG160_RANGE_2000 (0x00)
+#define BMG160_RANGE_1000 (0x01)
+#define BMG160_RANGE_500 (0x02)
+#define BMG160_RANGE_250 (0x03)
+#define BMG160_RANGE_125 (0x04)
 
 /***********************************************/
 /**\name    SOFT RESET DEFINITIONS*/
 /**********************************************/
-#define BMG160_SOFT_RESET                 (0xB6)
+#define BMG160_SOFT_RESET (0xB6)
 
 /***********************************************/
 /**\name    LATCH  DEFINITIONS*/
 /**********************************************/
-#define BMG160_NON_LATCH                  (0x00)
-#define BMG160_LATCH_250_MS               (0x01)
-#define BMG160_LATCH_500_MS               (0x02)
-#define BMG160_LATCH_1_SEC                (0x03)
-#define BMG160_LATCH_2_SEC                (0x04)
-#define BMG160_LATCH_4_SEC                (0x05)
-#define BMG160_LATCH_8_SEC                (0x06)
-#define BMG160_LATCH_LATCHED              (0x07)
-#define BMG160_LATCH_NON_LATCHED          (0x08)
-#define BMG160_LATCH_250_MICRO_SEC        (0x09)
-#define BMG160_LATCH_500_MICRO_SEC        (0x0A)
-#define BMG160_LATCH_1_MILLI_SEC          (0x0B)
-#define BMG160_LATCH_12_5_MILLI_SEC       (0x0C)
-#define BMG160_LATCH_25_MILLI_SEC         (0x0D)
-#define BMG160_LATCH_50_MILLI_SEC         (0x0E)
+#define BMG160_NON_LATCH (0x00)
+#define BMG160_LATCH_250_MS (0x01)
+#define BMG160_LATCH_500_MS (0x02)
+#define BMG160_LATCH_1_SEC (0x03)
+#define BMG160_LATCH_2_SEC (0x04)
+#define BMG160_LATCH_4_SEC (0x05)
+#define BMG160_LATCH_8_SEC (0x06)
+#define BMG160_LATCH_LATCHED (0x07)
+#define BMG160_LATCH_NON_LATCHED (0x08)
+#define BMG160_LATCH_250_MICRO_SEC (0x09)
+#define BMG160_LATCH_500_MICRO_SEC (0x0A)
+#define BMG160_LATCH_1_MILLI_SEC (0x0B)
+#define BMG160_LATCH_12_5_MILLI_SEC (0x0C)
+#define BMG160_LATCH_25_MILLI_SEC (0x0D)
+#define BMG160_LATCH_50_MILLI_SEC (0x0E)
 
 /***********************************************/
 /**\name    OFFSET DEFINITIONS*/
 /**********************************************/
-#define BMG160_OFFSET_MASK_BYTE_OF_DATA   (0x0FF0)
-#define BMG160_OFFSET_X_BIT_MASK1         (0x000C)
-#define BMG160_OFFSET_X_BIT_MASK2         (0x0003)
-#define BMG160_OFFSET_Y_Z_BIT_MASK1       (0x0001)
-#define BMG160_OFFSET_Y_Z_BIT_MASK2       (0x000E)
+#define BMG160_OFFSET_MASK_BYTE_OF_DATA (0x0FF0)
+#define BMG160_OFFSET_X_BIT_MASK1 (0x000C)
+#define BMG160_OFFSET_X_BIT_MASK2 (0x0003)
+#define BMG160_OFFSET_Y_Z_BIT_MASK1 (0x0001)
+#define BMG160_OFFSET_Y_Z_BIT_MASK2 (0x000E)
 
 /***********************************************/
 /**\name    BUS READ AND WRITE FUNCTION POINTERS DEFINITIONS*/
 /**********************************************/
-#define BMG160_WR_FUNC_PTR                int8_t (*bus_write) \
-        (uint8_t, uint8_t, uint8_t *, uint8_t)
-#define BMG160_RD_FUNC_PTR                int8_t (*bus_read) \
-        (uint8_t, uint8_t, uint8_t *, uint8_t)
-#define BMG160_BRD_FUNC_PTR               int8_t (*burst_read) \
-        (uint8_t, uint8_t, uint8_t *, uint16_t)
-#define BMG160_MDELAY_DATA_TYPE           uint32_t
+#define BMG160_WR_FUNC_PTR int8_t (*bus_write)(uint8_t, uint8_t, uint8_t*, uint8_t)
+#define BMG160_RD_FUNC_PTR int8_t (*bus_read)(uint8_t, uint8_t, uint8_t*, uint8_t)
+#define BMG160_BRD_FUNC_PTR int8_t (*burst_read)(uint8_t, uint8_t, uint8_t*, uint16_t)
+#define BMG160_MDELAY_DATA_TYPE uint32_t
 
-
-#define C_BMG160_TWO_U8X    2
+#define C_BMG160_TWO_U8X 2
 /**************************************************************/
 /**\name    STRUCTURE DEFINITIONS                         */
 /**************************************************************/
@@ -1627,19 +1622,17 @@ typedef unsigned long long int u64; /**< used for unsigned 64bit */
 /*!
  * @brief Structure containing gyro xyz data
  */
-typedef struct bmg160_data_t
-{
-    int16_t datax; /**<gyro X  data*/
-    int16_t datay; /**<gyro Y  data*/
-    int16_t dataz; /**<gyro Z  data*/
+typedef struct bmg160_data_t {
+    int16_t datax;        /**<gyro X  data*/
+    int16_t datay;        /**<gyro Y  data*/
+    int16_t dataz;        /**<gyro Z  data*/
     uint8_t intstatus[5]; /**<gyro interrupt status*/
 } bmg160_gyro_data_typedef;
 
 /*!
  * @brief Structure containing gyro offset xyz data
  */
-struct bmg160_offset_t
-{
+struct bmg160_offset_t {
     uint16_t datax; /**<offset X  data*/
     uint16_t datay; /**<offset Y  data*/
     uint16_t dataz; /**<offset Z  data*/
@@ -1649,13 +1642,12 @@ struct bmg160_offset_t
  *  @brief bmg160_t structure
  *  This structure holds all relevant information about bmg160
  */
-struct bmg160_t
-{
-    uint8_t chip_id; /**< chip id of BMG160 */
-    uint8_t dev_addr; /**< device address of BMG160 */
-    BMG160_BRD_FUNC_PTR; /**< burst read function pointer of BMG160 */
-    BMG160_WR_FUNC_PTR; /**< bus write function pointer of BMG160 */
-    BMG160_RD_FUNC_PTR; /**< bus read function pointer of BMG160 */
+struct bmg160_t {
+    uint8_t chip_id;              /**< chip id of BMG160 */
+    uint8_t dev_addr;             /**< device address of BMG160 */
+    BMG160_BRD_FUNC_PTR;          /**< burst read function pointer of BMG160 */
+    BMG160_WR_FUNC_PTR;           /**< bus write function pointer of BMG160 */
+    BMG160_RD_FUNC_PTR;           /**< bus read function pointer of BMG160 */
     void (*delay_msec)(uint32_t); /**< delay function pointer of BMG160 */
 };
 
@@ -1668,10 +1660,9 @@ struct bmg160_t
  *    - Number of bytes to be read from the FIFO should be mapped to the member
  *     "fifo_length" of this structure
  */
-struct fifo_configuration
-{
+struct fifo_configuration {
     /*! Data buffer of user defined length is to be mapped here */
-    uint8_t *fifo_data;
+    uint8_t* fifo_data;
 
     /*! No of bytes to be read in FIFO as specified by the user */
     uint16_t fifo_length;
@@ -1704,7 +1695,7 @@ struct fifo_configuration
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_init(struct bmg160_t *bmg160);
+BMG160_RETURN_FUNCTION_TYPE bmg160_init(struct bmg160_t* bmg160);
 
 /***********************************************/
 /**\name    DATA READ XYZ */
@@ -1724,7 +1715,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_init(struct bmg160_t *bmg160);
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t *v_data_x_int16_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t* v_data_x_int16_t);
 
 /*!
  * @brief Reads Rate data Y in the registers 0x04 to 0x05
@@ -1740,7 +1731,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t *v_data_x_int16_t);
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t *v_data_y_int16_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t* v_data_y_int16_t);
 
 /*!
  *  @brief Reads Rate data Z in the registers 0x06 to 0x07
@@ -1754,7 +1745,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t *v_data_y_int16_t);
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t *v_data_z_int16_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t* v_data_z_int16_t);
 
 /*!
  * @brief Reads data X,Y and Z from register location 0x02 to 0x07
@@ -1770,8 +1761,8 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t *v_data_z_int16_t);
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz(struct bmg160_data_t *data);
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t *data, uint8_t *buf);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz(struct bmg160_data_t* data);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t* data, uint8_t* buf);
 /*!
  *  @brief Reads data X,Y,Z and Interrupts
  *  from register location 0x02 to 0x07
@@ -1785,7 +1776,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t *data,
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t *data);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t* data);
 
 /***********************************************/
 /**\name    TEMPERATURE DATA READ */
@@ -1804,7 +1795,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t *data);
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_temp(int8_t *v_temp_int8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_temp(int8_t* v_temp_int8_t);
 
 /***********************************************/
 /**\name    COMMON READ AND WRITE FUNCTIONS */
@@ -1827,7 +1818,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_temp(int8_t *v_temp_int8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_read_register(uint8_t v_addr_uint8_t, uint8_t *v_data_uint8_t, uint8_t v_len_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_read_register(uint8_t v_addr_uint8_t, uint8_t* v_data_uint8_t, uint8_t v_len_uint8_t);
 
 /*!
  * @brief
@@ -1846,7 +1837,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_read_register(uint8_t v_addr_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_burst_read(uint8_t v_addr_uint8_t, uint8_t *v_data_uint8_t, uint16_t v_len_uint16_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_burst_read(uint8_t v_addr_uint8_t, uint8_t* v_data_uint8_t, uint16_t v_len_uint16_t);
 
 /*!
  * @brief
@@ -1865,7 +1856,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_burst_read(uint8_t v_addr_uint8_t, uint8_t *v
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_write_register(uint8_t v_addr_uint8_t, uint8_t *v_data_uint8_t, uint8_t v_len_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_write_register(uint8_t v_addr_uint8_t, uint8_t* v_data_uint8_t, uint8_t v_len_uint8_t);
 
 /***********************************************/
 /**\name    INTERRUPT STATUS */
@@ -1888,7 +1879,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_write_register(uint8_t v_addr_uint8_t, uint8_
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_zero(uint8_t *v_stat0_data_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_zero(uint8_t* v_stat0_data_uint8_t);
 
 /*!
  *  @brief This api used to reads the interrupt status of
@@ -1910,7 +1901,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_zero(uint8_t *v_stat0_data_
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_one(uint8_t *v_stat1_data_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_one(uint8_t* v_stat1_data_uint8_t);
 
 /*!
  *  @brief This api used to reads the interrupt status of
@@ -1934,7 +1925,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_one(uint8_t *v_stat1_data_u
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_two(uint8_t *v_stat2_data_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_two(uint8_t* v_stat2_data_uint8_t);
 
 /*!
  *  @brief This api used to reads the interrupt status of
@@ -1959,7 +1950,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_two(uint8_t *v_stat2_data_u
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_three(uint8_t *v_stat3_data_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_three(uint8_t* v_stat3_data_uint8_t);
 
 /***********************************************/
 /**\name     RANGE*/
@@ -1988,7 +1979,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_three(uint8_t *v_stat3_data
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_range_reg(uint8_t *v_range_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_range_reg(uint8_t* v_range_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2046,7 +2037,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_range_reg(uint8_t v_range_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_bw(uint8_t *v_bw_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_bw(uint8_t* v_bw_uint8_t);
 
 /*!
  *  @brief This API is used to set the gyro bandwidth
@@ -2103,7 +2094,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_bw(uint8_t v_bw_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_pmu_ext_tri_select(uint8_t *v_pwu_ext_tri_select_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_pmu_ext_tri_select(uint8_t* v_pwu_ext_tri_select_uint8_t);
 
 /*!
  *  @brief This API used to set the status of
@@ -2153,7 +2144,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_pmu_ext_tri_select(uint8_t v_pwu_ext_tri_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_high_bw(uint8_t *v_high_bw_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_high_bw(uint8_t* v_high_bw_uint8_t);
 
 /*!
  *  @brief  This API is used to set data high bandwidth
@@ -2201,7 +2192,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_high_bw(uint8_t v_high_bw_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_shadow_dis(uint8_t *v_shadow_dis_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_shadow_dis(uint8_t* v_shadow_dis_uint8_t);
 
 /*!
  *  @brief  This API is used to set the shadow dis
@@ -2269,7 +2260,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_soft_rst(void);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_enable(uint8_t *v_data_enable_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_enable(uint8_t* v_data_enable_uint8_t);
 
 /*!
  *  @brief This API is used to set the data(data_enable)
@@ -2317,7 +2308,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_data_enable(uint8_t v_data_enable_uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_enable(uint8_t *v_fifo_enable_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_enable(uint8_t* v_fifo_enable_uint8_t);
 
 /*!
  *  @brief This API is used to set the fifo(fifo_enable)
@@ -2365,7 +2356,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_enable(uint8_t v_fifo_enable_uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_offset_enable(uint8_t *v_offset_enable_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_offset_enable(uint8_t* v_offset_enable_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2419,7 +2410,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_offset_enable(uint8_t v_offset_enabl
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_output_type(uint8_t v_param_uint8_t, uint8_t *v_intr_output_type_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_output_type(uint8_t v_param_uint8_t, uint8_t* v_intr_output_type_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2475,7 +2466,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_output_type(uint8_t v_param_uint8_t,
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_level(uint8_t v_param_uint8_t, uint8_t *v_intr_level_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_level(uint8_t v_param_uint8_t, uint8_t* v_intr_level_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2529,7 +2520,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_level(uint8_t v_param_uint8_t, uint8
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_highrate(uint8_t *v_intr1_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_highrate(uint8_t* v_intr1_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2577,7 +2568,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_highrate(uint8_t v_intr1_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_any_motion(uint8_t *v_int1r_any_motion_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_any_motion(uint8_t* v_int1r_any_motion_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2630,7 +2621,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_any_motion(uint8_t v_int1r_any_moti
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_data(uint8_t v_axis_uint8_t, uint8_t *v_intr_data_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_data(uint8_t v_axis_uint8_t, uint8_t* v_intr_data_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2688,7 +2679,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_data(uint8_t v_axis_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_offset(uint8_t v_axis_uint8_t, uint8_t *v_intr2_offset_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_offset(uint8_t v_axis_uint8_t, uint8_t* v_intr2_offset_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2742,7 +2733,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_offset(uint8_t v_axis_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_offset(uint8_t v_axis_uint8_t, uint8_t *v_intr1_offset_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_offset(uint8_t v_axis_uint8_t, uint8_t* v_intr1_offset_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2795,7 +2786,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_offset(uint8_t v_axis_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_fifo(uint8_t *v_intr_fifo_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_fifo(uint8_t* v_intr_fifo_uint8_t);
 
 /*!
  *  @brief This API is used to get
@@ -2817,7 +2808,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_fifo(uint8_t *v_intr_fifo_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_fifo(uint8_t *v_intr_fifo_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_fifo(uint8_t* v_intr_fifo_uint8_t);
 
 /*!
  *  @brief This API is used to set the value of
@@ -2871,7 +2862,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_fifo(uint8_t v_axis_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_highrate(uint8_t *v_intr2_highrate_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_highrate(uint8_t* v_intr2_highrate_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2919,7 +2910,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_highrate(uint8_t v_intr2_highrate_u
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_any_motion(uint8_t *v_intr2_any_motion_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_any_motion(uint8_t* v_intr2_any_motion_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -2973,7 +2964,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_any_motion(uint8_t v_intr2_any_moti
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_unfilt(uint8_t v_param_uint8_t, uint8_t *v_offset_unfilt_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_unfilt(uint8_t v_param_uint8_t, uint8_t* v_offset_unfilt_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -3028,7 +3019,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_unfilt(uint8_t v_param_uint8_t, ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_unfilt_data(uint8_t v_param_uint8_t, uint8_t *v_unfilt_data_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_unfilt_data(uint8_t v_param_uint8_t, uint8_t* v_unfilt_data_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -3078,7 +3069,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_unfilt_data(uint8_t v_param_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_thres(uint8_t *v_any_motion_thres_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_thres(uint8_t* v_any_motion_thres_uint8_t);
 
 /*!
  *  @brief This API is used to set Any motion Threshold
@@ -3119,7 +3110,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_thres(uint8_t v_any_motion_thr
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_awake_durn(uint8_t *v_awake_durn_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_awake_durn(uint8_t* v_awake_durn_uint8_t);
 
 /*!
  *  @brief This API is used to set the awake Duration
@@ -3163,7 +3154,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_awake_durn(uint8_t v_awake_durn_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_durn_sample(uint8_t *v_durn_sample_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_durn_sample(uint8_t* v_durn_sample_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -3213,7 +3204,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_durn_sample(uint8_t v_durn_sam
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_enable_axis(uint8_t v_channel_uint8_t, uint8_t *v_any_motion_axis_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_enable_axis(uint8_t v_channel_uint8_t, uint8_t* v_any_motion_axis_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of
@@ -3265,7 +3256,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_enable(uint8_t *v_fifo_wm_enable_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_enable(uint8_t* v_fifo_wm_enable_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -3353,7 +3344,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_rst(uint8_t v_offset_rst_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_stat(uint8_t *v_latch_stat_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_stat(uint8_t* v_latch_stat_uint8_t);
 
 /*!
  *  @brief This API is used to set the Latch Status
@@ -3410,7 +3401,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_stat(uint8_t v_latch_stat_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_intr(uint8_t *v_latch_intr_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_intr(uint8_t* v_latch_intr_uint8_t);
 
 /*!
  *  @brief This API is used to set the Latch interrupt
@@ -3476,7 +3467,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_intr(uint8_t v_latch_intr_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_hyst(uint8_t v_channel_uint8_t, uint8_t *v_highrate_hyst_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_hyst(uint8_t v_channel_uint8_t, uint8_t* v_highrate_hyst_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of High
@@ -3530,7 +3521,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_hyst(uint8_t v_channel_uint8_t, 
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_thres(uint8_t v_channel_uint8_t, uint8_t *v_highrate_thres_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_thres(uint8_t v_channel_uint8_t, uint8_t* v_highrate_thres_uint8_t);
 
 /*!
  *  @brief This API is used to set the value of High rate
@@ -3585,7 +3576,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_thres(uint8_t v_channel_uint8_t,
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_enable_axis(uint8_t v_channel_uint8_t, uint8_t *v_enable_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_enable_axis(uint8_t v_channel_uint8_t, uint8_t* v_enable_uint8_t);
 
 /*!
  * @brief This API is used to set the status of High Enable
@@ -3643,7 +3634,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_enable_axis(uint8_t v_channel_ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_durn_axis(uint8_t v_channel_uint8_t, uint8_t *v_highrate_durn_axis_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_durn_axis(uint8_t v_channel_uint8_t, uint8_t* v_highrate_durn_axis_uint8_t);
 
 /*!
  * @brief This API is used to set the value
@@ -3700,7 +3691,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_durn_axis(uint8_t v_channel_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_thres(uint8_t *v_offset_thres_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_thres(uint8_t* v_offset_thres_uint8_t);
 
 /*!
  *  @brief This API is used to set Slow Offset Threshold
@@ -3749,7 +3740,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_thres(uint8_t v_offset_thres_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_durn(uint8_t *v_offset_durn_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_durn(uint8_t* v_offset_durn_uint8_t);
 
 /*!
  *  @brief This API is used to set Slow Offset duration
@@ -3804,7 +3795,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_durn(uint8_t v_offset_durn_ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t *v_slow_offset_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t* v_slow_offset_uint8_t);
 
 /*!
  *  @brief This API is used to set Slow Offset Enable channel
@@ -3862,7 +3853,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_enable_axis(uint8_t v_channel
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_word_length(uint8_t v_channel_uint8_t, uint8_t *v_offset_word_length_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_word_length(uint8_t v_channel_uint8_t, uint8_t* v_offset_word_length_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -3934,7 +3925,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_enable_fast_offset(void);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fast_offset_enable_axis(uint8_t *v_fast_offset_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fast_offset_enable_axis(uint8_t* v_fast_offset_uint8_t);
 
 /*!
  *  @brief This API set the Fast offset enable
@@ -3988,7 +3979,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fast_offset_enable_axis(uint8_t v_channel
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_remain(uint8_t *v_nvm_remain_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_remain(uint8_t* v_nvm_remain_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of nvm program
@@ -4026,7 +4017,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_load(uint8_t v_nvm_load_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_rdy(uint8_t *v_nvm_rdy_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_rdy(uint8_t* v_nvm_rdy_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of nvm
@@ -4065,7 +4056,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_trig(uint8_t nvm_prog_trig);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_prog_mode(uint8_t *nvm_prog_mode);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_prog_mode(uint8_t* nvm_prog_mode);
 
 /*!
  *  @brief This API is used to set
@@ -4116,7 +4107,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_mode(uint8_t nvm_prog_mode);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_i2c_wdt(uint8_t v_channel_uint8_t, uint8_t *v_i2c_wdt_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_i2c_wdt(uint8_t v_channel_uint8_t, uint8_t* v_i2c_wdt_uint8_t);
 
 /*!
  *  @brief This API is used to set
@@ -4169,7 +4160,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_i2c_wdt(uint8_t v_channel_uint8_t, uint8_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_spi3(uint8_t *v_spi3_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_spi3(uint8_t* v_spi3_uint8_t);
 
 /*!
  *  @brief  This API is used to set the status of spi3
@@ -4215,7 +4206,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_spi3(uint8_t v_spi3_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_tag(uint8_t *v_fifo_tag_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_tag(uint8_t* v_fifo_tag_uint8_t);
 
 /*!
  *  @brief  This API is used to set the status of FIFO tag
@@ -4253,7 +4244,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_tag(uint8_t v_fifo_tag_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_level(uint8_t *v_fifo_wm_level_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_level(uint8_t* v_fifo_wm_level_uint8_t);
 
 /*!
  *  @brief This API is used to set Water Mark Level
@@ -4311,7 +4302,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_level(uint8_t v_fifo_wm_level_uin
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset(uint8_t v_axis_uint8_t, int16_t *v_offset_int16_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset(uint8_t v_axis_uint8_t, int16_t* v_offset_int16_t);
 
 /*!
  *  @brief This API is used to set the value of offset
@@ -4370,7 +4361,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset(uint8_t v_axis_uint8_t, int16_t v_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_gp(uint8_t v_param_uint8_t, uint8_t *v_gp_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_gp(uint8_t v_param_uint8_t, uint8_t* v_gp_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of general
@@ -4420,7 +4411,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_gp(uint8_t v_param_uint8_t, uint8_t v_gp_
  *  @retval -127 -> Null Pointer Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration *fifo_conf);
+BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration* fifo_conf);
 
 /*!
  *  @brief this api is used to read the fifo status
@@ -4438,7 +4429,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration *fif
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_stat_reg(uint8_t *v_fifo_stat_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_stat_reg(uint8_t* v_fifo_stat_uint8_t);
 
 /*!
  *  @brief this API is used to get the fifo frame counter
@@ -4454,7 +4445,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_stat_reg(uint8_t *v_fifo_stat_uint8_
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_frame_count(uint8_t *v_fifo_frame_count_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_frame_count(uint8_t* v_fifo_frame_count_uint8_t);
 
 /*!
  *  @brief this API is used to get the fifo over run
@@ -4470,7 +4461,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_frame_count(uint8_t *v_fifo_frame_co
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_overrun(uint8_t *v_fifo_overrun_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_overrun(uint8_t* v_fifo_overrun_uint8_t);
 
 /*!
  *  @brief This API is used to get the status of fifo mode
@@ -4493,7 +4484,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_overrun(uint8_t *v_fifo_overrun_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_mode(uint8_t *v_fifo_mode_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_mode(uint8_t* v_fifo_mode_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of fifo mode
@@ -4539,7 +4530,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_mode(uint8_t v_fifo_mode_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_data_select(uint8_t *v_fifo_data_select_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_data_select(uint8_t* v_fifo_data_select_uint8_t);
 
 /*!
  *  @brief This API is used to set the status of fifo
@@ -4590,7 +4581,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_data_select(uint8_t v_fifo_data_sele
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_power_mode(uint8_t *v_power_mode_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_power_mode(uint8_t* v_power_mode_uint8_t);
 
 /*!
  *  @brief This API is used to set the operating modes of the
@@ -4638,7 +4629,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t *v_result_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t* v_result_uint8_t);
 
 /***********************************************/
 /**\name    SLEEP AND AUTO SLEEP CONFIGURATION  */
@@ -4668,7 +4659,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t *v_result_uint8_t);
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_sleep_durn(uint8_t *v_durn_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_sleep_durn(uint8_t* v_durn_uint8_t);
 
 /*!
  *  @brief  This API is used to set the auto sleep duration
@@ -4735,7 +4726,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_sleep_durn(uint8_t v_durn_uint8_t, u
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_sleep_durn(uint8_t *v_durn_uint8_t);
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_sleep_durn(uint8_t* v_durn_uint8_t);
 
 /*!
  *  @brief  This API is used to set the sleep duration

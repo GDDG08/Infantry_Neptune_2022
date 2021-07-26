@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-11 06:37:51
  */
 
-
 #ifndef LOG_LIB_H
 #define LOG_LIB_H
 
@@ -16,10 +15,7 @@
 extern "C" {
 #endif
 
-
 #include "stm32f4xx.h"
-
-
 
 #ifdef __cplusplus
 }

@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-11 11:06:13
  */
 
-
 #include "led_periph.h"
 
 #if __FN_IF_ENABLE(__FN_PERIPH_LED)
@@ -21,10 +20,9 @@ LED_LEDTypeDef LED_LED1, LED_LED2;
   * @retval     NULL
   */
 void LED_InitAllLEDs() {
-//    LED_InitLED(&LED_LED1,  GPIOC, GPIO_PIN_8, GPIO_PIN_SET, GPIO_PIN_RESET, LED_OFF);
-//    LED_InitLED(&LED_LED2,  GPIOA, GPIO_PIN_8, GPIO_PIN_SET, GPIO_PIN_RESET, LED_OFF);
+    //    LED_InitLED(&LED_LED1,  GPIOC, GPIO_PIN_8, GPIO_PIN_SET, GPIO_PIN_RESET, LED_OFF);
+    //    LED_InitLED(&LED_LED2,  GPIOA, GPIO_PIN_8, GPIO_PIN_SET, GPIO_PIN_RESET, LED_OFF);
 }
-
 
 /**
   * @brief      Read LED status
@@ -35,7 +33,6 @@ LED_LEDStateEnum LED_GetLEDState(LED_LEDTypeDef* led) {
     return led->state;
 }
 
-
 /**
   * @brief      Set LED status
   * @param      led: Pointer to LED object
@@ -45,13 +42,11 @@ LED_LEDStateEnum LED_GetLEDState(LED_LEDTypeDef* led) {
 void LED_SetLEDState(LED_LEDTypeDef* led, LED_LEDStateEnum state) {
     if (state == LED_OFF) {
         HAL_GPIO_WritePin(led->port, led->pin, led->off_pin_state);
-    }
-    else if (state == LED_ON) {
+    } else if (state == LED_ON) {
         HAL_GPIO_WritePin(led->port, led->pin, led->on_pin_state);
     }
     led->state = state;
 }
-
 
 /**
   * @brief      Turn off all LEDs
@@ -62,7 +57,6 @@ void LED_AllOff() {
     LED_SetLEDState(&LED_LED1, LED_OFF);
     LED_SetLEDState(&LED_LED2, LED_OFF);
 }
-
 
 /**
   * @brief      Initialize single LED
@@ -75,10 +69,10 @@ void LED_AllOff() {
   * @retval     NULL
   */
 void LED_InitLED(LED_LEDTypeDef* led, GPIO_TypeDef* port, uint16_t pin, GPIO_PinState off_pin_state, GPIO_PinState on_pin_state, LED_LEDStateEnum init_state) {
-    led->port           = port;
-    led->pin            = pin;
-    led->off_pin_state  = off_pin_state;
-    led->on_pin_state   = on_pin_state;
+    led->port = port;
+    led->pin = pin;
+    led->off_pin_state = off_pin_state;
+    led->on_pin_state = on_pin_state;
     LED_SetLEDState(led, init_state);
 }
 

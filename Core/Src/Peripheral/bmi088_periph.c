@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-23 21:22:35
  */
 
-
 #include "bmi088_periph.h"
 
 #if __FN_IF_ENABLE(__IMU_BMI088)
@@ -18,11 +17,10 @@
 float BMI088_ACCEL_SEN = BMI088_ACCEL_3G_SEN;
 float BMI088_GYRO_SEN = BMI088_GYRO_2000_SEN;
 
-SPI_HandleTypeDef* Const_BMI088_SPI_HANDLER         = &hspi1;
-const uint16_t Const_BMI088_OFFLINE_TIME            = 200;
+SPI_HandleTypeDef* Const_BMI088_SPI_HANDLER = &hspi1;
+const uint16_t Const_BMI088_OFFLINE_TIME = 200;
 
-BMI088_BMI088DataTypeDef BMI088_BMI088Data;	
-
+BMI088_BMI088DataTypeDef BMI088_BMI088Data;
 
 /**
   * @brief      Get pinter to the bmi088 data object
@@ -33,40 +31,35 @@ BMI088_BMI088DataTypeDef* BMI088_GetBMI088DataPtr() {
     return &BMI088_BMI088Data;
 }
 
-
 /**
   * @brief      Initialization bmi088
   * @param      NULL
   * @retval     NULL
   */
 uint8_t BMI088_Init() {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_GetBMI088DataPtr();
-    
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
+
     uint8_t error = BMI088_NO_ERROR;
     if (BMI088_BMI0xxAccelTest() != BMI088_NO_ERROR) {
         error |= BMI088_SELF_TEST_ACCEL_ERROR;
-    }
-    else {
+    } else {
         error |= BMI088_BMI0xxAccelInit();
     }
 
     if (BMI088_BMI0xxGyroTest() != BMI088_NO_ERROR) {
         error |= BMI088_SELF_TEST_GYRO_ERROR;
-    }
-    else {
+    } else {
         error |= BMI088_BMI0xxGyroInit();
     }
 
     if (error == BMI088_NO_ERROR) {
         bmi088->state = BMI088_STATE_LOST;
         return 0;
-    }
-    else {
+    } else {
         bmi088->state = BMI088_STATE_CONNECTED;
         return 0;
     }
 }
-
 
 /**
   * @brief      BMI0XX bmi088 Accel Initial
@@ -100,7 +93,6 @@ static uint8_t BMI088_BMI0xxAccelInit() {
 
     // set accel sonsor config and check
     for (write_reg_num = 0; write_reg_num < BMI088_WRITE_ACCEL_REG_NUM; write_reg_num++) {
-
         BMI088_ACCEL_WRITE_SINGLE_REG(write_BMI088_accel_reg_data_error[write_reg_num][0], write_BMI088_accel_reg_data_error[write_reg_num][1]);
         delay_us(BMI088_COM_WAIT_SENSOR_TIME);
 
@@ -113,7 +105,6 @@ static uint8_t BMI088_BMI0xxAccelInit() {
     }
     return BMI088_NO_ERROR;
 }
-
 
 /**
   * @brief      BMI0XX bmi088 Gyro Initial
@@ -146,7 +137,6 @@ static uint8_t BMI088_BMI0xxGyroInit() {
 
     // set gyro sonsor config and check
     for (write_reg_num = 0; write_reg_num < BMI088_WRITE_GYRO_REG_NUM; write_reg_num++) {
-
         BMI088_GYRO_WRITE_SINGLE_REG(write_BMI088_gyro_reg_data_error[write_reg_num][0], write_BMI088_gyro_reg_data_error[write_reg_num][1]);
         delay_us(BMI088_COM_WAIT_SENSOR_TIME);
 
@@ -161,14 +151,12 @@ static uint8_t BMI088_BMI0xxGyroInit() {
     return BMI088_NO_ERROR;
 }
 
-
 /**
   * @brief      BMI0XX bmi088 Accel function test
   * @param      NULL
   * @retval     NULL
 */
 static uint8_t BMI088_BMI0xxAccelTest() {
-    
     volatile uint8_t res = 0;
     int16_t self_test_accel[2][3];
     uint8_t buff[6] = {0, 0, 0, 0, 0, 0};
@@ -207,7 +195,6 @@ static uint8_t BMI088_BMI0xxAccelTest() {
 
     // set the accel register
     for (write_reg_num = 0; write_reg_num < 4; write_reg_num++) {
-
         BMI088_ACCEL_WRITE_SINGLE_REG(write_BMI088_ACCEL_self_test_Reg_Data_Error[write_reg_num][0], write_BMI088_ACCEL_self_test_Reg_Data_Error[write_reg_num][1]);
         delay_us(BMI088_COM_WAIT_SENSOR_TIME);
 
@@ -223,7 +210,6 @@ static uint8_t BMI088_BMI0xxAccelTest() {
 
     // self test include postive and negative
     for (write_reg_num = 0; write_reg_num < 2; write_reg_num++) {
-
         BMI088_ACCEL_WRITE_SINGLE_REG(write_BMI088_ACCEL_self_test_Reg_Data_Error[write_reg_num + 4][0], write_BMI088_ACCEL_self_test_Reg_Data_Error[write_reg_num + 4][1]);
         delay_us(BMI088_COM_WAIT_SENSOR_TIME);
 
@@ -270,7 +256,6 @@ static uint8_t BMI088_BMI0xxAccelTest() {
     return BMI088_NO_ERROR;
 }
 
-
 /**
   * @brief      BMI0XX bmi088 Gyro function test
   * @param      NULL
@@ -279,7 +264,7 @@ static uint8_t BMI088_BMI0xxAccelTest() {
 static uint8_t BMI088_BMI0xxGyroTest() {
     uint8_t res = 0;
     uint8_t retry = 0;
-    
+
     // check commiunication is normal
     BMI088_GYRO_READ_SINGLE_REG(BMI088_GYRO_CHIP_ID, res);
     delay_us(BMI088_COM_WAIT_SENSOR_TIME);
@@ -316,16 +301,13 @@ static uint8_t BMI088_BMI0xxGyroTest() {
     return BMI088_NO_ERROR;
 }
 
-
 /**
   * @brief      Initialization offset and set mode
   * @param      NULL
   * @retval     NULL
 */
 void BMI088_InitAngelOffset() {
-    
 }
-
 
 /**
   * @brief      Judge bmi088 offline
@@ -333,7 +315,7 @@ void BMI088_InitAngelOffset() {
   * @retval     Offline or not£¨1 is offline£¬0 is not£©
   */
 uint8_t BMI088_IsBMI088Offline() {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_GetBMI088DataPtr();
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
     uint32_t now = HAL_GetTick();
     if ((now - bmi088->last_update_time) > Const_BMI088_OFFLINE_TIME)
@@ -341,25 +323,23 @@ uint8_t BMI088_IsBMI088Offline() {
     return bmi088->state == BMI088_STATE_LOST;
 }
 
-
 /**
   * @brief      Reset bmi088 data object
   * @param      NUULL
   * @retval     NUL
   */
 void BMI088_ResetBMI088Data() {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_GetBMI088DataPtr();
-    
-    bmi088->accel.pitch     = 0;
-    bmi088->accel.row       = 0;
-    bmi088->accel.yaw       = 0;
-    bmi088->speed.pitch     = 0;
-    bmi088->speed.row       = 0;
-    bmi088->speed.yaw       = 0;
-    bmi088->temperature     = 0;
-    bmi088->last_update_time    = HAL_GetTick();
-}
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
+    bmi088->accel.pitch = 0;
+    bmi088->accel.row = 0;
+    bmi088->accel.yaw = 0;
+    bmi088->speed.pitch = 0;
+    bmi088->speed.row = 0;
+    bmi088->speed.yaw = 0;
+    bmi088->temperature = 0;
+    bmi088->last_update_time = HAL_GetTick();
+}
 
 /**
   * @brief      BMI088 decode data function    £¨For BMI0xx)
@@ -367,24 +347,24 @@ void BMI088_ResetBMI088Data() {
   * @retval     NULL
   */
 void BMI088_BMI0xxDecodeData() {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_GetBMI088DataPtr();
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
     uint8_t buff[8] = {0, 0, 0, 0, 0, 0};
     int16_t raw_temp;
 
-    bmi088->state              = BMI088_STATE_PENDING;    
-    bmi088->last_update_time   = HAL_GetTick();
+    bmi088->state = BMI088_STATE_PENDING;
+    bmi088->last_update_time = HAL_GetTick();
 
     BMI088_ACCEL_READ_MULI_REG(BMI088_ACCEL_XOUT_L, buff, 6);
 
     bmi088->accel.pitch = ((int16_t)((buff[1]) << 8) | buff[0]) * BMI088_ACCEL_SEN;
-    bmi088->accel.row   = ((int16_t)((buff[3]) << 8) | buff[2]) * BMI088_ACCEL_SEN;
-    bmi088->accel.yaw   = ((int16_t)((buff[5]) << 8) | buff[4]) * BMI088_ACCEL_SEN;
+    bmi088->accel.row = ((int16_t)((buff[3]) << 8) | buff[2]) * BMI088_ACCEL_SEN;
+    bmi088->accel.yaw = ((int16_t)((buff[5]) << 8) | buff[4]) * BMI088_ACCEL_SEN;
 
     BMI088_GYRO_READ_MULI_REG(BMI088_GYRO_CHIP_ID, buff, 8);
-    if(buff[0] == BMI088_GYRO_CHIP_ID_VALUE) {
+    if (buff[0] == BMI088_GYRO_CHIP_ID_VALUE) {
         bmi088->speed.pitch = ((int16_t)((buff[3]) << 8) | buff[2]) * BMI088_GYRO_SEN;
-        bmi088->speed.row   = ((int16_t)((buff[5]) << 8) | buff[4]) * BMI088_GYRO_SEN;
-        bmi088->speed.yaw   = ((int16_t)((buff[7]) << 8) | buff[6]) * BMI088_GYRO_SEN;
+        bmi088->speed.row = ((int16_t)((buff[5]) << 8) | buff[4]) * BMI088_GYRO_SEN;
+        bmi088->speed.yaw = ((int16_t)((buff[7]) << 8) | buff[6]) * BMI088_GYRO_SEN;
     }
     BMI088_ACCEL_READ_MULI_REG(BMI088_TEMP_M, buff, 2);
 
@@ -395,21 +375,20 @@ void BMI088_BMI0xxDecodeData() {
 
     bmi088->temperature = raw_temp * BMI088_TEMP_FACTOR + BMI088_TEMP_OFFSET;
 
-    bmi088->state              = BMI088_STATE_CONNECTED; 
+    bmi088->state = BMI088_STATE_CONNECTED;
 }
-
 
 /**
   * @brief      BMI088 decode temperature data function    £¨For BMI0xx)
   * @param      rx_buff :BMI088 SPI temperature buff
   * @retval     NULL
   */
-void BMI088_BMI0xxTempReadOver(uint8_t *rx_buff) {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_GetBMI088DataPtr();
+void BMI088_BMI0xxTempReadOver(uint8_t* rx_buff) {
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
-    bmi088->state              = BMI088_STATE_PENDING;    
-    bmi088->last_update_time   = HAL_GetTick();
-    
+    bmi088->state = BMI088_STATE_PENDING;
+    bmi088->last_update_time = HAL_GetTick();
+
     int16_t raw_temp;
     raw_temp = (int16_t)((rx_buff[0] << 3) | (rx_buff[1] >> 5));
 
@@ -418,47 +397,45 @@ void BMI088_BMI0xxTempReadOver(uint8_t *rx_buff) {
     }
     bmi088->temperature = raw_temp * BMI088_TEMP_FACTOR + BMI088_TEMP_OFFSET;
 
-    bmi088->state              = BMI088_STATE_CONNECTED; 
+    bmi088->state = BMI088_STATE_CONNECTED;
 }
-
 
 /**
   * @brief      BMI088 decode temperature data function    £¨For BMI0xx)
   * @param      rx_buff :BMI088 SPI accel buff
   * @retval     NULL
   */
-void BMI088_BMI0xxAccelReadOver(uint8_t *rx_buff) {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_GetBMI088DataPtr();
+void BMI088_BMI0xxAccelReadOver(uint8_t* rx_buff) {
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
-    bmi088->state              = BMI088_STATE_PENDING;    
-    bmi088->last_update_time   = HAL_GetTick();
+    bmi088->state = BMI088_STATE_PENDING;
+    bmi088->last_update_time = HAL_GetTick();
 
     bmi088->accel.pitch = ((int16_t)((rx_buff[1]) << 8) | rx_buff[0]) * BMI088_ACCEL_SEN;
-    bmi088->accel.row   = ((int16_t)((rx_buff[3]) << 8) | rx_buff[2]) * BMI088_ACCEL_SEN;
-    bmi088->accel.yaw   = ((int16_t)((rx_buff[5]) << 8) | rx_buff[4]) * BMI088_ACCEL_SEN;
+    bmi088->accel.row = ((int16_t)((rx_buff[3]) << 8) | rx_buff[2]) * BMI088_ACCEL_SEN;
+    bmi088->accel.yaw = ((int16_t)((rx_buff[5]) << 8) | rx_buff[4]) * BMI088_ACCEL_SEN;
 
     bmi088->sensor_time = ((uint32_t)((rx_buff[8] << 16) | (rx_buff[7] << 8) | rx_buff[6])) * 39.0625f;
 
-    bmi088->state              = BMI088_STATE_CONNECTED; 
+    bmi088->state = BMI088_STATE_CONNECTED;
 }
-
 
 /**
   * @brief      BMI088 decode temperature data function
   * @param      rx_buff :bmi088 SPI gyro buff
   * @retval     NULL
   */
-void BMI088_BMI088GyroReadOver(uint8_t *rx_buff) {
-    BMI088_BMI088DataTypeDef *bmi088 = BMI088_Getbmi088DataPtr();
+void BMI088_BMI088GyroReadOver(uint8_t* rx_buff) {
+    BMI088_BMI088DataTypeDef* bmi088 = BMI088_Getbmi088DataPtr();
 
-    bmi088->state              = BMI088_STATE_PENDING;    
-    bmi088->last_update_time   = HAL_GetTick();
-    
+    bmi088->state = BMI088_STATE_PENDING;
+    bmi088->last_update_time = HAL_GetTick();
+
     bmi088->speed.pitch = ((int16_t)((rx_buff[1]) << 8) | rx_buff[0]) * BMI088_GYRO_SEN;
-    bmi088->speed.row   = ((int16_t)((rx_buff[3]) << 8) | rx_buff[2]) * BMI088_GYRO_SEN;
-    bmi088->speed.yaw   = ((int16_t)((rx_buff[5]) << 8) | rx_buff[4]) * BMI088_GYRO_SEN;
+    bmi088->speed.row = ((int16_t)((rx_buff[3]) << 8) | rx_buff[2]) * BMI088_GYRO_SEN;
+    bmi088->speed.yaw = ((int16_t)((rx_buff[5]) << 8) | rx_buff[4]) * BMI088_GYRO_SEN;
 
-    bmi088->state              = BMI088_STATE_CONNECTED; 
+    bmi088->state = BMI088_STATE_CONNECTED;
 }
 
 #endif

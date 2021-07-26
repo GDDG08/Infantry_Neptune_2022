@@ -24,11 +24,11 @@ extern "C" {
 #include "math_alg.h"
 #include "filter_alg.h"
 
-typedef enum {      
-    Motor_TYPE_NOT_CONNECTED  = 0,
-    Motor_TYPE_CAN_MOTOR      = 1,
-    Motor_TYPE_PWM_MOTOR      = 2,
-    Motor_TYPE_OTHER_MOTOR    = 3
+typedef enum {
+    Motor_TYPE_NOT_CONNECTED = 0,
+    Motor_TYPE_CAN_MOTOR = 1,
+    Motor_TYPE_PWM_MOTOR = 2,
+    Motor_TYPE_OTHER_MOTOR = 3
 } Motor_MotorTypeEnum;  // Motor drive type
 
 typedef struct {
@@ -36,14 +36,14 @@ typedef struct {
     int16_t angle;
     int16_t speed;
     int16_t current;
-    int8_t  temp;
+    int8_t temp;
     // Used to calculate continuous angles
     int16_t last_angle;
     int16_t round_count;
-    int8_t  has_init; // Initial flag of the plucking wheel
-    float   init_offset;
-    float   limited_angle;
-    float   consequent_angle;
+    int8_t has_init;  // Initial flag of the plucking wheel
+    float init_offset;
+    float limited_angle;
+    float consequent_angle;
     // PWM encoder
     TIM_HandleTypeDef* htim;
     uint8_t direction;
@@ -79,7 +79,6 @@ typedef void (*Motor_EncoderCallbackFuncTypeDef)(Motor_MotorTypeDef*);
 
 extern const uint32_t Const_Motor_MOTOR_OFFLINE_TIME;
 
-
 /********** VOLATILE USER CODE **********/
 
 extern Motor_MotorGroupTypeDef Motor_chassisMotors;
@@ -100,14 +99,11 @@ extern Motor_MotorTypeDef Motor_feederMotor;
 extern Motor_MotorTypeDef Motor_shooterMotorLeft;
 extern Motor_MotorTypeDef Motor_shooterMotorRight;
 
-
 /********** VOLATILE USER CODE END **********/
-
 
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len);
 void Motor_InitAllMotors(void);
-void Motor_InitMotor(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint8_t pid_num, uint8_t cur_pid, float fdb_param, TIM_HandleTypeDef* htim, 
-                     uint32_t ch, TIM_HandleTypeDef* htim_enc, Motor_EncoderCallbackFuncTypeDef callback);
+void Motor_InitMotor(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint8_t pid_num, uint8_t cur_pid, float fdb_param, TIM_HandleTypeDef* htim, uint32_t ch, TIM_HandleTypeDef* htim_enc, Motor_EncoderCallbackFuncTypeDef callback);
 void Motor_InitMotorGroup(Motor_MotorGroupTypeDef* pgroup, Motor_MotorTypeEnum type, uint8_t motor_num, CAN_HandleTypeDef* phcan, uint16_t stdid);
 void Motor_InitMotorParam(Motor_MotorParamTypeDef* pparam, float pidpara[][4][5], PID_ModeEnum cur_mode, PID_ModeEnum spd_mode, PID_ModeEnum pos_mode);
 void Motor_ResetMotorPID(Motor_MotorTypeDef* pmotor);
@@ -127,7 +123,6 @@ uint8_t Motor_IsAnyMotorOffline(void);
 uint8_t Motor_IsMotorOffline(Motor_MotorTypeDef* pmotor);
 void Motor_ReadPWMEncoder(Motor_MotorTypeDef* pmotor);
 void Motor_DecodeEncoder(uint8_t rxdata[], Motor_MotorTypeDef* pmotor);
-
 
 #endif
 

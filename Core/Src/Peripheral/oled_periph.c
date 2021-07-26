@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-16 11:56:35
  */
 
-
 #include "oled_periph.h"
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
@@ -18,7 +17,7 @@
 #include "stdlib.h"
 #include "stdarg.h"
 
-I2C_HandleTypeDef* Const_OLED_I2C_HANDLER  = &hi2c1;
+I2C_HandleTypeDef* Const_OLED_I2C_HANDLER = &hi2c1;
 
 static uint8_t OLED_GRAM[128][8];
 
@@ -32,14 +31,12 @@ void Oled_Writebyte(uint8_t date, uint8_t cmd) {
     static uint8_t cmd_data[2];
     if (cmd == OLED_CMD) {
         cmd_data[0] = 0x00;
-    }
-    else {
+    } else {
         cmd_data[0] = 0x40;
     }
     cmd_data[1] = date;
     I2c_MasterSendMessage(Const_OLED_I2C_HANDLER, OLED_I2C_ADDRESS, cmd_data, 2);
 }
-
 
 /**
   * @brief          Initialize the oled device
@@ -47,36 +44,35 @@ void Oled_Writebyte(uint8_t date, uint8_t cmd) {
   * @retval         NULL
   */
 void OLED_init() {
-    Oled_Writebyte(0xAE, OLED_CMD);    // display off
-    Oled_Writebyte(0x20, OLED_CMD);    // Set Memory Addressing Mode	
-    Oled_Writebyte(0x10, OLED_CMD);    // 00,Horizontal Addressing Mode;01,Vertical Addressing Mode;10,Page Addressing Mode (RESET);11,Invalid
-    Oled_Writebyte(0xb0, OLED_CMD);    // Set Page Start Address for Page Addressing Mode,0-7
-    Oled_Writebyte(0xc8, OLED_CMD);    // Set COM Output Scan Direction
-    Oled_Writebyte(0x00, OLED_CMD);    // ---set low column address
-    Oled_Writebyte(0x10, OLED_CMD);    // ---set high column address
-    Oled_Writebyte(0x40, OLED_CMD);    // --set start line address
-    Oled_Writebyte(0x81, OLED_CMD);    // --set contrast control register
-    Oled_Writebyte(0xff, OLED_CMD);    // brightness 0x00~0xff
-    Oled_Writebyte(0xa1, OLED_CMD);    // --set segment re-map 0 to 127
-    Oled_Writebyte(0xa6, OLED_CMD);    // --set normal display
-    Oled_Writebyte(0xa8, OLED_CMD);    // --set multiplex ratio(1 to 64)
-    Oled_Writebyte(0x3F, OLED_CMD);    // 
-    Oled_Writebyte(0xa4, OLED_CMD);    // 0xa4,Output follows RAM content;0xa5,Output ignores RAM content
-    Oled_Writebyte(0xd3, OLED_CMD);    // -set display offset
-    Oled_Writebyte(0x00, OLED_CMD);    // -not offset
-    Oled_Writebyte(0xd5, OLED_CMD);    // --set display clock divide ratio/oscillator frequency
-    Oled_Writebyte(0xf0, OLED_CMD);    // --set divide ratio
-    Oled_Writebyte(0xd9, OLED_CMD);    // --set pre-charge period
-    Oled_Writebyte(0x22, OLED_CMD);    // 
-    Oled_Writebyte(0xda, OLED_CMD);    // --set com pins hardware configuration
-    Oled_Writebyte(0x12, OLED_CMD); 
-    Oled_Writebyte(0xdb, OLED_CMD);    // --set vcomh
-    Oled_Writebyte(0x20, OLED_CMD);    // 0x20,0.77xVcc
-    Oled_Writebyte(0x8d, OLED_CMD);    // --set DC-DC enable
-    Oled_Writebyte(0x14, OLED_CMD);    // 
-    Oled_Writebyte(0xaf, OLED_CMD);    // --turn on oled panel
+    Oled_Writebyte(0xAE, OLED_CMD);  // display off
+    Oled_Writebyte(0x20, OLED_CMD);  // Set Memory Addressing Mode
+    Oled_Writebyte(0x10, OLED_CMD);  // 00,Horizontal Addressing Mode;01,Vertical Addressing Mode;10,Page Addressing Mode (RESET);11,Invalid
+    Oled_Writebyte(0xb0, OLED_CMD);  // Set Page Start Address for Page Addressing Mode,0-7
+    Oled_Writebyte(0xc8, OLED_CMD);  // Set COM Output Scan Direction
+    Oled_Writebyte(0x00, OLED_CMD);  // ---set low column address
+    Oled_Writebyte(0x10, OLED_CMD);  // ---set high column address
+    Oled_Writebyte(0x40, OLED_CMD);  // --set start line address
+    Oled_Writebyte(0x81, OLED_CMD);  // --set contrast control register
+    Oled_Writebyte(0xff, OLED_CMD);  // brightness 0x00~0xff
+    Oled_Writebyte(0xa1, OLED_CMD);  // --set segment re-map 0 to 127
+    Oled_Writebyte(0xa6, OLED_CMD);  // --set normal display
+    Oled_Writebyte(0xa8, OLED_CMD);  // --set multiplex ratio(1 to 64)
+    Oled_Writebyte(0x3F, OLED_CMD);  //
+    Oled_Writebyte(0xa4, OLED_CMD);  // 0xa4,Output follows RAM content;0xa5,Output ignores RAM content
+    Oled_Writebyte(0xd3, OLED_CMD);  // -set display offset
+    Oled_Writebyte(0x00, OLED_CMD);  // -not offset
+    Oled_Writebyte(0xd5, OLED_CMD);  // --set display clock divide ratio/oscillator frequency
+    Oled_Writebyte(0xf0, OLED_CMD);  // --set divide ratio
+    Oled_Writebyte(0xd9, OLED_CMD);  // --set pre-charge period
+    Oled_Writebyte(0x22, OLED_CMD);  //
+    Oled_Writebyte(0xda, OLED_CMD);  // --set com pins hardware configuration
+    Oled_Writebyte(0x12, OLED_CMD);
+    Oled_Writebyte(0xdb, OLED_CMD);  // --set vcomh
+    Oled_Writebyte(0x20, OLED_CMD);  // 0x20,0.77xVcc
+    Oled_Writebyte(0x8d, OLED_CMD);  // --set DC-DC enable
+    Oled_Writebyte(0x14, OLED_CMD);  //
+    Oled_Writebyte(0xaf, OLED_CMD);  // --turn on oled panel
 }
-
 
 /**
   * @brief          Turn on OLED display
@@ -89,7 +85,6 @@ void OLED_DisplayOn() {
     Oled_Writebyte(0xaf, OLED_CMD);
 }
 
-
 /**
   * @brief          Turn off OLED display
   * @param          NULL
@@ -100,7 +95,6 @@ void OLED_DisplayOff() {
     Oled_Writebyte(0x10, OLED_CMD);
     Oled_Writebyte(0xae, OLED_CMD);
 }
-
 
 /**
   * @brief          Operate the graphic ram(size: 128*8 char)
@@ -116,17 +110,14 @@ void OLED_OperateGram(Oled_PenEnum pen) {
         for (n = 0; n < 128; n++) {
             if (pen == PEN_WRITE) {
                 OLED_GRAM[n][i] = 0xff;
-            }
-            else if (pen == PEN_CLEAR) {
+            } else if (pen == PEN_CLEAR) {
                 OLED_GRAM[n][i] = 0x00;
-            }
-            else {
+            } else {
                 OLED_GRAM[n][i] = 0xff - OLED_GRAM[n][i];
             }
         }
     }
 }
-
 
 /**
   * @brief          Cursor set to (x,y) point
@@ -135,11 +126,10 @@ void OLED_OperateGram(Oled_PenEnum pen) {
   * @retval         NULL
   */
 void OLED_SetPos(uint8_t x, uint8_t y) {
-    Oled_Writebyte((0xb0 + y), OLED_CMD);              // set page address y
-    Oled_Writebyte(((x&0xf0) >> 4) | 0x10, OLED_CMD);      // set column high address
-    Oled_Writebyte((x&0x0f), OLED_CMD);                // set column low address
+    Oled_Writebyte((0xb0 + y), OLED_CMD);                // set page address y
+    Oled_Writebyte(((x & 0xf0) >> 4) | 0x10, OLED_CMD);  // set column high address
+    Oled_Writebyte((x & 0x0f), OLED_CMD);                // set column low address
 }
-
 
 /**
   * @brief          Draw one bit of graphic raw, operate one point of screan(128*64)
@@ -163,15 +153,12 @@ void OLED_DrawPoint(int8_t x, int8_t y, Oled_PenEnum pen) {
 
     if (pen == PEN_WRITE) {
         OLED_GRAM[x][page] |= 1 << row;
-    }
-    else if (pen == PEN_INVERSION) {
+    } else if (pen == PEN_INVERSION) {
         OLED_GRAM[x][page] ^= 1 << row;
-    }
-    else {
+    } else {
         OLED_GRAM[x][page] &= ~(1 << row);
     }
 }
-
 
 /**
   * @brief          Draw a line from (x1, y1) to (x2, y2)
@@ -194,16 +181,14 @@ void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, Oled_PenEnum 
         for (col = x_st; col <= x_ed; col++) {
             OLED_DrawPoint(col, y1, pen);
         }
-    }
-    else if (x1 == x2) {
+    } else if (x1 == x2) {
         (y1 <= y2) ? (y_st = y1) : (y_st = y2);
         (y1 <= y2) ? (y_ed = y2) : (y_ed = y1);
 
         for (row = y_st; row <= y_ed; row++) {
             OLED_DrawPoint(x1, row, pen);
         }
-    }
-    else {
+    } else {
         k = ((float)(y2 - y1)) / (x2 - x1);
         b = (float)y1 - k * x1;
 
@@ -215,7 +200,6 @@ void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, Oled_PenEnum 
         }
     }
 }
-
 
 /**
   * @brief          Show a character
@@ -251,7 +235,6 @@ void OLED_ShowChar(uint8_t row, uint8_t col, char chr) {
     }
 }
 
-
 /**
   * @brief          Show a character string
   * @param          row: row of character string begin
@@ -259,8 +242,8 @@ void OLED_ShowChar(uint8_t row, uint8_t col, char chr) {
   * @param          chr: the pointer to character string
   * @retval         NULL
   */
-void OLED_ShowString(uint8_t row, uint8_t col, char *chr) {
-    uint8_t n =0;
+void OLED_ShowString(uint8_t row, uint8_t col, char* chr) {
+    uint8_t n = 0;
 
     while (chr[n] != '\0') {
         OLED_ShowChar(row, col, chr[n]);
@@ -274,7 +257,6 @@ void OLED_ShowString(uint8_t row, uint8_t col, char *chr) {
     }
 }
 
-
 /**
   * @brief          Formatted output in oled 128*64
   * @param          row: row of character string begin, 0 <= row <= 4;
@@ -283,7 +265,7 @@ void OLED_ShowString(uint8_t row, uint8_t col, char *chr) {
   * @note           if the character length is more than one row at a time, the extra characters will be truncated
   * @retval         NULL
   */
-void OLED_Printf(uint8_t row, uint8_t col, const char *fmt,...) {
+void OLED_Printf(uint8_t row, uint8_t col, const char* fmt, ...) {
     static char LCD_BUF[128] = {0};
     static va_list ap;
     uint8_t remain_size = 0;
@@ -293,7 +275,7 @@ void OLED_Printf(uint8_t row, uint8_t col, const char *fmt,...) {
     }
     va_start(ap, fmt);
 
-    vsprintf((char *)LCD_BUF, fmt, ap);
+    vsprintf((char*)LCD_BUF, fmt, ap);
 
     va_end(ap);
 
@@ -303,7 +285,6 @@ void OLED_Printf(uint8_t row, uint8_t col, const char *fmt,...) {
 
     OLED_ShowString(row, col, LCD_BUF);
 }
-
 
 /**
   * @brief          Send the data of gram to oled sreen
@@ -321,7 +302,6 @@ void OLED_RefreshGram() {
     }
 }
 
-
 /**
   * @brief          Show the logo of RoboMaster
   * @param          NULL
@@ -333,16 +313,14 @@ void OLED_DisplayLogo() {
     uint8_t i = 0;
     OLED_OperateGram(PEN_CLEAR);
 
-
-    for(; y < 64; y += 8) {
-        for(x = 0; x < 128; x++) {
-            temp_char = OLED_LOGO_RM[x][y/8];
-            for(i = 0; i < 8; i++) {
-                if(temp_char & 0x80) {
-                    OLED_DrawPoint(x, y + i,PEN_WRITE);
-                }
-                else {
-                    OLED_DrawPoint(x, y + i,PEN_CLEAR);
+    for (; y < 64; y += 8) {
+        for (x = 0; x < 128; x++) {
+            temp_char = OLED_LOGO_RM[x][y / 8];
+            for (i = 0; i < 8; i++) {
+                if (temp_char & 0x80) {
+                    OLED_DrawPoint(x, y + i, PEN_WRITE);
+                } else {
+                    OLED_DrawPoint(x, y + i, PEN_CLEAR);
                 }
                 temp_char <<= 1;
             }
@@ -351,22 +329,20 @@ void OLED_DisplayLogo() {
     OLED_RefreshGram();
 }
 
-
 /**
   * @brief          Show the BMG
   * @param          NULL
   * @retval         NULL
   */
-void OLED_DisplayBMG(const unsigned char *buf) {
-	uint8_t j, i;
-	uint16_t n = 0;
-	for (i = 0; i < 7; i++) {
-		for (j = 0; j < 128; j++) {
-			OLED_GRAM[j][i] = buf[n++];
-		}
-	}
+void OLED_DisplayBMG(const unsigned char* buf) {
+    uint8_t j, i;
+    uint16_t n = 0;
+    for (i = 0; i < 7; i++) {
+        for (j = 0; j < 128; j++) {
+            OLED_GRAM[j][i] = buf[n++];
+        }
+    }
 }
-
 
 /**
   * @brief          Show the GIF
@@ -374,18 +350,17 @@ void OLED_DisplayBMG(const unsigned char *buf) {
   * @retval         NULL
   */
 void OLED_DisplayGIF(const unsigned char gif[][1024]) {
-	static uint32_t frames_period = 0;
+    static uint32_t frames_period = 0;
     static uint8_t cur_frame = 0;
     uint32_t frame = 80;
-    
+
     if (cur_frame >= 15) {
         cur_frame = 15;
         frames_period = HAL_GetTick();
         OLED_DisplayBMG(gif[cur_frame]);
         frames_period++;
         cur_frame = 0;
-    }
-    else if ((HAL_GetTick() - frames_period) >= frame) {
+    } else if ((HAL_GetTick() - frames_period) >= frame) {
         frames_period = HAL_GetTick();
         OLED_DisplayBMG(gif[cur_frame]);
         cur_frame++;

@@ -13,15 +13,12 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
-    
-void WatchDog_Task(void const * argument);
+
+void WatchDog_Task(void const* argument);
 void WatchDog_FeedDog(void);
-    
-
-
 
 #ifdef __cplusplus
 }

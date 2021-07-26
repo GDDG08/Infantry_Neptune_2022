@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-11 03:33:52
  */
 
-
 #ifndef STR_LIB_H
 #define STR_LIB_H
 
@@ -21,10 +20,10 @@ extern "C" {
 #include "stdlib.h"
 #include "stdarg.h"
 
-char *Str_Itoa(int value, char *string);
-int Str_Atoi(const char *str);
-void Str_HexToAscii(uint8_t *src, char *dest, int len);
-    
+char* Str_Itoa(int value, char* string);
+int Str_Atoi(const char* str);
+void Str_HexToAscii(uint8_t* src, char* dest, int len);
+
 #ifdef __cplusplus
 }
 #endif

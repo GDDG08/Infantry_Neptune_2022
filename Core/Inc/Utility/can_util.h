@@ -13,7 +13,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -22,7 +22,7 @@ extern "C" {
 #include "can.h"
 
 void Can_ErrorHandler(uint32_t ret);
-void Can_InitTxHeader(CAN_TxHeaderTypeDef *pheader, uint32_t stdid, uint32_t extid, uint32_t dlc);
+void Can_InitTxHeader(CAN_TxHeaderTypeDef* pheader, uint32_t stdid, uint32_t extid, uint32_t dlc);
 void Can_InitFilterAndStart(CAN_HandleTypeDef* phcan);
 void Can_SendMessage(CAN_HandleTypeDef* phcan, CAN_TxHeaderTypeDef* pheader, uint8_t txdata[]);
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* phcan);

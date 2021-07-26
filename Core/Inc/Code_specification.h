@@ -97,7 +97,7 @@ No.3 Notes
     Function declaration annotation requirements:
         Format:
 */
-            /**
+/**
              * @brief      Function action
              * @param      Parameter 1: parameter function
              * @param      Parameter 2: parameter function
@@ -107,7 +107,7 @@ No.3 Notes
     File header annotation requirements:
         Format:
 */
-            /**
+/**
              * Robomaster Source/Header File (Note: here is your name for the project, such as dreamcode, etc,
                 Header file, source file code file)
              *

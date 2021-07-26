@@ -8,13 +8,12 @@
  *  LastEditTime : 2021-06-13 23:39:09
  */
 
-
 #ifndef PWM_UTIL_H
 #define PWM_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 #if __FN_IF_ENABLE(__FN_UTIL_PWM)
@@ -23,7 +22,7 @@ extern "C" {
 
 typedef enum {
     PWM_OFF = 0,
-    PWM_ON  = 1
+    PWM_ON = 1
 } PWM_PWMStateEnum;
 
 typedef struct {
@@ -42,7 +41,6 @@ void PWM_StartPWM(PWM_PWMHandleTypeDef* pwm);
 void PWM_StopPWM(PWM_PWMHandleTypeDef* pwm);
 void PWM_SetPWMDuty(PWM_PWMHandleTypeDef* pwm, float duty);
 void PWM_SetPWMFreq(PWM_PWMHandleTypeDef* pwm, uint32_t freq);
-
 
 #endif
 

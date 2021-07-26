@@ -15,16 +15,13 @@
 extern "C" {
 #endif
 
-
 #include "const.h"
 
-void Const_Infantry_6_Init(Const_ConstTypeDef *x);
+void Const_Infantry_6_Init(Const_ConstTypeDef* x);
 extern Const_ConstTypeDef Infantry_6_Const;
-
 
 #endif
 
 #ifdef __cplusplus
 }
 #endif
-

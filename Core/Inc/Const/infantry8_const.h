@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-11 10:54:25
  */
 
-
 #ifndef INFANTRY8_CONST_H
 #define INFANTRY8_CONST_H
 
@@ -16,16 +15,13 @@
 extern "C" {
 #endif
 
-
 #include "const.h"
 
-void Const_Infantry_8_Init(Const_ConstTypeDef *x);
+void Const_Infantry_8_Init(Const_ConstTypeDef* x);
 extern Const_ConstTypeDef Infantry_8_Const;
-
 
 #endif
 
 #ifdef __cplusplus
 }
 #endif
-

@@ -8,11 +8,9 @@
  *  LastEditTime : 2021-07-16 02:50:26
  */
 
-
 #include "bmg160_periph.h"
 
-
-static struct bmg160_t *p_bmg160;
+static struct bmg160_t* p_bmg160;
 
 /*!
  *  @brief This function is used for initialize
@@ -37,8 +35,7 @@ static struct bmg160_t *p_bmg160;
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_init(struct bmg160_t *bmg160)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_init(struct bmg160_t* bmg160) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
@@ -79,8 +76,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_init(struct bmg160_t *bmg160)
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t *v_data_x_int16_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t* v_data_x_int16_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = BMG160_INIT_VALUE;
 
@@ -88,15 +84,12 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t *v_data_x_int16_t)
      * v_data_uint8_t[0] - X LSB
      * v_data_uint8_t[1] - X MSB
      */
-    uint8_t v_data_uint8_t[BMG160_X_DATA_SIZE] = { BMG160_INIT_VALUE, BMG160_INIT_VALUE };
+    uint8_t v_data_uint8_t[BMG160_X_DATA_SIZE] = {BMG160_INIT_VALUE, BMG160_INIT_VALUE};
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the gyro x data */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RATE_X_LSB_BIT__REG,
@@ -126,8 +119,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_x(int16_t *v_data_x_int16_t)
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t *v_data_y_int16_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t* v_data_y_int16_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
@@ -135,15 +127,12 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t *v_data_y_int16_t)
      * v_data_uint8_t[0] - Y LSB
      * v_data_uint8_t[1] - Y MSB
      */
-    uint8_t v_data_uint8_t[BMG160_Y_DATA_SIZE] = { BMG160_INIT_VALUE, BMG160_INIT_VALUE };
+    uint8_t v_data_uint8_t[BMG160_Y_DATA_SIZE] = {BMG160_INIT_VALUE, BMG160_INIT_VALUE};
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the gyro  y data*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RATE_Y_LSB_BIT__REG,
@@ -171,8 +160,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_y(int16_t *v_data_y_int16_t)
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t *v_data_z_int16_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t* v_data_z_int16_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
@@ -180,15 +168,12 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t *v_data_z_int16_t)
      * v_data_uint8_t[0] - Z LSB
      * v_data_uint8_t[1] - Z MSB
      */
-    uint8_t v_data_uint8_t[BMG160_Z_DATA_SIZE] = { BMG160_INIT_VALUE, BMG160_INIT_VALUE };
+    uint8_t v_data_uint8_t[BMG160_Z_DATA_SIZE] = {BMG160_INIT_VALUE, BMG160_INIT_VALUE};
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RATE_Z_LSB_BIT__REG,
                                                 v_data_uint8_t,
@@ -217,8 +202,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_z(int16_t *v_data_z_int16_t)
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz(struct bmg160_data_t *data)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz(struct bmg160_data_t* data) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
@@ -232,15 +216,11 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz(struct bmg160_data_t *data)
      */
 
     uint8_t v_data_uint8_t[BMG160_XYZ_DATA_SIZE] = {
-        BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE
-    };
+        BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE};
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RATE_X_LSB_BIT__REG,
                                                 v_data_uint8_t,
@@ -248,41 +228,39 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz(struct bmg160_data_t *data)
 
         /* Data X */
         v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE],
-                                                                      BMG160_RATE_X_LSB_BIT);
+                                                                           BMG160_RATE_X_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->datax =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_X_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE]));
 
         /* Data Y */
         v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE],
-                                                                      BMG160_RATE_Y_LSB_BIT);
+                                                                           BMG160_RATE_Y_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->datay =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_Y_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE]));
 
         /* Data Z */
         v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE],
-                                                                      BMG160_RATE_Z_LSB_BIT);
+                                                                           BMG160_RATE_Z_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->dataz =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_Z_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE]));
     }
 
     return comres;
 }
 
-
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t *data, uint8_t *buf)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t* data, uint8_t* buf) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
@@ -300,48 +278,42 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t *data,
     }
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-
-
+    } else {
         /* Data X */
         v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE],
-                                                                      BMG160_RATE_X_LSB_BIT);
+                                                                           BMG160_RATE_X_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->datax =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_X_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE]));
 
         /* Data Y */
         v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE],
-                                                                      BMG160_RATE_Y_LSB_BIT);
+                                                                           BMG160_RATE_Y_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->datay =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_Y_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE]));
 
         /* Data Z */
         v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE],
-                                                                      BMG160_RATE_Z_LSB_BIT);
+                                                                           BMG160_RATE_Z_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->dataz =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_Z_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE]));
     }
 
     return comres;
 }
-
 
 /*!
  *  @brief Reads data X,Y,Z and Interrupts
@@ -356,8 +328,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyz_over(struct bmg160_data_t *data,
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t *data)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t* data) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
@@ -378,16 +349,12 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t *data)
     uint8_t v_data_uint8_t[BMG160_XYZ_INTR_DATA_SIZE] = {
         BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE,
         BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE, BMG160_INIT_VALUE,
-        BMG160_INIT_VALUE, BMG160_INIT_VALUE
-    };
+        BMG160_INIT_VALUE, BMG160_INIT_VALUE};
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RATE_X_LSB_BIT__REG,
                                                 v_data_uint8_t,
@@ -395,33 +362,33 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t *data)
 
         /* Data X */
         v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE],
-                                                                      BMG160_RATE_X_LSB_BIT);
+                                                                           BMG160_RATE_X_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->datax =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_X_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_X_LSB_BYTE]));
 
         /* Data Y */
         v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE],
-                                                                      BMG160_RATE_Y_LSB_BIT);
+                                                                           BMG160_RATE_Y_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->datay =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_Y_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_Y_LSB_BYTE]));
 
         /* Data Z */
         v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE] = BMG160_GET_BIT_POS0(v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE],
-                                                                      BMG160_RATE_Z_LSB_BIT);
+                                                                           BMG160_RATE_Z_LSB_BIT);
 
         /* To avoid signed integer shifting, multiplication by the same factor of position shift is performed
          * i.e 8 places have been shifted left which is equivalent to multiplying by 256 */
         data->dataz =
             (int16_t)((((int32_t)((int8_t)v_data_uint8_t[BMG160_DATA_FRAME_Z_MSB_BYTE])) * 256) |
-                  (v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE]));
+                      (v_data_uint8_t[BMG160_DATA_FRAME_Z_LSB_BYTE]));
 
         /* interrupt*/
         data->intstatus[BMG160_INTR0_STAT] = v_data_uint8_t[BMG160_DATA_FRAME_INTR0_BYTE];
@@ -447,19 +414,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_xyzi(struct bmg160_data_t *data)
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_temp(int8_t *v_temp_int8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_temp(int8_t* v_temp_int8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t v_data_uint8_t = 0;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read temperature data*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TEMP_ADDR,
@@ -488,18 +451,14 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_temp(int8_t *v_temp_int8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_read_register(uint8_t v_addr_uint8_t, uint8_t *v_data_uint8_t, uint8_t v_len_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_read_register(uint8_t v_addr_uint8_t, uint8_t* v_data_uint8_t, uint8_t v_len_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr, v_addr_uint8_t, v_data_uint8_t, v_len_uint8_t);
     }
 
@@ -523,18 +482,14 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_read_register(uint8_t v_addr_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_burst_read(uint8_t v_addr_uint8_t, uint8_t *v_data_uint8_t, uint16_t v_len_uint16_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_burst_read(uint8_t v_addr_uint8_t, uint8_t* v_data_uint8_t, uint16_t v_len_uint16_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BURST_READ_FUNC(p_bmg160->dev_addr, v_addr_uint8_t, v_data_uint8_t, v_len_uint16_t);
     }
 
@@ -558,18 +513,14 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_burst_read(uint8_t v_addr_uint8_t, uint8_t *v
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_write_register(uint8_t v_addr_uint8_t, uint8_t *v_data_uint8_t, uint8_t v_len_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_write_register(uint8_t v_addr_uint8_t, uint8_t* v_data_uint8_t, uint8_t v_len_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr, v_addr_uint8_t, v_data_uint8_t, v_len_uint8_t);
     }
 
@@ -593,19 +544,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_write_register(uint8_t v_addr_uint8_t, uint8_
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_zero(uint8_t *v_stat0_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_zero(uint8_t* v_stat0_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the interrupt status any motion and high rate*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_STAT_ZERO__REG,
@@ -637,19 +584,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_zero(uint8_t *v_stat0_data_
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_one(uint8_t *v_stat1_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_one(uint8_t* v_stat1_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the interrupt status*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_STAT_ONE__REG,
@@ -683,19 +626,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_one(uint8_t *v_stat1_data_u
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_two(uint8_t *v_stat2_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_two(uint8_t* v_stat2_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the interrupt status */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_STAT_TWO__REG,
@@ -730,19 +669,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_two(uint8_t *v_stat2_data_u
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_three(uint8_t *v_stat3_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_three(uint8_t* v_stat3_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the interrupt status */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_STAT_THREE__REG,
@@ -777,19 +712,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_stat_reg_three(uint8_t *v_stat3_data
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_range_reg(uint8_t *v_range_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_range_reg(uint8_t* v_range_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the gyro range */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RANGE_ADDR_RANGE__REG,
@@ -824,21 +755,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_range_reg(uint8_t *v_range_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_range_reg(uint8_t v_range_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_range_reg(uint8_t v_range_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_range_uint8_t < BMG160_BIT_LENGTH_RANGE)
-        {
+    } else {
+        if (v_range_uint8_t < BMG160_BIT_LENGTH_RANGE) {
             /* write the range*/
             comres = p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                      BMG160_RANGE_ADDR_RANGE__REG,
@@ -849,9 +775,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_range_reg(uint8_t v_range_uint8_t)
                                                       BMG160_RANGE_ADDR_RANGE__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -886,19 +810,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_range_reg(uint8_t v_range_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_bw(uint8_t *v_bw_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_bw(uint8_t* v_bw_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read gyro bandwidth*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_BW_ADDR__REG,
@@ -937,8 +857,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_bw(uint8_t *v_bw_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_bw(uint8_t v_bw_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_bw(uint8_t v_bw_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
@@ -946,17 +865,12 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_bw(uint8_t v_bw_uint8_t)
     uint8_t v_auto_sleep_dur = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_bw_uint8_t < BMG160_BIT_LENGTH_BW)
-        {
+    } else {
+        if (v_bw_uint8_t < BMG160_BIT_LENGTH_BW) {
             comres = bmg160_get_power_mode(&v_mode_uint8_tr);
-            if (v_mode_uint8_tr == BMG160_MODE_ADVANCEDPOWERSAVING)
-            {
+            if (v_mode_uint8_tr == BMG160_MODE_ADVANCEDPOWERSAVING) {
                 /* check the advance power save mode */
                 comres = bmg160_set_auto_sleep_durn(v_auto_sleep_dur, v_bw_uint8_t);
             }
@@ -971,9 +885,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_bw(uint8_t v_bw_uint8_t)
                                                       BMG160_BW_ADDR__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -1003,19 +915,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_bw(uint8_t v_bw_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_pmu_ext_tri_select(uint8_t *v_pwu_ext_tri_select_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_pmu_ext_tri_select(uint8_t* v_pwu_ext_tri_select_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* READ PMU TRIGGER*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__REG,
@@ -1049,19 +957,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_pmu_ext_tri_select(uint8_t *v_pwu_ext_tri
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_pmu_ext_tri_select(uint8_t v_pwu_ext_tri_select_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_pmu_ext_tri_select(uint8_t v_pwu_ext_tri_select_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* WRITE PMU TRIGGER*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MODE_LPM2_ADDR_EXT_TRI_SELECT__REG,
@@ -1097,19 +1001,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_pmu_ext_tri_select(uint8_t v_pwu_ext_tri_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_high_bw(uint8_t *v_high_bw_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_high_bw(uint8_t* v_high_bw_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read high bandwidth*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_HIGH_BW__REG,
@@ -1141,21 +1041,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_high_bw(uint8_t *v_high_bw_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_high_bw(uint8_t v_high_bw_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_high_bw(uint8_t v_high_bw_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_high_bw_uint8_t < BMG160_BIT_LENGTH_HIGH_BW)
-        {
+    } else {
+        if (v_high_bw_uint8_t < BMG160_BIT_LENGTH_HIGH_BW) {
             /* write high bandwidth*/
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_HIGH_BW__REG,
@@ -1166,9 +1061,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_high_bw(uint8_t v_high_bw_uint8_t)
                                                       BMG160_HIGH_BW__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -1196,19 +1089,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_high_bw(uint8_t v_high_bw_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_shadow_dis(uint8_t *v_shadow_dis_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_shadow_dis(uint8_t* v_shadow_dis_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read shadow dis*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_SHADOW_DIS__REG,
@@ -1240,21 +1129,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_shadow_dis(uint8_t *v_shadow_dis_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_shadow_dis(uint8_t v_shadow_dis_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_shadow_dis(uint8_t v_shadow_dis_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_shadow_dis_uint8_t < BMG160_BIT_LENGTH_SHADOW_DIS)
-        {
+    } else {
+        if (v_shadow_dis_uint8_t < BMG160_BIT_LENGTH_SHADOW_DIS) {
             /* write shadow dis*/
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_SHADOW_DIS__REG,
@@ -1265,9 +1149,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_shadow_dis(uint8_t v_shadow_dis_uint8_t)
                                                       BMG160_SHADOW_DIS__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -1289,8 +1171,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_shadow_dis(uint8_t v_shadow_dis_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_soft_rst(void)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_soft_rst(void) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_soft_rst_uint8_t;
@@ -1298,12 +1179,9 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_soft_rst(void)
     v_soft_rst_uint8_t = BMG160_SOFT_RESET;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write soft reset*/
         comres = p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                  BMG160_BGW_SOFT_RST_ADDR,
@@ -1334,19 +1212,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_soft_rst(void)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_enable(uint8_t *v_data_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_enable(uint8_t* v_data_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the data enable interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ENABLE0_DATA__REG,
@@ -1378,19 +1252,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_data_enable(uint8_t *v_data_enable_uint8_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_data_enable(uint8_t v_data_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_data_enable(uint8_t v_data_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write the data enable interrupt*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ENABLE0_DATA__REG,
@@ -1426,19 +1296,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_data_enable(uint8_t v_data_enable_uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_enable(uint8_t *v_fifo_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_enable(uint8_t* v_fifo_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the fifo enable */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ENABLE0_FIFO__REG,
@@ -1470,21 +1336,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_enable(uint8_t *v_fifo_enable_uint8_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_enable(uint8_t v_fifo_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_enable(uint8_t v_fifo_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_fifo_enable_uint8_t < BMG160_BIT_LENGTH_FIFO)
-        {
+    } else {
+        if (v_fifo_enable_uint8_t < BMG160_BIT_LENGTH_FIFO) {
             /* write the fifo enable */
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_INTR_ENABLE0_FIFO__REG,
@@ -1495,9 +1356,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_enable(uint8_t v_fifo_enable_uint8_t
                                                       BMG160_INTR_ENABLE0_FIFO__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -1525,19 +1384,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_enable(uint8_t v_fifo_enable_uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_offset_enable(uint8_t *v_offset_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_offset_enable(uint8_t* v_offset_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read auto offset*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ENABLE0_AUTO_OFFSET__REG,
@@ -1569,19 +1424,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_offset_enable(uint8_t *v_offset_enab
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_offset_enable(uint8_t v_offset_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_offset_enable(uint8_t v_offset_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write auto offset */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ENABLE0_AUTO_OFFSET__REG,
@@ -1623,21 +1474,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_offset_enable(uint8_t v_offset_enabl
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_output_type(uint8_t v_param_uint8_t, uint8_t *v_intr_output_type_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_output_type(uint8_t v_param_uint8_t, uint8_t* v_intr_output_type_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* read output type*/
             case BMG160_INTR1:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -1688,21 +1534,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_output_type(uint8_t v_param_uint8_t,
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_output_type(uint8_t v_param_uint8_t, uint8_t v_intr_output_type_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_output_type(uint8_t v_param_uint8_t, uint8_t v_intr_output_type_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* write output type*/
             case BMG160_INTR1:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -1761,21 +1602,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_output_type(uint8_t v_param_uint8_t,
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_level(uint8_t v_param_uint8_t, uint8_t *v_intr_level_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_level(uint8_t v_param_uint8_t, uint8_t* v_intr_level_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* read active level*/
             case BMG160_INTR1:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -1826,21 +1662,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_level(uint8_t v_param_uint8_t, uint8
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_level(uint8_t v_param_uint8_t, uint8_t v_intr_level_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_level(uint8_t v_param_uint8_t, uint8_t v_intr_level_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* write active level*/
             case BMG160_INTR1:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -1893,19 +1724,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_level(uint8_t v_param_uint8_t, uint8
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_highrate(uint8_t *v_intr1_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_highrate(uint8_t* v_intr1_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read high_rate enable */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__REG,
@@ -1937,19 +1764,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_highrate(uint8_t *v_intr1_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_highrate(uint8_t v_intr1_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_highrate(uint8_t v_intr1_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write high_rate enable */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_ZERO_INTR1_HIGHRATE__REG,
@@ -1985,19 +1808,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_highrate(uint8_t v_intr1_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_any_motion(uint8_t *v_int1r_any_motion_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_any_motion(uint8_t* v_int1r_any_motion_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read any motion interrupt*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__REG,
@@ -2029,19 +1848,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_any_motion(uint8_t *v_int1r_any_mot
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_any_motion(uint8_t v_int1r_any_motion_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_any_motion(uint8_t v_int1r_any_motion_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write any motion interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_ZERO_INTR1_ANY_MOTION__REG,
@@ -2082,21 +1897,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_any_motion(uint8_t v_int1r_any_moti
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_data(uint8_t v_axis_uint8_t, uint8_t *v_intr_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_data(uint8_t v_axis_uint8_t, uint8_t* v_intr_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* read data interrupt */
             case BMG160_INTR1_DATA:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2146,21 +1956,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_data(uint8_t v_axis_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_data(uint8_t v_axis_uint8_t, uint8_t v_intr_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_data(uint8_t v_axis_uint8_t, uint8_t v_intr_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* write data interrupt*/
             case BMG160_INTR1_DATA:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2218,21 +2023,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_data(uint8_t v_axis_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_offset(uint8_t v_axis_uint8_t, uint8_t *v_intr2_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_offset(uint8_t v_axis_uint8_t, uint8_t* v_intr2_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* read offset*/
             case BMG160_FAST_OFFSET:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2282,21 +2082,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_offset(uint8_t v_axis_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_offset(uint8_t v_axis_uint8_t, uint8_t v_intr2_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_offset(uint8_t v_axis_uint8_t, uint8_t v_intr2_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* write offset */
             case BMG160_FAST_OFFSET:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2354,21 +2149,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_offset(uint8_t v_axis_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_offset(uint8_t v_axis_uint8_t, uint8_t *v_intr1_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_offset(uint8_t v_axis_uint8_t, uint8_t* v_intr1_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* read offset*/
             case BMG160_FAST_OFFSET:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2418,21 +2208,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr_offset(uint8_t v_axis_uint8_t, uint8
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_offset(uint8_t v_axis_uint8_t, uint8_t v_intr1_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_offset(uint8_t v_axis_uint8_t, uint8_t v_intr1_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* write offset */
             case BMG160_FAST_OFFSET:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2485,19 +2270,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr1_offset(uint8_t v_axis_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_fifo(uint8_t *v_intr_fifo_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_fifo(uint8_t* v_intr_fifo_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MAP_ONE_INTR2_FIFO__REG,
                                                 &v_data_uint8_t,
@@ -2528,19 +2309,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_fifo(uint8_t *v_intr_fifo_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_fifo(uint8_t *v_intr_fifo_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_fifo(uint8_t* v_intr_fifo_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MAP_ONE_INTR1_FIFO__REG,
@@ -2578,21 +2355,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr1_fifo(uint8_t *v_intr_fifo_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_fifo(uint8_t v_axis_uint8_t, uint8_t v_intr_fifo_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_fifo(uint8_t v_axis_uint8_t, uint8_t v_intr_fifo_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* write fifo interrupt */
             case BMG160_INTR1:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2645,19 +2417,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr_fifo(uint8_t v_axis_uint8_t, uint8_t
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_highrate(uint8_t *v_intr2_highrate_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_highrate(uint8_t* v_intr2_highrate_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read high rate interrupt*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__REG,
@@ -2689,19 +2457,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_highrate(uint8_t *v_intr2_highrate_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_highrate(uint8_t v_intr2_highrate_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_highrate(uint8_t v_intr2_highrate_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write high rate interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_TWO_INTR2_HIGHRATE__REG,
@@ -2737,19 +2501,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_highrate(uint8_t v_intr2_highrate_u
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_any_motion(uint8_t *v_intr2_any_motion_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_any_motion(uint8_t* v_intr2_any_motion_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read any motion interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__REG,
@@ -2781,19 +2541,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_intr2_any_motion(uint8_t *v_intr2_any_mot
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_any_motion(uint8_t v_intr2_any_motion_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_any_motion(uint8_t v_intr2_any_motion_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write any motion interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_MAP_TWO_INTR2_ANY_MOTION__REG,
@@ -2835,21 +2591,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_intr2_any_motion(uint8_t v_intr2_any_moti
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_unfilt(uint8_t v_param_uint8_t, uint8_t *v_offset_unfilt_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_unfilt(uint8_t v_param_uint8_t, uint8_t* v_offset_unfilt_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* read offset unfilt data */
             case BMG160_SLOW_OFFSET:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2900,21 +2651,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_unfilt(uint8_t v_param_uint8_t, ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_unfilt(uint8_t v_param_uint8_t, uint8_t v_offset_unfilt_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_unfilt(uint8_t v_param_uint8_t, uint8_t v_offset_unfilt_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* write offset unfilt data */
             case BMG160_SLOW_OFFSET:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -2973,21 +2719,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_unfilt(uint8_t v_param_uint8_t, ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_unfilt_data(uint8_t v_param_uint8_t, uint8_t *v_unfilt_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_unfilt_data(uint8_t v_param_uint8_t, uint8_t* v_unfilt_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* read unfilt data */
             case BMG160_HIGHRATE_UNFILT_DATA:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -3037,21 +2778,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_unfilt_data(uint8_t v_param_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_unfilt_data(uint8_t v_param_uint8_t, uint8_t v_unfilt_data_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_unfilt_data(uint8_t v_param_uint8_t, uint8_t v_unfilt_data_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* write unfilt data */
             case BMG160_HIGHRATE_UNFILT_DATA:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -3071,8 +2807,8 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_unfilt_data(uint8_t v_param_uint8_t, uint
                                                         &v_data_uint8_t,
                                                         BMG160_GEN_READ_WRITE_DATA_LENGTH);
                 v_data_uint8_t = BMG160_SET_BITSLICE(v_data_uint8_t,
-                                                BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA,
-                                                v_unfilt_data_uint8_t);
+                                                     BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA,
+                                                     v_unfilt_data_uint8_t);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_INTR_ZERO_ADDR_ANY_MOTION_UNFILT_DATA__REG,
                                                           &v_data_uint8_t,
@@ -3104,19 +2840,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_unfilt_data(uint8_t v_param_uint8_t, uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_thres(uint8_t *v_any_motion_thres_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_thres(uint8_t* v_any_motion_thres_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read any motion threshold */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__REG,
@@ -3145,19 +2877,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_thres(uint8_t *v_any_motion_th
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_thres(uint8_t v_any_motion_thres_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_thres(uint8_t v_any_motion_thres_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write any motion threshold*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_ONE_ADDR_ANY_MOTION_THRES__REG,
@@ -3193,19 +2921,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_thres(uint8_t v_any_motion_thr
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_awake_durn(uint8_t *v_awake_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_awake_durn(uint8_t* v_awake_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read awake duration*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_TWO_ADDR_AWAKE_DURN__REG,
@@ -3237,19 +2961,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_awake_durn(uint8_t *v_awake_durn_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_awake_durn(uint8_t v_awake_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_awake_durn(uint8_t v_awake_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write awake duration*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_TWO_ADDR_AWAKE_DURN__REG,
@@ -3285,19 +3005,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_awake_durn(uint8_t v_awake_durn_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_durn_sample(uint8_t *v_durn_sample_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_durn_sample(uint8_t* v_durn_sample_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read any motion awake samples*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__REG,
@@ -3329,19 +3045,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_durn_sample(uint8_t *v_durn_sa
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_durn_sample(uint8_t v_durn_sample_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_durn_sample(uint8_t v_durn_sample_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write awake duration samples*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_TWO_ADDR_ANY_MOTION_DURN_SAMPLE__REG,
@@ -3383,21 +3095,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_durn_sample(uint8_t v_durn_sam
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_enable_axis(uint8_t v_channel_uint8_t, uint8_t *v_any_motion_axis_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_enable_axis(uint8_t v_channel_uint8_t, uint8_t* v_any_motion_axis_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data1_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read any motion axis enable*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -3455,21 +3162,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_any_motion_enable_axis(uint8_t v_channel_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_any_motion_axis_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_any_motion_axis_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write any motion axis enable*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -3477,8 +3179,8 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_
                                                         &v_data_uint8_t,
                                                         BMG160_GEN_READ_WRITE_DATA_LENGTH);
                 v_data_uint8_t = BMG160_SET_BIT_POS0(v_data_uint8_t,
-                                                BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X,
-                                                v_any_motion_axis_uint8_t);
+                                                     BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X,
+                                                     v_any_motion_axis_uint8_t);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_X__REG,
                                                           &v_data_uint8_t,
@@ -3490,8 +3192,8 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_
                                                         &v_data_uint8_t,
                                                         BMG160_GEN_READ_WRITE_DATA_LENGTH);
                 v_data_uint8_t = BMG160_SET_BITSLICE(v_data_uint8_t,
-                                                BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y,
-                                                v_any_motion_axis_uint8_t);
+                                                     BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y,
+                                                     v_any_motion_axis_uint8_t);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Y__REG,
                                                           &v_data_uint8_t,
@@ -3503,8 +3205,8 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_
                                                         &v_data_uint8_t,
                                                         BMG160_GEN_READ_WRITE_DATA_LENGTH);
                 v_data_uint8_t = BMG160_SET_BITSLICE(v_data_uint8_t,
-                                                BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z,
-                                                v_any_motion_axis_uint8_t);
+                                                     BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z,
+                                                     v_any_motion_axis_uint8_t);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_INTR_TWO_ADDR_ANY_MOTION_ENABLE_Z__REG,
                                                           &v_data_uint8_t,
@@ -3537,19 +3239,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_any_motion_enable_axis(uint8_t v_channel_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_enable(uint8_t *v_fifo_wm_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_enable(uint8_t* v_fifo_wm_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo water mark enable */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_INTR_4_FIFO_WM_ENABLE__REG,
@@ -3579,22 +3277,17 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_enable(uint8_t *v_fifo_wm_enable_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_enable(uint8_t v_fifo_wm_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_enable(uint8_t v_fifo_wm_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write fifo water mark enable*/
-        if (v_fifo_wm_enable_uint8_t < BMG160_BIT_LENGTH_FIFO_WM)
-        {
+        if (v_fifo_wm_enable_uint8_t < BMG160_BIT_LENGTH_FIFO_WM) {
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_INTR_4_FIFO_WM_ENABLE__REG,
                                                     &v_data_uint8_t,
@@ -3604,9 +3297,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_enable(uint8_t v_fifo_wm_enable_u
                                                       BMG160_INTR_4_FIFO_WM_ENABLE__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -3631,19 +3322,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_enable(uint8_t v_fifo_wm_enable_u
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_rst_intr(uint8_t v_rst_int_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_rst_intr(uint8_t v_rst_int_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write reset interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RST_LATCH_ADDR_RST_INTR__REG,
@@ -3676,19 +3363,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_rst_intr(uint8_t v_rst_int_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_rst(uint8_t v_offset_rst_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_rst(uint8_t v_offset_rst_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write reset offset */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RST_LATCH_ADDR_OFFSET_RST__REG,
@@ -3724,19 +3407,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_rst(uint8_t v_offset_rst_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_stat(uint8_t *v_latch_stat_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_stat(uint8_t* v_latch_stat_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the latch status*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RST_LATCH_ADDR_LATCH_STAT__REG,
@@ -3768,19 +3447,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_stat(uint8_t *v_latch_stat_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_stat(uint8_t v_latch_stat_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_stat(uint8_t v_latch_stat_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write the latch status */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RST_LATCH_ADDR_LATCH_STAT__REG,
@@ -3829,19 +3504,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_stat(uint8_t v_latch_stat_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_intr(uint8_t *v_latch_intr_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_intr(uint8_t* v_latch_intr_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read latch interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RST_LATCH_ADDR_LATCH_INTR__REG,
@@ -3886,19 +3557,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_latch_intr(uint8_t *v_latch_intr_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_intr(uint8_t v_latch_intr_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_intr(uint8_t v_latch_intr_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write latch interrupt */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_RST_LATCH_ADDR_LATCH_INTR__REG,
@@ -3939,21 +3606,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_latch_intr(uint8_t v_latch_intr_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_hyst(uint8_t v_channel_uint8_t, uint8_t *v_highrate_hyst_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_hyst(uint8_t v_channel_uint8_t, uint8_t* v_highrate_hyst_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read high hysteresis*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4010,21 +3672,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_hyst(uint8_t v_channel_uint8_t, 
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_hyst(uint8_t v_channel_uint8_t, uint8_t v_highrate_hyst_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_hyst(uint8_t v_channel_uint8_t, uint8_t v_highrate_hyst_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write high hysteresis*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4093,21 +3750,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_hyst(uint8_t v_channel_uint8_t, 
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_thres(uint8_t v_channel_uint8_t, uint8_t *v_highrate_thres_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_thres(uint8_t v_channel_uint8_t, uint8_t* v_highrate_thres_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read high rate threshold*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4164,21 +3816,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_thres(uint8_t v_channel_uint8_t,
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_thres(uint8_t v_channel_uint8_t, uint8_t v_highrate_thres_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_thres(uint8_t v_channel_uint8_t, uint8_t v_highrate_thres_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write high rate threshold*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4248,21 +3895,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_thres(uint8_t v_channel_uint8_t,
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_enable_axis(uint8_t v_channel_uint8_t, uint8_t *v_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_enable_axis(uint8_t v_channel_uint8_t, uint8_t* v_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read high rate axis enable */
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4320,21 +3962,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_enable_axis(uint8_t v_channel_ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_enable_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_enable_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write high rate axis enable */
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4406,21 +4043,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_enable_axis(uint8_t v_channel_ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_durn_axis(uint8_t v_channel_uint8_t, uint8_t *v_highrate_durn_axis_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_durn_axis(uint8_t v_channel_uint8_t, uint8_t* v_highrate_durn_axis_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read high rate duration*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4480,21 +4112,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_highrate_durn_axis(uint8_t v_channel_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_durn_axis(uint8_t v_channel_uint8_t, uint8_t v_highrate_durn_axis_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_durn_axis(uint8_t v_channel_uint8_t, uint8_t v_highrate_durn_axis_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write high rate duration*/
             case BMG160_X_AXIS:
                 v_data_uint8_t = v_highrate_durn_axis_uint8_t;
@@ -4547,19 +4174,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_highrate_durn_axis(uint8_t v_channel_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_thres(uint8_t *v_offset_thres_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_thres(uint8_t* v_offset_thres_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read slow offset threshold*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_SLOW_OFFSET_THRES__REG,
@@ -4592,19 +4215,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_thres(uint8_t *v_offset_thres
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_thres(uint8_t v_offset_thres_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_thres(uint8_t v_offset_thres_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write slow offset threshold*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_SLOW_OFFSET_THRES__REG,
@@ -4644,19 +4263,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_thres(uint8_t v_offset_thres_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_durn(uint8_t *v_offset_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_durn(uint8_t* v_offset_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read slow offset duration*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_SLOW_OFFSET_DURN__REG,
@@ -4692,19 +4307,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_durn(uint8_t *v_offset_durn_u
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_durn(uint8_t v_offset_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_durn(uint8_t v_offset_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write slow offset duration*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_SLOW_OFFSET_DURN__REG,
@@ -4747,21 +4358,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_durn(uint8_t v_offset_durn_ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t *v_slow_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t* v_slow_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read slow offset axis enable */
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4820,21 +4426,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_slow_offset_enable_axis(uint8_t v_channel
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_slow_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_slow_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write slow offset axis enable */
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -4905,21 +4506,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_slow_offset_enable_axis(uint8_t v_channel
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_word_length(uint8_t v_channel_uint8_t, uint8_t *v_offset_word_length_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_word_length(uint8_t v_channel_uint8_t, uint8_t* v_offset_word_length_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             case BMG160_AUTO_OFFSET_WORD_LENGHTH:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                         BMG160_AUTO_OFFSET_WORD_LENGHTH__REG,
@@ -4970,21 +4566,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset_word_length(uint8_t v_channel_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_word_length(uint8_t v_channel_uint8_t, uint8_t v_offset_word_length_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_word_length(uint8_t v_channel_uint8_t, uint8_t v_offset_word_length_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             case BMG160_AUTO_OFFSET_WORD_LENGHTH:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                         BMG160_AUTO_OFFSET_WORD_LENGHTH__REG,
@@ -5028,19 +4619,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset_word_length(uint8_t v_channel_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_enable_fast_offset(void)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_enable_fast_offset(void) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FAST_OFFSET_ENABLE__REG,
                                                 &v_data_uint8_t,
@@ -5078,19 +4665,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_enable_fast_offset(void)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fast_offset_enable_axis(uint8_t *v_fast_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fast_offset_enable_axis(uint8_t* v_fast_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fast offset enable axis*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FAST_OFFSET_ENABLE_XYZ__REG,
@@ -5131,21 +4714,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fast_offset_enable_axis(uint8_t *v_fast_o
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fast_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_fast_offset_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fast_offset_enable_axis(uint8_t v_channel_uint8_t, uint8_t v_fast_offset_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write fast offset enable axis*/
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -5206,19 +4784,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fast_offset_enable_axis(uint8_t v_channel
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_remain(uint8_t *v_nvm_remain_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_remain(uint8_t* v_nvm_remain_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read NVM program*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TRIM_NVM_CTRL_ADDR_NVM_REMAIN__REG,
@@ -5247,19 +4821,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_remain(uint8_t *v_nvm_remain_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_load(uint8_t v_nvm_load_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_load(uint8_t v_nvm_load_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write NVM program*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TRIM_NVM_CTRL_ADDR_NVM_LOAD__REG,
@@ -5292,19 +4862,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_load(uint8_t v_nvm_load_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_rdy(uint8_t *v_nvm_rdy_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_rdy(uint8_t* v_nvm_rdy_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TRIM_NVM_CTRL_ADDR_NVM_RDY__REG,
                                                 &v_data_uint8_t,
@@ -5332,19 +4898,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_rdy(uint8_t *v_nvm_rdy_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_trig(uint8_t nvm_prog_trig)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_trig(uint8_t nvm_prog_trig) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_TRIG__REG,
                                                 &v_data_uint8_t,
@@ -5377,19 +4939,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_trig(uint8_t nvm_prog_trig)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_prog_mode(uint8_t *nvm_prog_mode)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_prog_mode(uint8_t* nvm_prog_mode) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__REG,
                                                 &v_data_uint8_t,
@@ -5418,19 +4976,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_nvm_prog_mode(uint8_t *nvm_prog_mode)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_mode(uint8_t nvm_prog_mode)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_mode(uint8_t nvm_prog_mode) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_TRIM_NVM_CTRL_ADDR_NVM_PROG_MODE__REG,
                                                 &v_data_uint8_t,
@@ -5470,21 +5024,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_nvm_prog_mode(uint8_t nvm_prog_mode)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_i2c_wdt(uint8_t v_channel_uint8_t, uint8_t *v_i2c_wdt_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_i2c_wdt(uint8_t v_channel_uint8_t, uint8_t* v_i2c_wdt_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* read i2c wdt*/
             case BMG160_I2C_WDT_ENABLE:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -5534,21 +5083,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_i2c_wdt(uint8_t v_channel_uint8_t, uint8_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_i2c_wdt(uint8_t v_channel_uint8_t, uint8_t v_i2c_wdt_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_i2c_wdt(uint8_t v_channel_uint8_t, uint8_t v_i2c_wdt_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_channel_uint8_t)
-        {
+    } else {
+        switch (v_channel_uint8_t) {
             /* write i2c wdt*/
             case BMG160_I2C_WDT_ENABLE:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -5601,19 +5145,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_i2c_wdt(uint8_t v_channel_uint8_t, uint8_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_spi3(uint8_t *v_spi3_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_spi3(uint8_t* v_spi3_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_BGW_SPI3_WDT_ADDR_SPI3__REG,
                                                 &v_data_uint8_t,
@@ -5644,19 +5184,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_spi3(uint8_t *v_spi3_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_spi3(uint8_t v_spi3_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_spi3(uint8_t v_spi3_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_BGW_SPI3_WDT_ADDR_SPI3__REG,
                                                 &v_data_uint8_t,
@@ -5689,19 +5225,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_spi3(uint8_t v_spi3_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_tag(uint8_t *v_fifo_tag_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_tag(uint8_t* v_fifo_tag_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo tag*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_CGF0_ADDR_TAG__REG,
@@ -5731,21 +5263,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_tag(uint8_t *v_fifo_tag_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_tag(uint8_t v_fifo_tag_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_tag(uint8_t v_fifo_tag_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_fifo_tag_uint8_t < BMG160_BIT_LENGTH_FIFO_TAG)
-        {
+    } else {
+        if (v_fifo_tag_uint8_t < BMG160_BIT_LENGTH_FIFO_TAG) {
             /* write fifo tag */
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_FIFO_CGF0_ADDR_TAG__REG,
@@ -5756,9 +5283,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_tag(uint8_t v_fifo_tag_uint8_t)
                                                       BMG160_FIFO_CGF0_ADDR_TAG__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -5782,19 +5307,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_tag(uint8_t v_fifo_tag_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_level(uint8_t *v_fifo_wm_level_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_level(uint8_t* v_fifo_wm_level_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_CGF0_ADDR_WML__REG,
                                                 &v_data_uint8_t,
@@ -5821,21 +5342,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_wm_level(uint8_t *v_fifo_wm_level_ui
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_level(uint8_t v_fifo_wm_level_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_level(uint8_t v_fifo_wm_level_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_fifo_wm_level_uint8_t < BMG160_FIFO_WM_LENGTH)
-        {
+    } else {
+        if (v_fifo_wm_level_uint8_t < BMG160_FIFO_WM_LENGTH) {
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_FIFO_CGF0_ADDR_WML__REG,
                                                     &v_data_uint8_t,
@@ -5845,9 +5361,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_level(uint8_t v_fifo_wm_level_uin
                                                       BMG160_FIFO_CGF0_ADDR_WML__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -5889,22 +5403,17 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_wm_level(uint8_t v_fifo_wm_level_uin
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset(uint8_t v_axis_uint8_t, int16_t *v_offset_int16_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset(uint8_t v_axis_uint8_t, int16_t* v_offset_int16_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t v_data1_uint8_tr = BMG160_INIT_VALUE;
     uint8_t v_data2_uint8_tr = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* read offset */
             case BMG160_X_AXIS:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -6012,38 +5521,33 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_offset(uint8_t v_axis_uint8_t, int16_t *v
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset(uint8_t v_axis_uint8_t, int16_t v_offset_int16_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset(uint8_t v_axis_uint8_t, int16_t v_offset_int16_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data1_uint8_tr = BMG160_INIT_VALUE;
     uint8_t v_data2_uint8_tr = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_axis_uint8_t)
-        {
+    } else {
+        switch (v_axis_uint8_t) {
             /* write offset */
             case BMG160_X_AXIS:
 
                 /* To avoid signed integer shifting, division by the same factor of position shift is performed
                  * i.e 4 places have been shifted right which is equivalent to dividing by 16 */
-                v_data1_uint8_tr = ((int8_t) (v_offset_int16_t & BMG160_OFFSET_MASK_BYTE_OF_DATA)) / 16;
+                v_data1_uint8_tr = ((int8_t)(v_offset_int16_t & BMG160_OFFSET_MASK_BYTE_OF_DATA)) / 16;
                 comres = p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                          BMG160_OFC2_ADDR,
                                                          &v_data1_uint8_tr,
                                                          BMG160_GEN_READ_WRITE_DATA_LENGTH);
-                v_data1_uint8_tr = (uint8_t) (v_offset_int16_t & BMG160_OFFSET_X_BIT_MASK1);
+                v_data1_uint8_tr = (uint8_t)(v_offset_int16_t & BMG160_OFFSET_X_BIT_MASK1);
                 comres += p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                          BMG160_OFC1_ADDR_OFFSET_X__REG,
                                                          &v_data2_uint8_tr,
                                                          BMG160_GEN_READ_WRITE_DATA_LENGTH);
-                v_data1_uint8_tr += (uint8_t) (v_offset_int16_t & BMG160_OFFSET_X_BIT_MASK2);
+                v_data1_uint8_tr += (uint8_t)(v_offset_int16_t & BMG160_OFFSET_X_BIT_MASK2);
                 v_data2_uint8_tr = BMG160_SET_BITSLICE(v_data2_uint8_tr, BMG160_TRIM_GP0_ADDR_OFFSET_X, v_data1_uint8_tr);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_TRIM_GP0_ADDR_OFFSET_X__REG,
@@ -6054,17 +5558,17 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset(uint8_t v_axis_uint8_t, int16_t v_
 
                 /* To avoid signed integer shifting, division by the same factor of position shift is performed
                  * i.e 4 places have been shifted right which is equivalent to dividing by 16 */
-                v_data1_uint8_tr = ((int8_t) (v_offset_int16_t & BMG160_OFFSET_MASK_BYTE_OF_DATA)) / 16;
+                v_data1_uint8_tr = ((int8_t)(v_offset_int16_t & BMG160_OFFSET_MASK_BYTE_OF_DATA)) / 16;
                 comres = p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                          BMG160_OFC3_ADDR,
                                                          &v_data1_uint8_tr,
                                                          BMG160_GEN_READ_WRITE_DATA_LENGTH);
-                v_data1_uint8_tr = (uint8_t) (v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK2);
+                v_data1_uint8_tr = (uint8_t)(v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK2);
                 comres += p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                          BMG160_OFC1_ADDR_OFFSET_Y__REG,
                                                          &v_data2_uint8_tr,
                                                          BMG160_GEN_READ_WRITE_DATA_LENGTH);
-                v_data1_uint8_tr += (uint8_t) (v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK1);
+                v_data1_uint8_tr += (uint8_t)(v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK1);
                 v_data2_uint8_tr = BMG160_SET_BITSLICE(v_data2_uint8_tr, BMG160_TRIM_GP0_ADDR_OFFSET_Y, v_data1_uint8_tr);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_TRIM_GP0_ADDR_OFFSET_Y__REG,
@@ -6075,17 +5579,17 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset(uint8_t v_axis_uint8_t, int16_t v_
 
                 /* To avoid signed integer shifting, division by the same factor of position shift is performed
                  * i.e 4 places have been shifted right which is equivalent to dividing by 16 */
-                v_data1_uint8_tr = ((int8_t) (v_offset_int16_t & BMG160_OFFSET_MASK_BYTE_OF_DATA)) / 16;
+                v_data1_uint8_tr = ((int8_t)(v_offset_int16_t & BMG160_OFFSET_MASK_BYTE_OF_DATA)) / 16;
                 comres = p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                          BMG160_OFC4_ADDR,
                                                          &v_data1_uint8_tr,
                                                          BMG160_GEN_READ_WRITE_DATA_LENGTH);
-                v_data1_uint8_tr = (uint8_t) (v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK2);
+                v_data1_uint8_tr = (uint8_t)(v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK2);
                 comres += p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                          BMG160_OFC1_ADDR_OFFSET_Z__REG,
                                                          &v_data2_uint8_tr,
                                                          BMG160_GEN_READ_WRITE_DATA_LENGTH);
-                v_data1_uint8_tr += (uint8_t) (v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK1);
+                v_data1_uint8_tr += (uint8_t)(v_offset_int16_t & BMG160_OFFSET_Y_Z_BIT_MASK1);
                 v_data2_uint8_tr = BMG160_SET_BIT_POS0(v_data2_uint8_tr, BMG160_TRIM_GP0_ADDR_OFFSET_Z, v_data1_uint8_tr);
                 comres += p_bmg160->BMG160_BUS_WRITE_FUNC(p_bmg160->dev_addr,
                                                           BMG160_TRIM_GP0_ADDR_OFFSET_Z__REG,
@@ -6122,21 +5626,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_offset(uint8_t v_axis_uint8_t, int16_t v_
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_gp(uint8_t v_param_uint8_t, uint8_t *v_gp_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_gp(uint8_t v_param_uint8_t, uint8_t* v_gp_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* read general purpose register*/
             case BMG160_GP0:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -6182,21 +5681,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_gp(uint8_t v_param_uint8_t, uint8_t *v_gp
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_gp(uint8_t v_param_uint8_t, uint8_t v_gp_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_gp(uint8_t v_param_uint8_t, uint8_t v_gp_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        switch (v_param_uint8_t)
-        {
+    } else {
+        switch (v_param_uint8_t) {
             /* write general purpose register*/
             case BMG160_GP0:
                 comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
@@ -6246,8 +5740,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_gp(uint8_t v_param_uint8_t, uint8_t v_gp_
  *  @retval -127 -> Null Pointer Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration *fifo_conf)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration* fifo_conf) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t fifo_frame_count = 0;
@@ -6255,13 +5748,10 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration *fif
     uint8_t fifo_tag = 0;
     uint16_t fifo_data_bytes = 0;
 
-    if (p_bmg160 == BMG160_NULL || fifo_conf->fifo_data == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL || fifo_conf->fifo_data == BMG160_NULL) {
         /* check the p_bmg160 is NULL or fifo_data is not assigned*/
         comres = E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /*Frames in FIFO is stored */
         comres = bmg160_get_fifo_frame_count(&fifo_frame_count);
 
@@ -6272,44 +5762,34 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration *fif
         comres += bmg160_get_fifo_tag(&fifo_tag);
 
         /*Number of bytes in FIFO is calculated*/
-        if (fifo_data_select == BMG160_FIFO_XYZ_DATA_ENABLED)
-        {
+        if (fifo_data_select == BMG160_FIFO_XYZ_DATA_ENABLED) {
             /*Number of bytes in FIFO when XYZ data are enabled*/
-            if (fifo_tag == BMG160_FIFO_TAG_ENABLED)
-            {
+            if (fifo_tag == BMG160_FIFO_TAG_ENABLED) {
                 /*Number of bytes in FIFO when XYZ data
                  * are enabled with tag (in register 0x3D)
                  */
                 fifo_data_bytes = fifo_frame_count * BMG160_FIFO_XYZ_AXES_TAG_FRAME_SIZE;
-            }
-            else
-            {
+            } else {
                 /*Number of bytes in FIFO when XYZ data
                  * are enabled without tag
                  */
                 fifo_data_bytes = fifo_frame_count * BMG160_FIFO_XYZ_AXES_FRAME_SIZE;
             }
-        }
-        else
-        {
+        } else {
             /*No of bytes in FIFO when single axis data enabled*/
-            if (fifo_tag == BMG160_FIFO_TAG_ENABLED)
-            {
+            if (fifo_tag == BMG160_FIFO_TAG_ENABLED) {
                 /*Number of bytes in FIFO when single axis data
                  * is enabled in FIFO without tag
                  */
                 fifo_data_bytes = fifo_frame_count * BMG160_FIFO_SINGLE_AXIS_TAG_FRAME_SIZE;
-            }
-            else
-            {
+            } else {
                 /*Number of bytes in FIFO when single axis data
                  * is enabled in FIFO without tag
                  */
                 fifo_data_bytes = fifo_frame_count * BMG160_FIFO_SINGLE_AXIS_FRAME_SIZE;
             }
         }
-        if (fifo_conf->fifo_length > fifo_data_bytes)
-        {
+        if (fifo_conf->fifo_length > fifo_data_bytes) {
             /*Number of bytes in FIFO is read entirely when user
              * reads more FIFO data than available
              */
@@ -6342,19 +5822,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_read_fifo_data(struct fifo_configuration *fif
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_stat_reg(uint8_t *v_fifo_stat_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_stat_reg(uint8_t* v_fifo_stat_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo over run and frame counter */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_STAT_ADDR,
@@ -6380,19 +5856,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_stat_reg(uint8_t *v_fifo_stat_uint8_
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_frame_count(uint8_t *v_fifo_frame_count_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_frame_count(uint8_t* v_fifo_frame_count_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo frame counter */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_STAT_FRAME_COUNTER__REG,
@@ -6418,19 +5890,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_frame_count(uint8_t *v_fifo_frame_co
  *  @retval -1 -> Error
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_overrun(uint8_t *v_fifo_overrun_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_overrun(uint8_t* v_fifo_overrun_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo over run*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_STAT_OVERRUN__REG,
@@ -6463,19 +5931,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_overrun(uint8_t *v_fifo_overrun_uint
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_mode(uint8_t *v_fifo_mode_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_mode(uint8_t* v_fifo_mode_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo mode*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_CGF1_ADDR_MODE__REG,
@@ -6508,21 +5972,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_mode(uint8_t *v_fifo_mode_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_mode(uint8_t v_fifo_mode_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_mode(uint8_t v_fifo_mode_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_fifo_mode_uint8_t < BMG160_BIT_LENGTH_FIFO_MODE)
-        {
+    } else {
+        if (v_fifo_mode_uint8_t < BMG160_BIT_LENGTH_FIFO_MODE) {
             /* write fifo mode*/
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_FIFO_CGF1_ADDR_MODE__REG,
@@ -6534,9 +5993,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_mode(uint8_t v_fifo_mode_uint8_t)
                                                       BMG160_FIFO_CGF1_ADDR_MODE__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -6565,19 +6022,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_mode(uint8_t v_fifo_mode_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_data_select(uint8_t *v_fifo_data_select_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_data_select(uint8_t* v_fifo_data_select_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read fifo data select*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_FIFO_CGF1_ADDR_DATA_SELECT__REG,
@@ -6610,21 +6063,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_fifo_data_select(uint8_t *v_fifo_data_sel
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_data_select(uint8_t v_fifo_data_select_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_data_select(uint8_t v_fifo_data_select_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_fifo_data_select_uint8_t < BMG160_BIT_LENGTH_FIFO_DATA_SELECT)
-        {
+    } else {
+        if (v_fifo_data_select_uint8_t < BMG160_BIT_LENGTH_FIFO_DATA_SELECT) {
             /* write fifo data select*/
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_FIFO_CGF1_ADDR_DATA_SELECT__REG,
@@ -6636,9 +6084,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_data_select(uint8_t v_fifo_data_sele
                                                       BMG160_FIFO_CGF1_ADDR_DATA_SELECT__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -6668,20 +6114,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_fifo_data_select(uint8_t v_fifo_data_sele
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_power_mode(uint8_t *v_power_mode_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_power_mode(uint8_t* v_power_mode_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t data1 = BMG160_INIT_VALUE;
     uint8_t data2 = BMG160_INIT_VALUE;
     uint8_t data3 = BMG160_INIT_VALUE;
 
-    if (p_bmg160 == NULL)
-    {
+    if (p_bmg160 == NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read the power mode*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MODE_LPM1_ADDR,
@@ -6694,33 +6136,20 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_power_mode(uint8_t *v_power_mode_uint8_t)
         data1 = (data1 & 0xA0) >> 5;
         data3 = (data2 & 0x40) >> 6;
         data2 = (data2 & 0x80) >> 7;
-        if (data3 == 0x01)
-        {
+        if (data3 == 0x01) {
             *v_power_mode_uint8_t = BMG160_MODE_ADVANCEDPOWERSAVING;
-        }
-        else
-        {
-            if ((data1 == 0x00) && (data2 == 0x00))
-            {
+        } else {
+            if ((data1 == 0x00) && (data2 == 0x00)) {
                 *v_power_mode_uint8_t = BMG160_MODE_NORMAL;
-            }
-            else
-            {
-                if ((data1 == 0x01) || (data1 == 0x05))
-                {
+            } else {
+                if ((data1 == 0x01) || (data1 == 0x05)) {
                     *v_power_mode_uint8_t = BMG160_MODE_DEEPSUSPEND;
-                }
-                else
-                {
-                    if ((data1 == 0x04) && (data2 == 0x00))
-                    {
+                } else {
+                    if ((data1 == 0x04) && (data2 == 0x00)) {
                         *v_power_mode_uint8_t = BMG160_MODE_SUSPEND;
-                    }
-                    else if ((data1 == 0x04) && (data2 == 0x01))
-                    {
+                    } else if ((data1 == 0x04) && (data2 == 0x01)) {
                         *v_power_mode_uint8_t = BMG160_MODE_FASTPOWERUP;
                     }
-
                 }
             }
         }
@@ -6751,8 +6180,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_power_mode(uint8_t *v_power_mode_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t data1 = BMG160_INIT_VALUE;
@@ -6761,14 +6189,10 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t)
     uint8_t v_autosleepduration = BMG160_INIT_VALUE;
     uint8_t v_bw_uint8_tr = BMG160_INIT_VALUE;
 
-    if (p_bmg160 == NULL)
-    {
+    if (p_bmg160 == NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_power_mode_uint8_t < BMG160_BIT_LENGTH_POWER_MODE)
-        {
+    } else {
+        if (v_power_mode_uint8_t < BMG160_BIT_LENGTH_POWER_MODE) {
             /* write the power mode*/
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_MODE_LPM1_ADDR,
@@ -6778,8 +6202,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t)
                                                      BMG160_MODE_LPM2_ADDR,
                                                      &data2,
                                                      BMG160_GEN_READ_WRITE_DATA_LENGTH);
-            switch (v_power_mode_uint8_t)
-            {
+            switch (v_power_mode_uint8_t) {
                 case BMG160_MODE_NORMAL:
                     data1 = BMG160_SET_BITSLICE(data1, BMG160_MODE_LPM1, BMG160_BIT_LENGTH_POWER_MODE);
                     data2 =
@@ -6902,9 +6325,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t)
                 default:
                     break;
             }
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -6930,8 +6351,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_power_mode(uint8_t v_power_mode_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t *v_result_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t* v_result_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres;
     uint8_t v_data1_uint8_t;
@@ -6957,12 +6377,9 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t *v_result_uint8_t)
                                              &v_data1_uint8_t,
                                              BMG160_GEN_READ_WRITE_DATA_LENGTH);
     v_data1_uint8_t = BMG160_GET_BITSLICE(v_data1_uint8_t, BMG160_SELFTEST_ADDR_BISTFAIL);
-    if ((v_data1_uint8_t == BMG160_SELFTEST_BISTFAIL) && (v_data2_uint8_t == BMG160_SELFTEST_RATEOK))
-    {
+    if ((v_data1_uint8_t == BMG160_SELFTEST_BISTFAIL) && (v_data2_uint8_t == BMG160_SELFTEST_RATEOK)) {
         *v_result_uint8_t = C_BMG160_SUCCESS;
-    }
-    else
-    {
+    } else {
         *v_result_uint8_t = C_BMG160_FAILURE;
     }
 
@@ -6993,19 +6410,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_selftest(uint8_t *v_result_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_sleep_durn(uint8_t *v_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_sleep_durn(uint8_t* v_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read auto sleep duration*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MODE_LPM2_ADDR_AUTO_SLEEP_DURN__REG,
@@ -7055,116 +6468,83 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_auto_sleep_durn(uint8_t *v_durn_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_sleep_durn(uint8_t v_durn_uint8_t, uint8_t v_bw_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_sleep_durn(uint8_t v_durn_uint8_t, uint8_t v_bw_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
     uint8_t v_auto_sleep_durn_uint8_tr = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* write auto sleep duration*/
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MODE_LPM2_ADDR_AUTO_SLEEP_DURN__REG,
                                                 &v_data_uint8_t,
                                                 BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        if (v_durn_uint8_t < BMG160_BIT_LENGTH_DURN)
-        {
-            switch (v_bw_uint8_t)
-            {
+        if (v_durn_uint8_t < BMG160_BIT_LENGTH_DURN) {
+            switch (v_bw_uint8_t) {
                 case C_BMG160_NO_FILTER_U8X:
-                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_4MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_230HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_4MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_116HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_4MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_47HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_5MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_5MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_5MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_23HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_10MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_10MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_10MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_12HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_20MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_20MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_20MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_64HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_10MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_10MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_10MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 case C_BMG160_BW_32HZ_U8X:
-                    if (v_durn_uint8_t > C_BMG160_20MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_20MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_20MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
                 default:
-                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X)
-                    {
+                    if (v_durn_uint8_t > C_BMG160_4MS_AUTO_SLEEP_DURN_U8X) {
                         v_auto_sleep_durn_uint8_tr = v_durn_uint8_t;
-                    }
-                    else
-                    {
+                    } else {
                         v_auto_sleep_durn_uint8_tr = C_BMG160_4MS_AUTO_SLEEP_DURN_U8X;
                     }
                     break;
@@ -7174,9 +6554,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_sleep_durn(uint8_t v_durn_uint8_t, u
                                                       BMG160_MODE_LPM2_ADDR_AUTO_SLEEP_DURN__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }
@@ -7209,19 +6587,15 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_auto_sleep_durn(uint8_t v_durn_uint8_t, u
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_get_sleep_durn(uint8_t *v_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_get_sleep_durn(uint8_t* v_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
+    } else {
         /* read sleep duration */
         comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                 BMG160_MODELPM1_ADDR_SLEEP_DURN__REG,
@@ -7258,21 +6632,16 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_get_sleep_durn(uint8_t *v_durn_uint8_t)
  *
  *
  */
-BMG160_RETURN_FUNCTION_TYPE bmg160_set_sleep_durn(uint8_t v_durn_uint8_t)
-{
+BMG160_RETURN_FUNCTION_TYPE bmg160_set_sleep_durn(uint8_t v_durn_uint8_t) {
     /* variable used to return the bus communication status*/
     BMG160_RETURN_FUNCTION_TYPE comres = ERROR;
     uint8_t v_data_uint8_t = BMG160_INIT_VALUE;
 
     /* check the p_bmg160 struct pointer is NULL*/
-    if (p_bmg160 == BMG160_NULL)
-    {
+    if (p_bmg160 == BMG160_NULL) {
         return E_BMG160_NULL_PTR;
-    }
-    else
-    {
-        if (v_durn_uint8_t < BMG160_BIT_LENGTH_DURN)
-        {
+    } else {
+        if (v_durn_uint8_t < BMG160_BIT_LENGTH_DURN) {
             /* write sleep duration*/
             comres = p_bmg160->BMG160_BUS_READ_FUNC(p_bmg160->dev_addr,
                                                     BMG160_MODELPM1_ADDR_SLEEP_DURN__REG,
@@ -7283,9 +6652,7 @@ BMG160_RETURN_FUNCTION_TYPE bmg160_set_sleep_durn(uint8_t v_durn_uint8_t)
                                                       BMG160_MODELPM1_ADDR_SLEEP_DURN__REG,
                                                       &v_data_uint8_t,
                                                       BMG160_GEN_READ_WRITE_DATA_LENGTH);
-        }
-        else
-        {
+        } else {
             comres = E_BMG160_OUT_OF_RANGE;
         }
     }

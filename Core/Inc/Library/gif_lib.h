@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-16 08:47:56
  */
 
-
 #ifndef GIF_LIB_H
 #define GIF_LIB_H
 

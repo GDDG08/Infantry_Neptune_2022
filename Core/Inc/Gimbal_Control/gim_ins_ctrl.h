@@ -8,13 +8,12 @@
  *  LastEditTime : 2021-07-23 22:39:35
  */
 
-
 #ifndef GIM_INS_CTRL_H
 #define GIM_INS_CTRL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -31,38 +30,37 @@ extern "C" {
 #include "bmi055_periph.h"
 #include "hi22x_periph.h"
 
-#define SPI_DMA_GYRO_LENGHT       7
-#define SPI_DMA_ACCEL_LENGHT      8
+#define SPI_DMA_GYRO_LENGHT 7
+#define SPI_DMA_ACCEL_LENGHT 8
 #define SPI_DMA_ACCEL_TEMP_LENGHT 4
 
+#define IMU_DR_SHFITS 0
+#define IMU_SPI_SHFITS 1
+#define IMU_UPDATE_SHFITS 2
+#define IMU_NOTIFY_SHFITS 3
 
-#define IMU_DR_SHFITS        0
-#define IMU_SPI_SHFITS       1
-#define IMU_UPDATE_SHFITS    2
-#define IMU_NOTIFY_SHFITS    3
+#define INS_INIT_SHIFT 0
+#define INS_ACCEL_UPDATE_SHIFT 1
+#define INS_GYRO_UPDATE_SHIFT 2
+#define INS_MAG_UPDATE_SHIFT 3
 
-#define INS_INIT_SHIFT          0
-#define INS_ACCEL_UPDATE_SHIFT  1
-#define INS_GYRO_UPDATE_SHIFT   2
-#define INS_MAG_UPDATE_SHIFT    3
+#define INS_ACCEL_FINISH_SHIFT 4
+#define INS_GYRO_FINISH_SHIFT 5
+#define INS_MAG_FINISH_SHIFT 6
+#define INS_CLEAR_FINISH_FLAG 0X0F
 
-#define INS_ACCEL_FINISH_SHIFT  4
-#define INS_GYRO_FINISH_SHIFT   5
-#define INS_MAG_FINISH_SHIFT    6
-#define INS_CLEAR_FINISH_FLAG   0X0F
+#define IMU_REF_TEMP 40.0f
 
-#define IMU_REF_TEMP    40.0f
-
-#define BMI088_GYRO_RX_BUF_DATA_OFFSET  1
+#define BMI088_GYRO_RX_BUF_DATA_OFFSET 1
 #define BMI088_ACCEL_RX_BUF_DATA_OFFSET 2
 
 #define IST8310_RX_BUF_DATA_OFFSET 16
 
-#define INS_TASK_INIT_TIME 7 
+#define INS_TASK_INIT_TIME 7
 
-#define INS_YAW_ADDRESS_OFFSET    0
-#define INS_PITCH_ADDRESS_OFFSET  1
-#define INS_ROLL_ADDRESS_OFFSET   2
+#define INS_YAW_ADDRESS_OFFSET 0
+#define INS_PITCH_ADDRESS_OFFSET 1
+#define INS_ROLL_ADDRESS_OFFSET 2
 
 #define INS_GYRO_X_ADDRESS_OFFSET 0
 #define INS_GYRO_Y_ADDRESS_OFFSET 1
@@ -77,15 +75,15 @@ extern "C" {
 #define INS_MAG_Z_ADDRESS_OFFSET 2
 
 typedef enum {
-    INS_STATE_NULL      = 0,
+    INS_STATE_NULL = 0,
     INS_STATE_CONNECTED = 1,
-    INS_STATE_LOST      = 2,
-    INS_STATE_ERROR     = 3,
-    INS_STATE_PENDING   = 4
+    INS_STATE_LOST = 2,
+    INS_STATE_ERROR = 3,
+    INS_STATE_PENDING = 4
 } INS_IMUStateEnum;
 
 typedef struct {
-    float yaw;          
+    float yaw;
     float pitch;
     float row;
 } INS_IMUValueTypeDef;
@@ -107,7 +105,7 @@ typedef struct {
     float yaw_angle_offset;
     float pitch_angle_offset;
     float row_angle_offset;
-    
+
     INS_IMUStateEnum state;
     uint32_t last_update_time;
 } INS_IMUDataTypeDef;
@@ -115,14 +113,14 @@ typedef struct {
 extern volatile uint8_t ins_flag;
 extern float Ins_quat[4];
 extern TaskHandle_t INS_task_local_handler;
-void Ins_Task(void const * argument);
+void Ins_Task(void const* argument);
 void Ins_InsInit(void);
 void Ins_InitIMU(void);
 INS_IMUDataTypeDef* Ins_GetIMUDataPtr(void);
 uint8_t Ins_IsIMUOffline(void);
 void Ins_DecodeIMUData(void);
 void Ins_TempControl(void);
-void Ins_GPIOExitCallback(GPIO_GPIOTypeDef *gpio);
+void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio);
 static void Ins_ImuDMACmd(void);
 void Ins_DMAIRQHandler(void);
 

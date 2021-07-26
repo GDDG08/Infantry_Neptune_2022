@@ -15,10 +15,9 @@
 extern "C" {
 #endif
 
-
 #include "const.h"
 
-void Const_Infantry_5_Init(Const_ConstTypeDef *x);
+void Const_Infantry_5_Init(Const_ConstTypeDef* x);
 extern Const_ConstTypeDef Infantry_5_Const;
 
 #endif
@@ -26,4 +25,3 @@ extern Const_ConstTypeDef Infantry_5_Const;
 #ifdef __cplusplus
 }
 #endif
-

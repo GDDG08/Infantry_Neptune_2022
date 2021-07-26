@@ -18,13 +18,13 @@ extern "C" {
 #include "stm32f4xx_hal.h"
 #include "arm_math.h"
 
-#define   mat         arm_matrix_instance_f32
-#define   mat_init    arm_mat_init_f32
-#define   mat_add     arm_mat_add_f32
-#define   mat_sub     arm_mat_sub_f32
-#define   mat_mult    arm_mat_mult_f32
-#define   mat_trans   arm_mat_trans_f32
-#define   mat_inv     arm_mat_inverse_f32
+#define mat arm_matrix_instance_f32
+#define mat_init arm_mat_init_f32
+#define mat_add arm_mat_add_f32
+#define mat_sub arm_mat_sub_f32
+#define mat_mult arm_mat_mult_f32
+#define mat_trans arm_mat_trans_f32
+#define mat_inv arm_mat_inverse_f32
 
 /**
   * @brief      Limit function
@@ -32,15 +32,14 @@ extern "C" {
   * @param      max :Max limite value
   * @retval     NULL
   */
-#define LimitMax(input, max) {      \
-        if (input > max) {          \
-            input = max;            \
-        }                           \
-        else if (input < -max) {    \
-            input = -max;           \
-        }                           \
+#define LimitMax(input, max)       \
+    {                              \
+        if (input > max) {         \
+            input = max;           \
+        } else if (input < -max) { \
+            input = -max;          \
+        }                          \
     }
-
 
 /**
   * @brief      Maximum and minimum limiting
@@ -49,15 +48,14 @@ extern "C" {
   * @param      min :Min limite value
   * @retval     NULL
   */
-#define LimitMaxMin(input, max, min) {      \
-        if (input > max){                   \
-            input = max;                    \
-        }                                   \
-        else if (input < min) {             \
-            input = min;                    \
-        }                                   \
+#define LimitMaxMin(input, max, min) \
+    {                                \
+        if (input > max) {           \
+            input = max;             \
+        } else if (input < min) {    \
+            input = min;             \
+        }                            \
     }
-
 
 typedef struct {
     float acc;

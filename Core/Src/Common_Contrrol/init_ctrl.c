@@ -50,35 +50,32 @@ int GLOBAL_INIT_FLAG = 0;
   * @param      NULL
   * @retval     NULL
   */
-void Init_Task(void const * argument) {
-    
+void Init_Task(void const* argument) {
     LED_InitAllLEDs();
 
 #if __FN_IF_ENABLE(__FN_SUPER_CAP)
-    
+
     /* basis periph init    */
     BusComm_InitBusComm();
     Can_InitFilterAndStart(&hcan1);
     Can_InitFilterAndStart(&hcan2);
-    
+
     Sen_Init();
     Dac_Init();
-    
+
     Const_Init();
     Cap_Init();
     /* control function init    */
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
-    
-    
-    
+
     Const_Init();
-    
+
     Client_Init();
-    
+
     Servo_InitAllServos();
-    
+
     Ins_InsInit();
     MiniPC_InitMiniPC();
 
@@ -90,13 +87,12 @@ void Init_Task(void const * argument) {
     Gimbal_InitOffset();
     Shooter_InitShooter();
     MiniPC_ControlInit();
-    
+
     Remote_InitRemote();
     Remote_RemotrControlInit();
 
-    
     Login_Init();
- //   Login_LoginOn();
+    //   Login_LoginOn();
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
@@ -107,9 +103,9 @@ void Init_Task(void const * argument) {
     BusComm_InitBusComm();
     Can_InitFilterAndStart(&hcan1);
     Can_InitFilterAndStart(&hcan2);
-    
+
     Const_Init();
-        
+
     Chassis_InitChassis();
     Power_InitPower();
     GimbalYaw_InitGimbalYaw();
@@ -118,13 +114,11 @@ void Init_Task(void const * argument) {
     TaskHandle_t InitTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
 
     for (;;) {
-
         GLOBAL_INIT_FLAG = 1;
         vTaskDelete(InitTask_Handler);
         osDelay(1);
     }
 }
-
 
 /**
   * @brief      Initialization delay
@@ -132,5 +126,4 @@ void Init_Task(void const * argument) {
   * @retval     NULL
   */
 void Init_MainLoop() {
-   
 }

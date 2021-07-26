@@ -8,31 +8,30 @@
  *  LastEditTime : 2021-06-18 21:49:42
  */
 
-
 #ifndef DAC_UTIL_H
 #define DAC_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
-#include"configure.h"
+#include "configure.h"
 
 #if __FN_IF_ENABLE(__FN_UTIL_DAC)
 
 #include "dac.h"
 
 typedef enum {
-        DAC_OFF = 0,
-        DAC_ON  = 1
+    DAC_OFF = 0,
+    DAC_ON = 1
 } Dac_DacStateEnum;
 
 typedef struct {
-        Dac_DacStateEnum state;
-        DAC_HandleTypeDef* hdac;
-        uint32_t ch;
-        float value;
-        uint32_t Dac_DecodeValue;
+    Dac_DacStateEnum state;
+    DAC_HandleTypeDef* hdac;
+    uint32_t ch;
+    float value;
+    uint32_t Dac_DecodeValue;
 } Dac_DacHandleTypeDef;
 
 extern Dac_DacHandleTypeDef CurrentDac;

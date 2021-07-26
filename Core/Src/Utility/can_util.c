@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-06-15 14:06:55
  */
 
-
 #include "can_util.h"
 
 #if __FN_IF_ENABLE(__FN_UTIL_CAN)
@@ -16,11 +15,9 @@
 #include "motor_periph.h"
 #include "buscomm_ctrl.h"
 
-
 CAN_RxHeaderTypeDef Can_RxHeader;
 const uint16_t Const_Can_RX_BUFF_LEN = 200;
 uint8_t Can_RxData[Const_Can_RX_BUFF_LEN];
-
 
 /**
   * @brief      CAN Error handle handling
@@ -34,14 +31,13 @@ void Can_ErrorHandler(uint32_t ret) {
     }
 }
 
-
 /**
   * @brief      Initialize can transmitter
   * @param      pheader: Pointer to the initialized header
   * @param      stdid: CAN Equipment number
   * @retval     NULL
   */
-void Can_InitTxHeader(CAN_TxHeaderTypeDef *pheader, uint32_t stdid, uint32_t extid, uint32_t dlc) {
+void Can_InitTxHeader(CAN_TxHeaderTypeDef* pheader, uint32_t stdid, uint32_t extid, uint32_t dlc) {
     pheader->StdId = stdid;
     pheader->ExtId = extid;
     pheader->RTR = CAN_RTR_DATA;
@@ -49,7 +45,6 @@ void Can_InitTxHeader(CAN_TxHeaderTypeDef *pheader, uint32_t stdid, uint32_t ext
     pheader->DLC = dlc;
     pheader->TransmitGlobalTime = DISABLE;
 }
-
 
 /**
   * @brief      Initialize can filter and enable CAN Bus Transceiver
@@ -63,7 +58,7 @@ void Can_InitFilterAndStart(CAN_HandleTypeDef* phcan) {
         sFilterConfig.FilterBank = 0;
     else
         sFilterConfig.FilterBank = 14;
-    
+
     sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
     sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
     sFilterConfig.FilterIdHigh = 0x0000;
@@ -78,19 +73,17 @@ void Can_InitFilterAndStart(CAN_HandleTypeDef* phcan) {
     if (ret != HAL_OK) {
         Can_ErrorHandler(ret);
     }
-    
+
     ret = HAL_CAN_Start(phcan);
     if (ret != HAL_OK) {
         Can_ErrorHandler(ret);
     }
-    
+
     ret = HAL_CAN_ActivateNotification(phcan, CAN_IT_RX_FIFO0_MSG_PENDING);
     if (ret != HAL_OK) {
         Can_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief      Sending information to can bus
@@ -109,13 +102,12 @@ void Can_SendMessage(CAN_HandleTypeDef* phcan, CAN_TxHeaderTypeDef* pheader, uin
     }
 }
 
-
 /**
   * @brief      HAL_CAN_ Rx Fifo0 Message Pending Call back
   * @param      phcan: Pointer to the CAN header
   * @retval     NULL
   */
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *phcan) {
+void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* phcan) {
     /* Get RX message */
     uint32_t ret = HAL_CAN_GetRxMessage(phcan, CAN_RX_FIFO0, &Can_RxHeader, Can_RxData);
     if (ret != HAL_OK) {
@@ -125,7 +117,6 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *phcan) {
     Can_RxMessageCallback(phcan, &Can_RxHeader, Can_RxData);
 }
 
-
 /**
   * @brief      Can bus data receiving callback function that updates the motor status according to the received information
   * @param      phcan: Pointer to the CAN header
@@ -134,13 +125,12 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *phcan) {
   * @retval     NULL
   */
 void Can_RxMessageCallback(CAN_HandleTypeDef* phcan, CAN_RxHeaderTypeDef* rxheader, uint8_t rxdata[]) {
-    #if __FN_IF_ENABLE(__FN_INFANTRY)
-        BusComm_CANRxCallback(phcan, rxheader -> StdId, rxdata, rxheader -> DLC);
-    #endif
-    #if __FN_IF_ENABLE(__FN_PERIPH_MOTOR)
-        Motor_EncoderDecodeCallback(phcan, rxheader -> StdId, rxdata, rxheader -> DLC); //
-    #endif
-    
+#if __FN_IF_ENABLE(__FN_INFANTRY)
+    BusComm_CANRxCallback(phcan, rxheader->StdId, rxdata, rxheader->DLC);
+#endif
+#if __FN_IF_ENABLE(__FN_PERIPH_MOTOR)
+    Motor_EncoderDecodeCallback(phcan, rxheader->StdId, rxdata, rxheader->DLC);  //
+#endif
 }
 
 #endif

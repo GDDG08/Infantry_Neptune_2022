@@ -27,33 +27,29 @@
   * @param          NULL
   * @retval         NULL
   */
-void WatchDog_Task(void const * argument) {
-
-    for(;;) {
+void WatchDog_Task(void const* argument) {
+    for (;;) {
         WatchDog_FeedDog();
-      osDelay(WATCHDOG_TASK_PERIOD);
+        osDelay(WATCHDOG_TASK_PERIOD);
     }
 }
 
-
 void WatchDog_FeedDog() {
-    #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
-        if (BusComm_IsBusCommOffline()) {
-            GimbalYaw_SetGimbalYawControlState(0);
-            GimbalYaw_SetGimbalYawOutputState(0);
-            Chassis_SetMode(Chassis_MODE_STOP); 
-        }
-        else {
-            GimbalYaw_SetGimbalYawControlState(1);
-            GimbalYaw_SetGimbalYawOutputState(1);
-//            Chassis_SetChassisControlState(1);
-//            Chassis_SetChassisOutputState(1); 
-        }
-    #endif
+#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+    if (BusComm_IsBusCommOffline()) {
+        GimbalYaw_SetGimbalYawControlState(0);
+        GimbalYaw_SetGimbalYawOutputState(0);
+        Chassis_SetMode(Chassis_MODE_STOP);
+    } else {
+        GimbalYaw_SetGimbalYawControlState(1);
+        GimbalYaw_SetGimbalYawOutputState(1);
+        //            Chassis_SetChassisControlState(1);
+        //            Chassis_SetChassisOutputState(1);
+    }
+#endif
 
-    #if __FN_IF_ENABLE(__FN_INFANRTY_GIMBAL)
-        if (LOGIN_ON_FLAG == 0) {
-
-        }
-    #endif
+#if __FN_IF_ENABLE(__FN_INFANRTY_GIMBAL)
+    if (LOGIN_ON_FLAG == 0) {
+    }
+#endif
 }

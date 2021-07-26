@@ -8,13 +8,12 @@
  *  LastEditTime : 2021-07-11 11:03:22
  */
 
-
 #ifndef GIM_LOGIN_CTRL_H
 #define GIM_LOGIN_CTRL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -24,30 +23,29 @@ extern "C" {
 #include "main.h"
 #include "stdlib.h"
 
-#define CODE_KEY_W   0X00
-#define CODE_KEY_A   0X01
-#define CODE_KEY_S   0X02
-#define CODE_KEY_D   0X03
-#define CODE_KEY_Q   0X04
-#define CODE_KEY_E   0X05
-#define CODE_KEY_R   0X06
-#define CODE_KEY_F   0X07
-#define CODE_KEY_G   0X08
-#define CODE_KEY_Z   0X09
-#define CODE_KEY_X   0X0A
-#define CODE_KEY_C   0X0B
-#define CODE_KEY_V   0X0C
-#define CODE_KEY_B   0X0D
-#define CODE_SHIFT   0XFF
+#define CODE_KEY_W 0X00
+#define CODE_KEY_A 0X01
+#define CODE_KEY_S 0X02
+#define CODE_KEY_D 0X03
+#define CODE_KEY_Q 0X04
+#define CODE_KEY_E 0X05
+#define CODE_KEY_R 0X06
+#define CODE_KEY_F 0X07
+#define CODE_KEY_G 0X08
+#define CODE_KEY_Z 0X09
+#define CODE_KEY_X 0X0A
+#define CODE_KEY_C 0X0B
+#define CODE_KEY_V 0X0C
+#define CODE_KEY_B 0X0D
+#define CODE_SHIFT 0XFF
 
-#define CODE_MATCH    1
+#define CODE_MATCH 1
 #define CODE_NO_MATCH 0
 
-#define LOGIN_ON    1
-#define LOGIN_OFF   0
+#define LOGIN_ON 1
+#define LOGIN_OFF 0
 
 extern uint8_t LOGIN_ON_FLAG;
-
 
 void Login_Init(void);
 uint32_t Login_CreateCode(void);

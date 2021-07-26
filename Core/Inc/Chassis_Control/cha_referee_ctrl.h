@@ -8,13 +8,12 @@
  *  LastEditTime : 2021-07-11 09:10:42
  */
 
-
 #ifndef CHA_REFEREE_CTRL_H
 #define CHA_REFEREE_CTRL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -22,16 +21,14 @@ extern "C" {
 
 #include "stm32f4xx_hal.h"
 
-
 typedef struct {
-    uint8_t width_mode, width_mode_last;        // 1 for gyro mode, 0 for normal mode
-    uint8_t aim_mode, aim_mode_last;            // 0~2 correspond to 15,18,30 m/s bullet speed
-    uint8_t cap_state;                          // cap percent, 0 ~ 100
+    uint8_t width_mode, width_mode_last;  // 1 for gyro mode, 0 for normal mode
+    uint8_t aim_mode, aim_mode_last;      // 0~2 correspond to 15,18,30 m/s bullet speed
+    uint8_t cap_state;                    // cap percent, 0 ~ 100
     float pitch_angle;
 } Referee_DrawDataTypeDef;
 
-
-void Referee_Task(void const * argument);
+void Referee_Task(void const* argument);
 
 void Referee_SetWidthMode(uint8_t mode);
 void Referee_SetAimMode(uint8_t mode);

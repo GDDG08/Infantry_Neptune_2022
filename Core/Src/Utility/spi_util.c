@@ -15,13 +15,12 @@
 extern DMA_HandleTypeDef hdma_spi1_rx;
 extern DMA_HandleTypeDef hdma_spi1_tx;
 
-
 /**
   * @brief          Initnation SPI
   * @param          hspi: The spi handle
   * @retval         NULL
   */
-void Spi_Init(SPI_HandleTypeDef *hspi) {
+void Spi_Init(SPI_HandleTypeDef* hspi) {
     hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
     uint32_t ret;
 
@@ -29,7 +28,6 @@ void Spi_Init(SPI_HandleTypeDef *hspi) {
         Spi_ErrorHandler(ret);
     }
 }
-
 
 /**
   * @brief          Initnation SPI for DMA receive data
@@ -39,16 +37,15 @@ void Spi_Init(SPI_HandleTypeDef *hspi) {
   * @param          num: The data length
   * @retval         NULL
   */
-void Spi_DMAInit(SPI_HandleTypeDef *hspi, uint32_t tx_buf, uint32_t rx_buf, uint16_t num) {
+void Spi_DMAInit(SPI_HandleTypeDef* hspi, uint32_t tx_buf, uint32_t rx_buf, uint16_t num) {
     SET_BIT(hspi->Instance->CR2, SPI_CR2_TXDMAEN);
     SET_BIT(hspi->Instance->CR2, SPI_CR2_RXDMAEN);
-
 
     __HAL_SPI_ENABLE(hspi);
 
     // disable DMA
     __HAL_DMA_DISABLE(&hdma_spi1_rx);
-    while(hdma_spi1_rx.Instance->CR & DMA_SxCR_EN) {
+    while (hdma_spi1_rx.Instance->CR & DMA_SxCR_EN) {
         __HAL_DMA_DISABLE(&hdma_spi1_rx);
     }
     __HAL_DMA_CLEAR_FLAG(&hdma_spi1_rx, DMA_LISR_TCIF2);
@@ -63,7 +60,7 @@ void Spi_DMAInit(SPI_HandleTypeDef *hspi, uint32_t tx_buf, uint32_t rx_buf, uint
 
     // disable DMA
     __HAL_DMA_DISABLE(&hdma_spi1_tx);
-    while(hdma_spi1_tx.Instance->CR & DMA_SxCR_EN) {
+    while (hdma_spi1_tx.Instance->CR & DMA_SxCR_EN) {
         __HAL_DMA_DISABLE(&hdma_spi1_tx);
     }
     __HAL_DMA_CLEAR_FLAG(&hdma_spi1_tx, DMA_LISR_TCIF3);
@@ -75,7 +72,6 @@ void Spi_DMAInit(SPI_HandleTypeDef *hspi, uint32_t tx_buf, uint32_t rx_buf, uint
     __HAL_DMA_SET_COUNTER(&hdma_spi1_tx, num);
 }
 
-
 /**
   * @brief          SPI for DMA receive data
   * @param          hspi: The spi handle
@@ -84,29 +80,29 @@ void Spi_DMAInit(SPI_HandleTypeDef *hspi, uint32_t tx_buf, uint32_t rx_buf, uint
   * @param          ndtr: The data length
   * @retval         NULL
   */
-void Spi_DMAEnable(SPI_HandleTypeDef *hspi, uint32_t tx_buff, uint32_t rx_buff, uint16_t ndtr) {
+void Spi_DMAEnable(SPI_HandleTypeDef* hspi, uint32_t tx_buff, uint32_t rx_buff, uint16_t ndtr) {
     // disable DMA
 
     __HAL_DMA_DISABLE(&hdma_spi1_rx);
     __HAL_DMA_DISABLE(&hdma_spi1_tx);
-    while(hdma_spi1_rx.Instance->CR & DMA_SxCR_EN) {
+    while (hdma_spi1_rx.Instance->CR & DMA_SxCR_EN) {
         __HAL_DMA_DISABLE(&hdma_spi1_rx);
     }
-    while(hdma_spi1_tx.Instance->CR & DMA_SxCR_EN) {
+    while (hdma_spi1_tx.Instance->CR & DMA_SxCR_EN) {
         __HAL_DMA_DISABLE(&hdma_spi1_tx);
     }
     // clear flag
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmarx, __HAL_DMA_GET_TC_FLAG_INDEX(hspi->hdmarx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmarx, __HAL_DMA_GET_HT_FLAG_INDEX(hspi->hdmarx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmarx, __HAL_DMA_GET_TE_FLAG_INDEX(hspi->hdmarx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmarx, __HAL_DMA_GET_DME_FLAG_INDEX(hspi->hdmarx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmarx, __HAL_DMA_GET_FE_FLAG_INDEX(hspi->hdmarx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmarx, __HAL_DMA_GET_TC_FLAG_INDEX(hspi->hdmarx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmarx, __HAL_DMA_GET_HT_FLAG_INDEX(hspi->hdmarx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmarx, __HAL_DMA_GET_TE_FLAG_INDEX(hspi->hdmarx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmarx, __HAL_DMA_GET_DME_FLAG_INDEX(hspi->hdmarx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmarx, __HAL_DMA_GET_FE_FLAG_INDEX(hspi->hdmarx));
 
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmatx, __HAL_DMA_GET_TC_FLAG_INDEX(hspi->hdmatx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmatx, __HAL_DMA_GET_HT_FLAG_INDEX(hspi->hdmatx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmatx, __HAL_DMA_GET_TE_FLAG_INDEX(hspi->hdmatx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmatx, __HAL_DMA_GET_DME_FLAG_INDEX(hspi->hdmatx));
-    __HAL_DMA_CLEAR_FLAG (hspi->hdmatx, __HAL_DMA_GET_FE_FLAG_INDEX(hspi->hdmatx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmatx, __HAL_DMA_GET_TC_FLAG_INDEX(hspi->hdmatx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmatx, __HAL_DMA_GET_HT_FLAG_INDEX(hspi->hdmatx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmatx, __HAL_DMA_GET_TE_FLAG_INDEX(hspi->hdmatx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmatx, __HAL_DMA_GET_DME_FLAG_INDEX(hspi->hdmatx));
+    __HAL_DMA_CLEAR_FLAG(hspi->hdmatx, __HAL_DMA_GET_FE_FLAG_INDEX(hspi->hdmatx));
     // set memory address
     hdma_spi1_rx.Instance->M0AR = rx_buff;
     hdma_spi1_tx.Instance->M0AR = tx_buff;
@@ -118,7 +114,6 @@ void Spi_DMAEnable(SPI_HandleTypeDef *hspi, uint32_t tx_buff, uint32_t rx_buff, 
     __HAL_DMA_ENABLE(&hdma_spi1_tx);
 }
 
-
 /**
   * @brief          Receive data or command to spi address(For DMA)
   * @param          hspi: The spi handle
@@ -126,8 +121,7 @@ void Spi_DMAEnable(SPI_HandleTypeDef *hspi, uint32_t tx_buff, uint32_t rx_buff, 
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_ReceiveDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
-
+void Spi_ReceiveDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
     }
@@ -135,9 +129,7 @@ void Spi_ReceiveDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief          Receive data or command to spi address
@@ -146,8 +138,7 @@ void Spi_ReceiveDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_ReceiveData(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
-
+void Spi_ReceiveData(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
     }
@@ -155,9 +146,7 @@ void Spi_ReceiveData(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief          Send data or command to spi address(For DMA)
@@ -166,8 +155,7 @@ void Spi_ReceiveData(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_TransmitDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
-
+void Spi_TransmitDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
     }
@@ -175,9 +163,7 @@ void Spi_TransmitDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) 
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief          Send data or command to spi address
@@ -186,8 +172,7 @@ void Spi_TransmitDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) 
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_TransmitData(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
-
+void Spi_TransmitData(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
     }
@@ -195,9 +180,7 @@ void Spi_TransmitData(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief          Swap a data or command to spi address
@@ -206,17 +189,14 @@ void Spi_TransmitData(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t len) {
   * @param          len: The data length
   * @retval         NULL
   */
-uint8_t Spi_SwapAbyteData(SPI_HandleTypeDef *hspi, uint8_t txdata) {
-    
+uint8_t Spi_SwapAbyteData(SPI_HandleTypeDef* hspi, uint8_t txdata) {
     uint8_t rx_data;
     uint32_t ret = HAL_SPI_TransmitReceive(hspi, &txdata, &rx_data, 1, 100000);
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
     return rx_data;
-    
 }
-
 
 /**
   * @brief          Swap muli data or command to spi address
@@ -225,15 +205,13 @@ uint8_t Spi_SwapAbyteData(SPI_HandleTypeDef *hspi, uint8_t txdata) {
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_ReadMuliReg(SPI_HandleTypeDef *hspi, uint8_t *rx_data, uint8_t len) {
-    
-    while (len != 0) { 
+void Spi_ReadMuliReg(SPI_HandleTypeDef* hspi, uint8_t* rx_data, uint8_t len) {
+    while (len != 0) {
         *rx_data = Spi_SwapAbyteData(hspi, 0x55);
         rx_data++;
         len--;
     }
 }
-
 
 /**
   * @brief          Swap data or command to spi address(For DMA)
@@ -242,8 +220,7 @@ void Spi_ReadMuliReg(SPI_HandleTypeDef *hspi, uint8_t *rx_data, uint8_t len) {
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_SwapDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData, uint16_t len) {
-
+void Spi_SwapDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pTxData, uint8_t* pRxData, uint16_t len) {
     if ((hspi == NULL) || (pTxData == NULL) || (pRxData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
     }
@@ -251,9 +228,7 @@ void Spi_SwapDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief          Swap data or command to spi address
@@ -262,8 +237,7 @@ void Spi_SwapDataDMA(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData
   * @param          len: The data length
   * @retval         NULL
   */
-void Spi_SwapData(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData, uint16_t len) {
-
+void Spi_SwapData(SPI_HandleTypeDef* hspi, uint8_t* pTxData, uint8_t* pRxData, uint16_t len) {
     if ((hspi == NULL) || (pTxData == NULL) || (pRxData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
     }
@@ -271,9 +245,7 @@ void Spi_SwapData(SPI_HandleTypeDef *hspi, uint8_t *pTxData, uint8_t *pRxData, u
     if (ret != HAL_OK) {
         Spi_ErrorHandler(ret);
     }
-    
 }
-
 
 /**
   * @brief      Spi error handler
@@ -285,6 +257,5 @@ void Spi_ErrorHandler(uint32_t ret) {
         return;
     }
 }
-
 
 #endif

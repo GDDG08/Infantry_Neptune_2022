@@ -25,33 +25,33 @@ extern "C" {
 #include "gpio_util.h"
 
 typedef enum {
-	Power_PATH_NULL						= 0,
-	Power_PATH_REFEREE				    = 1,
-	Power_PATH_CAP						= 2
-}POWER_PathEnum;
+    Power_PATH_NULL = 0,
+    Power_PATH_REFEREE = 1,
+    Power_PATH_CAP = 2
+} POWER_PathEnum;
 
 typedef enum {
-    CAP_MODE_OFF            = 0,    //Super cap off
-    CAP_MODE_ON             = 1,    //Super cap is on
-    CAP_MODE_ERROR          = 2
-}CAP_StateEnum;
+    CAP_MODE_OFF = 0,  //Super cap off
+    CAP_MODE_ON = 1,   //Super cap is on
+    CAP_MODE_ERROR = 2
+} CAP_StateEnum;
 
 typedef enum {
-    CAP_CHARGE_OFF          = 0,
-    CAP_CHARGE_ON           = 1
-}CAP_ChargeStateEnum;
+    CAP_CHARGE_OFF = 0,
+    CAP_CHARGE_ON = 1
+} CAP_ChargeStateEnum;
 
 typedef struct {
-	float power_limit;
+    float power_limit;
 
     CAP_ChargeStateEnum charge_state;
-	POWER_PathEnum power_path;
-	CAP_StateEnum cap_state;
-}CAP_ControlValueTypeDef;
+    POWER_PathEnum power_path;
+    CAP_StateEnum cap_state;
+} CAP_ControlValueTypeDef;
 
 extern CAP_ControlValueTypeDef Cap_ControlState;
 
-void SuperCap_Task(void const * argument);
+void SuperCap_Task(void const* argument);
 void Cap_SetChargeCurrent(float current);
 void Cap_Init(void);
 CAP_ControlValueTypeDef* Cap_GetCapControlPtr(void);

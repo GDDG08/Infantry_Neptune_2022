@@ -11,24 +11,23 @@
 #ifndef MINIPC_PERIPH_H
 #define MINIPC_PERIPH_H
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include "configure.h"
 
-#if __FN_IF_ENABLE(__FN_PERIPH_MINIPC)	
+#if __FN_IF_ENABLE(__FN_PERIPH_MINIPC)
 
 #include "uart_util.h"
 #include "buff_lib.h"
 
 typedef enum {
-    MiniPC_NULL      = 0,
+    MiniPC_NULL = 0,
     MiniPC_CONNECTED = 1,
-    MiniPC_LOST      = 2,
-    MiniPC_ERROR     = 3,
-    MiniPC_PENDING   = 4
+    MiniPC_LOST = 2,
+    MiniPC_ERROR = 3,
+    MiniPC_PENDING = 4
 } MiniPC_MiniPCStateEnum;
 
 typedef struct {
@@ -39,7 +38,7 @@ typedef struct {
     uint8_t mode;
 
     // down stream
-    uint8_t is_get_target;			// 1 to get armor plate, 0 to not get armor plate
+    uint8_t is_get_target;  // 1 to get armor plate, 0 to not get armor plate
     float yaw_angle;
     float pitch_angle;
     float distance;
@@ -51,8 +50,8 @@ typedef struct {
     uint8_t new_data_flag;
 } MiniPC_MiniPCDataTypeDef;
 
-extern const uint8_t Const_MiniPC_ARMOR;      
-extern const uint8_t Const_MiniPC_BIG_BUFF;   
+extern const uint8_t Const_MiniPC_ARMOR;
+extern const uint8_t Const_MiniPC_BIG_BUFF;
 extern const uint8_t Const_MiniPC_LITTLE_BUFF;
 
 extern MiniPC_MiniPCDataTypeDef MiniPC_MiniPCData;

@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-09 05:28:59
  */
 
-
 #include "adrc_alg.h"
 
 /**
@@ -18,7 +17,7 @@
   * @param      adrc_unit :Initialize array
   * @retval     NULL
   */
-void ADRC_Init(ADRC_FhanDataTypeDef *fhan_input1, ADRC_FhanDataTypeDef *fhan_input2, float adrc_unit[][15]) {
+void ADRC_Init(ADRC_FhanDataTypeDef* fhan_input1, ADRC_FhanDataTypeDef* fhan_input2, float adrc_unit[][15]) {
     fhan_input1->r = adrc_unit[0][0];
     fhan_input1->h = adrc_unit[0][1];
     fhan_input1->N0 = (uint16_t)(adrc_unit[0][2]);
@@ -54,56 +53,53 @@ void ADRC_Init(ADRC_FhanDataTypeDef *fhan_input1, ADRC_FhanDataTypeDef *fhan_inp
     fhan_input2->zeta = adrc_unit[1][14];
 }
 
-
 /**
   * @brief      ADRC Fhan function
   * @param      fhan_input :Fhan function input
   * @param      expect_ADRC :adrc expect para
   * @retval     NULL
   */
-void Fhan_ADRC(ADRC_FhanDataTypeDef *fhan_input, float expect_ADRC) {
+void Fhan_ADRC(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC) {
     float d = 0, a0 = 0, y = 0, a1 = 0, a2 = 0, a = 0;
     float x1_delta = 0;
 
     x1_delta = fhan_input->x1 - expect_ADRC;
     fhan_input->h0 = fhan_input->N0 * fhan_input->h;
-    d = fhan_input->r * fhan_input->h0 * fhan_input->h0;          // d=rh^2;
-    a0 = fhan_input->h0 * fhan_input->x2;                         // a0=h*x2
-    y = x1_delta + a0;                                            // y=x1+a0
-    a1 = sqrt(d * (d + 8 * fabs(y)));                              // a1=sqrt(d*(d+8*ABS(y))])
-    a2 = a0 + Math_Sign(y) * (a1 - d) / 2;                        // a2=a0+sign(y)*(a1-d)/2;
-    a =(a0 + y) * Math_Fsg(y, d) + a2 * (1 - Math_Fsg(y, d));
+    d = fhan_input->r * fhan_input->h0 * fhan_input->h0;  // d=rh^2;
+    a0 = fhan_input->h0 * fhan_input->x2;                 // a0=h*x2
+    y = x1_delta + a0;                                    // y=x1+a0
+    a1 = sqrt(d * (d + 8 * fabs(y)));                     // a1=sqrt(d*(d+8*ABS(y))])
+    a2 = a0 + Math_Sign(y) * (a1 - d) / 2;                // a2=a0+sign(y)*(a1-d)/2;
+    a = (a0 + y) * Math_Fsg(y, d) + a2 * (1 - Math_Fsg(y, d));
 
     fhan_input->fh = -fhan_input->r * (a / d) * Math_Fsg(a, d) - fhan_input->r * Math_Sign(a) * (1 - Math_Fsg(a, d));
     fhan_input->x1 += fhan_input->h * fhan_input->x2;
     fhan_input->x2 += fhan_input->h * fhan_input->fh;
 }
 
-
 /**
   * @brief      ADRC extended state observer
   * @param      fhan_input :Fhan function input
   * @retval     NULL
   */
-void ADRS_ESO(ADRC_FhanDataTypeDef *fhan_input) {
-  fhan_input->e = fhan_input->z1 - fhan_input->y;
+void ADRS_ESO(ADRC_FhanDataTypeDef* fhan_input) {
+    fhan_input->e = fhan_input->z1 - fhan_input->y;
 
-  fhan_input->fe  = Math_Fal(fhan_input->e, 0.5,  fhan_input->h);
-  fhan_input->fe1 = Math_Fal(fhan_input->e, 0.25, fhan_input->h);
+    fhan_input->fe = Math_Fal(fhan_input->e, 0.5, fhan_input->h);
+    fhan_input->fe1 = Math_Fal(fhan_input->e, 0.25, fhan_input->h);
 
-  fhan_input->z1 += fhan_input->h * (fhan_input->z2 - fhan_input->beta_01 * fhan_input->e);
-  fhan_input->z2 += fhan_input->h * (fhan_input->z3 - fhan_input->beta_02 * fhan_input->fe + fhan_input->b0 * fhan_input->u);
+    fhan_input->z1 += fhan_input->h * (fhan_input->z2 - fhan_input->beta_01 * fhan_input->e);
+    fhan_input->z2 += fhan_input->h * (fhan_input->z3 - fhan_input->beta_02 * fhan_input->fe + fhan_input->b0 * fhan_input->u);
 
-  fhan_input->z3 += fhan_input->h * (-fhan_input->beta_03 * fhan_input->fe1);
+    fhan_input->z3 += fhan_input->h * (-fhan_input->beta_03 * fhan_input->fe1);
 }
-
 
 /**
   * @brief      Nonlinear combination calculation of ADRC
   * @param      fhan_input :Fhan function input
   * @retval     NULL
   */
-void ADRC_NolinearConbination(ADRC_FhanDataTypeDef *fhan_input) {
+void ADRC_NolinearConbination(ADRC_FhanDataTypeDef* fhan_input) {
     float d = 0, a0 = 0, y = 0, a1 = 0, a2 = 0, a = 0;
     float Sy = 0, Sa = 0;
 
@@ -111,7 +107,7 @@ void ADRC_NolinearConbination(ADRC_FhanDataTypeDef *fhan_input) {
 
     d = fhan_input->r * fhan_input->h1 * fhan_input->h1;
     a0 = fhan_input->h1 * fhan_input->c * fhan_input->e2;
-    y = fhan_input->e1+a0;
+    y = fhan_input->e1 + a0;
     a1 = sqrt(d * (d + 8 * fabs(y)));
     a2 = a0 + Math_Sign(y) * (a1 - d) / 2;
 
@@ -125,7 +121,6 @@ void ADRC_NolinearConbination(ADRC_FhanDataTypeDef *fhan_input) {
     fhan_input->fh = -fhan_input->r * (a / d) * Math_Fsg(a, d) - fhan_input->r * Math_Sign(a) * (1 - Math_Fsg(a, d));
 }
 
-
 /**
   * @brief      ADRC calculation function
   * @param      fhan_input :Fhan function input
@@ -133,18 +128,17 @@ void ADRC_NolinearConbination(ADRC_FhanDataTypeDef *fhan_input) {
   * @param      feedback_ADRC :Feedback value
   * @retval     Output with disturbance compensation
   */
-float ADRC_Calc(ADRC_FhanDataTypeDef *fhan_input, float expect_ADRC, float feedback_ADRC) {
-
+float ADRC_Calc(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC, float feedback_ADRC) {
     Fhan_ADRC(fhan_input, expect_ADRC);
-    fhan_input->y=feedback_ADRC;
-    
+    fhan_input->y = feedback_ADRC;
+
     ADRS_ESO(fhan_input);
-    fhan_input->e0+=fhan_input->e1*fhan_input->h;
-    fhan_input->e1=fhan_input->x1-fhan_input->z1;
-    fhan_input->e2=fhan_input->x2-fhan_input->z2;
-    
+    fhan_input->e0 += fhan_input->e1 * fhan_input->h;
+    fhan_input->e1 = fhan_input->x1 - fhan_input->z1;
+    fhan_input->e2 = fhan_input->x2 - fhan_input->z2;
+
     ADRC_NolinearConbination(fhan_input);
     fhan_input->u = fhan_input->u0;
-    LimitMaxMin(fhan_input->u, 200, -200);  
+    LimitMaxMin(fhan_input->u, 200, -200);
     return fhan_input->u;
 }

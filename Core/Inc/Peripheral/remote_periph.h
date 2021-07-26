@@ -21,20 +21,19 @@ extern "C" {
 #include "uart_util.h"
 #include "stdlib.h"
 
-
 typedef enum {
-    Remote_STATE_NULL       = 0,
-    Remote_STATE_CONNECTED  = 1,
-    Remote_STATE_LOST       = 2,
-    Remote_STATE_ERROR      = 3,
-    Remote_STATE_PENDING    = 4
+    Remote_STATE_NULL = 0,
+    Remote_STATE_CONNECTED = 1,
+    Remote_STATE_LOST = 2,
+    Remote_STATE_ERROR = 3,
+    Remote_STATE_PENDING = 4
 } Remote_RemoteStateEnum;
 
 typedef enum {
-    Remote_SWITCH_NULL      = 0,
-    Remote_SWITCH_UP        = 1,
-    Remote_SWITCH_DOWN      = 2,
-    Remote_SWITCH_MIDDLE    = 3
+    Remote_SWITCH_NULL = 0,
+    Remote_SWITCH_UP = 1,
+    Remote_SWITCH_DOWN = 2,
+    Remote_SWITCH_MIDDLE = 3
 } Remote_SwitchStateEnum;
 
 typedef struct {
@@ -43,23 +42,22 @@ typedef struct {
 
 typedef struct {
     struct {
-        int16_t                 ch[5];  //Channel 0 channel 1 channel 2 channel 3 paddle wheel
-        Remote_SwitchStateEnum  s[2];   //Switch 0 switch 1
+        int16_t ch[5];                //Channel 0 channel 1 channel 2 channel 3 paddle wheel
+        Remote_SwitchStateEnum s[2];  //Switch 0 switch 1
     } remote;
 
     struct {
-        int16_t  x;//mouse x
-        int16_t  y;//mouse y
-        int16_t  z;//mouse z
-        uint8_t  l;//mouse Left key
-        uint8_t  r;//mouse Right key
+        int16_t x;  //mouse x
+        int16_t y;  //mouse y
+        int16_t z;  //mouse z
+        uint8_t l;  //mouse Left key
+        uint8_t r;  //mouse Right key
     } mouse;
 
-    Remote_KeyboardTypeDef key;//key board
+    Remote_KeyboardTypeDef key;  //key board
     Remote_RemoteStateEnum state;
     uint32_t last_update_time;
 } Remote_RemoteDataTypeDef;
-
 
 extern Remote_RemoteDataTypeDef Remote_RemoteData;
 extern const uint16_t Const_Remote_RX_BUFF_LEN;

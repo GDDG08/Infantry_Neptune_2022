@@ -13,7 +13,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -24,27 +24,27 @@ extern "C" {
 #include "math_alg.h"
 
 typedef enum {
-    GimbalYaw_MODE_NULL             = 0u,
-    GimbalYaw_MODE_NO_AUTO          = 1u,
-    GimbalYaw_MODE_ARMOR            = 2u,
-    GimbalYaw_MODE_IMU_DEBUG        = 3u,
-    GimbalYaw_MODE_BIG_ENERGY       = 4u,
-    GimbalYaw_MODE_SMALL_ENERGY     = 5u
+    GimbalYaw_MODE_NULL = 0u,
+    GimbalYaw_MODE_NO_AUTO = 1u,
+    GimbalYaw_MODE_ARMOR = 2u,
+    GimbalYaw_MODE_IMU_DEBUG = 3u,
+    GimbalYaw_MODE_BIG_ENERGY = 4u,
+    GimbalYaw_MODE_SMALL_ENERGY = 5u
 } GimbalYaw_GimbalYawModeEnum;
 
 typedef struct {
-    float yaw_ref;                                  // Gimbal Yaw angle target value 
-    float yaw_position_fdb;                         // Gimbal Yaw IMU angle feedback value 
-    float yaw_speed_fdb;                            // Gimbal Yaw IMU angular velocity feedback value 
-    uint8_t yaw_ref_limit_status;                   // Gimbal Yaw limit status 
+    float yaw_ref;                 // Gimbal Yaw angle target value
+    float yaw_position_fdb;        // Gimbal Yaw IMU angle feedback value
+    float yaw_speed_fdb;           // Gimbal Yaw IMU angular velocity feedback value
+    uint8_t yaw_ref_limit_status;  // Gimbal Yaw limit status
     uint8_t yaw_count;
-    
-    uint8_t mode_changed;                           // Whether the gimbal Yaw mode is changed 1 Yes 0 No
-    GimbalYaw_GimbalYawModeEnum mode, last_mode;    // Gimbal Yaw mode, the mode before Gimbal Yaw 
-    
-    uint8_t control_state;                          // Whether to enable control 1 Yes 0 No 
-    uint8_t output_state;                           // Whether to enable output 1 Yes 0 No 
-    uint8_t pending_state;                          // Gimbal Yaw Occupy Lock 1 Yes 0 No 
+
+    uint8_t mode_changed;                         // Whether the gimbal Yaw mode is changed 1 Yes 0 No
+    GimbalYaw_GimbalYawModeEnum mode, last_mode;  // Gimbal Yaw mode, the mode before Gimbal Yaw
+
+    uint8_t control_state;  // Whether to enable control 1 Yes 0 No
+    uint8_t output_state;   // Whether to enable output 1 Yes 0 No
+    uint8_t pending_state;  // Gimbal Yaw Occupy Lock 1 Yes 0 No
 
     Filter_LowPassParamTypeDef ref_fil_param;
     Filter_LowPassTypeDef ref_fil;
@@ -58,7 +58,7 @@ extern Motor_MotorParamTypeDef GimbalYaw_gimbalYawMotorParamNoAuto;
 
 extern GimbalYaw_GimbalYawTypeDef GimbalYaw_gimbalYawControlData;
 
-void Gimbal_Task(void const * argument);
+void Gimbal_Task(void const* argument);
 void GimbalYaw_InitGimbalYaw(void);
 void GimbalYaw_StartGimbalYawControlTimer(void);
 GimbalYaw_GimbalYawTypeDef* GimbalYaw_GetGimbalYawPtr(void);

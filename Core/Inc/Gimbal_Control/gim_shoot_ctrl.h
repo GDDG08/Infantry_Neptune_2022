@@ -18,7 +18,6 @@ extern "C" {
 #include "configure.h"
 
 #if __FN_IF_ENABLE(__FN_CTRL_SHOOTER)
- 
 
 #include "pid_alg.h"
 #include "math_alg.h"
@@ -31,69 +30,69 @@ extern "C" {
 #define SHOOT_30M_SPEED_ADDRESS ADDR_FLASH_SECTOR_10
 
 typedef enum {
-	Feeder_NULL             = 0u,
-	Feeder_SINGLE           = 1u,
-	Feeder_FAST_CONTINUE    = 2u,
-    Feeder_LOW_CONTINUE     = 3u,
-	Feeder_LOCKED_ROTOR     = 4u,
-    Feeder_REFEREE          = 5u,
-  	Feeder_FINISH           = 6u      
-}Shoot_FeederModeEnum;
+    Feeder_NULL = 0u,
+    Feeder_SINGLE = 1u,
+    Feeder_FAST_CONTINUE = 2u,
+    Feeder_LOW_CONTINUE = 3u,
+    Feeder_LOCKED_ROTOR = 4u,
+    Feeder_REFEREE = 5u,
+    Feeder_FINISH = 6u
+} Shoot_FeederModeEnum;
 
 typedef enum {
-	Shoot_NULL		= 0u,
-	Shoot_FAST  	= 1u,
-	Shoot_SLOW 	    = 2u,
-	Shoot_REFEREE 	= 3u 
-}Shoot_ShooterModeEnum;
+    Shoot_NULL = 0u,
+    Shoot_FAST = 1u,
+    Shoot_SLOW = 2u,
+    Shoot_REFEREE = 3u
+} Shoot_ShooterModeEnum;
 
 typedef struct {
-	float left_shoot_speed;
-  	float right_shoot_speed;
-  	float feeder_shoot_speed;
-}Shoot_ShootSpeedTypeDef; 
+    float left_shoot_speed;
+    float right_shoot_speed;
+    float feeder_shoot_speed;
+} Shoot_ShootSpeedTypeDef;
 
 typedef struct {
-	uint32_t speed_15mm_offset;
-  	uint32_t speed_18mm_offset;
-  	uint32_t speed_30mm_offset;
-}Shoot_ShootSpeedOffsetFlashTypeDef; 
+    uint32_t speed_15mm_offset;
+    uint32_t speed_18mm_offset;
+    uint32_t speed_30mm_offset;
+} Shoot_ShootSpeedOffsetFlashTypeDef;
 
 typedef struct {
-	float speed_15mm_offset;
-  	float speed_18mm_offset;
-  	float speed_30mm_offset;
-}Shoot_ShootSpeedOffsetTypeDef; 
+    float speed_15mm_offset;
+    float speed_18mm_offset;
+    float speed_30mm_offset;
+} Shoot_ShootSpeedOffsetTypeDef;
 
 typedef struct {
     float shooter_17mm_cooling_heat;
     float shooter_17mm_cooling_rate;
     float shooter_17mm_heat_remain;
-    
+
     float current_speed;
     uint8_t current_pidnum;
-    
+
     uint16_t heat_tracking;
-}Shooter_HeatCtrlTypeDef;
+} Shooter_HeatCtrlTypeDef;
 
 typedef struct {
     uint8_t shooter_control;
     Shoot_ShooterModeEnum shooter_mode;
-	Shoot_FeederModeEnum feeder_mode;
+    Shoot_FeederModeEnum feeder_mode;
     Shoot_FeederModeEnum last_feeder_mode;
-    
+
     uint8_t single_shoot_done;
 
-	Shoot_ShootSpeedTypeDef shoot_speed;
+    Shoot_ShootSpeedTypeDef shoot_speed;
     Shoot_ShootSpeedOffsetTypeDef shoot_speed_offset;
     Shoot_ShootSpeedOffsetFlashTypeDef speed_offset_flash;
-    
+
     float shooter_speed_15mpers;
     float shooter_speed_18mpers;
     float shooter_speed_30mpers;
 
     Shooter_HeatCtrlTypeDef heat_ctrl;
-}Shoot_StatusTypeDef;
+} Shoot_StatusTypeDef;
 
 extern Motor_MotorParamTypeDef Shooter_shooterLeftMotorParam;
 extern Motor_MotorParamTypeDef Shooter_shooterRightMotorParam;
@@ -101,7 +100,7 @@ extern Motor_MotorParamTypeDef Shooter_feederMotorParam;
 
 extern Shoot_StatusTypeDef Shooter_ShooterControl;
 
-void Shoot_Task(void const * argument);
+void Shoot_Task(void const* argument);
 void Shooter_InitShooter(void);
 void Shooter_SpeedOffsetFlashInit(void);
 Shoot_StatusTypeDef* Shooter_GetShooterControlPtr(void);

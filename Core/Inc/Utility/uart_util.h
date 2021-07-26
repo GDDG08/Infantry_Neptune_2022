@@ -8,13 +8,12 @@
  *  LastEditTime : 2021-06-13 23:40:03
  */
 
-
 #ifndef UART_UTIL_H
 #define UART_UTIL_H
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -27,10 +26,10 @@ void Uart_SendMessage(UART_HandleTypeDef* huart, uint8_t txdata[], uint16_t size
 void Uart_SendMessage_IT(UART_HandleTypeDef* huart, uint8_t txdata[], uint16_t size);
 void Uart_SendMessage_IT_Force(UART_HandleTypeDef* huart, uint8_t txdata[], uint16_t size, uint32_t timeout);
 void Uart_ErrorHandler(uint32_t ret);
-uint16_t Uart_DMACurrentDataCounter(DMA_Stream_TypeDef *dma_stream);
+uint16_t Uart_DMACurrentDataCounter(DMA_Stream_TypeDef* dma_stream);
 void Uart_InitUartDMA(UART_HandleTypeDef* huart);
 void Uart_ReceiveDMA(UART_HandleTypeDef* huart, uint8_t rxdata[], uint32_t size);
-void Uart_ReceiveHandler(UART_HandleTypeDef *huart);
+void Uart_ReceiveHandler(UART_HandleTypeDef* huart);
 
 #endif
 

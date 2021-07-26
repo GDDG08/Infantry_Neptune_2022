@@ -13,7 +13,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif 
+#endif
 
 #include "configure.h"
 
@@ -40,8 +40,8 @@ typedef struct {
 } Power_DataTypeDef;
 
 typedef enum {
-    POWER_UNLIMITED     = 0X00,
-    POWER_LIMIT         = 0X01,
+    POWER_UNLIMITED = 0X00,
+    POWER_LIMIT = 0X01,
 } Power_ControlModeMnum;
 
 extern Power_DataTypeDef Power_data;

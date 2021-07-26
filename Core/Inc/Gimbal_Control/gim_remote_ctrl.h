@@ -8,7 +8,6 @@
  *  LastEditTime : 2021-07-11 08:59:26
  */
 
-
 #ifndef GIM_REMOTE_CTRL_H
 #define GIM_REMOTE_CTRL_H
 
@@ -25,9 +24,9 @@ extern "C" {
 #include "math_alg.h"
 
 typedef enum {
-    Chassis_OFF     = 0,
-    Chassis_ON      = 1
-}Chassis_ChassisStateEnum;
+    Chassis_OFF = 0,
+    Chassis_ON = 1
+} Chassis_ChassisStateEnum;
 
 typedef struct {
     uint8_t pending;
@@ -35,7 +34,7 @@ typedef struct {
     float yaw_angle_offset;
 } Remote_RemoteControlTypeDef;
 
-void Remote_Task(void const * argument);
+void Remote_Task(void const* argument);
 void Remote_RemotrControlInit(void);
 Remote_RemoteControlTypeDef* Remote_GetControlDataPtr(void);
 void Remote_ControlCom(void);

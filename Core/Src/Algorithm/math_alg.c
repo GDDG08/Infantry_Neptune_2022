@@ -8,9 +8,7 @@
  *  LastEditTime : 2021-07-09 05:12:35
  */
 
-
 #include "math_alg.h"
-
 
 /**
   * @brief      Radian to angle
@@ -20,7 +18,6 @@
 float Math_RadToAngle(float rad) {
     return (rad * 180.0f / PI);
 }
-
 
 /**
   * @brief      Continuous power function with linear segment near the origin
@@ -35,18 +32,16 @@ float Math_Fal(float e, float alpha, float zeta) {
     return fal_output;
 }
 
-
 /**
   * @brief      Calculate fsg
   * @param      x :Number to be calc
   * @retval     result
   */
 int16_t Math_Fsg(float x, float d) {
-  int16_t output = 0;
-  output = (Math_Sign(x + d) - Math_Sign(x - d)) / 2;
-  return output;
+    int16_t output = 0;
+    output = (Math_Sign(x + d) - Math_Sign(x - d)) / 2;
+    return output;
 }
-
 
 /**
   * @brief      Positive and negative judgment function
@@ -57,15 +52,12 @@ int16_t Math_Sign(float x) {
     int16_t output = 0;
     if (x > 0) {
         output = 1;
-    } 
-    else if (x < 0) {
+    } else if (x < 0) {
         output = -1;
-    }
-    else 
+    } else
         output = 0;
     return output;
 }
-
 
 /**
   * @brief      This shit is used to calculate the quick square root
@@ -73,15 +65,14 @@ int16_t Math_Sign(float x) {
   * @retval     One third of the open results
   */
 float Math_InvSqrt(float x) {
-	float halfx = 0.5f * x;
-	float y = x;
-	long i = *(long*) & y;
-	i = 0x5f3759df - (i >> 1);
-	y = *(float*) & i;
-	y = y * (1.5f - (halfx * y * y));
-	return y;
+    float halfx = 0.5f * x;
+    float y = x;
+    long i = *(long*)&y;
+    i = 0x5f3759df - (i >> 1);
+    y = *(float*)&i;
+    y = y * (1.5f - (halfx * y * y));
+    return y;
 }
-
 
 /**
   * @brief      Calculation differential (only two order)(To be improved)
@@ -105,7 +96,6 @@ float Math_Differential(float arr[], uint8_t order) {
     return value;
 }
 
-
 /**
   * @brief      Initialize ramp function control parameters
   * @param      pparam: Pointer to ramp function control parameter
@@ -121,7 +111,6 @@ void Math_InitSlopeParam(Math_SlopeParamTypeDef* pparam, float acc, float dec) {
     pparam->dec = dec;
 }
 
-
 /**
   * @brief      Calculate slope function setting
   * @param      rawref: Current setting value
@@ -131,20 +120,17 @@ void Math_InitSlopeParam(Math_SlopeParamTypeDef* pparam, float acc, float dec) {
   */
 float Math_CalcSlopeRef(float rawref, float targetref, Math_SlopeParamTypeDef* pparam) {
     float newref;
-    if (pparam->acc == 0 | pparam->dec == 0) 
+    if (pparam->acc == 0 | pparam->dec == 0)
         return targetref;
     if (rawref < targetref - pparam->acc) {
         newref = rawref + pparam->acc;
-    }
-    else if (rawref > targetref + pparam->dec) {
+    } else if (rawref > targetref + pparam->dec) {
         newref = rawref - pparam->dec;
-    }
-    else {
+    } else {
         newref = targetref;
     }
     return newref;
 }
-
 
 /**
   * @brief      Calculate the absolute slope function setting value
@@ -155,27 +141,22 @@ float Math_CalcSlopeRef(float rawref, float targetref, Math_SlopeParamTypeDef* p
   */
 float Math_CalcAbsSlopeRef(float rawref, float targetref, Math_SlopeParamTypeDef* pparam) {
     float newref;
-    if (pparam->acc == 0 | pparam->dec == 0) 
+    if (pparam->acc == 0 | pparam->dec == 0)
         return targetref;
     if (rawref > 0) {
         if (rawref < targetref - pparam->acc) {
             newref = rawref + pparam->acc;
-        }
-        else if (rawref > targetref + pparam->dec) {
+        } else if (rawref > targetref + pparam->dec) {
             newref = rawref - pparam->dec;
-        }
-        else {
+        } else {
             newref = targetref;
         }
-    }
-    else {
+    } else {
         if (rawref > targetref + pparam->acc) {
             newref = rawref - pparam->acc;
-        }
-        else if (rawref < targetref - pparam->dec) {
+        } else if (rawref < targetref - pparam->dec) {
             newref = rawref + pparam->dec;
-        }
-        else {
+        } else {
             newref = targetref;
         }
     }
