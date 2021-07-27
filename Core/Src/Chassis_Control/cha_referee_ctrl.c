@@ -5,7 +5,7 @@
  *  Description  : 陈康冰写的~
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-16 09:11:17
+ *  LastEditTime : 2021-07-27 07:25:58
  */
 
 #include "cha_referee_ctrl.h"
@@ -47,27 +47,28 @@ const uint8_t AIM_LINE_LAYER = 2;
 const Draw_Color AIM_LINE_COLOR = Draw_COLOR_GREEN;
 const uint8_t AIM_LINE_LINE_MODE = 3;
 const uint8_t AIM_LINE_LINE_NUM = 3 + 1;
-const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {  // ID, Width, X1, Y1, X2, Y2
+const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {
+    // ID, Width, X1, Y1, X2, Y2
     {
         // Mode 0: 15 m/s
-        {0x101, 2, 0, 0, 0, 0},  // Vertical Line
-        {0x102, 4, 0, 0, 0, 0},  // Horizontal Line 1
-        {0x103, 2, 0, 0, 0, 0},  // Horizontal Line 2
-        {0x104, 2, 0, 0, 0, 0}   // Horizontal Line 3
+        {0x101, 2, 960, 500, 960, 620},  // Vertical Line
+        {0x102, 4, 850, 600, 950, 600},  // Horizontal Line 1
+        {0x103, 2, 850, 560, 950, 560},  // Horizontal Line 2
+        {0x104, 2, 870, 520, 930, 520}   // Horizontal Line 3
     },
     {
         // Mode 1: 18 m/s
-        {0x101, 2, 0, 0, 0, 0},  // Vertical Line
-        {0x102, 4, 0, 0, 0, 0},  // Horiz0ontal Line 1
-        {0x103, 2, 0, 0, 0, 0},  // Horizontal Line 2
-        {0x104, 2, 0, 0, 0, 0}   // Horizontal Line 3
+        {0x101, 2, 960, 500, 960, 620},  // Vertical Line
+        {0x102, 4, 850, 600, 950, 600},  // Horizontal Line 1
+        {0x103, 2, 850, 540, 950, 540},  // Horizontal Line 2
+        {0x104, 2, 870, 500, 930, 500}   // Horizontal Line 3
     },
     {
-        // Mode 2: 18 m/s
-        {0x101, 2, 0, 0, 0, 0},  // Vertical Line
-        {0x102, 4, 0, 0, 0, 0},  // Horizontal Line 1
-        {0x103, 2, 0, 0, 0, 0},  // Horizontal Line 2
-        {0x104, 2, 0, 0, 0, 0}   // Horizontal Line 3
+        // Mode 2: 30 m/s
+        {0x101, 2, 960, 500, 960, 620},  // Vertical Line
+        {0x102, 4, 850, 600, 950, 600},  // Horizontal Line 1
+        {0x103, 2, 850, 580, 950, 580},  // Horizontal Line 2
+        {0x104, 2, 870, 560, 930, 560}   // Horizontal Line 3
     }};
 
 const uint8_t CROSSHAIR_LAYER = 2;
@@ -104,7 +105,25 @@ const uint8_t PITCH_METER_LAYER = 2;
 const Draw_Color PITCH_METER_COLOR = Draw_COLOR_GREEN;
 const uint16_t PITCH_METER_TEXT[5] = {0x501, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
 const char* PITCH_METER_TEXT_STR = "PITCH:";
-const uint16_t PITCH_METER_VALUE[6] = {0x502, 20, 3, 2, 1600, 540};  // ID, Font Size, Precision, Width, X, Y
+const uint16_t PITCH_METER_VALUE[6] = {0x502, 20, 3, 2, 1200, 540};  // ID, Font Size, Precision, Width, X, Y
+
+const uint8_t AIM_MODE_LAYER = 2;
+const Draw_Color AIM_MODE_COLOR = Draw_COLOR_GREEN;
+const uint16_t AIM_MODE_TEXT[5] = {0x501, 20, 2, 600, 840};         // ID, Font Size, Width, X, Y
+const uint16_t AIM_MODE_VALUE_TEXT[5] = {0x501, 20, 2, 1000, 840};  // ID, Font Size, Width, X, Y
+const char* AIM_MODE_TEXT_STR = "AIM_MODE:";
+const char* NORMAL_AIM_TEXT_STR = "NORMAL";
+const char* ARMOR_AIM_TEXT_STR = "ARMOR";
+const char* BIG_BUFF_AIM_TEXT_STR = "BIG_BUF";
+const char* SMALL_BUFF_AIM_TEXT_STR = "SMALL_BUF";
+
+const uint8_t CHASSIS_MODE_LAYER = 2;
+const Draw_Color CHASSIS_MODE_COLOR = Draw_COLOR_GREEN;
+const uint16_t CHASSIS_MODE_TEXT[5] = {0x501, 20, 2, 600, 540};         // ID, Font Size, Width, X, Y
+const uint16_t CHASSIS_MODE_VALUE_TEXT[5] = {0x501, 20, 2, 1000, 540};  // ID, Font Size, Width, X, Y
+const char* CHASSIS_MODE_TEXT_STR = "CHASSIS_MODE:";
+const char* NORMAL_RUN_TEXT_STR = "NORMAL";
+const char* GYRO_RUN_TEXT_STR = "GYRO";
 
 /********** END OF Drawing Constants **********/
 
@@ -323,11 +342,31 @@ void Referee_UpdatePitchMeter() {
 }
 
 /**
+  * @brief      设置底盘和自瞄模式
+  * @param      auto_aim_mode: 自瞄模式（0 ~ 3对应 无自瞄、装甲板自瞄、小能量自瞄、大能量自瞄）
+  * @param      cha_mode: 底盘模式 （0 ~ 1对应 正常底盘运动 、 小陀螺模式）
+  * @retval     无
+  */
+void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode) {
+    Referee_DrawDataTypeDef* draw = &Referee_DrawData;
+    if (auto_aim_mode <= 3)
+        draw->auto_aim_mode = auto_aim_mode;
+    if (cha_mode <= 1)
+        draw->cha_mode = cha_mode;
+}
+
+/**
   * @brief      模式显示绘制：初始化阶段
   * @param      无
   * @retval     无
   */
 void Referee_SetupModeDisplay() {
+    Referee_DrawDataTypeDef* draw = &Referee_DrawData;
+    draw->auto_aim_mode_last = draw->auto_aim_mode;
+    draw->cha_mode_last = draw->cha_mode;
+
+    Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);
+    Draw_AddString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], NORMAL_RUN_TEXT_STR);
 }
 
 /**
@@ -336,6 +375,40 @@ void Referee_SetupModeDisplay() {
   * @retval     无
   */
 void Referee_UpdateModeDisplay() {
+    Referee_DrawDataTypeDef* draw = &Referee_DrawData;
+    if (draw->auto_aim_mode_last != draw->auto_aim_mode) {
+        draw->auto_aim_mode_last = draw->auto_aim_mode;
+        switch (draw->auto_aim_mode) {
+            case 0:
+                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);
+                break;
+            case 1:
+                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], ARMOR_AIM_TEXT_STR);
+                break;
+            case 2:
+                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], BIG_BUFF_AIM_TEXT_STR);
+                break;
+            case 3:
+                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], SMALL_BUFF_AIM_TEXT_STR);
+                break;
+            default:
+                break;
+        }
+    }
+
+    if (draw->cha_mode_last != draw->cha_mode) {
+        draw->cha_mode_last = draw->cha_mode;
+        switch (draw->cha_mode) {
+            case 0:
+                Draw_AddString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], NORMAL_RUN_TEXT_STR);
+                break;
+            case 1:
+                Draw_AddString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], GYRO_RUN_TEXT_STR);
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 /**
@@ -365,6 +438,9 @@ void Referee_SetupAllString() {
 
     Draw_AddString(CAP_STATE_TEXT[0], CAP_STATE_LAYER[1], CAP_STATE_COLOR[1], CAP_STATE_TEXT[1], CAP_STATE_TEXT[2], CAP_STATE_TEXT[3], CAP_STATE_TEXT[4], CAP_STATE_TEXT_STR);
     Draw_AddString(PITCH_METER_TEXT[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_TEXT[1], PITCH_METER_TEXT[2], PITCH_METER_TEXT[3], PITCH_METER_TEXT[4], PITCH_METER_TEXT_STR);
+
+    Draw_AddString(AIM_MODE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_TEXT[1], AIM_MODE_TEXT[2], AIM_MODE_TEXT[3], AIM_MODE_TEXT[4], AIM_MODE_TEXT_STR);
+    Draw_AddString(CHASSIS_MODE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_TEXT[1], CHASSIS_MODE_TEXT[2], CHASSIS_MODE_TEXT[3], CHASSIS_MODE_TEXT[4], CHASSIS_MODE_TEXT_STR);
 }
 
 /**
@@ -386,7 +462,7 @@ void Referee_Setup() {
     Referee_SetupWidthMark();     // draw_cnt: 2, send(7), total_cmd_cnt: 2
     Referee_SetupCapState();      // draw_cnt: 2
     Referee_SetupPitchMeter();    // draw_cnt: 1
-    Referee_SetupModeDisplay();   // draw_cnt: 0
+    Referee_SetupModeDisplay();   // draw_cnt: 2
     Referee_SetupErrorDisplay();  // draw_cnt: 0, send(2)send(1), total_cmd_cnt: 4
 
     Referee_SetupAllString();  // cmd_cnt: 2, total_cmd_cnt: 6

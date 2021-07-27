@@ -5,7 +5,7 @@
  *  Description  : const.c
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-15 01:39:35
- *  LastEditTime : 2021-07-11 10:53:29
+ *  LastEditTime : 2021-07-26 21:56:02
  */
 
 #include "const.h"
@@ -215,6 +215,13 @@ static void Const_Copy() {
     Const_HeatCtrlWaitLimit = Const_Infantry.HeatCtrlWaitLimit;
     Const_HeatCtrlSingleCount = Const_Infantry.HeatCtrlSingleCount;
     Const_HeatCtrlStopLimit = Const_Infantry.HeatCtrlStopLimit;
+
+    Const_energy_yaw_offset = Const_Infantry.energy_yaw_offset;
+    Const_energy_pitch_offset = Const_Infantry.energy_pitch_offset;
+
+    Const_autoaim_pitch_offset = Const_Infantry.autoaim_pitch_offset;
+    Const_autoaim_yaw_offset = Const_Infantry.autoaim_yaw_offset;
+
 #endif
 }
 
@@ -294,3 +301,9 @@ uint16_t Const_HeatCtrlSlowLimit;
 uint16_t Const_HeatCtrlWaitLimit;
 uint16_t Const_HeatCtrlSingleCount;
 uint16_t Const_HeatCtrlStopLimit;
+
+float Const_energy_yaw_offset;
+float Const_energy_pitch_offset;
+
+float Const_autoaim_pitch_offset;
+float Const_autoaim_yaw_offset;

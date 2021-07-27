@@ -5,7 +5,7 @@
  *  Description  : This file contains HI22X function (For HI229 and BMI0XX)
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-10 11:02:50
- *  LastEditTime : 2021-07-23 21:49:05
+ *  LastEditTime : 2021-07-26 17:11:49
  */
 
 #include "hi22x_periph.h"
@@ -171,12 +171,6 @@ void HI22X_HI22xDecodeHI22XData(uint8_t* buff, int rxdatalen) {
     hi22x->angle.pitch = hi22x->angle.pitch + hi22x->pitch_angle_offset;
     hi22x->angle.yaw = hi22x->angle.yaw - hi22x->yaw_angle_offset;
     hi22x->angle.row = hi22x->angle.row;
-
-    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED) {
-        static BaseType_t xHigherPriorityTaskWoken;
-        vTaskNotifyGiveFromISR(INS_task_local_handler, &xHigherPriorityTaskWoken);
-        portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
-    }
 
     hi22x->last_update_time = HAL_GetTick();
     hi22x->state = HI22X_STATE_CONNECTED;

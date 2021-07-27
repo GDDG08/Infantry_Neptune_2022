@@ -5,7 +5,7 @@
  *  Description  : User defined UI interface of referee system
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 09:10:42
+ *  LastEditTime : 2021-07-26 18:09:27
  */
 
 #ifndef CHA_REFEREE_CTRL_H
@@ -24,7 +24,9 @@ extern "C" {
 typedef struct {
     uint8_t width_mode, width_mode_last;  // 1 for gyro mode, 0 for normal mode
     uint8_t aim_mode, aim_mode_last;      // 0~2 correspond to 15,18,30 m/s bullet speed
-    uint8_t cap_state;                    // cap percent, 0 ~ 100
+    uint8_t auto_aim_mode, auto_aim_mode_last;
+    uint8_t cha_mode, cha_mode_last;
+    uint8_t cap_state;  // cap percent, 0 ~ 100
     float pitch_angle;
 } Referee_DrawDataTypeDef;
 
@@ -34,6 +36,7 @@ void Referee_SetWidthMode(uint8_t mode);
 void Referee_SetAimMode(uint8_t mode);
 void Referee_SetCapState(uint8_t state);
 void Referee_SetPitchAngle(float angle);
+void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode);
 
 void Referee_SetupAimLine(void);
 void Referee_UpdateAimLine(void);

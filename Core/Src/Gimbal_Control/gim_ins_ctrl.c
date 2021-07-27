@@ -5,7 +5,7 @@
  *  Description  : gim_ins_ctrl.c
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-07-09 00:00:22
- *  LastEditTime : 2021-07-23 22:57:35
+ *  LastEditTime : 2021-07-26 17:11:15
  */
 
 #include "gim_ins_ctrl.h"
@@ -15,7 +15,7 @@
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
 
 #define INS_TASK_PERIOD 1
-#define dt (INS_TASK_PERIOD * 0.001)
+#define dt 0.0025f
 
 volatile uint8_t ins_flag = 0;
 
@@ -52,21 +52,19 @@ void Ins_Task(void const* argument) {
     ins_flag |= (1 << INS_INIT_SHIFT);
 
     for (;;) {
+        Ins_DecodeIMUData();
+#if __FN_IF_ENABLE(__IMU_HI22X)
+#else
+        // wait spi DMA tansmit done
         while (ulTaskNotifyTake(pdTRUE, portMAX_DELAY) != pdPASS) {
         }
 
         INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
         MAG_MAGDataTypeDef* mag = MAG_GetMAGDataPtr();
 
-        Ins_DecodeIMUData();
-#if __FN_IF_ENABLE(__IMU_HI22X)
-#else
-        // wait spi DMA tansmit done
-
         Ins_TempControl();
-
-        AHRS_MahonyUpdate(Ins_quat, imu->speed.pitch, imu->speed.row, imu->speed.yaw,
-                          imu->accel.pitch, imu->accel.row, imu->accel.yaw,
+        AHRS_MahonyUpdate(Ins_quat, -imu->speed.pitch, imu->speed.row, -imu->speed.yaw,
+                          -imu->accel.pitch, imu->accel.row, -imu->accel.yaw,
                           mag->mag_x, mag->mag_y, mag->mag_z);
 
         imu->last_angle.pitch = imu->now_angle.pitch;
@@ -76,7 +74,6 @@ void Ins_Task(void const* argument) {
         AHRS_GetAngle(Ins_quat, &imu->now_angle.yaw, &imu->now_angle.row, &imu->now_angle.pitch);
 
         Ins_ImuKF.MeasuredVector[0] = imu->now_angle.yaw;
-        //        Ins_ImuKF.MeasuredVector[1] = ins_yaw_bias - imu->speed.yaw;
         Ins_ImuKF.ControlVector[0] = imu->speed.yaw;
 
         Kalman_FilterUpdate(&Ins_ImuKF);
@@ -148,48 +145,38 @@ void Ins_InsInit() {
     Spi_DMAInit(Const_BMI055_SPI_HANDLER, (uint32_t)gyro_dma_tx_buf, (uint32_t)gyro_dma_rx_buf, SPI_DMA_GYRO_LENGHT);
 
     static float P_Init[4] = {
-        0, 0,
-        0, 0};
+        0.005, 0.005,
+        0.005, 0.005};
     static float F_Init[4] = {
         1, -dt,
         0, 1};
     static float Q_Init[4] = {
-        25 * dt,
+        0.001,
         0,
         0,
-        800 * dt,
+        0.005,
     };
-    static float Z_Init[2] = {
+    static float H_Init[2] = {
         1,
-        0,
-    };
-    static float H_Init[4] = {
-        1,
-        0,
-        0,
         0,
     };
     static float R_Init[1] = {
-        0.08};
+        0.056,
+    };
     static float B_Init[2] = {
         dt,
         0,
     };
-    static float u_Init[2] = {
-        1,
-        0};
-    static float state_min_variance[2] = {0, 0};
+    static float state_min_variance[2] = {0.05, 0.05};
 
     Ins_ImuKF.UseAutoAdjustment = 0;
-    Kalman_FilterInit(&Ins_ImuKF, 2, 2, 2);
+    Kalman_FilterInit(&Ins_ImuKF, 2, 1, 1);
 
     memcpy(Ins_ImuKF.B_data, B_Init, sizeof(B_Init));
-    memcpy(Ins_ImuKF.u_data, u_Init, sizeof(u_Init));
     memcpy(Ins_ImuKF.P_data, P_Init, sizeof(P_Init));
     memcpy(Ins_ImuKF.F_data, F_Init, sizeof(F_Init));
     memcpy(Ins_ImuKF.Q_data, Q_Init, sizeof(Q_Init));
     memcpy(Ins_ImuKF.R_data, R_Init, sizeof(R_Init));
-    memcpy(Ins_ImuKF.z_data, Z_Init, sizeof(Z_Init));
     memcpy(Ins_ImuKF.H_data, H_Init, sizeof(H_Init));
     memcpy(Ins_ImuKF.StateMinVariance, state_min_variance, sizeof(state_min_variance));
 #endif
@@ -263,6 +250,7 @@ uint8_t Ins_IsIMUOffline() {
   */
 void Ins_DecodeIMUData() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
+    MAG_MAGDataTypeDef* mag = MAG_GetMAGDataPtr();
 #if __FN_IF_ENABLE(__IMU_BMI055)
     BMI055_BMI055DataTypeDef* bmi055 = BMI055_GetBMI055DataPtr();
     imu->speed.pitch = bmi055->gyro.x;
@@ -272,6 +260,11 @@ void Ins_DecodeIMUData() {
     imu->accel.row = bmi055->accel.y;
     imu->accel.yaw = bmi055->accel.z;
     imu->temperature = bmi055->temperature;
+#if __FN_IF_ENABLE(__IMU_NINE_AXIS)
+    imu->mag.pitch = mag->mag_x;
+    imu->mag.row = mag->mag_y;
+    imu->mag.yaw = mag->mag_z;
+#endif
 #endif
 #if __FN_IF_ENABLE(__IMU_BMI088)
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
@@ -320,6 +313,8 @@ void Ins_TempControl() {
   * @retval         NULL
   */
 void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio) {
+#if __FN_IF_ENABLE(__IMU_HI22X)
+#else
     if (gpio == BMI_INT1) {
         if (ins_flag & (1 << INS_INIT_SHIFT)) {
             if ((!(ins_flag & (1 << INS_GYRO_UPDATE_SHIFT))) && (!(ins_flag & (1 << INS_ACCEL_FINISH_SHIFT)))) {
@@ -348,8 +343,14 @@ void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio) {
             }
         }
     }
+#endif
 }
 
+/**
+  * @brief          Ins Spi DMA Recive Control
+  * @param          pvParameters: NULL
+  * @retval         NULL
+  */
 static void Ins_ImuDMACmd() {
 #if __FN_IF_ENABLE(__IMU_HI22X)
 #else
@@ -366,6 +367,11 @@ static void Ins_ImuDMACmd() {
 #endif
 }
 
+/**
+  * @brief          Ins Spi DMA Recive interrupt Control
+  * @param          pvParameters: NULL
+  * @retval         NULL
+  */
 void Ins_DMAIRQHandler() {
 #if __FN_IF_ENABLE(__IMU_HI22X)
 #else

@@ -5,7 +5,7 @@
  *  Description  : This file contains Bus communication control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-23 21:03:07
+ *  LastEditTime : 2021-07-26 18:17:31
  */
 
 #include "buscomm_ctrl.h"
@@ -174,23 +174,6 @@ void BusComm_SendBusCommData() {
 
 // Gimbal steram
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
-    /*    
-    static uint8_t send_pack_flag = 0;
-    int i;
-    if (send_pack_flag == 0) {
-        i = 0;
-        send_pack_flag = 1;
-    }
-    else {
-        i = 2;
-        send_pack_flag = 0;
-    }
-    
-    for (int j = 0; j < 2 ; j++) {
-        if (Buscmd_GimSend[i + j].bus_func != NULL)
-            Buscmd_GimSend[i + j].bus_func(BusComm_TxData);    
-    }
-*/
     uint32_t out_time = HAL_GetTick();
     for (int i = 0; i < Const_BusComm_GIMBAL_BUFF_SIZE; i++) {
         while (HAL_CAN_GetTxMailboxesFreeLevel(Const_BusComm_CAN_HANDLER) == 0) {
@@ -316,7 +299,7 @@ void BusComm_Update() {
     Referee_RefereeDataTypeDef* referee = Referee_GetRefereeDataPtr();
 
     data->heat_speed_limit = referee->shooter_heat0_speed_limit;
-    int mode = 0;
+    uint8_t mode = 0;
     if (referee->shooter_heat0_speed_limit == 15)
         mode = 0;
     if (referee->shooter_heat0_speed_limit == 18)
@@ -327,6 +310,22 @@ void BusComm_Update() {
 
     Referee_SetCapState(data->cap_rest_energy);
     Referee_SetPitchAngle(data->pitch_angle);
+
+    uint8_t auto_aim_mode = 0, cha_mode = 0;
+    if (data->chassis_mode == CHASSIS_CTRL_NORMAL)
+        cha_mode = 0;
+    if (data->chassis_mode == CHASSIS_CTRL_GYRO)
+        cha_mode = 1;
+    if (data->gimbal_yaw_mode == GIMBAL_YAW_CTRL_NO_AUTO)
+        auto_aim_mode = 0;
+    if (data->gimbal_yaw_mode == GIMBAL_YAW_CTRL_ARMOR)
+        auto_aim_mode = 1;
+    if (data->gimbal_yaw_mode == GIMBAL_YAW_CTRL_SMALL_ENERGY)
+        auto_aim_mode = 2;
+    if (data->gimbal_yaw_mode == GIMBAL_YAW_CTRL_BIG_ENERGY)
+        auto_aim_mode = 3;
+
+    Referee_SetMode(auto_aim_mode, cha_mode);
 
     data->yaw_relative_angle = Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET;
     data->robot_id = referee->robot_id;

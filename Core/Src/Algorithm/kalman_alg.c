@@ -3,9 +3,9 @@
  * 
  *  file         : kalman_alg.c
  *  Description  : This file contains the kalman filter functions (whx designed)
- *  LastEditors  : 动情丶卜灬动心
+ *  LastEditors  : ?攫笑宋徤??看
  *  Date         : 2021-06-10 11:02:50
- *  LastEditTime : 2021-07-21 20:38:42
+ *  LastEditTime : 2021-07-26 21:25:46
  */
 
 #include "kalman_alg.h"
@@ -32,6 +32,7 @@ void Kalman_FilterInit(Kalman_KalmanTypeDef* kf, uint8_t xhatSize, uint8_t uSize
     kf->zSize = zSize;
 
     kf->MeasurementValidNum = 0;
+    kf->NonMeasurement = 0;
 
     // measurement flags
     kf->MeasurementMap = (uint8_t*)malloc(sizeof(uint8_t) * zSize);
@@ -155,7 +156,12 @@ float* Kalman_FilterUpdate(Kalman_KalmanTypeDef* kf) {
         memset(kf->MeasuredVector, 0, sizeof_float * kf->zSize);
     }
 
+    if (kf->z_data[0] == 0) {
+        kf->NonMeasurement = 1;
+    }
+
     memcpy(kf->u_data, kf->ControlVector, sizeof_float * kf->uSize);
+    memset(kf->ControlVector, 0, sizeof_float * kf->uSize);
 
     if (kf->User_Func0_f != NULL)
         kf->User_Func0_f(kf);
@@ -189,7 +195,7 @@ float* Kalman_FilterUpdate(Kalman_KalmanTypeDef* kf) {
     if (kf->User_Func2_f != NULL)
         kf->User_Func2_f(kf);
 
-    if (kf->MeasurementValidNum != 0 || kf->UseAutoAdjustment == 0) {
+    if ((kf->MeasurementValidNum != 0 || kf->UseAutoAdjustment == 0) && (kf->NonMeasurement == 0)) {
         // 3. K(k) = P'(k)·HT / (H·P'(k)·HT + R)
         if (!kf->SkipEq3) {
             kf->MatStatus = mat_trans(&kf->H, &kf->HT);  //z|x => x|z
@@ -244,6 +250,7 @@ float* Kalman_FilterUpdate(Kalman_KalmanTypeDef* kf) {
         // P(k) = P'(k)
         memcpy(kf->xhat_data, kf->xhatminus_data, sizeof_float * kf->xhatSize);
         memcpy(kf->P_data, kf->Pminus_data, sizeof_float * kf->xhatSize * kf->xhatSize);
+        kf->NonMeasurement = 0;
     }
 
     if (kf->User_Func5_f != NULL)

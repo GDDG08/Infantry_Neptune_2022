@@ -5,7 +5,7 @@
  *  Description  : const.h
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-13 12:48:01
- *  LastEditTime : 2021-07-11 10:52:02
+ *  LastEditTime : 2021-07-26 21:44:59
  */
 
 #ifndef CONST_H
@@ -94,6 +94,12 @@ typedef struct {
     uint16_t HeatCtrlWaitLimit;
     uint16_t HeatCtrlSingleCount;
     uint16_t HeatCtrlStopLimit;
+
+    float energy_yaw_offset;
+    float energy_pitch_offset;
+    float autoaim_pitch_offset;
+    float autoaim_yaw_offset;
+
 } Const_ConstTypeDef;
 
 /*      Super Cap Const         */
@@ -179,6 +185,12 @@ extern uint16_t Const_HeatCtrlSlowLimit;
 extern uint16_t Const_HeatCtrlWaitLimit;
 extern uint16_t Const_HeatCtrlSingleCount;
 extern uint16_t Const_HeatCtrlStopLimit;
+
+extern float Const_energy_yaw_offset;
+extern float Const_energy_pitch_offset;
+
+extern float Const_autoaim_pitch_offset;
+extern float Const_autoaim_yaw_offset;
 
 #endif
 

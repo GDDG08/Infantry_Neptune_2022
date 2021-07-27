@@ -5,7 +5,7 @@
  *  Description  : This file contains cap control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-16 09:11:26
+ *  LastEditTime : 2021-07-26 17:15:45
  */
 
 #include "supercap_ctrl.h"

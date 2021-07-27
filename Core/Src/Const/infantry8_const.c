@@ -148,5 +148,12 @@ void Const_Infantry_8_Init(Const_ConstTypeDef* x) {
     x->HeatCtrlWaitLimit = 10;
     x->HeatCtrlSingleCount = 10;
     x->HeatCtrlStopLimit = 10;
+
+    x->energy_yaw_offset = 0.9f;
+    x->energy_pitch_offset = 0.3f;
+
+    x->autoaim_pitch_offset = -3.0f;
+    x->autoaim_yaw_offset = 0.0f;
+
 #endif
 }

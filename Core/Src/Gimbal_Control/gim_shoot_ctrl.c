@@ -5,7 +5,7 @@
  *  Description  : This file contains Shooter control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-16 13:05:48
+ *  LastEditTime : 2021-07-26 17:02:24
  */
 
 #include "gim_shoot_ctrl.h"
@@ -137,7 +137,7 @@ float Shooter_GetShootSpeedOffset() {
             offset_speed = 15.0f;
             break;
     }
-    //return 0;
+
     return offset_speed;
 }
 
@@ -216,10 +216,10 @@ void Shooter_ChangeShooterMode(Shoot_ShooterModeEnum mode) {
     Shoot_StatusTypeDef* shooter = Shooter_GetShooterControlPtr();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
-    //    if (buscomm->main_shooter_power == 1)
-    shooter->shooter_mode = mode;
-    //    else
-    //        shooter->shooter_mode = Shoot_NULL;
+    if (buscomm->main_shooter_power == 1)
+        shooter->shooter_mode = mode;
+    else
+        shooter->shooter_mode = Shoot_NULL;
 }
 
 /**
@@ -470,6 +470,7 @@ void Shooter_ShootControl() {
             GPIO_Set(LASER);
             GPIO_Set(BULLET_CHARGING);
             Shooter_SetShooterSpeed(Shooter_GetRefereeSpeed() + Shooter_GetShootSpeedOffset());
+            break;
         default:
             break;
     }

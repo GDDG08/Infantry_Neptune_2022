@@ -5,7 +5,7 @@
  *  Description  : This file contains mini_PC data transceiver related auxiliary functions
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-22 07:05:36
+ *  LastEditTime : 2021-07-25 10:35:22
  */
 
 #include "minipc_periph.h"
@@ -14,6 +14,7 @@
 
 #include "const.h"
 #include "buscomm_ctrl.h"
+#include "gim_minipc_ctrl.h"
 
 UART_HandleTypeDef* Const_MiniPC_UART_HANDLER = &huart5;
 
@@ -141,6 +142,7 @@ void MiniPC_RXCallback(UART_HandleTypeDef* huart) {
     uint16_t rxdatalen = Const_MiniPC_RX_BUFF_LEN - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
 
     MiniPC_DecodeMiniPCPacket(MiniPC_RxData, rxdatalen);
+    MiniPC_UpdateControlData();
 
     /* restart dma transmission */
     __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_MiniPC_RX_BUFF_LEN);

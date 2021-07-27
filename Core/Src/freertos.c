@@ -145,23 +145,23 @@ void MX_FREERTOS_Init(void) {
     defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
     /* definition and creation of Gimbal */
-    osThreadDef(Gimbal, Gimbal_Task, osPriorityNormal, 0, 128);
+    osThreadDef(Gimbal, Gimbal_Task, osPriorityHigh, 0, 128);
     GimbalHandle = osThreadCreate(osThread(Gimbal), NULL);
 
     /* definition and creation of BusComm */
-    osThreadDef(BusComm, BusComm_Task, osPriorityNormal, 0, 128);
+    osThreadDef(BusComm, BusComm_Task, osPriorityRealtime, 0, 128);
     BusCommHandle = osThreadCreate(osThread(BusComm), NULL);
 
     /* definition and creation of Remote */
-    osThreadDef(Remote, Remote_Task, osPriorityNormal, 0, 128);
+    osThreadDef(Remote, Remote_Task, osPriorityAboveNormal, 0, 128);
     RemoteHandle = osThreadCreate(osThread(Remote), NULL);
 
     /* definition and creation of Chassis */
-    osThreadDef(Chassis, Chassis_Task, osPriorityNormal, 0, 128);
+    osThreadDef(Chassis, Chassis_Task, osPriorityHigh, 0, 128);
     ChassisHandle = osThreadCreate(osThread(Chassis), NULL);
 
     /* definition and creation of SuperCap */
-    osThreadDef(SuperCap, SuperCap_Task, osPriorityNormal, 0, 128);
+    osThreadDef(SuperCap, SuperCap_Task, osPriorityHigh, 0, 128);
     SuperCapHandle = osThreadCreate(osThread(SuperCap), NULL);
 
     /* definition and creation of Shoot */
@@ -173,7 +173,7 @@ void MX_FREERTOS_Init(void) {
     MiniPCHandle = osThreadCreate(osThread(MiniPC), NULL);
 
     /* definition and creation of Referee */
-    osThreadDef(Referee, Referee_Task, osPriorityNormal, 0, 128);
+    osThreadDef(Referee, Referee_Task, osPriorityAboveNormal, 0, 128);
     RefereeHandle = osThreadCreate(osThread(Referee), NULL);
 
     /* definition and creation of WatchDog */
@@ -189,7 +189,7 @@ void MX_FREERTOS_Init(void) {
     InsHandle = osThreadCreate(osThread(Ins), NULL);
 
     /* definition and creation of Init */
-    osThreadDef(Init, Init_Task, osPriorityNormal, 0, 128);
+    osThreadDef(Init, Init_Task, osPriorityRealtime, 0, 128);
     InitHandle = osThreadCreate(osThread(Init), NULL);
 
     /* USER CODE BEGIN RTOS_THREADS */

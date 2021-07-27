@@ -5,7 +5,7 @@
  *  Description  : This file contains all functions enable
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-10 11:03:55
- *  LastEditTime : 2021-07-23 21:55:18
+ *  LastEditTime : 2021-07-27 07:35:17
  */
 
 // Note:
@@ -30,12 +30,16 @@ extern "C" {
 #define __FN_BOARD_TYPE_GIMBAL 2
 #define __FN_BOARD_TYPE_SUPERCAP 3
 
-#define __IMU_TYPE __IMU_TYPE_HI22X
+#define __IMU_TYPE __IMU_TYPE_BMI055
 
 #define __IMU_TYPE_BMI055 1
 #define __IMU_TYPE_BMI088 2
 #define __IMU_TYPE_HI22X 3
 
+#define __IMU_AXIS_TYPE __IMU_SIX_AXIS
+
+#define __IMU_SIX_AXIS_TYPE 6
+#define __IMU_NINE_AXIS_TYPE 9
 /*      **********************************************      */
 
 extern int GLOBAL_INIT_FLAG;
@@ -77,6 +81,12 @@ extern int GLOBAL_INIT_FLAG;
 #if __IMU_TYPE == __IMU_TYPE_HI22X
 #define __IMU_HI22X __FN_ENABLE
 #endif
+#endif
+
+#if __IMU_AXIS_TYPE == __IMU_SIX_AXIS_TYPE
+#define __IMU_SIX_AXIS __FN_ENABLE
+#else
+#define __IMU_NINE_AXIS __FN_ENABLE
 #endif
 
 /*  Control function          */

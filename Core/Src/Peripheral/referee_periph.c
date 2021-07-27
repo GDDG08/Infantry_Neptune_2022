@@ -5,7 +5,7 @@
  *  Description  : This document contains the data receiving and sending of the referee system
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-09 05:47:17
+ *  LastEditTime : 2021-07-27 07:24:35
  */
 
 #include "referee_periph.h"
@@ -238,7 +238,7 @@ const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6] = {
     {0x0102, 30, NULL},   // 客户端绘制二个图形
     {0x0103, 75, NULL},   // 客户端绘制五个图形
     {0x0104, 105, NULL},  // 客户端绘制七个图形
-    {0x0105, 45, NULL}    // 客户端绘制字符图形
+    {0x0110, 45, NULL}    // 客户端绘制字符图形
 };
 
 graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};

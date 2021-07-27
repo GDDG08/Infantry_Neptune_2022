@@ -5,7 +5,7 @@
  *  Description  : This file contains Gimbal control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-22 06:42:43
+ *  LastEditTime : 2021-07-25 11:55:00
  */
 
 #include "gim_gimbal_ctrl.h"
@@ -41,6 +41,7 @@ void Gimbal_Task(void const* argument) {
             osDelay(1);
         }
 
+        MiniPC_CalcAutoAim();
         Gimbal_CtrlPitch();
         Gimbal_CtrlYaw();
         GimbalPitch_Output();

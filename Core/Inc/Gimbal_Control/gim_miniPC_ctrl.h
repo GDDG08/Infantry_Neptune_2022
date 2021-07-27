@@ -5,7 +5,7 @@
  *  Description  : This file contains MiniPC control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-10 11:03:12
- *  LastEditTime : 2021-07-22 12:36:23
+ *  LastEditTime : 2021-07-26 17:06:56
  */
 
 #ifndef GIM_MINIPC_CTRL_H
@@ -44,11 +44,14 @@ typedef struct {
     float pitch_angle;
 
     float yaw_ref_filtered, pitch_ref_filtered;
-    Filter_LowPassParamTypeDef yaw_fil_param;
-    Filter_LowPassTypeDef yaw_fil;
 
-    Filter_LowPassParamTypeDef pitch_fil_param;
-    Filter_LowPassTypeDef pitch_fil;
+    Filter_LowPassParamTypeDef pitch_lowfil_param;
+    Filter_LowPassParamTypeDef yaw_lowfil_param;
+    Filter_LowPassParamTypeDef dis_lowfil_param;
+
+    Filter_LowPassTypeDef pitch_lowfil;
+    Filter_LowPassTypeDef yaw_lowfil;
+    Filter_LowPassTypeDef dis_lowfil;
 
     Kalman_KalmanTypeDef kf_yaw, kf_pitch;
 
@@ -61,10 +64,12 @@ MiniPC_MiniPCControlTypeDef* MiniPC_GetMiniPCControlDataPtr(void);
 void MiniPC_ControlInit(void);
 void MiniPC_ChangeAimMode(MiniPC_AutoAimModeEnum mode);
 void MiniPC_CalcAutoAim(void);
+void MiniPC_ResetKFParam(void);
 void MiniPC_SetFollowMode(MiniPC_TargetFollowModeEnum mode);
 float MiniPC_CV_CalInitSpeed(float delta_err_angle);
 void MiniPC_SetTargetFollowMode(void);
 void MiniPC_UpdateControlData(void);
+void MiniPC_KalmanPrediction(void);
 void MiniPC_SetGimbalRef(void);
 void MiniPC_SetAutoAimRef(void);
 

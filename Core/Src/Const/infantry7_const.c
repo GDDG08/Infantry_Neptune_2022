@@ -5,7 +5,7 @@
  *  Description  : This file contains 7 infantry constants
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 06:15:51
+ *  LastEditTime : 2021-07-26 21:40:05
  */
 
 #include "configure.h"
@@ -148,5 +148,12 @@ void Const_Infantry_7_Init(Const_ConstTypeDef* x) {
     x->HeatCtrlWaitLimit = 10;
     x->HeatCtrlSingleCount = 10;
     x->HeatCtrlStopLimit = 10;
+
+    x->energy_yaw_offset = 0.9f;
+    x->energy_pitch_offset = 0.3f;
+
+    x->autoaim_pitch_offset = -3.0f;
+    x->autoaim_yaw_offset = 0.0f;
+
 #endif
 }

@@ -27,15 +27,15 @@
 #include "supercap_ctrl.h"
 #endif
 
-const uint32_t CMD_SET_YAW_ANGLE_BASIC_DATA = 0x21;
-const uint32_t CMD_SET_17MM_DATA = 0x22;
+const uint32_t CMD_SET_YAW_ANGLE_BASIC_DATA = 0x205;
+const uint32_t CMD_SET_17MM_DATA = 0x206;
 
-const uint32_t CMD_SET_MODE = 0x11;
-const uint32_t CMD_SET_GIMBAL_DATA = 0x12;
-const uint32_t CMD_SET_IMU_YAW = 0x13;
-const uint32_t CMD_SET_CHA_REF = 0x14;
+const uint32_t CMD_SET_MODE = 0x201;
+const uint32_t CMD_SET_GIMBAL_DATA = 0x202;
+const uint32_t CMD_SET_IMU_YAW = 0x203;
+const uint32_t CMD_SET_CHA_REF = 0x204;
 
-const uint32_t CMD_SEND_CAP_STATE = 0x31;
+const uint32_t CMD_SEND_CAP_STATE = 0x207;
 
 const uint32_t CMD_CHASSIS_SEND_PACK_1 = 0xA1;
 const uint32_t CMD_CHASSIS_SEND_PACK_2 = 0xA2;

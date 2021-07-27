@@ -5,7 +5,7 @@
  *  Description  : This file contains the kalman filter functions (whx designed)
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-10 11:03:12
- *  LastEditTime : 2021-07-21 20:39:16
+ *  LastEditTime : 2021-07-26 21:22:48
  */
 
 #ifndef KALMAN_ALG_H
@@ -34,7 +34,7 @@ typedef struct kf_t {
     float* MatR_DiagonalElements;  // variance for each measurement
     float* StateMinVariance;       // suppress filter excessive convergence
     uint8_t* temp;
-    uint8_t SkipEq1, SkipEq2, SkipEq3, SkipEq4, SkipEq5;
+    uint8_t SkipEq1, SkipEq2, SkipEq3, SkipEq4, SkipEq5, NonMeasurement;
 
     mat xhat;       // x(k|k)
     mat xhatminus;  // x(k|k-1)
