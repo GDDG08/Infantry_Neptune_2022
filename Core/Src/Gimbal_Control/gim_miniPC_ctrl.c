@@ -27,8 +27,8 @@ MiniPC_MiniPCControlTypeDef MiniPC_MiniPCContrlData;
 float autoaim_pitch_offset = -3.0f;
 float autoaim_yaw_offset = 0.0f;
 
-float energy_yaw_offset = 0.9f;
-float energy_pitch_offset = 0.3f;
+float energy_yaw_offset = -2.2f; //4:0.9 old3 -2.2
+float energy_pitch_offset = -1.4f;//4 0.3 old3 -1.5
 
 /**
   * @brief          MiniPC task
@@ -41,7 +41,7 @@ void MiniPC_Task(void const* argument) {
             osDelay(1);
         }
         MiniPC_UpdateControlData();
-        //        MiniPC_CalcAutoAim();
+        MiniPC_CalcAutoAim();
         MiniPC_SendHeartPacket();
         osDelay(MINI_PC_TASK_PERIOD);
     }
@@ -65,7 +65,7 @@ void MiniPC_ControlInit() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
 
     minipc->enable_aim_output = 1;
-    minipc->enable_prediction = 1;
+    minipc->enable_prediction = 0;
 
     static float Q_YAW_Init[4] = {
         0.5 * dt * dt * dt,
@@ -97,6 +97,9 @@ void MiniPC_ControlInit() {
     static uint8_t measurement_reference[2] = {1, 1};
     static float measurement_degree[2] = {1, 1};
     static float state_min_variance[2] = {0.03, 0.005};
+		
+		Filter_LowPassInit(0.5, &minipc->yaw_fil_param);
+    Filter_LowPassInit(0.4, &minipc->pitch_fil_param);
 
     Kalman_FilterInit(&minipc->kf_pitch, 2, 0, 2);
     Kalman_FilterInit(&minipc->kf_yaw, 2, 0, 2);
@@ -206,17 +209,25 @@ void MiniPC_UpdateControlData() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
-
+		Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
     if (minipc_data->new_data_flag != 1)
         return;
-
-    if (minipc_data->is_get_target == 1) {
+    if (minipc_data->is_get_target == 1)
         minipc->get_target_time = HAL_GetTick();
+
+    if (minipc_data->is_get_target == 1 && gimbal->mode.present_mode == Gimbal_ARMOR) {
         // Update data when get target
         // Otherwise keep last data
         minipc->yaw_angle = minipc_data->yaw_angle;
         minipc->pitch_angle = minipc_data->pitch_angle;
         minipc->distance = minipc_data->distance;
+    }
+		
+		else {
+				minipc->yaw_angle = minipc_data->yaw_angle;
+				minipc->pitch_angle = minipc_data->pitch_angle;
+				minipc->yaw_ref_filtered = Filter_LowPass(minipc->yaw_angle, &minipc->yaw_fil_param, &minipc->yaw_fil);
+        minipc->pitch_ref_filtered = Filter_LowPass(minipc->pitch_angle, &minipc->pitch_fil_param, &minipc->pitch_fil);
     }
 
     //Update cvkf-mode when get new measurements!
@@ -289,7 +300,8 @@ void MiniPC_SetGimbalRef() {
     else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_BIG_ENERGY)) {
         Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_ref_filtered + energy_yaw_offset);
         Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + energy_pitch_offset);
-    } else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_SMALL_ENERGY)) {
+    } 
+		else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_SMALL_ENERGY)) {
         Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_ref_filtered + energy_yaw_offset);
         Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + energy_pitch_offset);
     }

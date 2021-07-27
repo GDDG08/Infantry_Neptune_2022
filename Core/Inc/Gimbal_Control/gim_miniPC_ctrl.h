@@ -44,6 +44,11 @@ typedef struct {
     float pitch_angle;
 
     float yaw_ref_filtered, pitch_ref_filtered;
+    Filter_LowPassParamTypeDef yaw_fil_param;
+    Filter_LowPassTypeDef yaw_fil;
+
+    Filter_LowPassParamTypeDef pitch_fil_param;
+    Filter_LowPassTypeDef pitch_fil;
 
     Kalman_KalmanTypeDef kf_yaw, kf_pitch;
 
