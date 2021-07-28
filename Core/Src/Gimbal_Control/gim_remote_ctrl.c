@@ -295,6 +295,7 @@ void Remote_KeyMouseProcess() {
         }
     }
 
+    /******Gimbal mode control*******/
     static int big_energy_flag = 0, big_energy_state = 0;
     static int small_energy_flag = 0, small_energy_state = 0;
     if (data->key.b == 1) {
@@ -334,19 +335,23 @@ void Remote_KeyMouseProcess() {
             MiniPC_ChangeAimMode(MiniPC_SMALL_BUFF);
             // chassis stop
             Remote_ChangeChassisState(CHASSIS_CTRL_STOP);
-        } else if (big_energy_state == 1 && small_energy_state == 1) {
-            big_energy_state = 0;
-            small_energy_state = 0;
-            Gimbal_ChangeMode(Gimbal_NOAUTO);
-            MiniPC_ChangeAimMode(MiniPC_ARMOR);
-            Remote_ChangeChassisState(CHASSIS_CTRL_NORMAL);
         } else {
+            if (big_energy_state == 1 && small_energy_state == 1) {
+                big_energy_state = 0;
+                small_energy_state = 0;
+            }
             Gimbal_ChangeMode(Gimbal_NOAUTO);
             MiniPC_ChangeAimMode(MiniPC_ARMOR);
-            Remote_ChangeChassisState(CHASSIS_CTRL_NORMAL);
+
+            if (gyro_state == 1) {
+                Remote_ChangeChassisState(CHASSIS_CTRL_GYRO);
+                max_chassis_speed = MOUSE_CHASSIS_MAX_GYRO_SPEED;
+            } else {
+                Remote_ChangeChassisState(CHASSIS_CTRL_NORMAL);
+                max_chassis_speed = MOUSE_CHASSIS_MAX_SPEED;
+            }
         }
     }
-
     /*******State control of friction wheel*********/
     if (data->key.q == 1)  //Q Press to open the friction wheel
         Shooter_ChangeShooterMode(Shoot_REFEREE);

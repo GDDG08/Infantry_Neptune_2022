@@ -120,6 +120,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->SERVO_INIT_OFFSET = 0.05f;
 
     x->CVKF_NT_YAW = 80;
+    x->CVKF_NT_PITCH = 7;
 
     /*          Gimbal pitch limit                  */
     x->YAW_MOTOR_INIT_OFFSET = -62.0f;
@@ -147,10 +148,10 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->HeatCtrlSingleCount = 10;
     x->HeatCtrlStopLimit = 10;
 
-    x->energy_yaw_offset = 0.9f;
-    x->energy_pitch_offset = 0.3f;
+    x->energy_yaw_offset = -2.2f;
+    x->energy_pitch_offset = -1.4f;
 
-    x->autoaim_pitch_offset = -3.0f;
+    x->autoaim_pitch_offset = -5.0f;
     x->autoaim_yaw_offset = 0.0f;
 #endif
 }

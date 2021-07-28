@@ -70,7 +70,7 @@ void Gimbal_InitOffset() {
 
     Const_SetGimbalPitchMotorParam();
 
-    HAL_Delay(3000);
+    HAL_Delay(1000);
 
     Gimbal_ChangeMode(Gimbal_NOAUTO);
 }

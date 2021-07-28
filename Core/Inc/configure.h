@@ -30,7 +30,7 @@ extern "C" {
 #define __FN_BOARD_TYPE_GIMBAL 2
 #define __FN_BOARD_TYPE_SUPERCAP 3
 
-#define __IMU_TYPE __IMU_TYPE_BMI055
+#define __IMU_TYPE __IMU_TYPE_HI22X
 
 #define __IMU_TYPE_BMI055 1
 #define __IMU_TYPE_BMI088 2

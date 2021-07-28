@@ -122,6 +122,7 @@ void Const_Infantry_8_Init(Const_ConstTypeDef* x) {
     x->SERVO_INIT_OFFSET = 0.05f;
 
     x->CVKF_NT_YAW = 80;
+    x->CVKF_NT_PITCH = 7;
 
     /*          Gimbal pitch limit                  */
     x->YAW_MOTOR_INIT_OFFSET = -150.0f;

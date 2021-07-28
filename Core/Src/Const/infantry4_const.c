@@ -121,10 +121,11 @@ void Const_Infantry_4_Init(Const_ConstTypeDef* x) {
     x->PITCH_MOTOR_INIT_OFFSETf = -31.0f;
     x->SERVO_INIT_OFFSET = 0.05f;
 
-    x->CVKF_NT_YAW = 80;
+    x->CVKF_NT_YAW = 150;
+    x->CVKF_NT_PITCH = 7;
 
     /*          Gimbal pitch limit                  */
-    x->YAW_MOTOR_INIT_OFFSET = -150.0f;
+    x->YAW_MOTOR_INIT_OFFSET = -147.0f;
 
     x->ShooterLockedCurrent = 3000.0f;
     x->ShooterLockedSpeed = 20.0f;
@@ -152,7 +153,7 @@ void Const_Infantry_4_Init(Const_ConstTypeDef* x) {
     x->energy_yaw_offset = 0.9f;
     x->energy_pitch_offset = 0.3f;
 
-    x->autoaim_pitch_offset = -3.0f;
+    x->autoaim_pitch_offset = -5.0f;
     x->autoaim_yaw_offset = 0.0f;
 
 #endif

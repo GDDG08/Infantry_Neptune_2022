@@ -52,6 +52,7 @@ uint8_t HI22X_Init() {
     HI22X_HI22XData.last_update_time = HAL_GetTick();
     Uart_InitUartDMA(Const_HI22X_UART_HANDLER);
     Uart_ReceiveDMA(Const_HI22X_UART_HANDLER, HI22X_RxData, Const_HI22X_RX_BUFF_LEN);
+    HAL_Delay(INS_TASK_INIT_TIME);
     HI22X_InitAngelOffset();
     return 1;
 }
@@ -64,11 +65,11 @@ uint8_t HI22X_Init() {
 void HI22X_InitAngelOffset() {
     HI22X_HI22XDataTypeDef* hi22x = HI22X_GetHI22XDataPtr();
 
-    float y = 0;
-    for (int i = 0; i < 100; i++)
-        y += hi22x->angle.pitch;
+    // float y = 0;
+    // for (int i = 0; i < 100; i++)
+    //     y += hi22x->angle.pitch;
     hi22x->yaw_angle_offset = hi22x->angle.yaw;
-    hi22x->pitch_angle_offset = y / 100;
+    // hi22x->pitch_angle_offset = y / 100;
 }
 
 /**

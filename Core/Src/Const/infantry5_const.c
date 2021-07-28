@@ -86,7 +86,7 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     /*      infantry chasiss const                  */
-    x->YAW_MOTOR_INIT_OFFSET = -147.0f;
+    x->YAW_MOTOR_INIT_OFFSET = 59.0f;
 
     memcpy(x->chassisMotorParam, Const_chassisMotorParam_infantry_5, sizeof(Const_chassisMotorParam_infantry_5));
     memcpy(x->gimbalYawMotorParam, Const_gimbalYawMotorParam_infantry_5, sizeof(Const_gimbalYawMotorParam_infantry_5));
@@ -119,12 +119,13 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
     x->PITCH_DMAXANGLE = -31.5f;
     x->YAW_MAXANGLE = 40.0f;
     x->PITCH_MOTOR_INIT_OFFSETf = -31.0f;
-    x->SERVO_INIT_OFFSET = 0.05f;
+    x->SERVO_INIT_OFFSET = 0.032f;
 
     x->CVKF_NT_YAW = 80;
+    x->CVKF_NT_PITCH = 7;
 
     /*          Gimbal pitch limit                  */
-    x->YAW_MOTOR_INIT_OFFSET = -150.0f;
+    x->YAW_MOTOR_INIT_OFFSET = 59.0f;
 
     x->ShooterLockedCurrent = 3000.0f;
     x->ShooterLockedSpeed = 20.0f;

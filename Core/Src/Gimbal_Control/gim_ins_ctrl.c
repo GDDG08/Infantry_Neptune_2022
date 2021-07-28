@@ -117,7 +117,7 @@ void Ins_Task(void const* argument) {
   */
 void Ins_InsInit() {
     // wait a time
-    //  HAL_Delay(INS_TASK_INIT_TIME);
+    // HAL_Delay(INS_TASK_INIT_TIME);
 
     Ins_InitIMU();
 

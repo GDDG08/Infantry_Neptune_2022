@@ -192,6 +192,7 @@ static void Const_Copy() {
     Const_YAW_MOTOR_INIT_OFFSET = Const_Infantry.YAW_MOTOR_INIT_OFFSET;
 
     CVKF_NT_YAW = Const_Infantry.CVKF_NT_YAW;
+    CVKF_NT_PITCH = Const_Infantry.CVKF_NT_PITCH;
 
     Const_ShooterLockedCurrent = Const_Infantry.ShooterLockedCurrent;
     Const_ShooterLockedSpeed = Const_Infantry.ShooterLockedSpeed;
@@ -278,6 +279,7 @@ float Const_SERVO_INIT_OFFSET;
 float Const_YAW_MOTOR_INIT_OFFSET;
 
 int CVKF_NT_YAW;
+int CVKF_NT_PITCH;
 
 float Const_ShooterLockedCurrent;
 float Const_ShooterLockedSpeed;

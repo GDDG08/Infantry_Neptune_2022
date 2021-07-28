@@ -24,15 +24,14 @@
 #define dt 0.001f
 MiniPC_MiniPCControlTypeDef MiniPC_MiniPCContrlData;
 
-int CVKF_NT_PITCH = 7;
-
 float autoaim_pitch_dead = 0.05f;
 float autoaim_yaw_dead = 0.05f;
 
-float autoaim_yaw_offset = 0;
+float autoaim_pitch_limit = 10.0f;
+float autoaim_yaw_limit = 15.0f;
 
-float autoaim_pitch_limit = 5.0f;
-float autoaim_yaw_limit = 10.0f;
+float autoaim_pitch_offset = -5.0f;
+float autoaim_yaw_offset = 0.0f;
 
 /**
   * @brief          MiniPC task
@@ -46,6 +45,8 @@ void MiniPC_Task(void const* argument) {
         }
 
         MiniPC_SendHeartPacket();
+        MiniPC_UpdateControlData();
+        MiniPC_CalcAutoAim();
         osDelay(MINI_PC_TASK_PERIOD);
     }
 }
@@ -67,9 +68,9 @@ MiniPC_MiniPCControlTypeDef* MiniPC_GetMiniPCControlDataPtr() {
 void MiniPC_ControlInit() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
 
-    Filter_LowPassInit(0.5, &minipc->pitch_lowfil_param);
-    Filter_LowPassInit(0.5, &minipc->yaw_lowfil_param);
-    Filter_LowPassInit(0.5, &minipc->dis_lowfil_param);
+    Filter_LowPassInit(0.4, &minipc->pitch_lowfil_param);
+    Filter_LowPassInit(0.4, &minipc->yaw_lowfil_param);
+    Filter_LowPassInit(0.1, &minipc->dis_lowfil_param);  //distance is useless when > 2m
 
     minipc->enable_aim_output = 1;
     minipc->enable_prediction = 1;
@@ -228,6 +229,7 @@ void MiniPC_UpdateControlData() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
+    Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
     if (minipc_data->new_data_flag != 1)
         return;
@@ -236,16 +238,20 @@ void MiniPC_UpdateControlData() {
         minipc->get_target_time = HAL_GetTick();
     }
 
-    // Update data when get target
-    // Otherwise keep last data
-    minipc->yaw_angle = Filter_LowPass(minipc_data->yaw_angle, &minipc->yaw_lowfil_param, &minipc->yaw_lowfil);
-    minipc->pitch_angle = Filter_LowPass(minipc_data->pitch_angle, &minipc->pitch_lowfil_param, &minipc->pitch_lowfil);
-    minipc->distance = Filter_LowPass(minipc_data->distance, &minipc->dis_lowfil_param, &minipc->dis_lowfil);
+    if (minipc_data->is_get_target == 1 && gimbal->mode.present_mode == Gimbal_ARMOR) {
+        minipc->yaw_angle = minipc_data->yaw_angle;
+        minipc->pitch_angle = minipc_data->pitch_angle;
+        minipc->distance = minipc_data->distance;
+    }
+
+    else {
+        minipc->yaw_angle = Filter_LowPass(minipc_data->yaw_angle, &minipc->yaw_lowfil_param, &minipc->yaw_lowfil);
+        minipc->pitch_angle = Filter_LowPass(minipc_data->pitch_angle, &minipc->pitch_lowfil_param, &minipc->pitch_lowfil);
+    }
 
     LimitMax(minipc->yaw_angle, autoaim_yaw_limit);
     LimitMax(minipc->pitch_angle, autoaim_pitch_limit);
 
-    // Update cvkf-mode when get new measurements!
     minipc->kf_yaw.MeasuredVector[0] = imu->angle.yaw - minipc->yaw_angle;
     minipc->kf_pitch.MeasuredVector[0] = imu->angle.pitch + minipc->pitch_angle;
 
@@ -343,8 +349,8 @@ void MiniPC_SetAutoAimRef() {
     MiniPC_KalmanPrediction();
 
     if (minipc->enable_prediction == 1) {
-        after_predict_yaw = MiniPC_PredictNT(&minipc->kf_yaw, CVKF_NT_YAW);
-        after_predict_pitch = MiniPC_PredictNT(&minipc->kf_pitch, CVKF_NT_PITCH);
+        after_predict_yaw = MiniPC_PredictNT(&minipc->kf_yaw, CVKF_NT_YAW);        //150
+        after_predict_pitch = MiniPC_PredictNT(&minipc->kf_pitch, CVKF_NT_PITCH);  //7
     }
 
     static float ref_cvkf_yaw_angle = 0.0f;
@@ -359,21 +365,23 @@ void MiniPC_SetAutoAimRef() {
 
     float delta_predict = after_predict_yaw - minipc->yaw_ref_filtered;
 
-    if (fabs(delta_predict) < 0.5f)
-        autoaim_yaw_offset = 0;
-    else if (delta_predict >= 3.0f)
-        autoaim_yaw_offset = 4.0f;
-    else if (delta_predict >= 1.0f)
-        autoaim_yaw_offset = (delta_predict - 1.0f) * 4.0f / 2.5f;
-    else if (delta_predict <= -3.0f)
-        autoaim_yaw_offset = -4.0;
+    if (delta_predict >= 1.0f)
+        autoaim_yaw_offset = 2.0f;
     else if (delta_predict <= -1.0f)
-        autoaim_yaw_offset = (delta_predict + 1.0f) * 4.0f / 2.5f;
-    else
-        autoaim_yaw_offset = 0;
+        autoaim_yaw_offset = -2.0f;
+
+    float pitch_angle = gimbal->pitch_position_fdb + minipc->pitch_angle;
+    if (pitch_angle >= 0.7f)
+        autoaim_pitch_offset = -5.0f;
+    else if (pitch_angle <= -0.7f && pitch_angle >= -1.5f)
+        autoaim_pitch_offset = -6.7f;
+    else if (pitch_angle <= -1.5f && pitch_angle >= -5.0f)
+        autoaim_pitch_offset = -8.0f;
+    else if (pitch_angle <= -5.0f)
+        autoaim_pitch_offset = -4.5f;  // shoot for sentry
 
     Gimbal_SetYawAutoRef(ref_cvkf_yaw_angle + autoaim_yaw_offset);
-    Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + Const_autoaim_pitch_offset);
+    Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + autoaim_pitch_offset);
 }
 
 /**
@@ -394,7 +402,9 @@ void MiniPC_SetGimbalRef() {
     else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_BIG_ENERGY)) {
         Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_ref_filtered + Const_energy_yaw_offset);
         Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + Const_energy_pitch_offset);
-    } else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_SMALL_ENERGY)) {
+    }
+
+    else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_SMALL_ENERGY)) {
         Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_ref_filtered + Const_energy_yaw_offset);
         Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + Const_energy_pitch_offset);
     }

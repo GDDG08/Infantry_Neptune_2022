@@ -70,6 +70,7 @@ typedef struct {
     float PITCH_MOTOR_INIT_OFFSETf;
     float SERVO_INIT_OFFSET;
     int CVKF_NT_YAW;
+    int CVKF_NT_PITCH;
     /*          Gimbal pitch limit                  */
 
     float ShooterLockedCurrent;
@@ -171,6 +172,7 @@ extern float Const_ShooterSlowSpeed;
 extern float Const_ShooterFastSpeed;
 
 extern int CVKF_NT_YAW;
+extern int CVKF_NT_PITCH;
 
 extern float Const_Shooter15mpers;
 extern float Const_Shooter18mpers;
