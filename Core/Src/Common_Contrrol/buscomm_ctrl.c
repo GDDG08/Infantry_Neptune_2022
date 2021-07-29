@@ -5,7 +5,7 @@
  *  Description  : This file contains Bus communication control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-26 18:17:31
+ *  LastEditTime : 2021-07-28 22:40:19
  */
 
 #include "buscomm_ctrl.h"
@@ -258,6 +258,7 @@ void BusComm_ResetBusCommData() {
     buscomm->heat_cooling_limit = 0;
     buscomm->heat_speed_limit = 0;
     buscomm->main_shooter_power = 0;
+    buscomm->cap_rest_energy_display = 0;
 #endif
 
 // Gimbal stream
@@ -275,6 +276,7 @@ void BusComm_ResetBusCommData() {
     buscomm->pitch_angle = 0.0f;
     buscomm->ui_cmd = 0;
     buscomm->infantry_code = 0x00;
+    buscomm->cap_rest_energy_display = 0;
 #endif
 
 // SuperCap stream
@@ -479,9 +481,7 @@ void _cmd_mode_control() {
   * @retval     NULL
   */
 void BusComm_CANRxCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len) {
-#if __FN_IF_ENABLE(__FN_INFANTRY)
     if (phcan == Const_BusComm_CAN_HANDLER) {
         BusComm_DecodeBusCommData(rxdata, stdid, len);
     }
-#endif
 }

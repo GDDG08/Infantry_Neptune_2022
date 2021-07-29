@@ -5,7 +5,7 @@
  *  Description  : 陈康冰写的~
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-27 07:25:58
+ *  LastEditTime : 2021-07-26 18:09:17
  */
 
 #include "cha_referee_ctrl.h"
@@ -105,12 +105,12 @@ const uint8_t PITCH_METER_LAYER = 2;
 const Draw_Color PITCH_METER_COLOR = Draw_COLOR_GREEN;
 const uint16_t PITCH_METER_TEXT[5] = {0x501, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
 const char* PITCH_METER_TEXT_STR = "PITCH:";
-const uint16_t PITCH_METER_VALUE[6] = {0x502, 20, 3, 2, 1200, 540};  // ID, Font Size, Precision, Width, X, Y
+const uint16_t PITCH_METER_VALUE[6] = {0x502, 20, 3, 2, 1600, 540};  // ID, Font Size, Precision, Width, X, Y
 
 const uint8_t AIM_MODE_LAYER = 2;
 const Draw_Color AIM_MODE_COLOR = Draw_COLOR_GREEN;
-const uint16_t AIM_MODE_TEXT[5] = {0x501, 20, 2, 600, 840};         // ID, Font Size, Width, X, Y
-const uint16_t AIM_MODE_VALUE_TEXT[5] = {0x501, 20, 2, 1000, 840};  // ID, Font Size, Width, X, Y
+const uint16_t AIM_MODE_TEXT[5] = {0x503, 20, 2, 1500, 540};        // ID, Font Size, Width, X, Y
+const uint16_t AIM_MODE_VALUE_TEXT[5] = {0x504, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
 const char* AIM_MODE_TEXT_STR = "AIM_MODE:";
 const char* NORMAL_AIM_TEXT_STR = "NORMAL";
 const char* ARMOR_AIM_TEXT_STR = "ARMOR";
@@ -119,8 +119,8 @@ const char* SMALL_BUFF_AIM_TEXT_STR = "SMALL_BUF";
 
 const uint8_t CHASSIS_MODE_LAYER = 2;
 const Draw_Color CHASSIS_MODE_COLOR = Draw_COLOR_GREEN;
-const uint16_t CHASSIS_MODE_TEXT[5] = {0x501, 20, 2, 600, 540};         // ID, Font Size, Width, X, Y
-const uint16_t CHASSIS_MODE_VALUE_TEXT[5] = {0x501, 20, 2, 1000, 540};  // ID, Font Size, Width, X, Y
+const uint16_t CHASSIS_MODE_TEXT[5] = {0x505, 20, 2, 1500, 540};        // ID, Font Size, Width, X, Y
+const uint16_t CHASSIS_MODE_VALUE_TEXT[5] = {0x506, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
 const char* CHASSIS_MODE_TEXT_STR = "CHASSIS_MODE:";
 const char* NORMAL_RUN_TEXT_STR = "NORMAL";
 const char* GYRO_RUN_TEXT_STR = "GYRO";
@@ -380,16 +380,16 @@ void Referee_UpdateModeDisplay() {
         draw->auto_aim_mode_last = draw->auto_aim_mode;
         switch (draw->auto_aim_mode) {
             case 0:
-                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);
+                Draw_ModifyString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);
                 break;
             case 1:
-                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], ARMOR_AIM_TEXT_STR);
+                Draw_ModifyString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], ARMOR_AIM_TEXT_STR);
                 break;
             case 2:
-                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], BIG_BUFF_AIM_TEXT_STR);
+                Draw_ModifyString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], BIG_BUFF_AIM_TEXT_STR);
                 break;
             case 3:
-                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], SMALL_BUFF_AIM_TEXT_STR);
+                Draw_ModifyString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], SMALL_BUFF_AIM_TEXT_STR);
                 break;
             default:
                 break;
@@ -400,10 +400,10 @@ void Referee_UpdateModeDisplay() {
         draw->cha_mode_last = draw->cha_mode;
         switch (draw->cha_mode) {
             case 0:
-                Draw_AddString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], NORMAL_RUN_TEXT_STR);
+                Draw_ModifyString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], NORMAL_RUN_TEXT_STR);
                 break;
             case 1:
-                Draw_AddString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], GYRO_RUN_TEXT_STR);
+                Draw_ModifyString(CHASSIS_MODE_VALUE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_VALUE_TEXT[1], CHASSIS_MODE_VALUE_TEXT[2], CHASSIS_MODE_VALUE_TEXT[3], CHASSIS_MODE_VALUE_TEXT[4], GYRO_RUN_TEXT_STR);
                 break;
             default:
                 break;

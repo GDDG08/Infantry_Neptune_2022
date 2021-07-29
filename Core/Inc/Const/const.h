@@ -70,7 +70,6 @@ typedef struct {
     float PITCH_MOTOR_INIT_OFFSETf;
     float SERVO_INIT_OFFSET;
     int CVKF_NT_YAW;
-    int CVKF_NT_PITCH;
     /*          Gimbal pitch limit                  */
 
     float ShooterLockedCurrent;
@@ -98,9 +97,6 @@ typedef struct {
 
     float energy_yaw_offset;
     float energy_pitch_offset;
-    float autoaim_pitch_offset;
-    float autoaim_yaw_offset;
-
 } Const_ConstTypeDef;
 
 /*      Super Cap Const         */
@@ -172,7 +168,6 @@ extern float Const_ShooterSlowSpeed;
 extern float Const_ShooterFastSpeed;
 
 extern int CVKF_NT_YAW;
-extern int CVKF_NT_PITCH;
 
 extern float Const_Shooter15mpers;
 extern float Const_Shooter18mpers;
@@ -190,9 +185,6 @@ extern uint16_t Const_HeatCtrlStopLimit;
 
 extern float Const_energy_yaw_offset;
 extern float Const_energy_pitch_offset;
-
-extern float Const_autoaim_pitch_offset;
-extern float Const_autoaim_yaw_offset;
 
 #endif
 

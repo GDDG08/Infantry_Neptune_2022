@@ -5,7 +5,7 @@
  *  Description  : This file contains the client functions
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-06-10 23:50:33
- *  LastEditTime : 2021-07-27 07:34:54
+ *  LastEditTime : 2021-07-16 13:10:35
  */
 
 #include "gim_client_ctrl.h"
@@ -45,7 +45,9 @@ osEvent func_event;
   */
 void Client_Task(void const* argument) {
     static uint32_t page_stay_period = 0;
-
+    while (1) {
+        osDelay(1);
+    }
     for (;;) {
         Client_DisplayInterface();
         if (GLOBAL_INIT_FLAG == 1) {
@@ -93,8 +95,8 @@ void Client_PageInit() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
     Client_CreateNewPage(&Client_ShootState, "15mm_offset\0", &shooter->shoot_speed_offset.speed_15mm_offset, "18mm_offset\0", &shooter->shoot_speed_offset.speed_18mm_offset, "30mm_offset\0", &shooter->shoot_speed_offset.speed_30mm_offset, "shoot_Speed\0", shoot_state_func_short_press, shoot_state_func_long_press);
-    Client_CreateNewPage(&Client_PeriphState, "shoot_left_\0", &Motor_shooterMotorLeft.pid_spd.fdb, "shoot_right\0", &Motor_shooterMotorRight.pid_spd.fdb, "pitch_angle\0", &imu->angle.pitch, "Detect_data\0", periph_state_func_short_press, periph_state_func_long_press);
-    Client_CreateNewPage(&Client_CapState, "cap_precent\0", &buscomm->cap_rest_energy, "yaw_rel_ang\0", &buscomm->yaw_relative_angle, "yaw_ref_ang\0", &buscomm->gimbal_yaw_ref, "Cap_Sta_Pag\0", cap_state_func_short_press, cap_state_func_long_press);
+    Client_CreateNewPage(&Client_PeriphState, "pitch_ang____\0", &imu->angle.pitch, "yaw_ang____\0", &imu->angle.yaw, "row_ang____\0", &imu->angle.row, "imu_data___\0", periph_state_func_short_press, periph_state_func_long_press);
+    Client_CreateNewPage(&Client_CapState, "cap_precent\0", &buscomm->cap_rest_energy_display, "yaw_rel_ang\0", &buscomm->yaw_relative_angle, "yaw_ref_ang\0", &buscomm->gimbal_yaw_ref, "Cap_Sta_Pag\0", cap_state_func_short_press, cap_state_func_long_press);
 }
 
 /**

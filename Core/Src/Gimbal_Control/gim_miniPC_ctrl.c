@@ -5,7 +5,7 @@
  *  Description  : This file contains MiniPC control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-26 21:45:41
+ *  LastEditTime : 2021-07-28 23:18:06
  */
 
 #include "gim_miniPC_ctrl.h"
@@ -24,14 +24,12 @@
 #define dt 0.001f
 MiniPC_MiniPCControlTypeDef MiniPC_MiniPCContrlData;
 
+uint32_t CVKF_NT_PITCH = 7;
 float autoaim_pitch_dead = 0.05f;
 float autoaim_yaw_dead = 0.05f;
 
 float autoaim_pitch_limit = 10.0f;
 float autoaim_yaw_limit = 15.0f;
-
-float autoaim_pitch_offset = -5.0f;
-float autoaim_yaw_offset = 0.0f;
 
 /**
   * @brief          MiniPC task
@@ -45,8 +43,6 @@ void MiniPC_Task(void const* argument) {
         }
 
         MiniPC_SendHeartPacket();
-        MiniPC_UpdateControlData();
-        MiniPC_CalcAutoAim();
         osDelay(MINI_PC_TASK_PERIOD);
     }
 }
@@ -247,6 +243,7 @@ void MiniPC_UpdateControlData() {
     else {
         minipc->yaw_angle = Filter_LowPass(minipc_data->yaw_angle, &minipc->yaw_lowfil_param, &minipc->yaw_lowfil);
         minipc->pitch_angle = Filter_LowPass(minipc_data->pitch_angle, &minipc->pitch_lowfil_param, &minipc->pitch_lowfil);
+        minipc->distance = Filter_LowPass(minipc_data->distance, &minipc->dis_lowfil_param, &minipc->dis_lowfil);
     }
 
     LimitMax(minipc->yaw_angle, autoaim_yaw_limit);
@@ -364,13 +361,14 @@ void MiniPC_SetAutoAimRef() {
     }
 
     float delta_predict = after_predict_yaw - minipc->yaw_ref_filtered;
+    float pitch_angle = gimbal->pitch_position_fdb + minipc->pitch_angle;
+    float autoaim_yaw_offset, autoaim_pitch_offset;
 
     if (delta_predict >= 1.0f)
         autoaim_yaw_offset = 2.0f;
     else if (delta_predict <= -1.0f)
         autoaim_yaw_offset = -2.0f;
 
-    float pitch_angle = gimbal->pitch_position_fdb + minipc->pitch_angle;
     if (pitch_angle >= 0.7f)
         autoaim_pitch_offset = -5.0f;
     else if (pitch_angle <= -0.7f && pitch_angle >= -1.5f)
@@ -400,13 +398,13 @@ void MiniPC_SetGimbalRef() {
     }
 
     else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_BIG_ENERGY)) {
-        Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_ref_filtered + Const_energy_yaw_offset);
-        Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + Const_energy_pitch_offset);
+        Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_angle + Const_energy_yaw_offset);
+        Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_angle + Const_energy_pitch_offset);
     }
 
     else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_SMALL_ENERGY)) {
-        Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_ref_filtered + Const_energy_yaw_offset);
-        Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + Const_energy_pitch_offset);
+        Gimbal_SetYawAutoRef(imu->angle.yaw - minipc->yaw_angle + Const_energy_yaw_offset);
+        Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_angle + Const_energy_pitch_offset);
     }
 
     else

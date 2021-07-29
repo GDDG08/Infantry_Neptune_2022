@@ -40,6 +40,7 @@ void Gimbal_Task(void const* argument) {
         while (!GLOBAL_INIT_FLAG) {
             osDelay(1);
         }
+        Remote_ControlCom();
 
         MiniPC_CalcAutoAim();
         Gimbal_CtrlPitch();
@@ -70,7 +71,7 @@ void Gimbal_InitOffset() {
 
     Const_SetGimbalPitchMotorParam();
 
-    HAL_Delay(1000);
+    HAL_Delay(3000);
 
     Gimbal_ChangeMode(Gimbal_NOAUTO);
 }

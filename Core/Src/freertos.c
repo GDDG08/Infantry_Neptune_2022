@@ -60,7 +60,6 @@
 osThreadId defaultTaskHandle;
 osThreadId GimbalHandle;
 osThreadId BusCommHandle;
-osThreadId RemoteHandle;
 osThreadId ChassisHandle;
 osThreadId SuperCapHandle;
 osThreadId ShootHandle;
@@ -80,7 +79,6 @@ osMessageQId Key_QueueHandle;
 void StartDefaultTask(void const* argument);
 void Gimbal_Task(void const* argument);
 void BusComm_Task(void const* argument);
-void Remote_Task(void const* argument);
 void Chassis_Task(void const* argument);
 void SuperCap_Task(void const* argument);
 void Shoot_Task(void const* argument);
@@ -141,35 +139,31 @@ void MX_FREERTOS_Init(void) {
 
     /* Create the thread(s) */
     /* definition and creation of defaultTask */
-    osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+    osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
     defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
     /* definition and creation of Gimbal */
-    osThreadDef(Gimbal, Gimbal_Task, osPriorityHigh, 0, 128);
+    osThreadDef(Gimbal, Gimbal_Task, osPriorityAboveNormal, 0, 128);
     GimbalHandle = osThreadCreate(osThread(Gimbal), NULL);
 
     /* definition and creation of BusComm */
-    osThreadDef(BusComm, BusComm_Task, osPriorityRealtime, 0, 128);
+    osThreadDef(BusComm, BusComm_Task, osPriorityNormal, 0, 128);
     BusCommHandle = osThreadCreate(osThread(BusComm), NULL);
 
-    /* definition and creation of Remote */
-    osThreadDef(Remote, Remote_Task, osPriorityAboveNormal, 0, 128);
-    RemoteHandle = osThreadCreate(osThread(Remote), NULL);
-
     /* definition and creation of Chassis */
-    osThreadDef(Chassis, Chassis_Task, osPriorityHigh, 0, 128);
+    osThreadDef(Chassis, Chassis_Task, osPriorityAboveNormal, 0, 128);
     ChassisHandle = osThreadCreate(osThread(Chassis), NULL);
 
     /* definition and creation of SuperCap */
-    osThreadDef(SuperCap, SuperCap_Task, osPriorityHigh, 0, 128);
+    osThreadDef(SuperCap, SuperCap_Task, osPriorityAboveNormal, 0, 128);
     SuperCapHandle = osThreadCreate(osThread(SuperCap), NULL);
 
     /* definition and creation of Shoot */
-    osThreadDef(Shoot, Shoot_Task, osPriorityHigh, 0, 128);
+    osThreadDef(Shoot, Shoot_Task, osPriorityAboveNormal, 0, 128);
     ShootHandle = osThreadCreate(osThread(Shoot), NULL);
 
     /* definition and creation of MiniPC */
-    osThreadDef(MiniPC, MiniPC_Task, osPriorityNormal, 0, 128);
+    osThreadDef(MiniPC, MiniPC_Task, osPriorityAboveNormal, 0, 128);
     MiniPCHandle = osThreadCreate(osThread(MiniPC), NULL);
 
     /* definition and creation of Referee */
@@ -185,7 +179,7 @@ void MX_FREERTOS_Init(void) {
     ClientHandle = osThreadCreate(osThread(Client), NULL);
 
     /* definition and creation of Ins */
-    osThreadDef(Ins, Ins_Task, osPriorityNormal, 0, 128);
+    osThreadDef(Ins, Ins_Task, osPriorityAboveNormal, 0, 128);
     InsHandle = osThreadCreate(osThread(Ins), NULL);
 
     /* definition and creation of Init */
@@ -224,6 +218,8 @@ __weak void Gimbal_Task(void const* argument) {
     /* USER CODE BEGIN Gimbal_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t GimbalTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(GimbalTask_Handler);
         osDelay(1);
     }
     /* USER CODE END Gimbal_Task */
@@ -245,22 +241,6 @@ __weak void BusComm_Task(void const* argument) {
     /* USER CODE END BusComm_Task */
 }
 
-/* USER CODE BEGIN Header_Remote_Task */
-/**
-* @brief Function implementing the Remote thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Remote_Task */
-__weak void Remote_Task(void const* argument) {
-    /* USER CODE BEGIN Remote_Task */
-    /* Infinite loop */
-    for (;;) {
-        osDelay(1);
-    }
-    /* USER CODE END Remote_Task */
-}
-
 /* USER CODE BEGIN Header_Chassis_Task */
 /**
 * @brief Function implementing the Chassis thread.
@@ -272,6 +252,8 @@ __weak void Chassis_Task(void const* argument) {
     /* USER CODE BEGIN Chassis_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t ChassisTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(ChassisTask_Handler);
         osDelay(1);
     }
     /* USER CODE END Chassis_Task */
@@ -288,6 +270,8 @@ __weak void SuperCap_Task(void const* argument) {
     /* USER CODE BEGIN SuperCap_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t SuperCapTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(SuperCapTask_Handler);
         osDelay(1);
     }
     /* USER CODE END SuperCap_Task */
@@ -304,6 +288,8 @@ __weak void Shoot_Task(void const* argument) {
     /* USER CODE BEGIN Shoot_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t ShootTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(ShootTask_Handler);
         osDelay(1);
     }
     /* USER CODE END Shoot_Task */
@@ -320,6 +306,8 @@ __weak void MiniPC_Task(void const* argument) {
     /* USER CODE BEGIN MiniPC_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t MiniPCTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(MiniPCTask_Handler);
         osDelay(1);
     }
     /* USER CODE END MiniPC_Task */
@@ -336,6 +324,8 @@ __weak void Referee_Task(void const* argument) {
     /* USER CODE BEGIN Referee_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t RefereeTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(RefereeTask_Handler);
         osDelay(1);
     }
     /* USER CODE END Referee_Task */
@@ -368,6 +358,8 @@ __weak void Client_Task(void const* argument) {
     /* USER CODE BEGIN Client_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t ClientTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(ClientTask_Handler);
         osDelay(1);
     }
     /* USER CODE END Client_Task */
@@ -384,6 +376,8 @@ __weak void Ins_Task(void const* argument) {
     /* USER CODE BEGIN Ins_Task */
     /* Infinite loop */
     for (;;) {
+        TaskHandle_t InsTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));
+        vTaskDelete(InsTask_Handler);
         osDelay(1);
     }
     /* USER CODE END Ins_Task */

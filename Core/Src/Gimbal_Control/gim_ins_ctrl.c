@@ -5,7 +5,7 @@
  *  Description  : gim_ins_ctrl.c
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-07-09 00:00:22
- *  LastEditTime : 2021-07-26 17:11:15
+ *  LastEditTime : 2021-07-28 23:00:02
  */
 
 #include "gim_ins_ctrl.h"
@@ -52,12 +52,14 @@ void Ins_Task(void const* argument) {
     ins_flag |= (1 << INS_INIT_SHIFT);
 
     for (;;) {
-        Ins_DecodeIMUData();
 #if __FN_IF_ENABLE(__IMU_HI22X)
+        vTaskDelete(INS_task_local_handler);
+
 #else
         // wait spi DMA tansmit done
         while (ulTaskNotifyTake(pdTRUE, portMAX_DELAY) != pdPASS) {
         }
+        Ins_DecodeIMUData();
 
         INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
         MAG_MAGDataTypeDef* mag = MAG_GetMAGDataPtr();
@@ -117,7 +119,7 @@ void Ins_Task(void const* argument) {
   */
 void Ins_InsInit() {
     // wait a time
-    // HAL_Delay(INS_TASK_INIT_TIME);
+    //  HAL_Delay(INS_TASK_INIT_TIME);
 
     Ins_InitIMU();
 
@@ -313,8 +315,6 @@ void Ins_TempControl() {
   * @retval         NULL
   */
 void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio) {
-#if __FN_IF_ENABLE(__IMU_HI22X)
-#else
     if (gpio == BMI_INT1) {
         if (ins_flag & (1 << INS_INIT_SHIFT)) {
             if ((!(ins_flag & (1 << INS_GYRO_UPDATE_SHIFT))) && (!(ins_flag & (1 << INS_ACCEL_FINISH_SHIFT)))) {
@@ -343,7 +343,6 @@ void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio) {
             }
         }
     }
-#endif
 }
 
 /**

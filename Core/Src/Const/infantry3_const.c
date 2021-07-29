@@ -76,17 +76,17 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
 
     /*          DAC Control related constants       */
     x->DAC_GAIN = 20.0f;
-    x->DAC_DetectRES = 0.004f;
+    x->DAC_DetectRES = 0.002f;
 
     /*          Super Cap control const             */
-    x->Cap_MinVoltage = 11.0f;
+    x->Cap_MinVoltage = 15.0f;
     x->Cap_ChargeReservedPower = 5.0f;
-    x->Cap_AvailableVoltage = 16.0f;
+    x->Cap_AvailableVoltage = 19.0f;
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     /*      infantry chasiss const                  */
-    x->YAW_MOTOR_INIT_OFFSET = 117.0f;
+    x->YAW_MOTOR_INIT_OFFSET = 121.0f;
 
     memcpy(x->chassisMotorParam, Const_chassisMotorParam_infantry_3, sizeof(Const_chassisMotorParam_infantry_3));
     memcpy(x->gimbalYawMotorParam, Const_gimbalYawMotorParam_infantry_3, sizeof(Const_gimbalYawMotorParam_infantry_3));
@@ -120,10 +120,9 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->SERVO_INIT_OFFSET = 0.05f;
 
     x->CVKF_NT_YAW = 80;
-    x->CVKF_NT_PITCH = 7;
 
     /*          Gimbal pitch limit                  */
-    x->YAW_MOTOR_INIT_OFFSET = 117.0f;
+    x->YAW_MOTOR_INIT_OFFSET = 121.0f;
 
     x->ShooterLockedCurrent = 3000.0f;
     x->ShooterLockedSpeed = 20.0f;
@@ -148,10 +147,8 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->HeatCtrlSingleCount = 10;
     x->HeatCtrlStopLimit = 10;
 
-    x->energy_yaw_offset = -2.2f;
-    x->energy_pitch_offset = -1.4f;
+    x->energy_yaw_offset = 0.9f;
+    x->energy_pitch_offset = 0.3f;
 
-    x->autoaim_pitch_offset = -5.0f;
-    x->autoaim_yaw_offset = 0.0f;
 #endif
 }

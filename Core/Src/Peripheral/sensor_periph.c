@@ -75,8 +75,8 @@ void Sensor_Decode() {
 
     /*ADC_decodeBuf What a fool to deal with */
     basisValue->VccVoltage = Adc_decodeBuf[0] * Const_ADC_V_VGAIN;
-    basisValue->ChasissVoltage = Adc_decodeBuf[1] * Const_ADC_V_VGAIN;
-    basisValue->CapVoltage = Adc_decodeBuf[2] * Const_ADC_V_VGAIN;
+    basisValue->ChasissVoltage = Adc_decodeBuf[2] * Const_ADC_V_VGAIN;
+    basisValue->CapVoltage = Adc_decodeBuf[1] * Const_ADC_V_VGAIN;
 
     Sen_Filtering(&Sen_Filter, basisValue);
 

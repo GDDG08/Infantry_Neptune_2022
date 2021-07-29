@@ -192,7 +192,6 @@ static void Const_Copy() {
     Const_YAW_MOTOR_INIT_OFFSET = Const_Infantry.YAW_MOTOR_INIT_OFFSET;
 
     CVKF_NT_YAW = Const_Infantry.CVKF_NT_YAW;
-    CVKF_NT_PITCH = Const_Infantry.CVKF_NT_PITCH;
 
     Const_ShooterLockedCurrent = Const_Infantry.ShooterLockedCurrent;
     Const_ShooterLockedSpeed = Const_Infantry.ShooterLockedSpeed;
@@ -219,9 +218,6 @@ static void Const_Copy() {
 
     Const_energy_yaw_offset = Const_Infantry.energy_yaw_offset;
     Const_energy_pitch_offset = Const_Infantry.energy_pitch_offset;
-
-    Const_autoaim_pitch_offset = Const_Infantry.autoaim_pitch_offset;
-    Const_autoaim_yaw_offset = Const_Infantry.autoaim_yaw_offset;
 
 #endif
 }
@@ -279,7 +275,6 @@ float Const_SERVO_INIT_OFFSET;
 float Const_YAW_MOTOR_INIT_OFFSET;
 
 int CVKF_NT_YAW;
-int CVKF_NT_PITCH;
 
 float Const_ShooterLockedCurrent;
 float Const_ShooterLockedSpeed;
@@ -306,6 +301,3 @@ uint16_t Const_HeatCtrlStopLimit;
 
 float Const_energy_yaw_offset;
 float Const_energy_pitch_offset;
-
-float Const_autoaim_pitch_offset;
-float Const_autoaim_yaw_offset;

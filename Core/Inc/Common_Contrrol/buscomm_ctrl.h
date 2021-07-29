@@ -5,7 +5,7 @@
  *  Description  : This file contains Bus bus communication control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 08:57:43
+ *  LastEditTime : 2021-07-28 22:39:26
  */
 
 #ifndef BUSCOMM_CTRL_H
@@ -106,6 +106,7 @@ typedef struct {
     uint8_t cap_state;
     uint8_t cap_rest_energy;
 
+    float cap_rest_energy_display;
 } BusComm_BusCommDataTypeDef;
 
 extern BusComm_BusCommDataTypeDef BusComm_BusCommData;

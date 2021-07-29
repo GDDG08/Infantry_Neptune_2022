@@ -14,6 +14,7 @@
 
 #include "cha_gimbal_ctrl.h"
 #include "cha_power_ctrl.h"
+#include "buscomm_ctrl.h"
 #include "cmsis_os.h"
 
 #include "const.h"
@@ -213,9 +214,17 @@ inline float sqr(float x) {
 void Chassis_CalcGyroRef() {
     Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
     Referee_RefereeDataTypeDef* referee = Referee_GetRefereeDataPtr();
-
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     float speed_ref = (float)sqrt(sqr(chassis->raw_speed_ref.forward_back_ref) + sqr(chassis->raw_speed_ref.left_right_ref));
     float min_vro, power_exp;
+
+    if (buscomm->cap_state == SUPERCAP_MODE_ON) {
+        chassis->raw_speed_ref.rotate_ref = 750.0f - speed_ref * 1.2f;
+        if (chassis->raw_speed_ref.rotate_ref < 400)
+            chassis->raw_speed_ref.rotate_ref = 400;
+        return;
+    }
+
     if (referee->max_chassis_power <= 50) {
         min_vro = 480.0f;
         power_exp = 250000.0f;

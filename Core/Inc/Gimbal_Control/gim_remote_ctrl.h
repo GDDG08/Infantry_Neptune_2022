@@ -5,7 +5,7 @@
  *  Description  : This file contains Remote control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 08:59:26
+ *  LastEditTime : 2021-07-28 22:38:18
  */
 
 #ifndef GIM_REMOTE_CTRL_H
@@ -34,7 +34,6 @@ typedef struct {
     float yaw_angle_offset;
 } Remote_RemoteControlTypeDef;
 
-void Remote_Task(void const* argument);
 void Remote_RemotrControlInit(void);
 Remote_RemoteControlTypeDef* Remote_GetControlDataPtr(void);
 void Remote_ControlCom(void);

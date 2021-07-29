@@ -5,7 +5,7 @@
  *  Description  : This file is for idiot Can communication
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-09 03:52:32
- *  LastEditTime : 2021-07-11 08:44:39
+ *  LastEditTime : 2021-07-28 22:40:46
  */
 
 #include "buscomm_cmd.h"
@@ -251,6 +251,8 @@ static void _set_cap_state(uint8_t buff[]) {
     count7++;
     rate7 = 1000 * count7 / HAL_GetTick();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+
     buscomm->cap_state = buff[0];
     buscomm->cap_rest_energy = buff[1];
+    buscomm->cap_rest_energy_display = (float)buscomm->cap_rest_energy;
 }

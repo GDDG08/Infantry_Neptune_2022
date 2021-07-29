@@ -14,8 +14,8 @@
 
 #include "const.h"
 
-uint32_t Adc_valueBuf[3];  //Adc data array
-float Adc_decodeBuf[3];    //Adc decode data
+uint32_t Adc_valueBuf[30];  //Adc data array
+float Adc_decodeBuf[30];    //Adc decode data
 
 /**
   * @brief      Adc peripheral initialization
@@ -24,7 +24,7 @@ float Adc_decodeBuf[3];    //Adc decode data
   */
 void Adc_Init() {
     //	HAL_ADCEx_Calibration_Start(&hadc1);						//Adc calibration
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&Adc_valueBuf, 3);  //start Adc DMA,Get the first group data.
+    //	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&Adc_valueBuf, 4);		//start Adc DMA,Get the first group data.
 }
 
 /**
@@ -34,7 +34,7 @@ void Adc_Init() {
   * @retval     NULL
   */
 void Adc_GetData() {
-    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&Adc_valueBuf, 3);
+    HAL_ADC_Start_DMA(&hadc1, (uint32_t*)&Adc_valueBuf, 7);
 }
 
 /**
@@ -44,7 +44,7 @@ void Adc_GetData() {
   */
 void Adc_Decode() {
     memset(Adc_decodeBuf, 0, sizeof(Adc_decodeBuf));
-    for (int j = 0; j <= 3; j++)
+    for (int j = 0; j < 3; j++)
         Adc_decodeBuf[j] = (float)Adc_valueBuf[j] / 4096.0f * 3.3f;  //adc decode 3.3V AVCC
 }
 

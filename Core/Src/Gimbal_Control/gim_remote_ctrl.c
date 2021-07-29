@@ -5,7 +5,7 @@
  *  Description  : This file contains Remote control function
  *  LastEditors  : 动情丶卜灬动心
  *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-25 12:00:58
+ *  LastEditTime : 2021-07-28 22:47:07
  */
 
 #include "gim_remote_ctrl.h"
@@ -19,9 +19,6 @@
 #include "gim_miniPC_ctrl.h"
 #include "gim_shoot_ctrl.h"
 #include "gim_login_ctrl.h"
-#include "cmsis_os.h"
-
-#define REMOTE_TASK_PERIOD 1
 
 Remote_RemoteControlTypeDef Remote_remoteControlData;
 
@@ -35,22 +32,6 @@ Filter_Bessel_TypeDef Remote_mouse_y_Filter = {0, 0, 0};
 
 const float REMOTE_PITCH_ANGLE_TO_REF = 0.0015f;
 const float REMOTE_YAW_ANGLE_TO_REF = 0.0015f;
-
-/**
-  * @brief          Remote task
-  * @param          NULL
-  * @retval         NULL
-  */
-void Remote_Task(void const* argument) {
-    for (;;) {
-        while (!GLOBAL_INIT_FLAG) {
-            osDelay(1);
-        }
-
-        Remote_ControlCom();
-        osDelay(REMOTE_TASK_PERIOD);
-    }
-}
 
 /**
   * @brief      Remote Control Init
@@ -208,10 +189,10 @@ void Remote_RemoteProcess() {
         Remote_ChangeChassisState(CHASSIS_CTRL_NORMAL);
 
     if (data->remote.ch[4] >= 500.0f)
-        Servo_SetServoAngle(&Servo_ammoContainerCapServo, 90);
+        Servo_SetServoAngle(&Servo_ammoContainerCapServo, 300);
 
     if (data->remote.ch[4] <= 500.0f)
-        Servo_SetServoAngle(&Servo_ammoContainerCapServo, 0);
+        Servo_SetServoAngle(&Servo_ammoContainerCapServo, -30);
 
     buscomm->cap_charge_mode = SUPERCAP_UNCHARGE;
     /*      remote chassis reference value bessel filter    */
@@ -254,20 +235,14 @@ void Remote_KeyMouseProcess() {
     if (data->key.c == 1) {
     }
 
-    /*if you move you will exit the auto mode*/
-    if (((data->key.w == 1) || (data->key.a == 1) || (data->key.d == 1) || (data->key.s == 1)) &&
-        (buscomm->chassis_mode == CHASSIS_CTRL_STOP)) {
-        Remote_ChangeChassisState(CHASSIS_CTRL_NORMAL);
-    }
-
     /*******R relode projectile******/
     static int flag_relode = 0;
     if (data->key.r == 1) {
-        if ((Servo_GetServoAngle(&Servo_ammoContainerCapServo) != 200) && (flag_relode == 1)) {
-            Servo_SetServoAngle(&Servo_ammoContainerCapServo, 200);
+        if ((Servo_GetServoAngle(&Servo_ammoContainerCapServo) != 300) && (flag_relode == 1)) {
+            Servo_SetServoAngle(&Servo_ammoContainerCapServo, 300);
             flag_relode = 0;
         } else if ((Servo_GetServoAngle(&Servo_ammoContainerCapServo) != 0) && (flag_relode == 1)) {
-            Servo_SetServoAngle(&Servo_ammoContainerCapServo, 0);
+            Servo_SetServoAngle(&Servo_ammoContainerCapServo, -30);
             flag_relode = 0;
         }
     } else
@@ -320,7 +295,6 @@ void Remote_KeyMouseProcess() {
     } else
         small_energy_flag = 1;
 
-    /******Gimbal mode control*******/
     if (data->mouse.r == 1) {
         Gimbal_ChangeMode(Gimbal_ARMOR);
         MiniPC_ChangeAimMode(MiniPC_ARMOR);
@@ -330,7 +304,9 @@ void Remote_KeyMouseProcess() {
             MiniPC_ChangeAimMode(MiniPC_BIG_BUFF);
             //chassis stop
             Remote_ChangeChassisState(CHASSIS_CTRL_STOP);
-        } else if (big_energy_state == 0 && small_energy_state == 1) {
+        }
+
+        else if (big_energy_state == 0 && small_energy_state == 1) {
             Gimbal_ChangeMode(Gimbal_SMALL_ENERGY);
             MiniPC_ChangeAimMode(MiniPC_SMALL_BUFF);
             // chassis stop
@@ -363,6 +339,12 @@ void Remote_KeyMouseProcess() {
     }
 
     if (data->key.g == 1) {
+    }
+
+    /*if you move you will exit the auto mode*/
+    if (((data->key.w == 1) || (data->key.a == 1) || (data->key.d == 1) || (data->key.s == 1)) &&
+        (buscomm->chassis_mode == CHASSIS_CTRL_STOP)) {
+        Remote_ChangeChassisState(CHASSIS_CTRL_NORMAL);
     }
 
     if (data->key.shift == 1) {

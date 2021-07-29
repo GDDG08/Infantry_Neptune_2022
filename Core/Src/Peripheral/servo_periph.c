@@ -90,7 +90,7 @@ void Servo_InitServo(Servo_ServoTypeDef* servo, TIM_HandleTypeDef* htim, uint32_
     PWM_SetPWMFreq(&(servo->pwm), 50);
     Servo_StartServo(&Servo_ammoContainerCapServo);
 
-    Servo_SetServoAngle(servo, 200.0f);
+    Servo_SetServoAngle(servo, 300.0f);
 }
 
 #endif
