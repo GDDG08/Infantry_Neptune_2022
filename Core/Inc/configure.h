@@ -3,7 +3,7 @@
  * 
  *  file         : configure.h
  *  Description  : This file contains all functions enable
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-06-10 11:03:55
  *  LastEditTime : 2021-07-26 21:41:55
  */
@@ -13,7 +13,7 @@
 // if you want to change or add code function
 // please operate according to the following code specification
 #include "Code_specification.h"
-//        ¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü¡ü
+//        ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 #ifndef CONFIGURE_H
 #define CONFIGURE_H

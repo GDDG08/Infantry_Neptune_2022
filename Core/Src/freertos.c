@@ -347,7 +347,7 @@ __weak void WatchDog_Task(void const* argument) {
     /* USER CODE END WatchDog_Task */
 }
 
-/* USER CODE BEGIN Header_Client_Task */
+/* USER CODE BEGIN Header_Client_Task */        
 /**
 * @brief Function implementing the Client thread.
 * @param argument: Not used

@@ -3,7 +3,7 @@
  * 
  *  file         : crc_alg.c
  *  Description  : This file contains crc check function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-09 05:29:10
  */
@@ -37,7 +37,7 @@ const unsigned char CRC8_TAB[256] = {
 
 /**
   * @brief :  The calibration data of CRC8 is calculated according to the data
-  * @param :  pchMessage£ºA more accurate array pointer is required  dwLength£ºdata length
+  * @param :  pchMessageï¿½ï¿½A more accurate array pointer is required  dwLengthï¿½ï¿½data length
   * @retval:  NULL
   * @note  :  NULL
   */
@@ -117,7 +117,7 @@ const uint16_t CRC16_Table[256] = {
 
 /**
   * @brief :  The calibration data of CRC16 is calculated according to the data
-  * @param :  pchMessage£ºA more accurate array pointer is required  dwLength£ºdata length
+  * @param :  pchMessageï¿½ï¿½A more accurate array pointer is required  dwLengthï¿½ï¿½data length
   * @retval:  NULL
   * @note  :  NULL
   */

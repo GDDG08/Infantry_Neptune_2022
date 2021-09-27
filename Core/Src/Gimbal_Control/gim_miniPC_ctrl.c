@@ -364,9 +364,9 @@ void MiniPC_SetAutoAimRef() {
     float pitch_angle = gimbal->pitch_position_fdb + minipc->pitch_angle;
     float autoaim_yaw_offset, autoaim_pitch_offset;
 
-    if (delta_predict >= 1.0f)
+    if (delta_predict >= 2.0f)
         autoaim_yaw_offset = 2.0f;
-    else if (delta_predict <= -1.0f)
+    else if (delta_predict <= -2.0f)
         autoaim_yaw_offset = -2.0f;
 
     if (pitch_angle >= 0.7f)
@@ -375,8 +375,10 @@ void MiniPC_SetAutoAimRef() {
         autoaim_pitch_offset = -6.7f;
     else if (pitch_angle <= -1.5f && pitch_angle >= -5.0f)
         autoaim_pitch_offset = -8.0f;
-    else if (pitch_angle <= -5.0f)
-        autoaim_pitch_offset = -4.5f;  // shoot for sentry
+    else if (pitch_angle < -5.0f && pitch_angle >= -15.0f)
+        autoaim_pitch_offset = -5.0f;  // shoot for sentry in Round High
+    else if (pitch_angle < -15.0f)
+        autoaim_pitch_offset = -3.0f;  // shoot for sentry in ~~ROAD
 
     Gimbal_SetYawAutoRef(ref_cvkf_yaw_angle + autoaim_yaw_offset);
     Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + autoaim_pitch_offset);
