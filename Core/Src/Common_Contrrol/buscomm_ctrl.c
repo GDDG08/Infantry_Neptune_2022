@@ -3,7 +3,7 @@
  * 
  *  file         : buscomm_ctrl.c
  *  Description  : This file contains Bus communication control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ĞÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 22:40:19
  */
@@ -57,6 +57,7 @@ const uint8_t GIMBAL_YAW_CTRL_SMALL_ENERGY = 0x07;
 const uint8_t CHASSIS_CTRL_STOP = 0x08;
 const uint8_t CHASSIS_CTRL_NORMAL = 0x09;
 const uint8_t CHASSIS_CTRL_GYRO = 0x0A;
+const uint8_t CHASSIS_CTRL_DANCE = 0x0B;
 //      cap mode
 const uint8_t SUPERCAP_CTRL_OFF = 0x31;
 const uint8_t SUPERCAP_CTRL_ON = 0x32;
@@ -438,6 +439,17 @@ void _cmd_mode_control() {
             break;
         }
         case CHASSIS_CTRL_GYRO: {
+            Chassis_SetMode(Chassis_MODE_GYRO);
+            Chassis_SetForwardBackRef(buscomm->chassis_fb_ref);
+            Chassis_SetLeftRightRef(buscomm->chassis_lr_ref);
+            Chassis_SetChassisControlState(1);
+            Chassis_SetChassisOutputState(1);
+
+            Referee_SetWidthMode(1);
+
+            break;
+        }
+        case CHASSIS_CTRL_DANCE: {
             Chassis_SetMode(Chassis_MODE_GYRO);
             Chassis_SetForwardBackRef(buscomm->chassis_fb_ref);
             Chassis_SetLeftRightRef(buscomm->chassis_lr_ref);

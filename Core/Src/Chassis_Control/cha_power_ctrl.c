@@ -3,7 +3,7 @@
  * 
  *  file         : cha_power_ctrl.c
  *  Description  : This file contains power control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-09 07:37:27
  */
@@ -32,7 +32,7 @@ void Power_InitPower() {
     Power_data.buffer_total_current_limit = 16000.0f;
     Power_data.power_total_current_limit = 20000.0f;
 
-    Power_ControlMode = POWER_LIMIT;
+    Power_ControlMode = POWER_UNLIMITED;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     ;
 }
 
 /**

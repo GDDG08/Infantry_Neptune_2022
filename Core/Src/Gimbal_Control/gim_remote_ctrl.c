@@ -3,7 +3,7 @@
  * 
  *  file         : gim_remote_ctrl.c
  *  Description  : This file contains Remote control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 22:47:07
  */
@@ -54,6 +54,7 @@ Remote_RemoteControlTypeDef* Remote_GetControlDataPtr() {
     return &Remote_remoteControlData;
 }
 
+uint32_t timestamp = 0, CW = 1;
 /**
 * @brief      Remote control command
 * @param      NULL
@@ -82,15 +83,19 @@ void Remote_ControlCom() {
             /* right switch mid is keymouse mode    */
             Remote_KeyMouseProcess();
             Remote_MouseShooterModeSet();
-            //            Remote_ChangeChassisState(CHASSIS_CTRL_STOP);
+            //            Remote_ChangeChassisState(CHASSIS_CTRL_STOP)
             Remote_Gesture();
             break;
         }
         case Remote_SWITCH_DOWN: {
             /* right switch down is auto aim mode   */
-            Gimbal_ChangeMode(Gimbal_ARMOR);
-            MiniPC_ChangeAimMode(MiniPC_ARMOR);
-            Remote_ChangeChassisState(CHASSIS_CTRL_STOP);
+            Gimbal_ChangeMode(Gimbal_DANCE);
+            // MiniPC_ChangeAimMode(MiniPC_ARMOR);
+            if (HAL_GetTick() - timestamp >= 250) {
+                CW = !CW;
+                timestamp = HAL_GetTick();
+            }
+            Remote_ChangeChassisState(CW ? CHASSIS_CTRL_GYRO : CHASSIS_CTRL_NORMAL);
             Remote_RemoteShooterModeSet();
             Remote_Gesture();
             break;
@@ -489,7 +494,7 @@ void Remote_Gesture() {
 }
 
 /**
-* @brief      ¡°\/¡± control function
+* @brief      ï¿½ï¿½\/ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */
@@ -501,7 +506,7 @@ void Remote_GestureFunction_1() {
 }
 
 /**
-* @brief      ¡°/\¡± control function
+* @brief      ï¿½ï¿½/\ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */
@@ -513,7 +518,7 @@ void Remote_GestureFunction_2() {
 }
 
 /**
-* @brief      ¡°//¡± control function
+* @brief      ï¿½ï¿½//ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */
@@ -523,7 +528,7 @@ void Remote_GestureFunction_3() {
 }
 
 /**
-* @brief      ¡°\\¡± control function
+* @brief      ï¿½ï¿½\\ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */

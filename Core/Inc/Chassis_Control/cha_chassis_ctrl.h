@@ -1,9 +1,18 @@
 /*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Chassis_Control\cha_chassis_ctrl.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-07-24 10:27:08
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-10-14 21:18:52
+ */
+/*
  *  Project      : Infantry_Neptune
  * 
  *  file         : cha_chassis_ctrl.h
  *  Description  : This file contains chassis control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 09:00:56
  */
@@ -28,7 +37,8 @@ typedef enum {
     Chassis_MODE_INIT = 1,
     Chassis_MODE_STOP = 2,
     Chassis_MODE_NORMAL = 3,
-    Chassis_MODE_GYRO = 4
+    Chassis_MODE_GYRO = 4,
+    Chassis_MODE_DANCE = 5
 } Chassis_ChassisModeEnum;
 
 typedef struct {
@@ -77,6 +87,7 @@ void Chassis_ClearChassisRef(Chassis_ChassisRefTypeDef* pref);
 void Chassis_CopyChassisRef(Chassis_ChassisRefTypeDef* dest, Chassis_ChassisRefTypeDef* src);
 void Chassis_CalcFollowRef(void);
 void Chassis_CalcGyroRef(void);
+void Chassis_CalcDanceRef(void);
 void Chassis_CalcMecanumRef(void);
 void Chassis_Control(void);
 void Chassis_Output(void);

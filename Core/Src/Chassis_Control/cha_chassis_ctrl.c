@@ -3,7 +3,7 @@
  * 
  *  file         : cha_chassis_ctrl.c
  *  Description  : This file contains chassis control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 09:00:35
  */
@@ -170,7 +170,7 @@ void Chassis_CalcMoveRef() {
     Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
 
     float theta_rad;
-    if (chassis->mode == Chassis_MODE_GYRO) {
+    if (chassis->mode == Chassis_MODE_GYRO || chassis->mode == Chassis_MODE_DANCE) {
         theta_rad = -(Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET) * PI / 180 - 0.5f;
     } else {
         theta_rad = -(Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET) * PI / 180;
@@ -208,7 +208,7 @@ void Chassis_CalcFollowRef() {
   * @param      NULL
   * @retval     NULL
   */
-inline float sqr(float x) {
+float sqr(float x) {
     return x * x;
 }
 void Chassis_CalcGyroRef() {
@@ -238,6 +238,27 @@ void Chassis_CalcGyroRef() {
     chassis->raw_speed_ref.rotate_ref = (float)sqrt(power_exp - sqr(speed_ref));
     if (chassis->raw_speed_ref.rotate_ref < min_vro)
         chassis->raw_speed_ref.rotate_ref = min_vro;
+}
+
+uint32_t timestamp = 0, CW = 1;
+void Chassis_CalcDanceRef() {
+    Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
+    Referee_RefereeDataTypeDef* referee = Referee_GetRefereeDataPtr();
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+    float speed_ref = (float)sqrt(sqr(chassis->raw_speed_ref.forward_back_ref) + sqr(chassis->raw_speed_ref.left_right_ref));
+    float min_vro, power_exp;
+
+    min_vro = 720.0f;
+    power_exp = 540000.0f;
+
+    if (HAL_GetTick() - timestamp >= 462) {
+        CW = !CW;
+        timestamp = HAL_GetTick();
+    }
+
+    chassis->raw_speed_ref.rotate_ref = (CW ? 1 : -1) * (float)sqrt(power_exp - sqr(speed_ref));
+    // if (chassis->raw_speed_ref.rotate_ref < min_vro)
+    //     chassis->raw_speed_ref.rotate_ref = min_vro;
 }
 
 /**
@@ -310,6 +331,11 @@ void Chassis_Control() {
             chassis->current_param = &Chassis_chassisMotorParamGyro;
             Chassis_CalcMoveRef();  // Headless translation solution
             Chassis_CalcGyroRef();  // Solution of small gyroscope
+            break;
+        case Chassis_MODE_DANCE:
+            chassis->current_param = &Chassis_chassisMotorParamGyro;
+            Chassis_CalcMoveRef();   // Headless translation solution
+            Chassis_CalcDanceRef();  // Solution of small gyroscope
             break;
         default:
             return;

@@ -3,7 +3,7 @@
  * 
  *  file         : buscomm_ctrl.h
  *  Description  : This file contains Bus bus communication control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 22:39:26
  */
@@ -41,6 +41,7 @@ extern const uint8_t GIMBAL_YAW_CTRL_NO_AUTO;
 extern const uint8_t CHASSIS_CTRL_STOP;
 extern const uint8_t CHASSIS_CTRL_NORMAL;
 extern const uint8_t CHASSIS_CTRL_GYRO;
+extern const uint8_t CHASSIS_CTRL_DANCE;
 //      cap mode
 extern const uint8_t SUPERCAP_CTRL_OFF;
 extern const uint8_t SUPERCAP_CTRL_ON;

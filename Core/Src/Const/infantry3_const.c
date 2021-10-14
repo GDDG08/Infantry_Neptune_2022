@@ -3,7 +3,7 @@
  * 
  *  file         : infantry3_const.c
  *  Description  : This file contains 3 infantry constants
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-26 21:55:17
  */
@@ -133,7 +133,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->ShooterSlowSpeed = 150.0f;
     x->ShooterFastSpeed = 230.0f;
 
-    x->Shooter15mpers = 215.0f;
+    x->Shooter15mpers = 60.0f;
     x->Shooter18mpers = 230.0f;
     x->Shooter30mpers = 330.0f;
 
