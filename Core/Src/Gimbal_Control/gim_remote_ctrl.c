@@ -91,11 +91,12 @@ void Remote_ControlCom() {
             /* right switch down is auto aim mode   */
             Gimbal_ChangeMode(Gimbal_DANCE);
             // MiniPC_ChangeAimMode(MiniPC_ARMOR);
-            if (HAL_GetTick() - timestamp >= 250) {
-                CW = !CW;
-                timestamp = HAL_GetTick();
-            }
-            Remote_ChangeChassisState(CW ? CHASSIS_CTRL_GYRO : CHASSIS_CTRL_NORMAL);
+            // if (HAL_GetTick() - timestamp >= 250) {
+            //     CW = !CW;
+            //     timestamp = HAL_GetTick();
+            // }
+            // Remote_ChangeChassisState(CW ? CHASSIS_CTRL_GYRO : CHASSIS_CTRL_NORMAL);
+            Remote_ChangeChassisState(CHASSIS_CTRL_DANCE);
             Remote_RemoteShooterModeSet();
             Remote_Gesture();
             break;

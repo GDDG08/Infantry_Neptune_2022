@@ -450,7 +450,7 @@ void _cmd_mode_control() {
             break;
         }
         case CHASSIS_CTRL_DANCE: {
-            Chassis_SetMode(Chassis_MODE_GYRO);
+            Chassis_SetMode(Chassis_MODE_DANCE);
             Chassis_SetForwardBackRef(buscomm->chassis_fb_ref);
             Chassis_SetLeftRightRef(buscomm->chassis_lr_ref);
             Chassis_SetChassisControlState(1);

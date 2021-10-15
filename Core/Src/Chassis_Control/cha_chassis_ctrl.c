@@ -248,10 +248,9 @@ void Chassis_CalcDanceRef() {
     float speed_ref = (float)sqrt(sqr(chassis->raw_speed_ref.forward_back_ref) + sqr(chassis->raw_speed_ref.left_right_ref));
     float min_vro, power_exp;
 
-    min_vro = 720.0f;
-    power_exp = 540000.0f;
+    power_exp = 250000.0f;
 
-    if (HAL_GetTick() - timestamp >= 462) {
+    if (HAL_GetTick() - timestamp >= 1000 * 60.0f / 131.0f) {
         CW = !CW;
         timestamp = HAL_GetTick();
     }
@@ -350,7 +349,7 @@ void Chassis_Control() {
     Motor_CalcMotorGroupOutput(&Motor_chassisMotors, chassis->current_param);
     // Power control
 
-    Power_PowerControl(&Motor_chassisMotors);
+    // Power_PowerControl(&Motor_chassisMotors);
 }
 
 /**
