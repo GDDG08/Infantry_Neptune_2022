@@ -126,6 +126,9 @@ void Gimbal_CtrlYaw() {
         case Gimbal_SMALL_ENERGY:
             gimbal->yaw_mode = GimbalYaw_MODE_SMALL_ENERGY;
             break;
+        case Gimbal_DANCE:
+            gimbal->yaw_mode = Gimbal_DANCE;
+            break;
     }
 }
 
