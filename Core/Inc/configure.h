@@ -24,7 +24,7 @@ extern "C" {
 
 /* Main Control program       */
 
-#define __FN_BOARD_TYPE __FN_BOARD_TYPE_GIMBAL
+#define __FN_BOARD_TYPE __FN_BOARD_TYPE_CHASSIS
 
 #define __FN_BOARD_TYPE_CHASSIS 1
 #define __FN_BOARD_TYPE_GIMBAL 2
@@ -114,7 +114,7 @@ extern int GLOBAL_INIT_FLAG;
 #define __FN_CTRL_POWER __FN_ENABLE
 #define __FN_CTRL_GIMBAL_YAW_CHA __FN_ENABLE
 #define __FN_WATCHDOG_CHA __FN_ENABLE
-#define __FN_CTRL_REFEREE __FN_ENABLE
+// #define __FN_CTRL_REFEREE __FN_ENABLE
 #endif
 
 /*      Infantry function enable    */
