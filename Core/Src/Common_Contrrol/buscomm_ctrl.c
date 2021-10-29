@@ -3,7 +3,7 @@
  * 
  *  file         : buscomm_ctrl.c
  *  Description  : This file contains Bus communication control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 22:40:19
  */
@@ -333,7 +333,8 @@ void BusComm_Update() {
     data->robot_id = referee->robot_id;
     data->power_limit = referee->max_chassis_power;
     data->heat_17mm = referee->shooter_heat0;
-    data->heat_cooling_rate = referee->shooter_heat0_cooling_rate;
+
+    data->heat_cooling_rate = referee->shooter_heat0_cooling_rate; /*unused*/
     data->heat_cooling_limit = referee->shooter_heat0_cooling_limit;
     data->heat_speed_limit = referee->shooter_heat0_speed_limit;
     data->main_shooter_power = referee->mains_power_shooter_output;

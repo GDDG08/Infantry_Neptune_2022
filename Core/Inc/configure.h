@@ -40,6 +40,10 @@ extern "C" {
 
 #define __IMU_SIX_AXIS_TYPE 6
 #define __IMU_NINE_AXIS_TYPE 9
+
+/*      ******************DEBUG********************      */
+#define __FN_DEBUG_NOREFEREEHW __FN_ENABLE
+
 /*      **********************************************      */
 
 extern int GLOBAL_INIT_FLAG;
@@ -114,7 +118,10 @@ extern int GLOBAL_INIT_FLAG;
 #define __FN_CTRL_POWER __FN_ENABLE
 #define __FN_CTRL_GIMBAL_YAW_CHA __FN_ENABLE
 #define __FN_WATCHDOG_CHA __FN_ENABLE
-// #define __FN_CTRL_REFEREE __FN_ENABLE
+
+#if !__FN_IF_ENABLE(__FN_DEBUG_NOREFEREEHW)
+#define __FN_CTRL_REFEREE __FN_ENABLE
+#endif
 #endif
 
 /*      Infantry function enable    */
@@ -167,7 +174,12 @@ extern int GLOBAL_INIT_FLAG;
 // Enable remote
 #endif
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
-#define __FN_PERIPH_REFEREE __FN_ENABLE
+
+#if __FN_IF_ENABLE(__FN_DEBUG_NOREFEREEHW)
+#define __FN_PERIPH_REFEREE_NOHW __FN_ENABLE
+#else
+#define __FN_PERIPH_REFEREE __FN_ENABLE             
+#endif
 // Enable referee
 #endif
 #define __FN_PERIPH_BEEPER __FN_ENABLE

@@ -9,8 +9,55 @@
  */
 
 #include "referee_periph.h"
+#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE_NOHW) || __FN_IF_ENABLE(__FN_PERIPH_REFEREE) 
+Referee_RefereeDataTypeDef Referee_RefereeData;
 
-#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE)
+/**
+  * @brief      获取裁判系统数据对象的指针
+  * @param      无
+  * @retval     指针指向裁判系统数据对象
+  */
+Referee_RefereeDataTypeDef* Referee_GetRefereeDataPtr() {
+    return &Referee_RefereeData;
+}
+
+/**
+  * @brief      重置裁判系统数据对象
+  * @param      无
+  * @retval     无
+  */
+void Referee_ResetRefereeData() {
+    Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
+    Referee_RefereeStateEnum state = referee->state;        // backup state
+    uint32_t last_update_time = referee->last_update_time;  // backup time
+    memset(referee, 0, sizeof(Referee_RefereeDataTypeDef));
+    referee->state = state;
+    referee->last_update_time = last_update_time;
+}
+
+#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE_NOHW)
+/**
+  * @brief      初始化裁判系统
+  * @param      无
+  * @retval     无
+  */
+void Referee_InitReferee() {
+    Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
+    Referee_ResetRefereeData();
+    referee->last_update_time = HAL_GetTick();
+    referee->max_chassis_power = 80;
+    referee->chassis_power_buffer = 80;
+    referee->chassis_power = 0;
+
+    referee->robot_id = 7;
+    referee->shooter_heat0 = 0;
+    referee->shooter_heat0_cooling_rate = 20;
+    referee->shooter_heat0_cooling_limit = 120;
+    referee->shooter_heat0_speed_limit = 15;
+    referee->mains_power_shooter_output = 1;
+}
+
+#elif __FN_IF_ENABLE(__FN_PERIPH_REFEREE)
 
 #include "const.h"
 
@@ -22,7 +69,6 @@ const uint16_t Const_Referee_REMOTE_OFFLINE_TIME = 1000;
 
 uint8_t Referee_TxData[Const_Referee_TX_BUFF_LEN];
 uint8_t Referee_RxData[Const_Referee_RX_BUFF_LEN];
-Referee_RefereeDataTypeDef Referee_RefereeData;
 
 const uint8_t PARSE_FAILED = 0, PARSE_SUCCEEDED = 1;
 
@@ -242,29 +288,6 @@ const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6] = {
 };
 
 graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
-/**
-  * @brief      获取裁判系统数据对象的指针
-  * @param      无
-  * @retval     指针指向裁判系统数据对象
-  */
-Referee_RefereeDataTypeDef* Referee_GetRefereeDataPtr() {
-    return &Referee_RefereeData;
-}
-
-/**
-  * @brief      重置裁判系统数据对象
-  * @param      无
-  * @retval     无
-  */
-void Referee_ResetRefereeData() {
-    Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
-    Referee_RefereeStateEnum state = referee->state;        // backup state
-    uint32_t last_update_time = referee->last_update_time;  // backup time
-    memset(referee, 0, sizeof(Referee_RefereeDataTypeDef));
-    referee->state = state;
-    referee->last_update_time = last_update_time;
-}
 
 /**
   * @brief      初始化裁判系统
@@ -996,4 +1019,5 @@ void Referee_RXCallback(UART_HandleTypeDef* huart) {
     __HAL_DMA_ENABLE(huart->hdmarx);
 }
 
+#endif
 #endif

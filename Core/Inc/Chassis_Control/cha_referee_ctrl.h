@@ -1,9 +1,18 @@
 /*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Chassis_Control\cha_referee_ctrl.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-07-24 10:27:08
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-10-29 21:29:54
+ */
+/*
  *  Project      : Infantry_Neptune
  * 
  *  file         : cha_referee_ctrl.h
  *  Description  : User defined UI interface of referee system
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-26 18:09:27
  */
@@ -20,6 +29,14 @@ extern "C" {
 #if __FN_IF_ENABLE(__FN_CTRL_CHASSIS)
 
 #include "stm32f4xx_hal.h"
+void Referee_Setup(void);
+void Referee_SetWidthMode(uint8_t mode);
+void Referee_SetAimMode(uint8_t mode);
+void Referee_SetCapState(uint8_t state);
+void Referee_SetPitchAngle(float angle);
+void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode);
+
+#if __FN_IF_ENABLE(__FN_CTRL_REFEREE)
 
 typedef struct {
     uint8_t width_mode, width_mode_last;  // 1 for gyro mode, 0 for normal mode
@@ -31,12 +48,6 @@ typedef struct {
 } Referee_DrawDataTypeDef;
 
 void Referee_Task(void const* argument);
-
-void Referee_SetWidthMode(uint8_t mode);
-void Referee_SetAimMode(uint8_t mode);
-void Referee_SetCapState(uint8_t state);
-void Referee_SetPitchAngle(float angle);
-void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode);
 
 void Referee_SetupAimLine(void);
 void Referee_UpdateAimLine(void);
@@ -53,13 +64,14 @@ void Referee_UpdateModeDisplay(void);
 void Referee_SetupErrorDisplay(void);
 void Referee_UpdateErrorDisplay(void);
 void Referee_SetupAllString(void);
-void Referee_Setup(void);
 void Referee_Update(void);
 
 #endif
 
 #ifdef __cplusplus
 }
+#endif
+
 #endif
 
 #endif

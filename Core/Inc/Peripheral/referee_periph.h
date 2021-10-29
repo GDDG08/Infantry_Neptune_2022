@@ -3,7 +3,7 @@
  * 
  *  file         : referee_periph.h
  *  Description  : This document contains the data receiving and sending of the referee system
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-09 05:52:35
  */
@@ -16,7 +16,7 @@ extern "C" {
 #endif
 
 #include "configure.h"
-#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE)
+#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE_NOHW) || __FN_IF_ENABLE(__FN_PERIPH_REFEREE)
 
 #include "uart_util.h"
 #include "crc_alg.h"
@@ -95,7 +95,7 @@ typedef __packed struct {
     uint8_t dart_remaining_time;
 } ext_dart_remaining_time_t;
 
-/* £¨obsolete£©
+/* ï¿½ï¿½obsoleteï¿½ï¿½
 typedef __packed struct {
     uint8_t supply_projectile_id; 
     uint8_t supply_robot_id;
@@ -245,29 +245,29 @@ typedef enum {
 } Referee_RefereeStateEnum;
 
 typedef struct {
-    Referee_RefereeStateEnum state;  // ²ÃÅÐÏµÍ³µ±Ç°×´Ì¬
-    uint32_t last_update_time;       // ²ÃÅÐÏµÍ³ÉÏ´Î¸üÐÂÊ±¼ä
+    Referee_RefereeStateEnum state;  // ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½Ç°×´Ì¬
+    uint32_t last_update_time;       // ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ï´Î¸ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
-    uint16_t client_id;  // ¿Í»§¶ËID
-                         //  client_custom_data_t custom_data;           // £¨ÒÑ·ÏÆú£©¿Í»§¶Ë×Ô¶¨ÒåÊý¾Ý
-                         //  ext_client_graphic_draw_t graphic_draw;     // £¨ÒÑ·ÏÆú£©¿Í»§¶Ë×Ô¶¨Òå»æÍ¼
+    uint16_t client_id;  // ï¿½Í»ï¿½ï¿½ï¿½ID
+                         //  client_custom_data_t custom_data;           // ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                         //  ext_client_graphic_draw_t graphic_draw;     // ï¿½ï¿½ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Í¼
 
-    graphic_data_struct_t graphic_buf[30];  // ¿Í»§¶Ë×Ô¶¨Òå»æÍ¼»º³åÇø
-    uint8_t graphic_buf_len;                // ¿Í»§¶Ë×Ô¶¨Òå»æÍ¼»º³åÇøÒÑÕ¼ÓÃ³¤¶È
-                                            //  uint32_t graphic_current_id;                // ¿Í»§¶Ë×Ô¶¨Òå»æÍ¼µ±Ç°ÐòºÅ
+    graphic_data_struct_t graphic_buf[30];  // ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    uint8_t graphic_buf_len;                // ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½Ã³ï¿½ï¿½ï¿½
+                                            //  uint32_t graphic_current_id;                // ï¿½Í»ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
 
-    uint8_t game_type;           //  ÓÎÏ·ÀàÐÍ,    1:RoboMaster »ú¼×´óÊ¦Èü£»
-                                 //              2:RoboMaster »ú¼×´óÊ¦µ¥ÏîÈü£»
-                                 //      	    3£ºICRA RoboMaster ÈË¹¤ÖÇÄÜÌôÕ½Èü
-                                 //              4£ºRoboMaster ÁªÃËÈü3V3
-                                 //              5£ºRoboMaster ÁªÃËÈü1V1
-    uint8_t game_progress;       //  µ±Ç°±ÈÈü½×¶Î,0£ºÎ´¿ªÊ¼±ÈÈü£»
-                                 //              1£º×¼±¸½×¶Î£»
-                                 //              2£º×Ô¼ì½×¶Î£»
-                                 //              3£º5sµ¹¼ÆÊ±£»
-                                 //              4£º¶ÔÕ½ÖÐ£»
-                                 //              5£º±ÈÈü½áËãÖÐ
-    uint16_t stage_remain_time;  //  µ±Ç°½×¶ÎÊ£ÓàÊ±¼ä£¬µ¥Î»s
+    uint8_t game_type;           //  ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½,    1:RoboMaster ï¿½ï¿½ï¿½×´ï¿½Ê¦ï¿½ï¿½ï¿½ï¿½
+                                 //              2:RoboMaster ï¿½ï¿½ï¿½×´ï¿½Ê¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                                 //      	    3ï¿½ï¿½ICRA RoboMaster ï¿½Ë¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½
+                                 //              4ï¿½ï¿½RoboMaster ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3V3
+                                 //              5ï¿½ï¿½RoboMaster ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1V1
+    uint8_t game_progress;       //  ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½,0ï¿½ï¿½Î´ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                                 //              1ï¿½ï¿½×¼ï¿½ï¿½ï¿½×¶Î£ï¿½
+                                 //              2ï¿½ï¿½ï¿½Ô¼ï¿½×¶Î£ï¿½
+                                 //              3ï¿½ï¿½5sï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+                                 //              4ï¿½ï¿½ï¿½ï¿½Õ½ï¿½Ð£ï¿½
+                                 //              5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    uint16_t stage_remain_time;  //  ï¿½ï¿½Ç°ï¿½×¶ï¿½Ê£ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½Î»s
 
     uint32_t event_type;
 
@@ -315,9 +315,9 @@ typedef struct {
 typedef uint8_t (*Referee_RefereeCmdParseFuncDef)(Referee_RefereeDataTypeDef* referee, void* data_ptr);
 
 typedef struct {
-    uint16_t cmd_id;                            // Ö¸ÁîID
-    uint8_t data_length;                        // Êý¾ÝÖ¡³¤¶È
-    Referee_RefereeCmdParseFuncDef parse_func;  // ½âÎöº¯ÊýÖ¸Õë
+    uint16_t cmd_id;                            // Ö¸ï¿½ï¿½ID
+    uint8_t data_length;                        // ï¿½ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½
+    Referee_RefereeCmdParseFuncDef parse_func;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 } Referee_RefereeCmdTypeDef;
 
 typedef struct {
@@ -337,34 +337,34 @@ typedef union {
 } Referee_GraphicDataConverterUnion;
 
 typedef enum {
-    Draw_OPERATE_NULL = 0,    // ¿Õ²Ù×÷
-    Draw_OPERATE_ADD = 1,     // Ôö¼Ó
-    Draw_OPERATE_MODIFY = 2,  // ÐÞ¸Ä
-    Draw_OPERATE_DELETE = 3   // É¾³ý
-} Draw_OperateType;           // Í¼ÐÎ²Ù×÷
+    Draw_OPERATE_NULL = 0,    // ï¿½Õ²ï¿½ï¿½ï¿½
+    Draw_OPERATE_ADD = 1,     // ï¿½ï¿½ï¿½ï¿½
+    Draw_OPERATE_MODIFY = 2,  // ï¿½Þ¸ï¿½
+    Draw_OPERATE_DELETE = 3   // É¾ï¿½ï¿½
+} Draw_OperateType;           // Í¼ï¿½Î²ï¿½ï¿½ï¿½
 
 typedef enum {
-    Draw_TYPE_LINE = 0,       // Ö±Ïß
-    Draw_TYPE_RECTANGLE = 1,  // ¾ØÐÎ
-    Draw_TYPE_CIRCLE = 2,     // ÕûÔ²
-    Draw_TYPE_ELLIPSE = 3,    // ÍÖÔ²
-    Draw_TYPE_ARC = 4,        // Ô²»¡
-    Draw_TYPE_FLOAT = 6,      // ¸¡µãÊý
-    Draw_TYPE_INT = 5,        // ÕûÐÍÊý
-    Draw_TYPE_STRING = 7      // ×Ö·û
-} Draw_GraphicType;           // Í¼ÐÎÀàÐÍ
+    Draw_TYPE_LINE = 0,       // Ö±ï¿½ï¿½
+    Draw_TYPE_RECTANGLE = 1,  // ï¿½ï¿½ï¿½ï¿½
+    Draw_TYPE_CIRCLE = 2,     // ï¿½ï¿½Ô²
+    Draw_TYPE_ELLIPSE = 3,    // ï¿½ï¿½Ô²
+    Draw_TYPE_ARC = 4,        // Ô²ï¿½ï¿½
+    Draw_TYPE_FLOAT = 6,      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    Draw_TYPE_INT = 5,        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    Draw_TYPE_STRING = 7      // ï¿½Ö·ï¿½
+} Draw_GraphicType;           // Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 typedef enum {
-    Draw_COLOR_RED_BLUE = 0,  // ºìÀ¶Ö÷É«
-    Draw_COLOR_YELLOW = 1,    // »ÆÉ«
-    Draw_COLOR_GREEN = 2,     // ÂÌÉ«
-    Draw_COLOR_ORANGE = 3,    // ³ÈÉ«
-    Draw_COLOR_VIOLET = 4,    // ×ÏºìÉ«
-    Draw_COLOR_PINK = 5,      // ·ÛÉ«
-    Draw_COLOR_CYAN = 6,      // ÇàÉ«
-    Draw_COLOR_BLACK = 7,     // ºÚÉ«
-    Draw_COLOR_WHITE = 8      // °×É«
-} Draw_Color;                 // ÑÕÉ«
+    Draw_COLOR_RED_BLUE = 0,  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
+    Draw_COLOR_YELLOW = 1,    // ï¿½ï¿½É«
+    Draw_COLOR_GREEN = 2,     // ï¿½ï¿½É«
+    Draw_COLOR_ORANGE = 3,    // ï¿½ï¿½É«
+    Draw_COLOR_VIOLET = 4,    // ï¿½Ïºï¿½É«
+    Draw_COLOR_PINK = 5,      // ï¿½ï¿½É«
+    Draw_COLOR_CYAN = 6,      // ï¿½ï¿½É«
+    Draw_COLOR_BLACK = 7,     // ï¿½ï¿½É«
+    Draw_COLOR_WHITE = 8      // ï¿½ï¿½É«
+} Draw_Color;                 // ï¿½ï¿½É«
 
 extern const uint16_t Const_Referee_RX_BUFF_LEN;
 extern const uint16_t Const_Referee_REMOTE_OFFLINE_TIME;
@@ -374,6 +374,10 @@ extern Referee_RefereeDataTypeDef Referee_RefereeData;
 Referee_RefereeDataTypeDef* Referee_GetRefereeDataPtr(void);
 void Referee_ResetRefereeData(void);
 void Referee_InitReferee(void);
+
+#endif
+#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE)
+
 uint16_t Referee_GetClientIDByRobotID(uint8_t robot_id);
 void Referee_SendInteractiveData(uint16_t data_cmd_id, uint16_t receiver_ID, const uint8_t* interactive_data, uint16_t interactive_data_length);
 void Referee_SendRobotCustomData(uint16_t data_cmd_id, uint16_t receiver_ID, const uint8_t* data, uint16_t data_length);
