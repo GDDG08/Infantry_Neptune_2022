@@ -43,6 +43,7 @@ extern "C" {
 
 /*      ******************DEBUG********************      */
 #define __FN_DEBUG_NOREFEREEHW __FN_ENABLE
+#define __FN_DEBUG_BTLOG __FN_ENABLE
 
 /*      **********************************************      */
 
