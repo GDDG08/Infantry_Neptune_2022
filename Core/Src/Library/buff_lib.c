@@ -3,7 +3,7 @@
  * 
  *  file         : buff_lib.c
  *  Description  : This file contains auxiliary functions related to byte buffer operation
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 10:56:12
  */
@@ -42,6 +42,18 @@ int16_t buff2i16(uint8_t* buff) {
     uint8_t tmpbuff[2];
     memcpy(tmpbuff, buff, 2);
     return *((int16_t*)tmpbuff);
+}
+
+/**
+  * @brief      Turn int16 push into byte buffer
+  * @param      u: Uint16 T to be pressed in
+  * @param      buff: Pointer to byte buffer
+  * @retval     NULL
+  */
+void i162buff(uint16_t u, uint8_t* buff) {
+    uint8_t tmpbuff[2];
+    *((int16_t*)tmpbuff) = u;
+    memcpy(buff, tmpbuff, 2);
 }
 
 /**

@@ -42,7 +42,7 @@ extern "C" {
 #define __IMU_NINE_AXIS_TYPE 9
 
 /*      ******************DEBUG********************      */
-#define __FN_DEBUG_NOREFEREEHW __FN_ENABLE
+#define __FN_DEBUG_NOREFEREEHW __FN_DISABLE
 #define __FN_DEBUG_BTLOG __FN_ENABLE
 
 /*      **********************************************      */

@@ -3,7 +3,7 @@
  * 
  *  file         : gim_remote_ctrl.c
  *  Description  : This file contains Remote control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 22:47:07
  */
@@ -489,7 +489,7 @@ void Remote_Gesture() {
 }
 
 /**
-* @brief      ¡°\/¡± control function
+* @brief      ï¿½ï¿½\/ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */
@@ -501,7 +501,7 @@ void Remote_GestureFunction_1() {
 }
 
 /**
-* @brief      ¡°/\¡± control function
+* @brief      ï¿½ï¿½/\ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */
@@ -513,7 +513,7 @@ void Remote_GestureFunction_2() {
 }
 
 /**
-* @brief      ¡°//¡± control function
+* @brief      ï¿½ï¿½//ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */
@@ -523,7 +523,7 @@ void Remote_GestureFunction_3() {
 }
 
 /**
-* @brief      ¡°\\¡± control function
+* @brief      ï¿½ï¿½\\ï¿½ï¿½ control function
 * @param      NULL
 * @retval     NULL
 */

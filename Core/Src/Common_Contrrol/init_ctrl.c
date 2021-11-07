@@ -3,7 +3,7 @@
  * 
  *  file         : init_ctrl.c
  *  Description  : This file contains Initialize control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-16 09:15:22
  */
@@ -39,6 +39,7 @@
 
 #include "buscomm_ctrl.h"
 #include "watchdog_ctrl.h"
+#include "debug_BTlog.h"
 
 #include "const.h"
 #include "cmsis_os.h"
@@ -65,6 +66,10 @@ void Init_Task(void const* argument) {
 
     Const_Init();
     Cap_Init();
+
+#if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
+    BTlog_Init();
+#endif
     /* control function init    */
 #endif
 
@@ -92,7 +97,10 @@ void Init_Task(void const* argument) {
     Remote_RemotrControlInit();
 
     Login_Init();
-    //   Login_LoginOn();
+//   Login_LoginOn();
+#if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
+    BTlog_Init();
+#endif
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
@@ -109,6 +117,9 @@ void Init_Task(void const* argument) {
     Chassis_InitChassis();
     Power_InitPower();
     GimbalYaw_InitGimbalYaw();
+#if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
+    BTlog_Init();
+#endif
 #endif
 
     TaskHandle_t InitTask_Handler = xTaskGetHandle(pcTaskGetName(NULL));

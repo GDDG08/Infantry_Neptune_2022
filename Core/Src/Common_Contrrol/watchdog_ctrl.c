@@ -1,9 +1,18 @@
 /*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Src\Common_Contrrol\watchdog_ctrl.c
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-07-24 10:27:08
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-10-31 17:14:30
+ */
+/*
  *  Project      : Infantry_Neptune
  * 
  *  file         : watchdog_ctrl.c
  *  Description  : This is my lovely dog's home
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 09:12:11
  */
@@ -20,6 +29,8 @@
 #include "cha_chassis_ctrl.h"
 #include "gim_login_ctrl.h"
 
+#include "debug_BTlog.h"
+
 #define WATCHDOG_TASK_PERIOD 1
 
 /**
@@ -30,6 +41,7 @@
 void WatchDog_Task(void const* argument) {
     for (;;) {
         WatchDog_FeedDog();
+        BTlog_Send();
         osDelay(WATCHDOG_TASK_PERIOD);
     }
 }

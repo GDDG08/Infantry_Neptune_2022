@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F405xx,ARM_MATH_CM4,__TARGET_FPU_VFP,__CC_ARM</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;                    ../Drivers/STM32F4xx_HAL_Driver/Inc;                    ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;                    ../Middlewares/Third_Party/FreeRTOS/Source/include;                    ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;                    ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;                    ../Drivers/CMSIS/Device/ST/STM32F4xx/Include;                    ../Drivers/CMSIS/Include;                    ..\Drivers\CMSIS\DSP\Include;                    ..\Core\Inc;                    ..\Core\Inc\Algorithm;                    ..\Core\Inc\Library;                    ..\Core\Inc\Peripheral;                    ..\Core\Inc\Utility;                    ..\Core\Inc\Chassis_Control;                    ..\Core\Inc\Gimbal_Control;                    ..\Core\Inc\SuperCap_Control;                    ..\Core\Inc\Common_Contrrol;                    ..\Core\Inc\Const</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;..\Drivers\CMSIS\DSP\Include;..\Core\Inc;..\Core\Inc\Algorithm;..\Core\Inc\Library;..\Core\Inc\Peripheral;..\Core\Inc\Utility;..\Core\Inc\Chassis_Control;..\Core\Inc\Gimbal_Control;..\Core\Inc\SuperCap_Control;..\Core\Inc\Common_Contrrol;..\Core\Inc\Const</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -892,6 +892,11 @@
               <FileName>init_ctrl.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\Common_Contrrol\init_ctrl.c</FilePath>
+            </File>
+            <File>
+              <FileName>debug_BTlog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\Common_Contrrol\debug_BTlog.c</FilePath>
             </File>
           </Files>
         </Group>

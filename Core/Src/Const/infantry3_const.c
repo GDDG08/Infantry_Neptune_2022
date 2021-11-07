@@ -3,7 +3,7 @@
  * 
  *  file         : infantry3_const.c
  *  Description  : This file contains 3 infantry constants
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-26 21:55:17
  */
@@ -86,7 +86,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     /*      infantry chasiss const                  */
-    x->YAW_MOTOR_INIT_OFFSET = 121.0f;
+    x->YAW_MOTOR_INIT_OFFSET = -59.0f;
 
     memcpy(x->chassisMotorParam, Const_chassisMotorParam_infantry_3, sizeof(Const_chassisMotorParam_infantry_3));
     memcpy(x->gimbalYawMotorParam, Const_gimbalYawMotorParam_infantry_3, sizeof(Const_gimbalYawMotorParam_infantry_3));
@@ -122,7 +122,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->CVKF_NT_YAW = 80;
 
     /*          Gimbal pitch limit                  */
-    x->YAW_MOTOR_INIT_OFFSET = 121.0f;
+    x->YAW_MOTOR_INIT_OFFSET = -59.0f;
 
     x->ShooterLockedCurrent = 3000.0f;
     x->ShooterLockedSpeed = 20.0f;

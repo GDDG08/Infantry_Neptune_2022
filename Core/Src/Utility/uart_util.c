@@ -3,7 +3,7 @@
  * 
  *  file         : uart_util.c
  *  Description  : This file containss the UART functions
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-06-11 14:19:14
  *  LastEditTime : 2021-07-14 11:14:12
  */
@@ -18,6 +18,7 @@
 #include "referee_periph.h"
 #include "supercap_ctrl.h"
 #include "buscomm_ctrl.h"
+#include "debug_BTlog.h"
 
 /********** VOLATILE USER CODE **********/
 
@@ -56,8 +57,14 @@ void Uart_RxIdleCallback(UART_HandleTypeDef* huart) {
         CapComm_RXCallback(huart);
     }
 #endif
-}
 
+#if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
+    if (huart == Const_BTlog_UART_HANDLER) {
+        BTlog_RXCallback(huart);
+    }
+#endif
+		
+}
 /********** VOLATILE USER CODE END **********/
 
 /**
@@ -94,7 +101,7 @@ void Uart_SendMessage_IT(UART_HandleTypeDef* huart, uint8_t txdata[], uint16_t s
 }
 
 /**
-  * @brief      Sending information to UART (Non blocking mode)£¬force waiting£¬may cause delay
+  * @brief      Sending information to UART (Non blocking mode)ï¿½ï¿½force waitingï¿½ï¿½may cause delay
   * @param      huart: UART handle
   * @param      txdata: The message to send
   * @param      size: The message length

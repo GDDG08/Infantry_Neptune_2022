@@ -3,7 +3,7 @@
  * 
  *  file         : Using gyroscope, geomagnetic pole completes attitude calculation
  *  Description  : gim_ins_ctrl.h
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-07-09 00:00:36
  *  LastEditTime : 2021-07-23 22:39:35
  */

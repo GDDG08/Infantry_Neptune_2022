@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : cha_chassis_ctrl.h
- *  Description  : This file contains chassis control function
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 09:00:56
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Chassis_Control\cha_chassis_ctrl.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-10-29 20:20:13
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-11-08 00:02:14
  */
 
 #ifndef CHA_CHASSIS_CTRL_H
@@ -62,6 +62,8 @@ extern Motor_MotorParamTypeDef Chassis_chassisMotorParamGyro;
 extern Motor_MotorParamTypeDef Chassis_chassisMotorParamSlopeJump;
 
 extern PID_PIDParamTypeDef Chassis_followPIDParam;
+
+extern float Chassis_Gyro_compensate[];
 
 void Chassis_Task(void const* argument);
 void Chassis_InitChassis(void);

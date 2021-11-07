@@ -245,17 +245,23 @@ void Chassis_CalcGyroRef() {
   * @param      NULL
   * @retval     NULL
   */
+float Gyro_compensate_1 = 1.0f;
+float Gyro_compensate_2 = 1.0f;
+float Gyro_compensate_3 = 1.0f;
+float Gyro_compensate_4 = 1.0f;
+float Chassis_Gyro_compensate[4] = {1.1f, 1.0f, 1.0f, 0.9f};
+
 void Chassis_CalcMecanumRef() {
     Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
 
     Motor_SetMotorRef(&Motor_chassisMotor1,
-                      chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+                      Gyro_compensate_1 * (chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
     Motor_SetMotorRef(&Motor_chassisMotor2,
-                      -chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+                      Gyro_compensate_2 * (-chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
     Motor_SetMotorRef(&Motor_chassisMotor3,
-                      -chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+                      Gyro_compensate_3 * (-chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
     Motor_SetMotorRef(&Motor_chassisMotor4,
-                      chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+                      Gyro_compensate_4 * (chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
 }
 
 /**
@@ -313,6 +319,18 @@ void Chassis_Control() {
             break;
         default:
             return;
+    }
+
+    if (chassis->mode == Chassis_MODE_GYRO) {
+        Gyro_compensate_1 = Chassis_Gyro_compensate[0];
+        Gyro_compensate_2 = Chassis_Gyro_compensate[1];
+        Gyro_compensate_3 = Chassis_Gyro_compensate[2];
+        Gyro_compensate_4 = Chassis_Gyro_compensate[3];
+    } else {
+        Gyro_compensate_1 = 1.0f;
+        Gyro_compensate_2 = 1.0f;
+        Gyro_compensate_3 = 1.0f;
+        Gyro_compensate_4 = 1.0f;
     }
 
     Chassis_CopyChassisRef(&(chassis->power_ref), &(chassis->raw_speed_ref));

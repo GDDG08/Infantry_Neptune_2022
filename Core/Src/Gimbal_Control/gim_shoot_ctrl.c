@@ -3,7 +3,7 @@
  * 
  *  file         : gim_shoot_ctrl.c
  *  Description  : This file contains Shooter control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-26 17:02:24
  */
@@ -452,7 +452,9 @@ void Shooter_ShootControl() {
 
     switch (shooter->shooter_mode) {
         case Shoot_NULL:
+#if !__FN_IF_ENABLE(__FN_DEBUG_BTLOG)
             GPIO_Reset(LASER);
+#endif
             GPIO_Reset(BULLET_CHARGING);
             Shooter_SetShooterSpeed(0);
             break;
