@@ -179,7 +179,7 @@ extern int GLOBAL_INIT_FLAG;
 #if __FN_IF_ENABLE(__FN_DEBUG_NOREFEREEHW)
 #define __FN_PERIPH_REFEREE_NOHW __FN_ENABLE
 #else
-#define __FN_PERIPH_REFEREE __FN_ENABLE             
+#define __FN_PERIPH_REFEREE __FN_ENABLE
 #endif
 // Enable referee
 #endif

@@ -1,3 +1,12 @@
+/*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\tim.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-10-31 17:14:31
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-11-08 00:05:01
+ */
 /**
   ******************************************************************************
   * @file    tim.h
@@ -59,7 +68,7 @@ void MX_TIM10_Init(void);
 void MX_TIM11_Init(void);
 void MX_TIM12_Init(void);
 
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef* htim);
 
 /* USER CODE BEGIN Prototypes */
 

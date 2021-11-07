@@ -13,20 +13,20 @@
 No.1  Language usage standard
     Try to use English or English spelling for naming, and prohibit the use of Pinyin.
     Such as 
-        Chassis £¨µ×ÅÌ£©
-        Remote  £¨Ò£¿ØÆ÷£©
+        Chassis ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½
+        Remote  ï¿½ï¿½Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     You can't name it that way.
     Such as
-        TUOLUO  £¨ÍÓÂÝ£©
-        YunTai  £¨ÔÆÌ¨£©
+        TUOLUO  ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½
+        YunTai  ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½
     
 No.2 Naming standard
     Variable:
-        1¡¢The global variables in the module are named by the format of "module name_variable name".
-        2¡¢The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3¡¢The variable name is a noun phrase beginning with a small letter. Except for the first word, each word begins with 
-            a capital letter, and the variable function should be expressed with a concise modifier¡£
-        4¡¢Non global variables in the module are named in lowercase.
+        1ï¿½ï¿½The global variables in the module are named by the format of "module name_variable name".
+        2ï¿½ï¿½The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
+        3ï¿½ï¿½The variable name is a noun phrase beginning with a small letter. Except for the first word, each word begins with 
+            a capital letter, and the variable function should be expressed with a concise modifierï¿½ï¿½
+        4ï¿½ï¿½Non global variables in the module are named in lowercase.
             what you need to take care is:
             The variable name does not need to include the module name.
             You can use abbreviations or incomplete words.
@@ -38,49 +38,49 @@ No.2 Naming standard
             ref                     // PID set point, local variable
     
     Const:
-        1¡¢Macro definition should be avoided as far as possible in the module, and const definition 
+        1ï¿½ï¿½Macro definition should be avoided as far as possible in the module, and const definition 
            should be used instead. Constants are named using the "Const" module name.
-        2¡¢The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3¡¢The constant name is a noun phrase, each word is capitalized, the words are divided by underscores, and simple 
+        2ï¿½ï¿½The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
+        3ï¿½ï¿½The constant name is a noun phrase, each word is capitalized, the words are divided by underscores, and simple 
            modifiers are used to express the function.
-        4¡¢Const in front of the name_ Prefix, indicating that the name is a constant name.
+        4ï¿½ï¿½Const in front of the name_ Prefix, indicating that the name is a constant name.
         Such as
             Const_ShooterLockedReverseSpeed   = -50.0f;     // Shooter motor locked reverse speed
         
     Custom type:
         struct:
-        1¡¢The module name is used to name the structure type in the module_ Structure name "TypeDef".
-        2¡¢The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3¡¢The structure name is a noun phrase. Each word begins with a capital letter and uses a concise modifier to express its function.
-        4¡¢If the structure name is followed by typedef, it means that this name is the structure type name.
-        5¡¢The naming rules of structural elements are the same as that of local variables, which are separated by lowercase underscores.
+        1ï¿½ï¿½The module name is used to name the structure type in the module_ Structure name "TypeDef".
+        2ï¿½ï¿½The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
+        3ï¿½ï¿½The structure name is a noun phrase. Each word begins with a capital letter and uses a concise modifier to express its function.
+        4ï¿½ï¿½If the structure name is followed by typedef, it means that this name is the structure type name.
+        5ï¿½ï¿½The naming rules of structural elements are the same as that of local variables, which are separated by lowercase underscores.
         
         Enum:
-        1¡¢Enumeration types within a module are named using the module name_ The format of the enumerator "Enum".
-        2¡¢The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3¡¢Enumerating names are noun phrases, each word begins with a capital letter, and uses simple modifiers to express its function.
-        4¡¢Enum followed by enum indicates that the name is an enum type name.
-        5¡¢Enumeration elements are named according to the same rules as constants, separated by capital letters and underscores.
+        1ï¿½ï¿½Enumeration types within a module are named using the module name_ The format of the enumerator "Enum".
+        2ï¿½ï¿½The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
+        3ï¿½ï¿½Enumerating names are noun phrases, each word begins with a capital letter, and uses simple modifiers to express its function.
+        4ï¿½ï¿½Enum followed by enum indicates that the name is an enum type name.
+        5ï¿½ï¿½Enumeration elements are named according to the same rules as constants, separated by capital letters and underscores.
 
         Such as
             Motor_MotorTypeDef      // Motor object struct
             Remote_RemoteStateEnum  // Remote state enum
     
     Function:
-        1¡¢Functions are named using the "module name_ Function name".
-        2¡¢The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3¡¢The function name is a predicate phrase, each word is capitalized, and a concise modifier is used to express the 
+        1ï¿½ï¿½Functions are named using the "module name_ Function name".
+        2ï¿½ï¿½The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
+        3ï¿½ï¿½The function name is a predicate phrase, each word is capitalized, and a concise modifier is used to express the 
            function function and data characteristics (get / change).
-        4¡¢The naming rules of function parameters are the same as those of local variables.
+        4ï¿½ï¿½The naming rules of function parameters are the same as those of local variables.
         Such as
             Remote_ResetRemoteData();       // reset remote data object (function)
             pmotor_group                    // Motor group pointer (function parameter)
 
     File:
-        1¡¢File are named using the "file content_ File level" format.
-        2¡¢Files at the same level are placed in the same level folder.
-        3¡¢Do not use Chinese or special characters£¨contains PIN YIN).
-        4¡¢File level try to ues abbreviations.
+        1ï¿½ï¿½File are named using the "file content_ File level" format.
+        2ï¿½ï¿½Files at the same level are placed in the same level folder.
+        3ï¿½ï¿½Do not use Chinese or special charactersï¿½ï¿½contains PIN YIN).
+        4ï¿½ï¿½File level try to ues abbreviations.
         Such as
             Utility->{ adc_uttil.c(h)
                      { can_util.c(h)
@@ -121,62 +121,62 @@ No.3 Notes
 
 No.4 Writing standard
     Empty line:
-        1¡¢Empty lines after defining variables.
-        2¡¢Each function definition is followed by a blank line.
-        3¡¢Add blank lines between functions of different levels in the same function.
-        4¡¢Leave two empty lines between two function definitions.
-        5¡¢The header comment and header file keep a blank line, 
+        1ï¿½ï¿½Empty lines after defining variables.
+        2ï¿½ï¿½Each function definition is followed by a blank line.
+        3ï¿½ï¿½Add blank lines between functions of different levels in the same function.
+        4ï¿½ï¿½Leave two empty lines between two function definitions.
+        5ï¿½ï¿½The header comment and header file keep a blank line, 
            and a blank line between the header file and other definitions and functions.
-        6¡¢ect
+        6ï¿½ï¿½ect
     
-    Space£º
-        1¡¢Leave a space after the keyword(lick¡¢const¡¢case).
-        2¡¢For example, if, for, while and other keywords should be followed by a space and left parenthesis"(".
-        3¡¢Do not leave a space after the function name, it should be followed by the left bracket "(", 
+    Spaceï¿½ï¿½
+        1ï¿½ï¿½Leave a space after the keyword(lickï¿½ï¿½constï¿½ï¿½case).
+        2ï¿½ï¿½For example, if, for, while and other keywords should be followed by a space and left parenthesis"(".
+        3ï¿½ï¿½Do not leave a space after the function name, it should be followed by the left bracket "(", 
            to distinguish it from the keyword.
-        4¡¢"," followed by a space. If ";" is not the end of a line, leave a space after it.
-        5¡¢Assignment operators, relational operators, arithmetic operators, logical operators, 
+        4ï¿½ï¿½"," followed by a space. If ";" is not the end of a line, leave a space after it.
+        5ï¿½ï¿½Assignment operators, relational operators, arithmetic operators, logical operators, 
            bit operators, such as =, =! =The following binocular operators, + =, - =, * =, / =,
            % =, > =, < < =, & =, ^ =, | =, >, < =, >, > =, +, -, *, /,%, &, |, <, >, ^, should 
            be preceded by spaces.
-        6¡¢The operator "%" is a complement operator, which is different from the "%" of% d in printf, 
+        6ï¿½ï¿½The operator "%" is a complement operator, which is different from the "%" of% d in printf, 
            so there is no need to add spaces before and after the "%" in %d.
-        7¡¢Single operator!, ~, + +, -, -, *, & etc. without spaces before and after.
-        8¡¢array symbol, struct member operator, and struct member operator - >, 
+        7ï¿½ï¿½Single operator!, ~, + +, -, -, *, & etc. without spaces before and after.
+        8ï¿½ï¿½array symbol, struct member operator, and struct member operator - >, 
            there are no spaces before and after these operators.
-        9¡¢
+        9ï¿½ï¿½
     
-    Indent£º
-        1¡¢Indentation is realized by tab on the keyboard, which can make the program more hierarchical. 
+    Indentï¿½ï¿½
+        1ï¿½ï¿½Indentation is realized by tab on the keyboard, which can make the program more hierarchical. 
            The principle is that if the status is equal, indent is not required; if the internal code belongs to a code, 
            it needs to be indented.
-        2¡¢Indents align units automatically. Do not mix indentation with space.
+        2ï¿½ï¿½Indents align units automatically. Do not mix indentation with space.
     
     Alignment:
-        1¡¢"{}" in function, "{" needs to be aligned with the function named line and a space is reserved.
+        1ï¿½ï¿½"{}" in function, "{" needs to be aligned with the function named line and a space is reserved.
            "}" needs to have the last line alone.   
            Such as
            int main(void) {
                return 0;
            }
-        2¡¢The code within {} should be indented by a tab, and those in the same position should be left aligned, 
+        2ï¿½ï¿½The code within {} should be indented by a tab, and those in the same position should be left aligned, 
            while those in different positions should continue to be indented.
            Such as
             int main(void) {
-                if (¡­) {
-                    while (¡­)
+                if (ï¿½ï¿½) {
+                    while (ï¿½ï¿½)
                 }
                 return 0;
             }
     Code line:
-        1¡¢A line of code only does one thing, such as defining only one variable or writing only one statement.
-        2¡¢If, else, for, while, do and other statements occupy one line, and the execution statement shall not be immediately followed.
+        1ï¿½ï¿½A line of code only does one thing, such as defining only one variable or writing only one statement.
+        2ï¿½ï¿½If, else, for, while, do and other statements occupy one line, and the execution statement shall not be immediately followed.
 
 No.5 Header file reference:
-    1¡¢Add a macro definition in the header file to prevent the header file from repeatedly referencing the macro.
-    2¡¢The header file reference should be referenced level by level as far as possible, and the lower level header .
+    1ï¿½ï¿½Add a macro definition in the header file to prevent the header file from repeatedly referencing the macro.
+    2ï¿½ï¿½The header file reference should be referenced level by level as far as possible, and the lower level header .
        file and its lower level header file should not be referenced at the same time.
-    3¡¢Do not refer to parent or peer header files in header files.
-    4¡¢The parent or peer header file is referenced in the source file, and the lower level header file can be referenced in the header file.
+    3ï¿½ï¿½Do not refer to parent or peer header files in header files.
+    4ï¿½ï¿½The parent or peer header file is referenced in the source file, and the lower level header file can be referenced in the header file.
 
 */
