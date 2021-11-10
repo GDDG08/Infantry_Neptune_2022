@@ -3,7 +3,7 @@
  * 
  *  file         : motor_periph.h
  *  Description  : This file contains motor control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-05-14 11:56:42
  */
@@ -99,6 +99,7 @@ extern Motor_MotorTypeDef Motor_feederMotor;
 extern Motor_MotorTypeDef Motor_shooterMotorLeft;
 extern Motor_MotorTypeDef Motor_shooterMotorRight;
 
+// extern float GimbalMotorYaw_INIT_Offset;
 /********** VOLATILE USER CODE END **********/
 
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len);

@@ -3,7 +3,7 @@
  * 
  *  file         : gim_gimbal_ctrl.c
  *  Description  : This file contains Gimbal control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-25 11:55:00
  */
@@ -71,7 +71,7 @@ void Gimbal_InitOffset() {
 
     Const_SetGimbalPitchMotorParam();
 
-    HAL_Delay(3000);
+    // HAL_Delay(3000);
 
     Gimbal_ChangeMode(Gimbal_NOAUTO);
 }
@@ -208,23 +208,23 @@ float Gimbal_LimitPitch(float ref) {
         return ref;
 }
 
-/**
-* @brief      Yaw angle limit
-* @param      ref: Yaw set ref
-* @retval     Limited ywa ref
-*/
-float Gimbal_LimitYaw(float ref) {
-    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
-    Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
+// /**
+// * @brief      Yaw angle limit
+// * @param      ref: Yaw set ref
+// * @retval     Limited ywa ref
+// */
+// float Gimbal_LimitYaw(float ref) {
+//     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+//     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
-    if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
-        return ref;
-    else if (((buscomm->yaw_relative_angle < -Const_YAW_MAXANGLE) && (ref > 0)) ||
-             ((buscomm->yaw_relative_angle > Const_YAW_MAXANGLE) && (ref < 0)))
-        return 0.0f;
-    else
-        return ref;
-}
+//     if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
+//         return ref;
+//     else if (((buscomm->yaw_relative_angle < -Const_YAW_MAXANGLE) && (ref > 0)) ||
+//              ((buscomm->yaw_relative_angle > Const_YAW_MAXANGLE) && (ref < 0)))
+//         return 0.0f;
+//     else
+//         return ref;
+// }
 
 /**
 * @brief      Set pitch ref
@@ -270,16 +270,26 @@ void Gimbal_SetYawRef(float ref) {
 }
 
 /**
+* @brief      Set yaw ref delta
+* @param      ref: Pitch set ref
+* @retval     NULL
+*/
+void Gimbal_SetYawRefDelta(float ref) {
+    Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
+
+    gimbal->angle.yaw_angle_ref_delta = ref;
+}
+
+/**
 * @brief      Aoto aim mode set yaw ref
 * @param      ref: Yaw set ref
 * @retval     NULL
 */
+float yawAutoRefLast = 0.0f;
 void Gimbal_SetYawAutoRef(float ref) {
-    Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
-    INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
-    MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
-
-    gimbal->angle.yaw_angle_ref = Gimbal_LimitYaw(ref);  //imu->angle.yaw - ref
+    Gimbal_SetYawRefDelta(ref - yawAutoRefLast);
+    yawAutoRefLast = ref;
+    // gimbal->angle.yaw_angle_ref = Gimbal_LimitYaw(ref);  //imu->angle.yaw - ref
 }
 
 /**

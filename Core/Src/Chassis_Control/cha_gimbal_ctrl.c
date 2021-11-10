@@ -3,7 +3,7 @@
  * 
  *  file         : cha_gimbal_ctrl.c
  *  Description  : This file contains Gimbal Yaw control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 09:20:59
  */
@@ -125,14 +125,38 @@ void GimbalYaw_SetEncoderFdb() {
 }
 
 /**
+* @brief      Yaw angle limit
+* @param      ref: Yaw set ref
+* @retval     Limited ywa ref
+*/
+// float yaw_relative_angle_debug;
+float GimbalYaw_Limit(float ref) {
+    Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
+    GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
+
+    float yaw_relative_angle = Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET;
+    float yaw_relative_angle_ref = gimbalyaw->yaw_ref - gimbalyaw->yaw_position_fdb + yaw_relative_angle;
+    // yaw_relative_angle_debug = yaw_relative_angle;
+    if (chassis->mode == Chassis_MODE_GYRO)
+        return ref;
+    // else if (((yaw_relative_angle < -Const_YAW_MAXANGLE) && (ref > 0)) ||
+    //          ((yaw_relative_angle > Const_YAW_MAXANGLE) && (ref < 0)))
+    //     return 0.0f;
+    else if (((yaw_relative_angle_ref < -Const_YAW_MAXANGLE) && (ref > 0)) ||
+             ((yaw_relative_angle_ref > Const_YAW_MAXANGLE) && (ref < 0)))
+        return 0.0f;
+    else
+        return ref;
+}
+/**
   * @brief      Set the target value of gimbal yaw
   * @param      yaw_ref: gimbal yaw target value
   * @retval     NULL
   */
-void GimbalYaw_SetYawRef(float yaw_ref) {
+void GimbalYaw_SetYawRef(float yaw_ref_delta) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
-    gimbalyaw->yaw_ref = yaw_ref;
+    gimbalyaw->yaw_ref -= GimbalYaw_Limit(yaw_ref_delta);
 }
 
 /**

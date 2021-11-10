@@ -3,7 +3,7 @@
  * 
  *  file         : This file contains Constant setting function
  *  Description  : const.c
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-06-15 01:39:35
  *  LastEditTime : 2021-07-26 21:56:02
  */
@@ -153,12 +153,14 @@ static void Const_Copy() {
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     /*          Motor control constant              */
     Const_YAW_MOTOR_INIT_OFFSET = Const_Infantry.YAW_MOTOR_INIT_OFFSET;
-
+    Const_YAW_MAXANGLE = Const_Infantry.YAW_MAXANGLE;
     memcpy(Const_chassisMotorParam, Const_Infantry.chassisMotorParam, sizeof(Const_Infantry.chassisMotorParam));
     memcpy(Const_gimbalYawMotorParam, Const_Infantry.gimbalYawMotorParam, sizeof(Const_Infantry.gimbalYawMotorParam));
     /*          Chassis control filter const        */
     Const_Chassis_MOVE_REF_TO_MOTOR_REF = Const_Infantry.Chassis_MOVE_REF_TO_MOTOR_REF;
     Const_Chassis_ROTATE_REF_TO_MOTOR_REF = Const_Infantry.Chassis_ROTATE_REF_TO_MOTOR_REFf;
+		
+	
 
 #endif
 
@@ -186,7 +188,7 @@ static void Const_Copy() {
     Const_PITCH_UMAXANGLE = Const_Infantry.PITCH_UMAXANGLE;
     Const_PITCH_UMAXANGLE_GRYO = Const_Infantry.PITCH_UMAXANGLE_GRYO;
     Const_PITCH_DMAXANGLE = Const_Infantry.PITCH_DMAXANGLE;
-    Const_YAW_MAXANGLE = Const_Infantry.YAW_MAXANGLE;
+//    Const_YAW_MAXANGLE = Const_Infantry.YAW_MAXANGLE;
     Const_PITCH_MOTOR_INIT_OFFSET = Const_Infantry.PITCH_MOTOR_INIT_OFFSETf;
     Const_SERVO_INIT_OFFSET = Const_Infantry.SERVO_INIT_OFFSET;
     Const_YAW_MOTOR_INIT_OFFSET = Const_Infantry.YAW_MOTOR_INIT_OFFSET;
@@ -226,16 +228,16 @@ static void Const_Copy() {
 
 /*          ADC Control related constants       */
 float Const_ADC_V_VGAIN;               // Voltage value division ratio 10:1
-float Const_ADC_V_C_HolzerGAIN;        // Gain of Hall current sensor£¨chassis referee£©
-float Const_ADC_V_C_BuckOutResGAIN;    // Buck output current sensing gain£¨LT3790£©
-float Const_ADC_V_C_BuckInputResGAIN;  // Buck input current sensing gain£¨LT3790£©
+float Const_ADC_V_C_HolzerGAIN;        // Gain of Hall current sensorï¿½ï¿½chassis refereeï¿½ï¿½
+float Const_ADC_V_C_BuckOutResGAIN;    // Buck output current sensing gainï¿½ï¿½LT3790ï¿½ï¿½
+float Const_ADC_V_C_BuckInputResGAIN;  // Buck input current sensing gainï¿½ï¿½LT3790ï¿½ï¿½
 float Const_ADC_Cap_TotalEnergy;       // Total capacitance energy
 float Const_ADC_CapValue;              // Minimum voltage of capacitor
 float Const_ADC_CurrentErrorVoltage;   // Current sensor error
 
 /*          DAC Control related constants       */
-float Const_DAC_GAIN;       // DAC current set gain£¨LT3790£©
-float Const_DAC_DetectRES;  // DAC current set resistor£¨LT3790£©
+float Const_DAC_GAIN;       // DAC current set gainï¿½ï¿½LT3790ï¿½ï¿½
+float Const_DAC_DetectRES;  // DAC current set resistorï¿½ï¿½LT3790ï¿½ï¿½
 
 /*          Super Cap control const             */
 float Cap_MinVoltage;           // Cap min voltage

@@ -242,20 +242,20 @@ void Shooter_ChangeFeederMode(Shoot_FeederModeEnum mode) {
     }
 }
 
-/**
-  * @brief      Initialize Shooter Motor
-  * @param      NULL
-  * @retval     NULL
-  */
-void Shooter_InitShooterMotor() {
-    HAL_Delay(2000);
-    for (int i = 0; i < 7; i++) {
-        Motor_shooterMotorLeft.pwm.duty = 0.1 * i;
-        Motor_shooterMotorRight.pwm.duty = 0.1 * i;
-        Motor_SendMotorGroupOutput(&Motor_shooterMotors);
-        HAL_Delay(200);
-    }
-}
+// /**
+//   * @brief      Initialize Shooter Motor
+//   * @param      NULL
+//   * @retval     NULL
+//   */
+// void Shooter_InitShooterMotor() {
+//     HAL_Delay(2000);
+//     for (int i = 0; i < 7; i++) {
+//         Motor_shooterMotorLeft.pwm.duty = 0.1 * i;
+//         Motor_shooterMotorRight.pwm.duty = 0.1 * i;
+//         Motor_SendMotorGroupOutput(&Motor_shooterMotors);
+//         HAL_Delay(200);
+//     }
+// }
 
 /**
   * @brief      Initialize Shooter heat control

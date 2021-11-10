@@ -202,7 +202,7 @@ void Remote_RemoteProcess() {
     yaw_ref = (float)data->remote.ch[2] * REMOTE_YAW_ANGLE_TO_REF;
     pitch_ref = (float)data->remote.ch[3] * REMOTE_PITCH_ANGLE_TO_REF;
 
-    Gimbal_SetYawRef(Gimbal_LimitYaw(yaw_ref));
+    Gimbal_SetYawRefDelta(yaw_ref);
     Gimbal_SetPitchRef(Gimbal_LimitPitch(-pitch_ref));
 }
 
@@ -389,7 +389,7 @@ void Remote_KeyMouseProcess() {
         yaw = (float)data->mouse.x * MOUSE_YAW_ANGLE_TO_FACT;
         pitch = Filter_Bessel((float)data->mouse.y, &Remote_mouse_y_Filter) * MOUSE_PITCH_ANGLE_TO_FACT;
 
-        Gimbal_SetYawRef(Gimbal_LimitYaw(yaw));
+        Gimbal_SetYawRefDelta(yaw);
         Gimbal_SetPitchRef(Gimbal_LimitPitch(pitch));
     }
 }

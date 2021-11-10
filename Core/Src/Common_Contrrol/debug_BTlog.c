@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-07 23:58:08
+ * @LastEditTime : 2021-11-08 21:38:04
  */
 
 #include "debug_BTlog.h"
@@ -42,13 +42,14 @@ const uint8_t Const_BTlog_ID = 0x02;
 #endif
 
 /*              Debug BTlog constant            */
-const uint32_t Const_BTlog_HEART_SENT_PERIOD = 100;  // (ms)
+const uint32_t Const_BTlog_HEART_SENT_PERIOD = 10;  // (ms)
 const uint16_t Const_BTlog_RX_BUFF_LEN_MAX = 200;
 const uint16_t Const_BTlog_TX_BUFF_LEN_MAX = 5000;
 const uint16_t Const_BTlog_TX_DATA_LEN_MAX = 20;
 uint8_t BTlog_RxData[Const_BTlog_RX_BUFF_LEN_MAX];
 uint8_t BTlog_TxData[Const_BTlog_TX_BUFF_LEN_MAX];
 uint8_t BTlog_state_pending = 0;
+uint8_t BTlog_state_sending = 0;
 BTlog_TableEntry BTlog_Send_Data[Const_BTlog_TX_DATA_LEN_MAX];
 
 uint8_t BTlog_startFlag = 0xfa;
@@ -86,20 +87,24 @@ void BTlog_Init() {
     // Motor_MotorTypeDef Motor_chassisMotor1, Motor_chassisMotor2, Motor_chassisMotor3, Motor_chassisMotor4, Motor_gimbalMotorYaw, Motor_gimbalMotorPitch, Motor_feederMotor, Motor_shooterMotorLeft, Motor_shooterMotorRight;
 
     void* p = NULL;
-    // ADD_SEND_DATA(imu->angle.pitch, Float, "imu->angle.pitch");
+
+#if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
+    ADD_SEND_DATA(imu->angle.pitch, Float, "imu->angle.pitch");
+    ADD_SEND_DATA(imu->angle.yaw, Float, "imu->angle.yaw");
+#elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+    ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");
+#elif __FN_IF_ENABLE(__FN_SUPER_CAP)
+
+#endif
 
     ADD_SEND_DATA(BTlog_time, uInt32, "current_time");
-    // AddSendData(&(p =), sizeof());
-    // AddSendData(&(p =), sizeof());
-    // AddSendData(&(p =), sizeof());
-    // AddSendData(&(p =), sizeof());
 
     Uart_InitUartDMA(Const_BTlog_UART_HANDLER);
     Uart_ReceiveDMA(Const_BTlog_UART_HANDLER, BTlog_RxData, Const_BTlog_RX_BUFF_LEN_MAX);
 }
 
 void BTlog_Send() {
-    if (BTlog_state_pending)
+    if (BTlog_state_pending || !BTlog_state_sending)
         return;
 
     static uint32_t heart_count = 0;
@@ -129,7 +134,11 @@ void BTlog_Send() {
 }
 
 const uint8_t CMD_GET_STRUCT = 0xFF;
+const uint8_t CMD_START_SENDING = 0xF1;
+const uint8_t CMD_STOP_SENDING = 0xF2;
+
 const uint8_t CMD_SET_GYRO_COMPENSATE = 0xA0;
+
 void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
     // HAL_UART_Transmit_IT(Const_BTlog_UART_HANDLER, BTlog_RxData, rxdatalen);
     if (rxdatalen == 1) {
@@ -149,9 +158,15 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
 
             memcpy(buff + size - sizeof(BTlog_endFlag), BTlog_endFlag, sizeof(BTlog_endFlag) - 1);
             Uart_SendMessage_IT(Const_BTlog_UART_HANDLER, buff, size);
+        } else if (BTlog_RxData[0] == CMD_START_SENDING) {
+            BTlog_state_sending = 1;
+        } else if (BTlog_RxData[0] == CMD_STOP_SENDING) {
+            BTlog_state_sending = 0;
         }
         BTlog_state_pending = 0;
+
     } else {
+#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
         if (BTlog_RxData[0] == CMD_SET_GYRO_COMPENSATE) {
             //float * 4
             Chassis_Gyro_compensate[0] = buff2float(BTlog_RxData + 1);
@@ -159,6 +174,7 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
             Chassis_Gyro_compensate[2] = buff2float(BTlog_RxData + 9);
             Chassis_Gyro_compensate[3] = buff2float(BTlog_RxData + 13);
         }
+#endif
     }
 }
 

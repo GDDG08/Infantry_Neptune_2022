@@ -87,6 +87,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     /*      infantry chasiss const                  */
     x->YAW_MOTOR_INIT_OFFSET = -59.0f;
+    x->YAW_MAXANGLE = 40.0f;
 
     memcpy(x->chassisMotorParam, Const_chassisMotorParam_infantry_3, sizeof(Const_chassisMotorParam_infantry_3));
     memcpy(x->gimbalYawMotorParam, Const_gimbalYawMotorParam_infantry_3, sizeof(Const_gimbalYawMotorParam_infantry_3));
@@ -115,7 +116,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->PITCH_UMAXANGLE = 10.0f;
     x->PITCH_UMAXANGLE_GRYO = 8.0f;
     x->PITCH_DMAXANGLE = -31.5f;
-    x->YAW_MAXANGLE = 40.0f;
+    // x->YAW_MAXANGLE = 40.0f;
     x->PITCH_MOTOR_INIT_OFFSETf = -31.0f;
     x->SERVO_INIT_OFFSET = 0.05f;
 

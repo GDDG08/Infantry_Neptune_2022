@@ -3,7 +3,7 @@
  * 
  *  file         : gim_miniPC_ctrl.c
  *  Description  : This file contains MiniPC control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 23:18:06
  */

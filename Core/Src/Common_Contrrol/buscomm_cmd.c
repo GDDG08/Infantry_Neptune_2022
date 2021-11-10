@@ -3,7 +3,7 @@
  * 
  *  file         : buscomm_cmd.c
  *  Description  : This file is for idiot Can communication
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-09 03:52:32
  *  LastEditTime : 2021-07-28 22:40:46
  */
@@ -138,7 +138,7 @@ static void _send_gimbal_data(uint8_t buff[]) {
     rate4a = 1000 * count4a / HAL_GetTick();
     memset(buff, 0, 8);
     float2buff(buscomm->pitch_angle, buff);
-    float2buff(buscomm->gimbal_yaw_ref, buff + 4);
+    float2buff(buscomm->gimbal_yaw_ref_delta, buff + 4);
     Can_SendMessage(Const_BusComm_CAN_HANDLER, pheader, buff);
 }
 
@@ -225,7 +225,7 @@ static void _set_gimbal_data(uint8_t buff[]) {
     rate4 = 1000 * count4 / HAL_GetTick();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     buscomm->pitch_angle = buff2float(buff);
-    buscomm->gimbal_yaw_ref = buff2float(buff + 4);
+    buscomm->gimbal_yaw_ref_delta = buff2float(buff + 4);
 }
 int count5;
 float rate5;

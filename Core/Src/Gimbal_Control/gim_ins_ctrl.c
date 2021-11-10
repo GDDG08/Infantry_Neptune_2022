@@ -3,7 +3,7 @@
  * 
  *  file         : Using gyroscope, geomagnetic pole completes attitude calculation
  *  Description  : gim_ins_ctrl.c
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-07-09 00:00:22
  *  LastEditTime : 2021-07-28 23:00:02
  */
@@ -119,7 +119,7 @@ void Ins_Task(void const* argument) {
   */
 void Ins_InsInit() {
     // wait a time
-    //  HAL_Delay(INS_TASK_INIT_TIME);
+     HAL_Delay(INS_TASK_INIT_TIME);
 
     Ins_InitIMU();
 
@@ -223,7 +223,7 @@ INS_IMUDataTypeDef* Ins_GetIMUDataPtr() {
 /**
   * @brief      Judge IMU offline
   * @param      NULL
-  * @retval     Offline or not£¨1 is offline£¬0 is not£©
+  * @retval     Offline or notï¿½ï¿½1 is offlineï¿½ï¿½0 is notï¿½ï¿½
   */
 uint8_t Ins_IsIMUOffline() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
@@ -246,7 +246,7 @@ uint8_t Ins_IsIMUOffline() {
 }
 
 /**
-  * @brief      IMU decode data function    £¨For BMI0xx)
+  * @brief      IMU decode data function    ï¿½ï¿½For BMI0xx)
   * @param      NULL
   * @retval     NULL
   */

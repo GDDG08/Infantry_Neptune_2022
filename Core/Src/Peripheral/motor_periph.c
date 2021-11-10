@@ -3,7 +3,7 @@
  * 
  *  file         : motor_periph.c
  *  Description  : This file contains motor control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-05-14 11:57:35
  */
@@ -125,6 +125,7 @@ Motor_MotorTypeDef Motor_feederMotor;
 Motor_MotorTypeDef Motor_shooterMotorLeft;
 Motor_MotorTypeDef Motor_shooterMotorRight;
 
+// float GimbalMotorYaw_INIT_Offset = 0.0f;
 /**
   * @brief      Motor encoder decoding callback function
   * @param      canid: CAN Handle number
@@ -132,6 +133,7 @@ Motor_MotorTypeDef Motor_shooterMotorRight;
   * @param      rxdata: CAN rx data buff
   * @retval     NULL
   */
+// uint8_t gimbalYawINIT = 0;
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len) {
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     if (phcan == &hcan1) {
@@ -154,6 +156,11 @@ void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8
             }
             case 0x205: {
                 Motor_DecodeEncoder(rxdata, &Motor_gimbalMotorYaw);
+
+                // if (!gimbalYawINIT) {
+                //     GimbalMotorYaw_INIT_Offset = Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET;
+                //     gimbalYawINIT = 1;
+                // }
                 break;
             }
             default: {

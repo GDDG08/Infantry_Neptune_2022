@@ -3,7 +3,7 @@
  * 
  *  file         : This file contains Constant setting function
  *  Description  : const.h
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-06-13 12:48:01
  *  LastEditTime : 2021-07-26 21:44:59
  */
@@ -105,16 +105,16 @@ typedef struct {
 
 /*          ADC Control related constants       */
 extern float Const_ADC_V_VGAIN;               // Voltage value division ratio 10:1
-extern float Const_ADC_V_C_HolzerGAIN;        // Gain of Hall current sensor£¨chassis referee£©
-extern float Const_ADC_V_C_BuckOutResGAIN;    // Buck output current sensing gain£¨LT3790£©
-extern float Const_ADC_V_C_BuckInputResGAIN;  // Buck input current sensing gain£¨LT3790£©
+extern float Const_ADC_V_C_HolzerGAIN;        // Gain of Hall current sensorï¿½ï¿½chassis refereeï¿½ï¿½
+extern float Const_ADC_V_C_BuckOutResGAIN;    // Buck output current sensing gainï¿½ï¿½LT3790ï¿½ï¿½
+extern float Const_ADC_V_C_BuckInputResGAIN;  // Buck input current sensing gainï¿½ï¿½LT3790ï¿½ï¿½
 extern float Const_ADC_Cap_TotalEnergy;       // Total capacitance energy
 extern float Const_ADC_CapValue;              // Minimum voltage of capacitor
 extern float Const_ADC_CurrentErrorVoltage;   // Current sensor error
 
 /*          DAC Control related constants       */
-extern float Const_DAC_GAIN;       // DAC current set gain£¨LT3790£©
-extern float Const_DAC_DetectRES;  // DAC current set resistor£¨LT3790£©
+extern float Const_DAC_GAIN;       // DAC current set gainï¿½ï¿½LT3790ï¿½ï¿½
+extern float Const_DAC_DetectRES;  // DAC current set resistorï¿½ï¿½LT3790ï¿½ï¿½
 
 /*          Super Cap control const             */
 extern float Cap_MinVoltage;           // Cap min voltage
@@ -130,6 +130,8 @@ extern float Const_YAW_MOTOR_INIT_OFFSET;
 /*          Chassis control filter const        */
 extern float Const_Chassis_MOVE_REF_TO_MOTOR_REF;
 extern float Const_Chassis_ROTATE_REF_TO_MOTOR_REF;
+
+extern float Const_YAW_MAXANGLE;
 
 #endif
 
@@ -153,7 +155,7 @@ extern uint32_t Const_MiniPC_Lost_Target_Time;
 extern float Const_PITCH_UMAXANGLE;
 extern float Const_PITCH_UMAXANGLE_GRYO;
 extern float Const_PITCH_DMAXANGLE;
-extern float Const_YAW_MAXANGLE;
+// extern float Const_YAW_MAXANGLE;
 extern float Const_PITCH_MOTOR_INIT_OFFSET;
 extern float Const_SERVO_INIT_OFFSET;
 extern float Const_YAW_MOTOR_INIT_OFFSET;

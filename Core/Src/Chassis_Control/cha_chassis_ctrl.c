@@ -249,19 +249,30 @@ float Gyro_compensate_1 = 1.0f;
 float Gyro_compensate_2 = 1.0f;
 float Gyro_compensate_3 = 1.0f;
 float Gyro_compensate_4 = 1.0f;
-float Chassis_Gyro_compensate[4] = {1.1f, 1.0f, 1.0f, 0.9f};
+float Chassis_Gyro_compensate[4] = {1.11f, 1.0f, 1.0304f, 1.0096f};
 
 void Chassis_CalcMecanumRef() {
     Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
 
-    Motor_SetMotorRef(&Motor_chassisMotor1,
-                      Gyro_compensate_1 * (chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
-    Motor_SetMotorRef(&Motor_chassisMotor2,
-                      Gyro_compensate_2 * (-chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
-    Motor_SetMotorRef(&Motor_chassisMotor3,
-                      Gyro_compensate_3 * (-chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
-    Motor_SetMotorRef(&Motor_chassisMotor4,
-                      Gyro_compensate_4 * (chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
+    if (chassis->power_ref.forward_back_ref > 5.0f || chassis->power_ref.left_right_ref > 5.0f) {
+        Motor_SetMotorRef(&Motor_chassisMotor1,
+                          chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+        Motor_SetMotorRef(&Motor_chassisMotor2,
+                          -chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+        Motor_SetMotorRef(&Motor_chassisMotor3,
+                          -chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+        Motor_SetMotorRef(&Motor_chassisMotor4,
+                          chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF);
+    } else {
+        Motor_SetMotorRef(&Motor_chassisMotor1,
+                          Gyro_compensate_1 * (chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
+        Motor_SetMotorRef(&Motor_chassisMotor2,
+                          Gyro_compensate_2 * (-chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
+        Motor_SetMotorRef(&Motor_chassisMotor3,
+                          Gyro_compensate_3 * (-chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
+        Motor_SetMotorRef(&Motor_chassisMotor4,
+                          Gyro_compensate_4 * (chassis->power_ref.forward_back_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF - chassis->power_ref.left_right_ref * Const_Chassis_MOVE_REF_TO_MOTOR_REF + chassis->power_ref.rotate_ref * Const_Chassis_ROTATE_REF_TO_MOTOR_REF));
+    }
 }
 
 /**

@@ -117,6 +117,7 @@ void Init_Task(void const* argument) {
     Chassis_InitChassis();
     Power_InitPower();
     GimbalYaw_InitGimbalYaw();
+    
 #if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
     BTlog_Init();
 #endif

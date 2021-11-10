@@ -3,7 +3,7 @@
  * 
  *  file         : buscomm_ctrl.h
  *  Description  : This file contains Bus bus communication control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-28 22:39:26
  */
@@ -88,7 +88,7 @@ typedef struct {
 
     // Gimbal up stream
     uint8_t gimbal_yaw_mode;   // Yaw mode of gimbal
-    float gimbal_yaw_ref;      // gimbal yaw target value
+    float gimbal_yaw_ref_delta;      // gimbal yaw target delta value
     float gimbal_imu_pos;      // gimbal yaw IMU angle feedback value
     float gimbal_imu_spd;      // Speed feedback value of gimbal yaw IMU
     uint8_t chassis_mode;      // Chassis mode

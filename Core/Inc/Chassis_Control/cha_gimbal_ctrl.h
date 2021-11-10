@@ -1,9 +1,18 @@
 /*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Chassis_Control\cha_gimbal_ctrl.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-07-24 10:27:08
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-11-10 10:05:50
+ */
+/*
  *  Project      : Infantry_Neptune
  * 
  *  file         : cha_gimbal_ctrl.h
  *  Description  : This file contains Gimbal control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-05-08 08:25:47
  */
@@ -22,6 +31,7 @@ extern "C" {
 #include "motor_periph.h"
 #include "filter_alg.h"
 #include "math_alg.h"
+#include "cha_chassis_ctrl.h"
 
 typedef enum {
     GimbalYaw_MODE_NULL = 0u,

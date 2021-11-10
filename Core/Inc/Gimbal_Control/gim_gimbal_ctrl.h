@@ -1,9 +1,18 @@
 /*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Gimbal_Control\gim_gimbal_ctrl.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-10-29 20:20:13
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2021-11-10 10:08:05
+ */
+/*
  *  Project      : Infantry_Neptune
  * 
  *  file         : gim_gimbal_ctrl.h
  *  Description  : This file contains Gimbal control function
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 10:32:36
  */
@@ -52,6 +61,7 @@ typedef struct {
 typedef struct {
     float pitch_angle_ref;
     float yaw_angle_ref;
+    float yaw_angle_ref_delta;
 } Gimbal_AngleRefTypeDef;
 
 typedef struct {
@@ -83,10 +93,11 @@ void Gimbal_CtrlYaw(void);
 void Gimbal_CtrlPitch(void);
 void Gimbal_ChangeMode(Gimbal_ModeEnum mode);
 float Gimbal_LimitPitch(float ref);
-float Gimbal_LimitYaw(float ref);
+// float Gimbal_LimitYaw(float ref);
 void Gimbal_SetPitchRef(float ref);
 void Gimbal_SetPitchAutoRef(float ref);
 void Gimbal_SetYawRef(float ref);
+void Gimbal_SetYawRefDelta(float ref);
 void Gimbal_SetYawAutoRef(float ref);
 
 #endif
