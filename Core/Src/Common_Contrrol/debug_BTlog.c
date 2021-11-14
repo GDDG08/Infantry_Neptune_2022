@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-08 21:38:04
+ * @LastEditTime : 2021-11-13 21:43:10
  */
 
 #include "debug_BTlog.h"
@@ -20,6 +20,7 @@
 #include "gim_gimbal_ctrl.h"
 #include "gim_ins_ctrl.h"
 #include "key_periph.h"
+#include "minipc_periph.h"
 #endif
 
 #if __FN_IF_ENABLE(__FN_SUPER_CAP)
@@ -42,7 +43,7 @@ const uint8_t Const_BTlog_ID = 0x02;
 #endif
 
 /*              Debug BTlog constant            */
-const uint32_t Const_BTlog_HEART_SENT_PERIOD = 10;  // (ms)
+const uint32_t Const_BTlog_HEART_SENT_PERIOD = 5;  // (ms)
 const uint16_t Const_BTlog_RX_BUFF_LEN_MAX = 200;
 const uint16_t Const_BTlog_TX_BUFF_LEN_MAX = 5000;
 const uint16_t Const_BTlog_TX_DATA_LEN_MAX = 20;
@@ -77,6 +78,7 @@ void BTlog_Init() {
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
+    MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     GimbalYaw_GimbalYawTypeDef* gimbal = GimbalYaw_GetGimbalYawPtr();
     Referee_RefereeDataTypeDef* referee = Referee_GetRefereeDataPtr();
@@ -87,17 +89,21 @@ void BTlog_Init() {
     // Motor_MotorTypeDef Motor_chassisMotor1, Motor_chassisMotor2, Motor_chassisMotor3, Motor_chassisMotor4, Motor_gimbalMotorYaw, Motor_gimbalMotorPitch, Motor_feederMotor, Motor_shooterMotorLeft, Motor_shooterMotorRight;
 
     void* p = NULL;
-
+    ADD_SEND_DATA(BTlog_time, uInt32, "current_time");
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     ADD_SEND_DATA(imu->angle.pitch, Float, "imu->angle.pitch");
     ADD_SEND_DATA(imu->angle.yaw, Float, "imu->angle.yaw");
+    ADD_SEND_DATA(minipc_data->state, uInt8, "minipcD->state");
+    ADD_SEND_DATA(minipc_data->pitch_angle, uInt8, "minipcD->pitch_angle");
+    ADD_SEND_DATA(minipc_data->yaw_angle, uInt8, "minipcD->yaw_angle");
+
+
+
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");
 #elif __FN_IF_ENABLE(__FN_SUPER_CAP)
 
 #endif
-
-    ADD_SEND_DATA(BTlog_time, uInt32, "current_time");
 
     Uart_InitUartDMA(Const_BTlog_UART_HANDLER);
     Uart_ReceiveDMA(Const_BTlog_UART_HANDLER, BTlog_RxData, Const_BTlog_RX_BUFF_LEN_MAX);
