@@ -67,23 +67,23 @@ const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {
     {
         // Mode 0: 15 m/s
         {0x101, 2, 960, 500, 960, 620},  // Vertical Line
-        {0x102, 4, 850, 600, 950, 600},  // Horizontal Line 1
-        {0x103, 2, 850, 560, 950, 560},  // Horizontal Line 2
-        {0x104, 2, 870, 520, 930, 520}   // Horizontal Line 3
+        {0x102, 4, 910, 610, 1010, 610},     // Horizontal Line 1
+        {0x103, 2, 820, 560, 1100, 560},     // Horizontal Line 2
+        {0x104, 2, 910, 510, 1010, 510}      // Horizontal Line 3
     },
     {
         // Mode 1: 18 m/s
         {0x101, 2, 960, 500, 960, 620},  // Vertical Line
-        {0x102, 4, 850, 600, 950, 600},  // Horizontal Line 1
-        {0x103, 2, 850, 540, 950, 540},  // Horizontal Line 2
-        {0x104, 2, 870, 500, 930, 500}   // Horizontal Line 3
+        {0x102, 4, 910, 610, 1010, 600},     // Horizontal Line 1
+        {0x103, 2, 820, 560, 1100, 560},     // Horizontal Line 2
+        {0x104, 2, 910, 520, 1010, 520}      // Horizontal Line 3
     },
     {
         // Mode 2: 30 m/s
         {0x101, 2, 960, 500, 960, 620},  // Vertical Line
-        {0x102, 4, 850, 600, 950, 600},  // Horizontal Line 1
-        {0x103, 2, 850, 580, 950, 580},  // Horizontal Line 2
-        {0x104, 2, 870, 560, 930, 560}   // Horizontal Line 3
+        {0x102, 4, 910, 600, 1010, 600},     // Horizontal Line 1
+        {0x103, 2, 820, 560, 1100, 560},     // Horizontal Line 2
+        {0x104, 2, 910, 520, 1010, 520}      // Horizontal Line 3
     }};
 
 const uint8_t CROSSHAIR_LAYER = 2;
@@ -118,27 +118,27 @@ const char* CAP_STATE_TEXT_STR = "CAP";
 
 const uint8_t PITCH_METER_LAYER = 2;
 const Draw_Color PITCH_METER_COLOR = Draw_COLOR_GREEN;
-const uint16_t PITCH_METER_TEXT[5] = {0x501, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
+const uint16_t PITCH_METER_TEXT[5]  = {0x501, 20, 2, 1600, 500};     // ID, Font Size, Width, X, Y
 const char* PITCH_METER_TEXT_STR = "PITCH:";
 const uint16_t PITCH_METER_VALUE[6] = {0x502, 20, 3, 2, 1600, 540};  // ID, Font Size, Precision, Width, X, Y
 
 const uint8_t AIM_MODE_LAYER = 2;
 const Draw_Color AIM_MODE_COLOR = Draw_COLOR_GREEN;
-const uint16_t AIM_MODE_TEXT[5] = {0x503, 20, 2, 1500, 540};        // ID, Font Size, Width, X, Y
-const uint16_t AIM_MODE_VALUE_TEXT[5] = {0x504, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
-const char* AIM_MODE_TEXT_STR = "AIM_MODE:";
-const char* NORMAL_AIM_TEXT_STR = "NORMAL";
-const char* ARMOR_AIM_TEXT_STR = "ARMOR";
-const char* BIG_BUFF_AIM_TEXT_STR = "BIG_BUF";
-const char* SMALL_BUFF_AIM_TEXT_STR = "SMALL_BUF";
+const uint16_t AIM_MODE_TEXT[5]     = {0x503, 20, 2, 200, 800};     // ID, Font Size, Width, X, Y
+const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x504, 20, 2, 600, 900};     // ID, Font Size, Width, X, Y
+const char *AIM_MODE_TEXT_STR       = "AIM_MODE:\0";
+const char *NORMAL_AIM_TEXT_STR     = "AIM_MODE: NORMAL\0";
+const char *ARMOR_AIM_TEXT_STR      = "AIM_MODE: ARMOR\0";
+const char *BIG_BUFF_AIM_TEXT_STR   = "AIM_MODE: BIG_BUF\0";
+const char *SMALL_BUFF_AIM_TEXT_STR = "AIM_MODE: SMALL_BUF\0";
 
 const uint8_t CHASSIS_MODE_LAYER = 2;
 const Draw_Color CHASSIS_MODE_COLOR = Draw_COLOR_GREEN;
-const uint16_t CHASSIS_MODE_TEXT[5] = {0x505, 20, 2, 1500, 540};        // ID, Font Size, Width, X, Y
-const uint16_t CHASSIS_MODE_VALUE_TEXT[5] = {0x506, 20, 2, 1500, 540};  // ID, Font Size, Width, X, Y
-const char* CHASSIS_MODE_TEXT_STR = "CHASSIS_MODE:";
-const char* NORMAL_RUN_TEXT_STR = "NORMAL";
-const char* GYRO_RUN_TEXT_STR = "GYRO";
+const uint16_t CHASSIS_MODE_TEXT[5] = {0x505, 20, 2, 200, 600};     // ID, Font Size, Width, X, Y
+const uint16_t CHASSIS_MODE_VALUE_TEXT[5]  = {0x506, 20, 2, 600, 850};     // ID, Font Size, Width, X, Y
+const char *CHASSIS_MODE_TEXT_STR  = "CHASSIS_MODE:\0";
+const char *NORMAL_RUN_TEXT_STR    = "CHASSIS_MODE: NORMAL\0";
+const char *GYRO_RUN_TEXT_STR      = "CHASSIS_MODE: GYRO\0";
 
 /********** END OF Drawing Constants **********/
 
@@ -451,8 +451,8 @@ void Referee_SetupAllString() {
     // cmd_cnt: 2
     //Referee_RefereeDataTypeDef *Referee = &Referee_DrawData;
 
-    Draw_AddString(CAP_STATE_TEXT[0], CAP_STATE_LAYER[1], CAP_STATE_COLOR[1], CAP_STATE_TEXT[1], CAP_STATE_TEXT[2], CAP_STATE_TEXT[3], CAP_STATE_TEXT[4], CAP_STATE_TEXT_STR);
-    Draw_AddString(PITCH_METER_TEXT[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_TEXT[1], PITCH_METER_TEXT[2], PITCH_METER_TEXT[3], PITCH_METER_TEXT[4], PITCH_METER_TEXT_STR);
+//    Draw_AddString(CAP_STATE_TEXT[0], CAP_STATE_LAYER[1], CAP_STATE_COLOR[1], CAP_STATE_TEXT[1], CAP_STATE_TEXT[2], CAP_STATE_TEXT[3], CAP_STATE_TEXT[4], CAP_STATE_TEXT_STR);
+//    Draw_AddString(PITCH_METER_TEXT[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_TEXT[1], PITCH_METER_TEXT[2], PITCH_METER_TEXT[3], PITCH_METER_TEXT[4], PITCH_METER_TEXT_STR);
 
     Draw_AddString(AIM_MODE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_TEXT[1], AIM_MODE_TEXT[2], AIM_MODE_TEXT[3], AIM_MODE_TEXT[4], AIM_MODE_TEXT_STR);
     Draw_AddString(CHASSIS_MODE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_TEXT[1], CHASSIS_MODE_TEXT[2], CHASSIS_MODE_TEXT[3], CHASSIS_MODE_TEXT[4], CHASSIS_MODE_TEXT_STR);

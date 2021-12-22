@@ -54,8 +54,8 @@ static const float Const_gimbalPitchMotorParam_infantry_3[5][3][4][5] = {
 };
 
 static const float Const_ShooterMotorParam_infantry_3[2][3][4][5] = {
-    {{{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}, {{18, 0.2, 0, 10000, 20000}, {-1, -1}, {0, 0}, {-1, -1}}, {{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}},  // Left shooter motor
-    {{{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}, {{18, 0.2, 0, 10000, 20000}, {-1, -1}, {0, 0}, {-1, -1}}, {{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}}   // Right shooter motor
+    {{{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}, {{18, 0.18, 0, 10000, 20000}, {-1, -1}, {0, 0}, {-1, -1}}, {{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}},  // Left shooter motor
+    {{{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}, {{18, 0.22, 0, 10000, 20000}, {-1, -1}, {0, 0}, {-1, -1}}, {{0, 0, 0, 0, 0}, {-1, -1}, {0, 0}, {-1, -1}}}   // Right shooter motor
 };
 
 static const float Const_FeederMotorParam_infantry_3[1][3][4][5] = {
@@ -81,7 +81,7 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     /*          Super Cap control const             */
     x->Cap_MinVoltage = 15.0f;
     x->Cap_ChargeReservedPower = 5.0f;
-    x->Cap_AvailableVoltage = 19.0f;
+    x->Cap_AvailableVoltage = 18.0f;
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
@@ -134,9 +134,9 @@ void Const_Infantry_3_Init(Const_ConstTypeDef* x) {
     x->ShooterSlowSpeed = 150.0f;
     x->ShooterFastSpeed = 230.0f;
 
-    x->Shooter15mpers = 215.0f;
-    x->Shooter18mpers = 230.0f;
-    x->Shooter30mpers = 330.0f;
+    x->Shooter15mpers = 105.0f;
+    x->Shooter18mpers = 115.0f;
+    x->Shooter30mpers = 175.0f;
 
     x->FeederSlowSpeed = 50.0f;
     x->FeederFastSpeed = 100.0f;

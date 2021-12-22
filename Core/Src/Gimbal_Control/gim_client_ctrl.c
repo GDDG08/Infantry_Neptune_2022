@@ -45,9 +45,9 @@ osEvent func_event;
   */
 void Client_Task(void const* argument) {
     static uint32_t page_stay_period = 0;
-    while (1) {
-        osDelay(1);
-    }
+    // while (1) {
+    //     osDelay(1);
+    // }
     for (;;) {
         Client_DisplayInterface();
         if (GLOBAL_INIT_FLAG == 1) {

@@ -3,7 +3,7 @@
  * 
  *  file         : infantry6_const.c
  *  Description  : This file contains 6 infantry constants
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-11 06:15:02
  */
@@ -81,7 +81,7 @@ void Const_Infantry_6_Init(Const_ConstTypeDef* x) {
     /*          Super Cap control const             */
     x->Cap_MinVoltage = 15.0f;
     x->Cap_ChargeReservedPower = 5.0f;
-    x->Cap_AvailableVoltage = 19.0f;
+    x->Cap_AvailableVoltage = 18.0f;
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)

@@ -3,7 +3,7 @@
  * 
  *  file         : infantry5_const.c
  *  Description  : This file contains 5 infantry constants
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-26 21:39:54
  */
@@ -81,7 +81,7 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
     /*          Super Cap control const             */
     x->Cap_MinVoltage = 15.0f;
     x->Cap_ChargeReservedPower = 5.0f;
-    x->Cap_AvailableVoltage = 19.0f;
+    x->Cap_AvailableVoltage = 18.0f;
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
@@ -121,10 +121,10 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
     x->PITCH_MOTOR_INIT_OFFSETf = -31.0f;
     x->SERVO_INIT_OFFSET = 0.05f;
 
-    x->CVKF_NT_YAW = 80;
+    x->CVKF_NT_YAW = 150;
 
     /*          Gimbal pitch limit                  */
-    x->YAW_MOTOR_INIT_OFFSET = 59.0f;
+    x->YAW_MOTOR_INIT_OFFSET = -150.0f;  //59.0f;
 
     x->ShooterLockedCurrent = 3000.0f;
     x->ShooterLockedSpeed = 20.0f;
@@ -135,9 +135,9 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
     x->ShooterSlowSpeed = 150.0f;
     x->ShooterFastSpeed = 230.0f;
 
-    x->Shooter15mpers = 215.0f;
-    x->Shooter18mpers = 230.0f;
-    x->Shooter30mpers = 330.0f;
+    x->Shooter15mpers = 235.0f;
+    x->Shooter18mpers = 260.0f;
+    x->Shooter30mpers = 360.0f;
 
     x->FeederSlowSpeed = 50.0f;
     x->FeederFastSpeed = 100.0f;
@@ -149,8 +149,8 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
     x->HeatCtrlSingleCount = 10;
     x->HeatCtrlStopLimit = 10;
 
-    x->energy_yaw_offset = 0.9f;
-    x->energy_pitch_offset = 0.3f;
+    x->energy_yaw_offset = 0.7f;
+    x->energy_pitch_offset = -0.2f;
 
 #endif
 }
