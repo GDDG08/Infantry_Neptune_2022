@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-13 21:43:10
+ * @LastEditTime : 2021-11-30 23:26:28
  */
 
 #include "debug_BTlog.h"
@@ -27,9 +27,8 @@
 #include "supercap_ctrl.h"
 #endif
 
-#define ADD_SEND_DATA(x, y, z) \
-    p = &x;                    \
-    AddSendData(&p, sizeof(x), y, z)
+#define ADD_SEND_DATA(x, y, z) AddSendData(&x, sizeof(x), y, z)
+#define ADD_RECV_DATA(x, y) AddRecvData(&x, sizeof(x), y)
 
 #if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
 
@@ -43,26 +42,44 @@ const uint8_t Const_BTlog_ID = 0x02;
 #endif
 
 /*              Debug BTlog constant            */
-const uint32_t Const_BTlog_HEART_SENT_PERIOD = 5;  // (ms)
-const uint16_t Const_BTlog_RX_BUFF_LEN_MAX = 200;
+const uint32_t Const_BTlog_HEART_SENT_PERIOD = 10;  // (ms)
+const uint16_t Const_BTlog_RX_BUFF_LEN_MAX = 5000;
 const uint16_t Const_BTlog_TX_BUFF_LEN_MAX = 5000;
-const uint16_t Const_BTlog_TX_DATA_LEN_MAX = 20;
+const uint16_t Const_BTlog_RX_DATA_LEN_MAX = 50;
+const uint16_t Const_BTlog_TX_DATA_LEN_MAX = 50;
+
 uint8_t BTlog_RxData[Const_BTlog_RX_BUFF_LEN_MAX];
 uint8_t BTlog_TxData[Const_BTlog_TX_BUFF_LEN_MAX];
+BTlog_TableEntry BTlog_Send_Data[Const_BTlog_TX_DATA_LEN_MAX];
+BTlog_TableEntry BTlog_Recv_Data[Const_BTlog_RX_DATA_LEN_MAX];
+
 uint8_t BTlog_state_pending = 0;
 uint8_t BTlog_state_sending = 0;
-BTlog_TableEntry BTlog_Send_Data[Const_BTlog_TX_DATA_LEN_MAX];
 
 uint8_t BTlog_startFlag = 0xfa;
 char BTlog_endFlag[] = "@\r\n";
-uint32_t BTlog_time = 0;
+uint8_t BTlog_Recv_endFlag = 0x5a;
 
 //StartFlag, Head and EndFlag
 uint16_t BTlog_TX_BUFF_LEN = 3 + 1 + 3;
 uint16_t BTlog_TX_DATA_LEN = 0;
+//Head Checksum and EndFlag
+uint16_t BTlog_RX_BUFF_LEN = 1 + 1 + 1;
+uint16_t BTlog_RX_DATA_LEN = 0;
 
-void AddSendData(void** ptr, uint8_t size, BTlog_TypeEnum type, char* tag) {
-    BTlog_Send_Data[BTlog_TX_DATA_LEN].ptr = *ptr;
+uint32_t BTlog_time = 0;
+
+/**
+ * @name: anonymous
+ * @msg: 
+ * @param {void*} ptr
+ * @param {uint8_t} size
+ * @param {BTlog_TypeEnum} type
+ * @param {char*} tag
+ * @return {*}
+ */
+void AddSendData(void* ptr, uint8_t size, BTlog_TypeEnum type, char* tag) {
+    BTlog_Send_Data[BTlog_TX_DATA_LEN].ptr = ptr;
     BTlog_Send_Data[BTlog_TX_DATA_LEN].size = size;
     BTlog_Send_Data[BTlog_TX_DATA_LEN].type = type;
     memcpy(BTlog_Send_Data[BTlog_TX_DATA_LEN].tag, tag, BTlog_tagSize);
@@ -70,6 +87,30 @@ void AddSendData(void** ptr, uint8_t size, BTlog_TypeEnum type, char* tag) {
     BTlog_TX_DATA_LEN++;
 }
 
+/**
+ * @name: anonymous
+ * @msg: 
+ * @param {void*} ptr
+ * @param {uint8_t} size
+ * @param {BTlog_TypeEnum} type
+ * @param {char*} tag
+ * @return {*}
+ */
+void AddRecvData(void* ptr, uint8_t size, BTlog_TypeEnum type) {
+    BTlog_Recv_Data[BTlog_RX_DATA_LEN].ptr = ptr;
+    BTlog_Recv_Data[BTlog_RX_DATA_LEN].size = size;
+    BTlog_Recv_Data[BTlog_RX_DATA_LEN].type = type;
+    BTlog_RX_BUFF_LEN += size;
+    BTlog_RX_DATA_LEN++;
+}
+
+/**
+ * @name: INIT
+ * @test: TODO: Add to init
+ * @msg: 
+ * @param {*}
+ * @return {*}
+ */
 void BTlog_Init() {
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     GPIO_Set(LASER);
@@ -88,19 +129,33 @@ void BTlog_Init() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     // Motor_MotorTypeDef Motor_chassisMotor1, Motor_chassisMotor2, Motor_chassisMotor3, Motor_chassisMotor4, Motor_gimbalMotorYaw, Motor_gimbalMotorPitch, Motor_feederMotor, Motor_shooterMotorLeft, Motor_shooterMotorRight;
 
-    void* p = NULL;
+    //Log Data Send
     ADD_SEND_DATA(BTlog_time, uInt32, "current_time");
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     ADD_SEND_DATA(imu->angle.pitch, Float, "imu->angle.pitch");
     ADD_SEND_DATA(imu->angle.yaw, Float, "imu->angle.yaw");
     ADD_SEND_DATA(minipc_data->state, uInt8, "minipcD->state");
-    ADD_SEND_DATA(minipc_data->pitch_angle, uInt8, "minipcD->pitch_angle");
-    ADD_SEND_DATA(minipc_data->yaw_angle, uInt8, "minipcD->yaw_angle");
-
-
+    ADD_SEND_DATA(minipc_data->pitch_angle, Float, "minipcD->pitch_angle");
+    ADD_SEND_DATA(minipc_data->yaw_angle, Float, "minipcD->yaw_angle");
 
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");
+    ADD_SEND_DATA(Motor_chassisMotor1.encoder.speed, uInt16, "Chassis_Motor1_spd");
+    ADD_SEND_DATA(Motor_chassisMotor2.encoder.speed, uInt16, "Chassis_Motor2_spd");
+    ADD_SEND_DATA(Motor_chassisMotor3.encoder.speed, uInt16, "Chassis_Motor3_spd");
+    ADD_SEND_DATA(Motor_chassisMotor4.encoder.speed, uInt16, "Chassis_Motor4_spd");
+#elif __FN_IF_ENABLE(__FN_SUPER_CAP)
+
+#endif
+
+//Customize Remote Control Receive
+#if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
+
+#elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+    ADD_RECV_DATA(Chassis_Gyro_compensate[0], Float);
+    ADD_RECV_DATA(Chassis_Gyro_compensate[1], Float);
+    ADD_RECV_DATA(Chassis_Gyro_compensate[2], Float);
+    ADD_RECV_DATA(Chassis_Gyro_compensate[3], Float);
 #elif __FN_IF_ENABLE(__FN_SUPER_CAP)
 
 #endif
@@ -109,6 +164,12 @@ void BTlog_Init() {
     Uart_ReceiveDMA(Const_BTlog_UART_HANDLER, BTlog_RxData, Const_BTlog_RX_BUFF_LEN_MAX);
 }
 
+/**
+ * @name: SEND
+ * @msg: TODO:  call this when needed
+ * @param {*}
+ * @return {*}
+ */
 void BTlog_Send() {
     if (BTlog_state_pending || !BTlog_state_sending)
         return;
@@ -144,7 +205,14 @@ const uint8_t CMD_START_SENDING = 0xF1;
 const uint8_t CMD_STOP_SENDING = 0xF2;
 
 const uint8_t CMD_SET_GYRO_COMPENSATE = 0xA0;
-
+const uint8_t CMD_SET_CUSTOMIZE = 0xA5;
+/**
+ * @name: DECODE
+ * @msg: 
+ * @param {uint8_t*} BTlog_RxData
+ * @param {uint16_t} rxdatalen
+ * @return {*}
+ */
 void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
     // HAL_UART_Transmit_IT(Const_BTlog_UART_HANDLER, BTlog_RxData, rxdatalen);
     if (rxdatalen == 1) {
@@ -181,23 +249,55 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
             Chassis_Gyro_compensate[3] = buff2float(BTlog_RxData + 13);
         }
 #endif
+
+        if (BTlog_RxData[0] == CMD_SET_CUSTOMIZE) {
+            //check
+            if (BTLog_VerifyData(BTlog_RxData, rxdatalen)) {
+                uint8_t* buff = BTlog_RxData;
+                int cur_pos = 1;
+                for (uint16_t i = 0; i < BTlog_RX_DATA_LEN; i++) {
+                    uint8_t size = BTlog_Recv_Data[i].size;
+                    memcpy(BTlog_Recv_Data[i].ptr, buff + cur_pos, size);
+                    cur_pos += size;
+                }
+            }
+        }
     }
 }
+/**
+  * @brief      Data Checksum Verify
+  * @param      buff: Data buffer
+  * @param      rxdatalen: recevie data length
+  * @retval     Match is 1  not match is 0
+  */
 
+uint8_t BTLog_VerifyData(uint8_t* buff, uint16_t rxdatalen) {
+    if (rxdatalen != BTlog_RX_BUFF_LEN)
+        return 0;
+    if (buff[0] != CMD_SET_CUSTOMIZE || buff[rxdatalen - 1] != BTlog_Recv_endFlag)
+        return 0;
+
+    uint8_t sum = buff[rxdatalen - 2];
+    uint32_t checksum = 0;
+    for (int i = 1; i < rxdatalen - 2; i++)
+        checksum += buff[i];
+    checksum = checksum & 0xff;
+    return checksum == sum;
+}
+
+/**
+ * @name: RX
+ * @msg: TODO: add this to uart cbk
+ * @param {UART_HandleTypeDef*} huart
+ * @return {*}
+ */
 void BTlog_RXCallback(UART_HandleTypeDef* huart) {
-    /* clear DMA transfer complete flag */
     __HAL_DMA_DISABLE(huart->hdmarx);
-
-    /* handle dbus data dbus_buf from DMA */
-
     uint16_t rxdatalen = Const_BTlog_RX_BUFF_LEN_MAX - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
 
     BTlog_DecodeData(BTlog_RxData, rxdatalen);
-    //Referee_DecodeRefereeData(Referee_RxData, rxdatalen);
 
-    /* restart dma transmission */
     __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_BTlog_RX_BUFF_LEN_MAX);
-    //HAL_DMA_Start(huart->hdmarx,(uint32_t)&huart->Instance->DR,(uint32_t)Referee_RxData,Const_Referee_RX_BUFF_LEN);
     __HAL_DMA_ENABLE(huart->hdmarx);
 }
 

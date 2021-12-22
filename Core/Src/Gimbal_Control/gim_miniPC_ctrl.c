@@ -49,8 +49,8 @@ float autoaim_yaw_dead = 0.05f;
 float autoaim_pitch_limit = 5.0f;
 float autoaim_yaw_limit = 10.0f;
 
-float energy_yaw_offset = 1.0f;  //LEFT + RIGHT -
-float energy_pitch_offset = 0.2f; // UP - DOWN +
+float energy_yaw_offset = 1.0f;    //LEFT + RIGHT -
+float energy_pitch_offset = 0.2f;  // UP - DOWN +
 
 float delta_predict = 0.0f;
 float pitch_angle = 0;
@@ -96,13 +96,13 @@ void MiniPC_ControlInit() {
     Filter_LowPassInit(0.01, &minipc->distance_fil_param);
 
     //CVKF Init Variables:
-    minipc->cvkf_control.total = 1;
+    minipc->cvkf_control.total = 0;
     minipc->cvkf_control.basicprocess = 1;
     minipc->cvkf_control.jumpjudge = 0;  //no function
     minipc->cvkf_control.limit = 0;
     minipc->cvkf_control.offset = 1;
     minipc->cvkf_control.output = 1;
-    minipc->cvkf_control.predict = 1;
+    minipc->cvkf_control.predict = 0;
     minipc->cvkf_control.lowfilter = 1;
     minipc->cvkf_control.dead_domain_delta_ref = 1;
 
@@ -360,22 +360,29 @@ void MiniPC_SetAutoAimRef() {
         if (minipc->cvkf_control.offset == 1) {
             pitch_angle = gimbal->pitch_position_fdb + minipc->pitch_angle;
 
-            if (pitch_angle >= 0.7f)                                autoaim_pitch_offset = -5.0f;
-            else if (pitch_angle < -0.7f && pitch_angle >= -1.3f)   autoaim_pitch_offset = -6.7f;
-            else if (pitch_angle < -1.3f && pitch_angle >= -5.0f)   autoaim_pitch_offset = -8.0f;				
-						else if (pitch_angle < -5.0f && pitch_angle >= -15.0f)  autoaim_pitch_offset = -5.0f; // shoot for sentry in Round High
-						else if (pitch_angle < -15.0f)                          autoaim_pitch_offset = -3.0f; // shoot for sentry in ~~ROAD
-					
-						
+            if (pitch_angle >= 0.7f)
+                autoaim_pitch_offset = -5.0f;
+            else if (pitch_angle < -0.7f && pitch_angle >= -1.3f)
+                autoaim_pitch_offset = -6.7f;
+            else if (pitch_angle < -1.3f && pitch_angle >= -5.0f)
+                autoaim_pitch_offset = -8.0f;
+            else if (pitch_angle < -5.0f && pitch_angle >= -15.0f)
+                autoaim_pitch_offset = -5.0f;  // shoot for sentry in Round High
+            else if (pitch_angle < -15.0f)
+                autoaim_pitch_offset = -3.0f;  // shoot for sentry in ~~ROAD
 
             delta_predict = after_predict_yaw - minipc->cvkf_yaw.angle;
-            if (delta_predict >= 2.0f)        autoaim_yaw_offset =  2.0f; 
-						else if (delta_predict <= -2.0f)  autoaim_yaw_offset = -2.0f;
-
+            if (delta_predict >= 2.0f)
+                autoaim_yaw_offset = 2.0f;
+            else if (delta_predict <= -2.0f)
+                autoaim_yaw_offset = -2.0f;
         }
 
         Gimbal_SetYawAutoRef(ref_cvkf_yaw_angle + autoaim_yaw_offset);
         Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + autoaim_pitch_offset);
+    } else {
+        Gimbal_SetYawAutoRef(-minipc->yaw_ref_filtered);
+        Gimbal_SetPitchAutoRef(minipc->pitch_ref_filtered);
     }
 }
 
@@ -405,12 +412,6 @@ void MiniPC_SetGimbalRef() {
 }
 
 #endif
-
-
-
-
-
-
 
 // /**
 // * @brief      Reset Kf param
@@ -523,7 +524,7 @@ void MiniPC_SetGimbalRef() {
 // }
 
 // /**
-// * @brief      Set the state of the target being recognized 
+// * @brief      Set the state of the target being recognized
 // * @param      NULL
 // * @retval     NULL
 // */

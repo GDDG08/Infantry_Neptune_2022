@@ -287,7 +287,7 @@ void Gimbal_SetYawRefDelta(float ref) {
 */
 float yawAutoRefLast = 0.0f;
 void Gimbal_SetYawAutoRef(float ref) {
-    Gimbal_SetYawRefDelta(ref - yawAutoRefLast);
+    Gimbal_SetYawRefDelta(yawAutoRefLast - ref);
     yawAutoRefLast = ref;
     // gimbal->angle.yaw_angle_ref = Gimbal_LimitYaw(ref);  //imu->angle.yaw - ref
 }

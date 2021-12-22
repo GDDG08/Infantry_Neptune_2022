@@ -49,12 +49,13 @@ void Gimbal_Task(void const* argument) {
   * @retval     NULL
   */
 void GimbalYaw_InitGimbalYaw() {
+    HAL_Delay(2000); 
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
     gimbalyaw->control_state = 1;
     gimbalyaw->output_state = 1;
     gimbalyaw->mode_changed = 0;
-    gimbalyaw->yaw_ref = 0;
+    gimbalyaw->yaw_ref = gimbalyaw->yaw_position_fdb;
     gimbalyaw->yaw_count = 0;
     gimbalyaw->mode = GimbalYaw_MODE_IMU_DEBUG;
     gimbalyaw->last_mode = GimbalYaw_MODE_IMU_DEBUG;
