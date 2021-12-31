@@ -180,7 +180,7 @@ void Remote_RemoteProcess() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     Remote_RemoteDataTypeDef* data = Remote_GetRemoteDataPtr();
 
-    buscomm->chassis_fb_ref = Filter_Bessel((float)data->remote.ch[1], &Remote_forward_backFilter) * 0.5f;
+    buscomm->chassis_fb_ref = Filter_Bessel((float)data->remote.ch[1], &Remote_forward_backFilter) * 1.0f;
     buscomm->chassis_lr_ref = Filter_Bessel((float)data->remote.ch[0], &Remote_right_leftFilter) * 0.5f;
 
     if (data->remote.ch[4] <= -500.0f)
