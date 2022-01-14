@@ -100,7 +100,7 @@ void MiniPC_ControlInit() {
     minipc->cvkf_control.basicprocess = 1;
     minipc->cvkf_control.jumpjudge = 0;  //no function
     minipc->cvkf_control.limit = 0;
-    minipc->cvkf_control.offset = 1;
+    minipc->cvkf_control.offset = 0;
     minipc->cvkf_control.output = 1;
     minipc->cvkf_control.predict = 0;
     minipc->cvkf_control.lowfilter = 1;
@@ -288,9 +288,7 @@ void MiniPC_UpdateControlData() {
                 minipc->pitch_angle = -autoaim_pitch_limit;
             else
                 minipc->pitch_angle = minipc_data->pitch_angle;
-        }
-
-        else {
+        }else {
             minipc->yaw_angle = minipc_data->yaw_angle;
             minipc->pitch_angle = minipc_data->pitch_angle;
         }

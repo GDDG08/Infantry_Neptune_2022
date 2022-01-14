@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-12-31 17:00:24
+ * @LastEditTime : 2022-01-12 17:09:59
  */
 
 #include "debug_BTlog.h"
@@ -140,6 +140,7 @@ void BTlog_Init() {
 
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");
+    ADD_SEND_DATA(gimbal->yaw_ref, Float, "yaw_ref");
     ADD_SEND_DATA(Motor_chassisMotor1.encoder.speed, uInt16, "Chassis_Motor1_spd");
     ADD_SEND_DATA(Motor_chassisMotor2.encoder.speed, uInt16, "Chassis_Motor2_spd");
     ADD_SEND_DATA(Motor_chassisMotor3.encoder.speed, uInt16, "Chassis_Motor3_spd");

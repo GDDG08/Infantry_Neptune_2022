@@ -3,7 +3,7 @@
  * 
  *  file         : miniPC_periph.c
  *  Description  : This file contains mini_PC data transceiver related auxiliary functions
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-25 10:35:22
  */
@@ -207,7 +207,7 @@ void MiniPC_ArmorPacketDecode(uint8_t* buff, uint16_t rxdatalen) {
 
     minipc->yaw_angle = (float)buff2i16(buff + 9) / 100.0f;
     minipc->pitch_angle = (float)buff2i16(buff + 11) / 100.0f;
-    minipc->distance = (float)buff2i16(buff + 13) / 1000.0f;
+    minipc->distance = (float)buff2i16(buff + 13);
 
     minipc->state = MiniPC_CONNECTED;
 }

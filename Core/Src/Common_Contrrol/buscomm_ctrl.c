@@ -347,6 +347,7 @@ void BusComm_Update() {
 
     data->gimbal_yaw_mode = gimbal->yaw_mode + 0x02;
     data->gimbal_yaw_ref_delta = gimbal->angle.yaw_angle_ref_delta;
+    gimbal->angle.yaw_angle_ref_delta = 0;
     data->gimbal_imu_pos = imu->angle.yaw;
     data->gimbal_imu_spd = imu->speed.yaw;
     data->pitch_angle = imu->angle.pitch;
