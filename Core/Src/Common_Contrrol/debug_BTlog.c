@@ -5,7 +5,11 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
+<<<<<<< HEAD
  * @LastEditTime : 2022-01-12 17:09:59
+=======
+ * @LastEditTime : 2021-11-30 23:26:28
+>>>>>>> parent of 10a190d (suprcap test)
  */
 
 #include "debug_BTlog.h"
@@ -206,7 +210,6 @@ const uint8_t CMD_START_SENDING = 0xF1;
 const uint8_t CMD_STOP_SENDING = 0xF2;
 
 const uint8_t CMD_SET_GYRO_COMPENSATE = 0xA0;
-const uint8_t CMD_SET_SUPERCAP_VOLTAGE = 0xA1;
 const uint8_t CMD_SET_CUSTOMIZE = 0xA5;
 /**
  * @name: DECODE
@@ -215,7 +218,6 @@ const uint8_t CMD_SET_CUSTOMIZE = 0xA5;
  * @param {uint16_t} rxdatalen
  * @return {*}
  */
-float watch = 0.0f;
 void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
     // HAL_UART_Transmit_IT(Const_BTlog_UART_HANDLER, BTlog_RxData, rxdatalen);
     if (rxdatalen == 1) {
@@ -250,20 +252,6 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
             Chassis_Gyro_compensate[1] = buff2float(BTlog_RxData + 5);
             Chassis_Gyro_compensate[2] = buff2float(BTlog_RxData + 9);
             Chassis_Gyro_compensate[3] = buff2float(BTlog_RxData + 13);
-
-        } else if (BTlog_RxData[0] == CMD_SET_SUPERCAP_VOLTAGE) {
-            watch = buff2float(BTlog_RxData + 1);
-            uint8_t txdata[8];
-            txdata[0] = (uint8_t)0xE1;
-            txdata[1] = BTlog_RxData[1];
-            txdata[2] = BTlog_RxData[2];
-            txdata[3] = BTlog_RxData[3];
-            txdata[4] = BTlog_RxData[4];
-            txdata[5] = 0x01;
-            txdata[6] = 0x02;
-            txdata[7] = 66;
-
-            Can_SendMessage(&hcan1, &BusComm_CapState, txdata);
         }
 #endif
 
