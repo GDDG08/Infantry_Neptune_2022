@@ -50,7 +50,7 @@ int16_t buff2i16(uint8_t* buff) {
   * @param      buff: Pointer to byte buffer
   * @retval     NULL
   */
-void i162buff(uint16_t u, uint8_t* buff) {
+void i162buff(int16_t u, uint8_t* buff) {
     uint8_t tmpbuff[2];
     *((int16_t*)tmpbuff) = u;
     memcpy(buff, tmpbuff, 2);

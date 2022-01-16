@@ -74,7 +74,7 @@ typedef enum {
 
 typedef struct {
     BusComm_BusCommStateEnum state;
-    uint32_t last_update_time;
+    uint32_t last_update_time[2];
 
     // Chassis up stream
     float yaw_relative_angle;  // Angle of chassis relative to pan tilt

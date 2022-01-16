@@ -1,9 +1,18 @@
 /*
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\miniPC_periph.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-01-15 23:53:53
+ */
+/*
  *  Project      : Infantry_Neptune
  * 
  *  file         : miniPC_periph.h
  *  Description  : This file contains mini_PC data transceiver related auxiliary functions
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-07-22 07:05:01
  */
@@ -60,6 +69,7 @@ extern UART_HandleTypeDef* Const_MiniPC_UART_HANDLER;
 void MiniPC_InitMiniPC(void);
 MiniPC_MiniPCDataTypeDef* MiniPC_GetMiniPCDataPtr(void);
 void MiniPC_SendHeartPacket(void);
+void MiniPC_SendDataPacket(void);
 uint8_t MiniPC_IsMiniPCOffline(void);
 void MiniPC_RXCallback(UART_HandleTypeDef* huart);
 void MiniPC_DecodeMiniPCPacket(uint8_t* buff, uint16_t rxdatalen);

@@ -3,7 +3,7 @@
  * 
  *  file         : buff_lib.h
  *  Description  : This file contains auxiliary functions related to byte buffer operation
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
+ *  LastEditors  : ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½ï¿½á¶¯ï¿½ï¿½
  *  Date         : 2021-05-04 20:53:31
  *  LastEditTime : 2021-05-08 03:36:04
  */
@@ -23,6 +23,7 @@ void float2buff(float f, uint8_t* buff);
 int16_t buff2i16(uint8_t* buff);
 uint16_t buff2ui16(uint8_t* buff);
 void ui162buff(uint16_t u, uint8_t* buff);
+void i162buff(int16_t u, uint8_t* buff);
 uint32_t buff2ui32(uint8_t* buff);
 void ui322buff(uint32_t u, uint8_t* buff);
 

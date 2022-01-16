@@ -135,10 +135,22 @@ BusComm_BusCommDataTypeDef* BusComm_GetBusDataPtr() {
   */
 uint8_t BusComm_IsBusCommOffline() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
-    if (HAL_GetTick() - buscomm->last_update_time > Const_BusComm_OFFLINE_TIME) {
+
+#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+    //Only consider gimbal offline
+    if (HAL_GetTick() - buscomm->last_update_time[0] > Const_BusComm_OFFLINE_TIME
+        /*|| HAL_GetTick() - buscomm->last_update_time[1] > Const_BusComm_OFFLINE_TIME*/) {
         buscomm->state = BusComm_STATE_LOST;
         return 1;
     }
+
+#else
+    if (HAL_GetTick() - buscomm->last_update_time[0] > Const_BusComm_OFFLINE_TIME) {
+        buscomm->state = BusComm_STATE_LOST;
+        return 1;
+    }
+#endif
+
     return 0;
 }
 
@@ -213,10 +225,20 @@ float decode_rate;
   */
 void BusComm_DecodeBusCommData(uint8_t buff[], uint32_t stdid, uint16_t rxdatalen) {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
-    buscomm->last_update_time = HAL_GetTick();
 
     decode_cont++;
-    decode_rate = decode_cont * 1000 / HAL_GetTick();
+    decode_rate = 1000 / (HAL_GetTick() - buscomm->last_update_time[0]);
+
+#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+    if (stdid == CMD_SEND_CAP_STATE)
+        buscomm->last_update_time[1] = HAL_GetTick();
+
+    else
+        buscomm->last_update_time[0] = HAL_GetTick();
+
+#else
+    buscomm->last_update_time[0] = HAL_GetTick();
+#endif
 
     memcpy(BusComm_RxData, buff, rxdatalen);
 
@@ -246,10 +268,11 @@ void BusComm_SendBlockError() {
 void BusComm_ResetBusCommData() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
-    buscomm->last_update_time = HAL_GetTick();
+    buscomm->last_update_time[0] = HAL_GetTick();
 
 // Chassis stream
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+    buscomm->last_update_time[1] = HAL_GetTick();
     buscomm->yaw_relative_angle = 0;
     buscomm->robot_id = 0;
     buscomm->heat_17mm = 0;
@@ -263,6 +286,7 @@ void BusComm_ResetBusCommData() {
 
 // Gimbal stream
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
+    buscomm->last_update_time[1] = 0;
     buscomm->gimbal_yaw_mode = 0;
     buscomm->gimbal_yaw_ref_delta = 0.0f;
     buscomm->gimbal_imu_pos = 0.0f;
@@ -281,6 +305,7 @@ void BusComm_ResetBusCommData() {
 
 // SuperCap stream
 #if __FN_IF_ENABLE(__FN_SUPER_CAP)
+    buscomm->last_update_time[1] = 0;
     buscomm->cap_state = SUPERCAP_MODE_OFF;
     buscomm->cap_rest_energy = 0;
     buscomm->power_path_change_flag = 0;
@@ -374,6 +399,7 @@ void _cmd_mode_control() {
         case GIMBAL_YAW_CTRL_BIG_ENERGY: {
             GimbalYaw_SetMode(GimbalYaw_MODE_BIG_ENERGY);
             GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
             GimbalYaw_SetGimbalYawControlState(1);
@@ -383,6 +409,7 @@ void _cmd_mode_control() {
         case GIMBAL_YAW_CTRL_SMALL_ENERGY: {
             GimbalYaw_SetMode(GimbalYaw_MODE_SMALL_ENERGY);
             GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
             GimbalYaw_SetGimbalYawControlState(1);
@@ -392,6 +419,7 @@ void _cmd_mode_control() {
         case GIMBAL_YAW_CTRL_ARMOR: {
             GimbalYaw_SetMode(GimbalYaw_MODE_ARMOR);
             GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
             GimbalYaw_SetGimbalYawControlState(1);
@@ -401,6 +429,7 @@ void _cmd_mode_control() {
         case GIMBAL_YAW_CTRL_IMU_DEBUG: {
             GimbalYaw_SetMode(GimbalYaw_MODE_IMU_DEBUG);
             GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetEncoderFdb();
             GimbalYaw_SetGimbalYawControlState(1);
             GimbalYaw_SetGimbalYawOutputState(1);
@@ -409,6 +438,7 @@ void _cmd_mode_control() {
         case GIMBAL_YAW_CTRL_NO_AUTO: {
             GimbalYaw_SetMode(GimbalYaw_MODE_NO_AUTO);
             GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
             GimbalYaw_SetGimbalYawControlState(1);

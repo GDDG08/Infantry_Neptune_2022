@@ -76,6 +76,7 @@ void MiniPC_Task(void const* argument) {
         }
 
         MiniPC_SendHeartPacket();
+        MiniPC_SendDataPacket();
         osDelay(MINI_PC_TASK_PERIOD);
     }
 }
@@ -90,8 +91,8 @@ void MiniPC_ControlInit() {
 
     minipc->enable_aim_output = 1;
 
-    Filter_LowPassInit(0.5, &minipc->yaw_fil_param);
-    Filter_LowPassInit(0.4, &minipc->pitch_fil_param);
+    Filter_LowPassInit(0.05, &minipc->yaw_fil_param);
+    Filter_LowPassInit(0.1, &minipc->pitch_fil_param);
     Filter_LowPassInit(0.1, &minipc->yaw_cvkf_fil_param);
     Filter_LowPassInit(0.01, &minipc->distance_fil_param);
 
@@ -379,7 +380,7 @@ void MiniPC_SetAutoAimRef() {
         Gimbal_SetYawAutoRef(ref_cvkf_yaw_angle + autoaim_yaw_offset);
         Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + autoaim_pitch_offset);
     } else {
-        Gimbal_SetYawAutoRef(-minipc->yaw_ref_filtered);
+        Gimbal_SetYawAutoRef(minipc->yaw_ref_filtered);
         Gimbal_SetPitchAutoRef(minipc->pitch_ref_filtered);
     }
 }
