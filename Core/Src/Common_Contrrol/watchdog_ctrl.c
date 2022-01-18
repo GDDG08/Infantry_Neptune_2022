@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-10-31 17:14:30
+ * @LastEditTime : 2022-01-17 22:37:18
  */
 /*
  *  Project      : Infantry_Neptune
@@ -47,16 +47,25 @@ void WatchDog_Task(void const* argument) {
 }
 
 void WatchDog_FeedDog() {
+    // static uint8_t firstout = 1;
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     if (BusComm_IsBusCommOffline()) {
+        // firstout = 1;
         GimbalYaw_SetGimbalYawControlState(0);
         GimbalYaw_SetGimbalYawOutputState(0);
+        GimbalYaw_ReSetYawRef();
         Chassis_SetMode(Chassis_MODE_STOP);
     } else {
+        // if (firstout) {
+        //     firstout = 0;
+        //     GimbalYaw_ReSetYawRef();
+        // }
+
         GimbalYaw_SetGimbalYawControlState(1);
         GimbalYaw_SetGimbalYawOutputState(1);
-        //            Chassis_SetChassisControlState(1);
-        //            Chassis_SetChassisOutputState(1);
+
+        Chassis_SetChassisControlState(1);
+        Chassis_SetChassisOutputState(1);
     }
 #endif
 

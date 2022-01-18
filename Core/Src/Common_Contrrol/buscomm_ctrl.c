@@ -229,22 +229,22 @@ void BusComm_DecodeBusCommData(uint8_t buff[], uint32_t stdid, uint16_t rxdatale
     decode_cont++;
     decode_rate = 1000 / (HAL_GetTick() - buscomm->last_update_time[0]);
 
-#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
-    if (stdid == CMD_SEND_CAP_STATE)
-        buscomm->last_update_time[1] = HAL_GetTick();
-
-    else
-        buscomm->last_update_time[0] = HAL_GetTick();
-
-#else
-    buscomm->last_update_time[0] = HAL_GetTick();
-#endif
-
     memcpy(BusComm_RxData, buff, rxdatalen);
 
     for (int i = 1; i <= (Const_BusComm_SUPERCAP_BUFF_SIZE + Const_BusComm_CHASSIS_BUFF_SIZE + Const_BusComm_GIMBAL_BUFF_SIZE); i++) {
         if ((stdid == Buscmd_Receive[i].cmd_id) && (Buscmd_Receive[i].bus_func != NULL)) {
             Buscmd_Receive[i].bus_func(BusComm_RxData);
+
+#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
+            if (stdid == CMD_SEND_CAP_STATE)
+                buscomm->last_update_time[1] = HAL_GetTick();
+
+            else
+                buscomm->last_update_time[0] = HAL_GetTick();
+
+#else
+            buscomm->last_update_time[0] = HAL_GetTick();
+#endif
             return;
         }
     }
@@ -398,7 +398,7 @@ void _cmd_mode_control() {
     switch (buscomm->gimbal_yaw_mode) {
         case GIMBAL_YAW_CTRL_BIG_ENERGY: {
             GimbalYaw_SetMode(GimbalYaw_MODE_BIG_ENERGY);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            GimbalYaw_SetYawRefDelta(buscomm->gimbal_yaw_ref_delta);
             buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
@@ -408,7 +408,7 @@ void _cmd_mode_control() {
         }
         case GIMBAL_YAW_CTRL_SMALL_ENERGY: {
             GimbalYaw_SetMode(GimbalYaw_MODE_SMALL_ENERGY);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            GimbalYaw_SetYawRefDelta(buscomm->gimbal_yaw_ref_delta);
             buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
@@ -418,7 +418,7 @@ void _cmd_mode_control() {
         }
         case GIMBAL_YAW_CTRL_ARMOR: {
             GimbalYaw_SetMode(GimbalYaw_MODE_ARMOR);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            GimbalYaw_SetYawRefDelta(buscomm->gimbal_yaw_ref_delta);
             buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
@@ -428,7 +428,7 @@ void _cmd_mode_control() {
         }
         case GIMBAL_YAW_CTRL_IMU_DEBUG: {
             GimbalYaw_SetMode(GimbalYaw_MODE_IMU_DEBUG);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            GimbalYaw_SetYawRefDelta(buscomm->gimbal_yaw_ref_delta);
             buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetEncoderFdb();
             GimbalYaw_SetGimbalYawControlState(1);
@@ -437,7 +437,7 @@ void _cmd_mode_control() {
         }
         case GIMBAL_YAW_CTRL_NO_AUTO: {
             GimbalYaw_SetMode(GimbalYaw_MODE_NO_AUTO);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref_delta);
+            GimbalYaw_SetYawRefDelta(buscomm->gimbal_yaw_ref_delta);
             buscomm->gimbal_yaw_ref_delta = 0.0f;
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);

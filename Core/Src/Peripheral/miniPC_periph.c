@@ -22,13 +22,13 @@ UART_HandleTypeDef* Const_MiniPC_UART_HANDLER = &huart5;
 
 /*              Mini_PC control constant            */
 const uint32_t Const_MiniPC_HEART_SENT_PERIOD = 100;  // (ms)
-const uint32_t Const_MiniPC_DATA_SENT_PERIOD = 10;    // (ms)
+const uint32_t Const_MiniPC_DATA_SENT_PERIOD = 5;   // (ms)
 
 const uint16_t Const_MiniPC_RX_BUFF_LEN = 200;           // miniPC Receive buffer length
 const uint16_t Const_MiniPC_TX_BUFF_LEN = 200;           // miniPC Transmit buffer length
 const uint16_t Const_MiniPC_MINIPC_OFFLINE_TIME = 1000;  // miniPC offline time
 const uint16_t Const_MiniPC_TX_HEART_FRAME_LEN = 10;     // miniPC heart transmit frame length
-const uint16_t Const_MiniPC_TX_DATA_FRAME_LEN = 14;      // miniPC data transmit frame length
+const uint16_t Const_MiniPC_TX_DATA_FRAME_LEN = 16;      // miniPC data transmit frame length
 
 const uint8_t Const_MiniPC_SLAVE_COMPUTER = 0x00;
 const uint8_t Const_MiniPC_INFANTRY_3 = 0x03;
@@ -50,7 +50,7 @@ const uint8_t Const_MiniPC_ARMOR_PACKET = 0x02;
 const uint8_t Const_MiniPC_DATA_PACKET = 0x08;
 
 const uint8_t Const_MiniPC_Heart_PACKET_DATA_LEN = 2;
-const uint8_t Const_MiniPC_Data_PACKET_DATA_LEN = 7;
+const uint8_t Const_MiniPC_Data_PACKET_DATA_LEN = 8;
 
 MiniPC_MiniPCDataTypeDef MiniPC_MiniPCData;  // miniPC data
 
@@ -94,7 +94,7 @@ void MiniPC_SendHeartPacket() {
 
     minipc->state = MiniPC_PENDING;
 
-    uint8_t* buff = MiniPC_TxData_state;
+    uint8_t* buff = MiniPC_TxData;
     int size = Const_MiniPC_TX_HEART_FRAME_LEN;
     buff[0] = Const_MiniPC_PACKET_HEADR_0;
     buff[1] = Const_MiniPC_PACKET_HEADR_1;
@@ -129,6 +129,7 @@ void MiniPC_SendHeartPacket() {
   * @param      NULL
   * @retval     NULL
   */
+
 void MiniPC_SendDataPacket() {
     static uint32_t data_count = 0;
     if ((HAL_GetTick() - data_count) <= Const_MiniPC_DATA_SENT_PERIOD)
@@ -143,20 +144,22 @@ void MiniPC_SendDataPacket() {
 
     minipc->state = MiniPC_PENDING;
 
-    uint8_t* buff = MiniPC_TxData;
+    uint8_t* buff = MiniPC_TxData_state;
     int size = Const_MiniPC_TX_DATA_FRAME_LEN;
     buff[0] = Const_MiniPC_PACKET_HEADR_0;
     buff[1] = Const_MiniPC_PACKET_HEADR_1;
     buff[2] = Const_MiniPC_SLAVE_COMPUTER;
     buff[3] = minipc->addressee;
-    buff[4] = Const_MiniPC_Heart_PACKET;
-    buff[5] = Const_MiniPC_Heart_PACKET_DATA_LEN;
+    buff[4] = Const_MiniPC_DATA_PACKET;
+    buff[5] = Const_MiniPC_Data_PACKET_DATA_LEN;
     buff[6] = 0;
     buff[7] = 0;
     buff[8] = 0x01;
     i162buff(yaw, buff + 9);
     i162buff(pitch, buff + 11);
     i162buff(row, buff + 13);
+    //Must be even
+    buff[15] = 0x00;
 
     uint16_t checksum = 0;
     if (size % 2) {
@@ -172,7 +175,7 @@ void MiniPC_SendDataPacket() {
 
     if (HAL_UART_GetState(Const_MiniPC_UART_HANDLER) & 0x01)
         return;  // tx busy
-    Uart_SendMessage_IT(Const_MiniPC_UART_HANDLER, buff, size);
+    Uart_SendMessage_IT(Const_MiniPC_UART_HANDLER, buff, Const_MiniPC_TX_DATA_FRAME_LEN);
 }
 
 /**

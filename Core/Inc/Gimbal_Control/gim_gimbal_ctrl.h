@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-29 20:20:13
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-10 10:08:05
+ * @LastEditTime : 2022-01-17 21:18:14
  */
 /*
  *  Project      : Infantry_Neptune
@@ -83,6 +83,7 @@ extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamIMUDebug;
 extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamNoAuto;
 
 extern Gimbal_GimbalTypeDef Gimbal_gambalControlData;
+extern float watch_ref;
 
 Gimbal_GimbalTypeDef* Gimbal_GetGimbalControlPtr(void);
 

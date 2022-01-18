@@ -228,7 +228,7 @@ float Gimbal_LimitPitch(float ref) {
 
 /**
 * @brief      Set pitch ref
-* @param      ref: Yaw set ref
+* @param      ref: Pitch set ref
 * @retval     NULL
 */
 void Gimbal_SetPitchRef(float ref) {
@@ -248,13 +248,8 @@ void Gimbal_SetPitchAutoRef(float ref) {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
 
-    if (ref > 8.0f)
-        ref = 8.0f;
-    else if (ref < -8.0f)
-        ref = 8.0f;
-
-    ref /= AutoControl_ratio_pitch;
-    ref += imu->angle.pitch;
+    // ref /= AutoControl_ratio_pitch;
+    // ref += imu->angle.pitch;
     float limited_ref;
     if (ref > Const_PITCH_UMAXANGLE)
         limited_ref = Const_PITCH_UMAXANGLE;
@@ -297,23 +292,30 @@ void Gimbal_SetYawRefDelta(float ref) {
 * @retval     NULL
 */
 
-float AutoControl_ratio_yaw = 80.0f;
+// float AutoControl_ratio_yaw = 80.0f;
 float watch_ref;
-void Gimbal_SetYawAutoRef(float ref) {
-    
-    if (ref > 8.0f)
-        ref = 8.0f;
-    else if (ref < -8.0f)
-        ref = -8.0f;
+float ref_yaw_last = 0.0f;
 
-    if (fabs(ref) < 3.0f)
-        ref /= AutoControl_ratio_yaw;
-    else if (fabs(ref)  < 6.0f)
-        ref /= 70.0f;
-    else
-        ref /= 60.0f;
+void Gimbal_SetYawAutoRef(float ref/*, int isDelta*/) {
+    // if (isDelta) {
+    //     ref+=
+    // }
     watch_ref = ref;
-    Gimbal_SetYawRefDelta(ref);
+    Gimbal_SetYawRefDelta(ref - ref_yaw_last);
+    ref_yaw_last = ref;
+    // if (ref > 8.0f)
+    //     ref = 8.0f;
+    // else if (ref < -8.0f)
+    //     ref = -8.0f;
+
+    // // if (fabs(ref) < 3.0f)
+    //     ref /= AutoControl_ratio_yaw;
+    // // else if (fabs(ref)  < 6.0f)
+    // //     ref /= 70.0f;
+    // // else
+    // //     ref /= 60.0f;
+    // watch_ref = ref;
+
     // gimbal->angle.yaw_angle_ref = Gimbal_LimitYaw(ref);  //imu->angle.yaw - ref
 }
 

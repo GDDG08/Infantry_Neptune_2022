@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-10 10:05:50
+ * @LastEditTime : 2022-01-17 21:51:56
  */
 /*
  *  Project      : Infantry_Neptune
@@ -76,7 +76,9 @@ void GimbalYaw_SetGimbalYawControlState(uint8_t state);
 void GimbalYaw_SetGimbalYawOutputState(uint8_t state);
 void GimbalYaw_SetMode(GimbalYaw_GimbalYawModeEnum mode);
 void GimbalYaw_SetEncoderFdb(void);
+void GimbalYaw_SetYawRefDelta(float yaw_ref_delta);
 void GimbalYaw_SetYawRef(float yaw_ref);
+void GimbalYaw_ReSetYawRef(void);
 void GimbalYaw_SetIMUYawPositionFdb(float imu_yaw_position_fdb);
 void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb);
 void GimbalYaw_Control(void);

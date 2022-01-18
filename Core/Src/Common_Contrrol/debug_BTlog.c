@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-16 22:31:39
+ * @LastEditTime : 2022-01-18 17:06:17
  */
 
 #include "debug_BTlog.h"
@@ -68,6 +68,7 @@ uint16_t BTlog_RX_BUFF_LEN = 1 + 1 + 1;
 uint16_t BTlog_RX_DATA_LEN = 0;
 
 uint32_t BTlog_time = 0;
+int32_t BTlog_time_verse = 0;
 
 /**
  * @name: anonymous
@@ -131,21 +132,25 @@ void BTlog_Init() {
 
     //Log Data Send
     ADD_SEND_DATA(BTlog_time, uInt32, "current_time");
+    ADD_SEND_DATA(BTlog_time_verse, Int32, "current_time");
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     ADD_SEND_DATA(imu->angle.pitch, Float, "imu->angle.pitch");
     ADD_SEND_DATA(imu->angle.yaw, Float, "imu->angle.yaw");
+    ADD_SEND_DATA(imu->angle.row, Float, "imu->angle.row");
+
     ADD_SEND_DATA(minipc_data->state, uInt8, "minipcD->state");
     ADD_SEND_DATA(minipc_data->pitch_angle, Float, "minipcD->pitch_angle");
     ADD_SEND_DATA(minipc_data->yaw_angle, Float, "minipcD->yaw_angle");
+    ADD_SEND_DATA(watch_ref, Float, "yaw_ref");
     ADD_SEND_DATA(gimbal->angle.yaw_angle_ref_delta, uInt8, "yaw_delta");
 
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");
     ADD_SEND_DATA(gimbal->yaw_ref, Float, "yaw_ref");
-    ADD_SEND_DATA(Motor_chassisMotor1.encoder.speed, uInt16, "Chassis_Motor1_spd");
-    ADD_SEND_DATA(Motor_chassisMotor2.encoder.speed, uInt16, "Chassis_Motor2_spd");
-    ADD_SEND_DATA(Motor_chassisMotor3.encoder.speed, uInt16, "Chassis_Motor3_spd");
-    ADD_SEND_DATA(Motor_chassisMotor4.encoder.speed, uInt16, "Chassis_Motor4_spd");
+    ADD_SEND_DATA(Motor_chassisMotor1.encoder.speed, Int16, "Chassis_Motor1_spd");
+    ADD_SEND_DATA(Motor_chassisMotor2.encoder.speed, Int16, "Chassis_Motor2_spd");
+    ADD_SEND_DATA(Motor_chassisMotor3.encoder.speed, Int16, "Chassis_Motor3_spd");
+    ADD_SEND_DATA(Motor_chassisMotor4.encoder.speed, Int16, "Chassis_Motor4_spd");
 #elif __FN_IF_ENABLE(__FN_SUPER_CAP)
 
 #endif
@@ -181,6 +186,8 @@ void BTlog_Send() {
         return;
 
     BTlog_time = HAL_GetTick();
+    BTlog_time_verse = -BTlog_time;
+
     uint8_t* buff = BTlog_TxData;
 
     buff[0] = BTlog_startFlag;

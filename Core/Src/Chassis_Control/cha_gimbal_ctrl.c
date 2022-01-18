@@ -55,10 +55,11 @@ void GimbalYaw_InitGimbalYaw() {
     gimbalyaw->control_state = 1;
     gimbalyaw->output_state = 1;
     gimbalyaw->mode_changed = 0;
-    gimbalyaw->yaw_ref = gimbalyaw->yaw_position_fdb;
     gimbalyaw->yaw_count = 0;
     gimbalyaw->mode = GimbalYaw_MODE_IMU_DEBUG;
     gimbalyaw->last_mode = GimbalYaw_MODE_IMU_DEBUG;
+
+    GimbalYaw_ReSetYawRef();
 
     Motor_gimbalMotorYaw.encoder.angle = 4000;
 
@@ -151,13 +152,36 @@ float GimbalYaw_Limit(float ref) {
 }
 /**
   * @brief      Set the target value of gimbal yaw
-  * @param      yaw_ref: gimbal yaw target value
+  * @param      yaw_ref_delta gimbal yaw target value ref
   * @retval     NULL
   */
-void GimbalYaw_SetYawRef(float yaw_ref_delta) {
+void GimbalYaw_SetYawRefDelta(float yaw_ref_delta) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
     gimbalyaw->yaw_ref -= GimbalYaw_Limit(yaw_ref_delta);
+}
+
+/**
+  * @brief      Set the target value of gimbal yaw
+  * @param      yaw_ref: gimbal yaw target value
+  * @retval     NULL
+  */
+void GimbalYaw_SetYawRef(float yaw_ref) {
+    GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
+
+    gimbalyaw->yaw_ref = yaw_ref;
+}
+
+/**
+  * @brief      Reset the target value of gimbal yaw
+  * @param      NULL
+  * @retval     NULL
+  */
+void GimbalYaw_ReSetYawRef() {
+    GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
+
+    gimbalyaw->yaw_ref = gimbalyaw->yaw_position_fdb;
+    // gimbalyaw->yaw_ref = Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET;  //gimbalyaw->yaw_relative_angle;
 }
 
 /**
