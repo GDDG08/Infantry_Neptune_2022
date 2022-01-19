@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-17 22:37:18
+ * @LastEditTime : 2022-01-18 21:24:22
  */
 /*
  *  Project      : Infantry_Neptune
@@ -53,7 +53,6 @@ void WatchDog_FeedDog() {
         // firstout = 1;
         GimbalYaw_SetGimbalYawControlState(0);
         GimbalYaw_SetGimbalYawOutputState(0);
-        GimbalYaw_ReSetYawRef();
         Chassis_SetMode(Chassis_MODE_STOP);
     } else {
         // if (firstout) {

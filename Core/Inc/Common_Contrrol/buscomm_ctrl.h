@@ -88,7 +88,7 @@ typedef struct {
 
     // Gimbal up stream
     uint8_t gimbal_yaw_mode;   // Yaw mode of gimbal
-    float gimbal_yaw_ref_delta;      // gimbal yaw target delta value
+    float gimbal_yaw_ref;      // gimbal yaw target value
     float gimbal_imu_pos;      // gimbal yaw IMU angle feedback value
     float gimbal_imu_spd;      // Speed feedback value of gimbal yaw IMU
     uint8_t chassis_mode;      // Chassis mode

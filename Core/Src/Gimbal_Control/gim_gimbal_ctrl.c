@@ -269,7 +269,7 @@ void Gimbal_SetPitchAutoRef(float ref) {
 void Gimbal_SetYawRef(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
-    gimbal->angle.yaw_angle_ref -= ref;
+    gimbal->angle.yaw_angle_ref = ref;
 }
 
 /**
@@ -280,10 +280,7 @@ void Gimbal_SetYawRef(float ref) {
 void Gimbal_SetYawRefDelta(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
-    if (gimbal->angle.yaw_angle_ref_delta)
-        gimbal->angle.yaw_angle_ref_delta += ref;
-    else
-        gimbal->angle.yaw_angle_ref_delta = ref;
+    gimbal->angle.yaw_angle_ref -= ref;
 }
 
 /**
@@ -293,16 +290,12 @@ void Gimbal_SetYawRefDelta(float ref) {
 */
 
 // float AutoControl_ratio_yaw = 80.0f;
-float watch_ref;
-float ref_yaw_last = 0.0f;
 
-void Gimbal_SetYawAutoRef(float ref/*, int isDelta*/) {
+void Gimbal_SetYawAutoRef(float ref /*, int isDelta*/) {
     // if (isDelta) {
     //     ref+=
     // }
-    watch_ref = ref;
-    Gimbal_SetYawRefDelta(ref - ref_yaw_last);
-    ref_yaw_last = ref;
+    Gimbal_SetYawRef(ref);
     // if (ref > 8.0f)
     //     ref = 8.0f;
     // else if (ref < -8.0f)

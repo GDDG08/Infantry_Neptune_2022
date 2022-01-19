@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-18 17:06:17
+ * @LastEditTime : 2022-01-18 21:07:55
  */
 
 #include "debug_BTlog.h"
@@ -141,8 +141,7 @@ void BTlog_Init() {
     ADD_SEND_DATA(minipc_data->state, uInt8, "minipcD->state");
     ADD_SEND_DATA(minipc_data->pitch_angle, Float, "minipcD->pitch_angle");
     ADD_SEND_DATA(minipc_data->yaw_angle, Float, "minipcD->yaw_angle");
-    ADD_SEND_DATA(watch_ref, Float, "yaw_ref");
-    ADD_SEND_DATA(gimbal->angle.yaw_angle_ref_delta, uInt8, "yaw_delta");
+    ADD_SEND_DATA(gimbal->angle.yaw_angle_ref, Float, "yaw_ref");
 
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");

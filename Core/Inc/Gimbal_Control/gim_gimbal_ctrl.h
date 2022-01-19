@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-29 20:20:13
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-17 21:18:14
+ * @LastEditTime : 2022-01-18 21:33:29
  */
 /*
  *  Project      : Infantry_Neptune
@@ -61,7 +61,6 @@ typedef struct {
 typedef struct {
     float pitch_angle_ref;
     float yaw_angle_ref;
-    float yaw_angle_ref_delta;
 } Gimbal_AngleRefTypeDef;
 
 typedef struct {
@@ -83,7 +82,6 @@ extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamIMUDebug;
 extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamNoAuto;
 
 extern Gimbal_GimbalTypeDef Gimbal_gambalControlData;
-extern float watch_ref;
 
 Gimbal_GimbalTypeDef* Gimbal_GetGimbalControlPtr(void);
 
@@ -94,7 +92,6 @@ void Gimbal_CtrlYaw(void);
 void Gimbal_CtrlPitch(void);
 void Gimbal_ChangeMode(Gimbal_ModeEnum mode);
 float Gimbal_LimitPitch(float ref);
-// float Gimbal_LimitYaw(float ref);
 void Gimbal_SetPitchRef(float ref);
 void Gimbal_SetPitchAutoRef(float ref);
 void Gimbal_SetYawRef(float ref);

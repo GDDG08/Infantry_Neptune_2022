@@ -49,17 +49,16 @@ void Gimbal_Task(void const* argument) {
   * @retval     NULL
   */
 void GimbalYaw_InitGimbalYaw() {
-    HAL_Delay(2000); 
+    HAL_Delay(2000);
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
     gimbalyaw->control_state = 1;
     gimbalyaw->output_state = 1;
     gimbalyaw->mode_changed = 0;
     gimbalyaw->yaw_count = 0;
+    gimbalyaw->yaw_ref = 0;
     gimbalyaw->mode = GimbalYaw_MODE_IMU_DEBUG;
     gimbalyaw->last_mode = GimbalYaw_MODE_IMU_DEBUG;
-
-    GimbalYaw_ReSetYawRef();
 
     Motor_gimbalMotorYaw.encoder.angle = 4000;
 
@@ -131,34 +130,32 @@ void GimbalYaw_SetEncoderFdb() {
 * @param      ref: Yaw set ref
 * @retval     Limited ywa ref
 */
-// float yaw_relative_angle_debug;
 float GimbalYaw_Limit(float ref) {
     Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
     float yaw_relative_angle = Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET;
     float yaw_relative_angle_ref = gimbalyaw->yaw_ref - gimbalyaw->yaw_position_fdb + yaw_relative_angle;
-    // yaw_relative_angle_debug = yaw_relative_angle;
-    if (chassis->mode == Chassis_MODE_GYRO)
-        return ref;
-    // else if (((yaw_relative_angle < -Const_YAW_MAXANGLE) && (ref > 0)) ||
-    //          ((yaw_relative_angle > Const_YAW_MAXANGLE) && (ref < 0)))
-    //     return 0.0f;
-    else if (((yaw_relative_angle_ref < -Const_YAW_MAXANGLE) && (ref > 0)) ||
-             ((yaw_relative_angle_ref > Const_YAW_MAXANGLE) && (ref < 0)))
-        return 0.0f;
-    else
-        return ref;
-}
-/**
-  * @brief      Set the target value of gimbal yaw
-  * @param      yaw_ref_delta gimbal yaw target value ref
-  * @retval     NULL
-  */
-void GimbalYaw_SetYawRefDelta(float yaw_ref_delta) {
-    GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
+    float yaw_relative_angle_ref_to = ref - gimbalyaw->yaw_position_fdb + yaw_relative_angle;
 
-    gimbalyaw->yaw_ref -= GimbalYaw_Limit(yaw_ref_delta);
+    float ref_limited;
+    if (chassis->mode == Chassis_MODE_GYRO)
+        ref_limited = ref;
+    else if (((yaw_relative_angle_ref < -Const_YAW_MAXANGLE) && (ref < gimbalyaw->yaw_ref)) ||
+             ((yaw_relative_angle_ref > Const_YAW_MAXANGLE) && (ref > gimbalyaw->yaw_ref)))
+        ref_limited = gimbalyaw->yaw_ref;
+    // else if (yaw_relative_angle_ref_to < -Const_YAW_MAXANGLE) {
+    //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle - Const_YAW_MAXANGLE;
+    //     if (ref_limited > 0)
+    //         ref_limited = 0.0f;
+    // } else if (yaw_relative_angle_ref_to > Const_YAW_MAXANGLE) {
+    //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle + Const_YAW_MAXANGLE;
+    //     if (ref_limited > 0)
+    //         ref_limited = 0.0f;
+    else
+        ref_limited = ref;
+
+    return ref_limited;
 }
 
 /**
@@ -169,19 +166,7 @@ void GimbalYaw_SetYawRefDelta(float yaw_ref_delta) {
 void GimbalYaw_SetYawRef(float yaw_ref) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
-    gimbalyaw->yaw_ref = yaw_ref;
-}
-
-/**
-  * @brief      Reset the target value of gimbal yaw
-  * @param      NULL
-  * @retval     NULL
-  */
-void GimbalYaw_ReSetYawRef() {
-    GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
-
-    gimbalyaw->yaw_ref = gimbalyaw->yaw_position_fdb;
-    // gimbalyaw->yaw_ref = Motor_gimbalMotorYaw.encoder.limited_angle - Const_YAW_MOTOR_INIT_OFFSET;  //gimbalyaw->yaw_relative_angle;
+    gimbalyaw->yaw_ref = GimbalYaw_Limit(yaw_ref);
 }
 
 /**
