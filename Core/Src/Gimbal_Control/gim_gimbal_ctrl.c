@@ -208,24 +208,6 @@ float Gimbal_LimitPitch(float ref) {
         return ref;
 }
 
-// /**
-// * @brief      Yaw angle limit
-// * @param      ref: Yaw set ref
-// * @retval     Limited ywa ref
-// */
-// float Gimbal_LimitYaw(float ref) {
-//     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
-//     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
-
-//     if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
-//         return ref;
-//     else if (((buscomm->yaw_relative_angle < -Const_YAW_MAXANGLE) && (ref > 0)) ||
-//              ((buscomm->yaw_relative_angle > Const_YAW_MAXANGLE) && (ref < 0)))
-//         return 0.0f;
-//     else
-//         return ref;
-// }
-
 /**
 * @brief      Set pitch ref
 * @param      ref: Pitch set ref
@@ -242,7 +224,8 @@ void Gimbal_SetPitchRef(float ref) {
 * @param      ref: Yaw set ref
 * @retval     NULL
 */
-float AutoControl_ratio_pitch = 1.8f;
+// float AutoControl_ratio_pitch = 1.8f;
+float AutoControl_offset_pitch = -0.4f;
 void Gimbal_SetPitchAutoRef(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
@@ -250,6 +233,7 @@ void Gimbal_SetPitchAutoRef(float ref) {
 
     // ref /= AutoControl_ratio_pitch;
     // ref += imu->angle.pitch;
+    ref += AutoControl_offset_pitch;
     float limited_ref;
     if (ref > Const_PITCH_UMAXANGLE)
         limited_ref = Const_PITCH_UMAXANGLE;
@@ -261,6 +245,58 @@ void Gimbal_SetPitchAutoRef(float ref) {
     gimbal->angle.pitch_angle_ref = limited_ref;  //imu->angle.pitch + ref
 }
 
+// /**
+// * @brief      Yaw angle limit
+// * @param      ref: Yaw set ref
+// * @retval     Limited yaw ref
+// */
+// float Gimbal_LimitYaw(float ref) {
+//     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+//     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
+
+//     if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
+//         return ref;
+//     else if (((buscomm->yaw_relative_angle < -Const_YAW_MAXANGLE) && (ref > 0)) ||
+//              ((buscomm->yaw_relative_angle > Const_YAW_MAXANGLE) && (ref < 0)))
+//         return 0.0f;
+//     else
+//         return ref;
+// }
+
+/**
+* @brief      Yaw angle limit
+* @param      ref: Yaw set ref
+* @retval     Limited ywa ref
+*/
+float Gimbal_LimitYaw(float ref) {
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+    Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
+    INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
+
+    float yaw_relative_angle = buscomm->yaw_relative_angle;
+    float yaw_relative_angle_ref = gimbal->angle.yaw_angle_ref - imu->angle.yaw + yaw_relative_angle;
+    float yaw_relative_angle_ref_to = ref - imu->angle.yaw + yaw_relative_angle;
+
+    float ref_limited;
+    if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
+        ref_limited = ref;
+    else if (((yaw_relative_angle_ref < -Const_YAW_MAXANGLE) && (ref < gimbal->angle.yaw_angle_ref)) ||
+             ((yaw_relative_angle_ref > Const_YAW_MAXANGLE) && (ref > gimbal->angle.yaw_angle_ref)))
+        ref_limited = gimbal->angle.yaw_angle_ref;
+    // else if (yaw_relative_angle_ref_to < -Const_YAW_MAXANGLE) {
+    //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle - Const_YAW_MAXANGLE;
+    //     if (ref_limited > 0)
+    //         ref_limited = 0.0f;
+    // } else if (yaw_relative_angle_ref_to > Const_YAW_MAXANGLE) {
+    //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle + Const_YAW_MAXANGLE;
+    //     if (ref_limited > 0)
+    //         ref_limited = 0.0f;
+    else
+        ref_limited = ref;
+
+    return ref_limited;
+}
+
 /**
 * @brief      Set yaw ref
 * @param      ref: Pitch set ref
@@ -269,7 +305,7 @@ void Gimbal_SetPitchAutoRef(float ref) {
 void Gimbal_SetYawRef(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
-    gimbal->angle.yaw_angle_ref = ref;
+    gimbal->angle.yaw_angle_ref = Gimbal_LimitYaw(ref);
 }
 
 /**
@@ -280,7 +316,7 @@ void Gimbal_SetYawRef(float ref) {
 void Gimbal_SetYawRefDelta(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
-    gimbal->angle.yaw_angle_ref -= ref;
+    gimbal->angle.yaw_angle_ref -= gimbal->angle.yaw_angle_ref - Gimbal_LimitYaw(gimbal->angle.yaw_angle_ref - ref);
 }
 
 /**
@@ -290,11 +326,12 @@ void Gimbal_SetYawRefDelta(float ref) {
 */
 
 // float AutoControl_ratio_yaw = 80.0f;
-
+float AutoControl_offset_yaw = -0.65f;
 void Gimbal_SetYawAutoRef(float ref /*, int isDelta*/) {
     // if (isDelta) {
     //     ref+=
     // }
+    ref += AutoControl_offset_yaw;
     Gimbal_SetYawRef(ref);
     // if (ref > 8.0f)
     //     ref = 8.0f;

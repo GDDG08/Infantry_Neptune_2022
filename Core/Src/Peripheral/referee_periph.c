@@ -201,9 +201,11 @@ uint8_t P_ext_robot_hurt(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
 }
 
 uint8_t P_ext_shoot_data(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_shoot_data_t *struct_ptr = data_ptr;
+    ext_shoot_data_t *struct_ptr = data_ptr;
 
-    // Shoot Callback
+    referee->shooter_id = struct_ptr->shooter_id;
+    referee->bullet_freq = struct_ptr->bullet_freq;
+    referee->bullet_speed = struct_ptr->bullet_speed;
 
     return PARSE_SUCCEEDED;
 }

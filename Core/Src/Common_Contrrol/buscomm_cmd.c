@@ -108,7 +108,7 @@ static void _send_17mm_data(uint8_t buff[]) {
     count2a++;
     rate2a = 1000 * count2a / HAL_GetTick();
     memset(buff, 0, 8);
-    ui162buff(buscomm->heat_cooling_rate, buff);
+    ui162buff(buscomm->speed_17mm, buff);
     ui162buff(buscomm->heat_cooling_limit, buff + 2);
     ui162buff(buscomm->heat_17mm, buff + 4);
     ui162buff(buscomm->heat_speed_limit, buff + 6);
@@ -193,7 +193,7 @@ static void _set_17mm_data(uint8_t buff[]) {
     count2++;
     rate2 = 1000 * count2 / HAL_GetTick();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
-    buscomm->heat_cooling_rate = buff2ui16(buff);
+    buscomm->speed_17mm = buff2ui16(buff);
     buscomm->heat_cooling_limit = buff2ui16(buff + 2);
     buscomm->heat_17mm = buff2ui16(buff + 4);
     buscomm->heat_speed_limit = buff2ui16(buff + 6);

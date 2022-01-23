@@ -154,13 +154,12 @@ static void Const_Copy() {
     /*          Motor control constant              */
     Const_YAW_MOTOR_INIT_OFFSET = Const_Infantry.YAW_MOTOR_INIT_OFFSET;
     Const_YAW_MAXANGLE = Const_Infantry.YAW_MAXANGLE;
+
     memcpy(Const_chassisMotorParam, Const_Infantry.chassisMotorParam, sizeof(Const_Infantry.chassisMotorParam));
     memcpy(Const_gimbalYawMotorParam, Const_Infantry.gimbalYawMotorParam, sizeof(Const_Infantry.gimbalYawMotorParam));
     /*          Chassis control filter const        */
     Const_Chassis_MOVE_REF_TO_MOTOR_REF = Const_Infantry.Chassis_MOVE_REF_TO_MOTOR_REF;
     Const_Chassis_ROTATE_REF_TO_MOTOR_REF = Const_Infantry.Chassis_ROTATE_REF_TO_MOTOR_REFf;
-		
-	
 
 #endif
 
@@ -188,10 +187,12 @@ static void Const_Copy() {
     Const_PITCH_UMAXANGLE = Const_Infantry.PITCH_UMAXANGLE;
     Const_PITCH_UMAXANGLE_GRYO = Const_Infantry.PITCH_UMAXANGLE_GRYO;
     Const_PITCH_DMAXANGLE = Const_Infantry.PITCH_DMAXANGLE;
-//    Const_YAW_MAXANGLE = Const_Infantry.YAW_MAXANGLE;
     Const_PITCH_MOTOR_INIT_OFFSET = Const_Infantry.PITCH_MOTOR_INIT_OFFSETf;
-    Const_SERVO_INIT_OFFSET = Const_Infantry.SERVO_INIT_OFFSET;
+    /*          Gimbal yaw limit                  */
+    Const_YAW_MAXANGLE = Const_Infantry.YAW_MAXANGLE;
     Const_YAW_MOTOR_INIT_OFFSET = Const_Infantry.YAW_MOTOR_INIT_OFFSET;
+
+    Const_SERVO_INIT_OFFSET = Const_Infantry.SERVO_INIT_OFFSET;
 
     CVKF_NT_YAW = Const_Infantry.CVKF_NT_YAW;
 

@@ -91,8 +91,8 @@ void MiniPC_ControlInit() {
 
     minipc->enable_aim_output = 1;
 
-    Filter_LowPassInit(0.1, &minipc->yaw_fil_param);
-    Filter_LowPassInit(0.3=, &minipc->pitch_fil_param);
+    Filter_LowPassInit(0.8, &minipc->yaw_fil_param);
+    Filter_LowPassInit(0.5, &minipc->pitch_fil_param);
     Filter_LowPassInit(0.1, &minipc->yaw_cvkf_fil_param);
     Filter_LowPassInit(0.01, &minipc->distance_fil_param);
 
@@ -377,8 +377,8 @@ void MiniPC_SetAutoAimRef() {
                 autoaim_yaw_offset = -2.0f;
         }
 
-        Gimbal_SetYawAutoRef(imu->angle.yaw + ref_cvkf_yaw_angle + autoaim_yaw_offset);
-        Gimbal_SetPitchAutoRef(imu->angle.pitch + ref_cvkf_pitch_angle + autoaim_pitch_offset);
+        Gimbal_SetYawAutoRef(ref_cvkf_yaw_angle + autoaim_yaw_offset);
+        Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + autoaim_pitch_offset);
     } else {
         Gimbal_SetYawAutoRef(/*-imu->angle.yaw + */minipc->yaw_ref_filtered);
         Gimbal_SetPitchAutoRef(/*imu->angle.pitch + */minipc->pitch_ref_filtered);
@@ -401,11 +401,11 @@ void MiniPC_SetGimbalRef() {
     }
 
     else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_BIG_ENERGY)) {
-        Gimbal_SetYawAutoRef(imu->angle.yaw + minipc->yaw_ref_filtered + energy_yaw_offset);
-        Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + energy_pitch_offset);
+        Gimbal_SetYawAutoRef(minipc->yaw_ref_filtered + energy_yaw_offset);
+        Gimbal_SetPitchAutoRef(minipc->pitch_ref_filtered + energy_pitch_offset);
     } else if ((minipc->enable_aim_output) && (minipc->target_state == MiniPC_TARGET_FOLLOWING) && (gimbal->mode.present_mode == Gimbal_SMALL_ENERGY)) {
-        Gimbal_SetYawAutoRef(imu->angle.yaw + minipc->yaw_ref_filtered + energy_yaw_offset);
-        Gimbal_SetPitchAutoRef(imu->angle.pitch + minipc->pitch_ref_filtered + energy_pitch_offset);
+        Gimbal_SetYawAutoRef(minipc->yaw_ref_filtered + energy_yaw_offset);
+        Gimbal_SetPitchAutoRef(minipc->pitch_ref_filtered + energy_pitch_offset);
     } else
         return;
 }

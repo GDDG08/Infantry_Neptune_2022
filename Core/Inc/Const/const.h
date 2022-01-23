@@ -155,7 +155,7 @@ extern uint32_t Const_MiniPC_Lost_Target_Time;
 extern float Const_PITCH_UMAXANGLE;
 extern float Const_PITCH_UMAXANGLE_GRYO;
 extern float Const_PITCH_DMAXANGLE;
-// extern float Const_YAW_MAXANGLE;
+extern float Const_YAW_MAXANGLE;
 extern float Const_PITCH_MOTOR_INIT_OFFSET;
 extern float Const_SERVO_INIT_OFFSET;
 extern float Const_YAW_MOTOR_INIT_OFFSET;

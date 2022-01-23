@@ -81,7 +81,7 @@ typedef struct {
     uint8_t robot_id;          // Robot ID
     uint8_t power_limit;       // Super capacitor state
     uint16_t heat_17mm;        // Heat transfer of 17mm launching mechanism
-    uint16_t heat_cooling_rate;
+    float speed_17mm;
     uint16_t heat_cooling_limit;
     uint16_t heat_speed_limit;
     uint8_t main_shooter_power;

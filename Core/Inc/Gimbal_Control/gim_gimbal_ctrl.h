@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-29 20:20:13
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-18 21:33:29
+ * @LastEditTime : 2022-01-19 18:34:35
  */
 /*
  *  Project      : Infantry_Neptune
@@ -82,8 +82,12 @@ extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamIMUDebug;
 extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamNoAuto;
 
 extern Gimbal_GimbalTypeDef Gimbal_gambalControlData;
+extern float AutoControl_offset_pitch;
+extern float AutoControl_offset_yaw;
 
-Gimbal_GimbalTypeDef* Gimbal_GetGimbalControlPtr(void);
+
+Gimbal_GimbalTypeDef*
+Gimbal_GetGimbalControlPtr(void);
 
 void Gimbal_Task(void const* argument);
 void Gimbal_InitOffset(void);
@@ -94,6 +98,7 @@ void Gimbal_ChangeMode(Gimbal_ModeEnum mode);
 float Gimbal_LimitPitch(float ref);
 void Gimbal_SetPitchRef(float ref);
 void Gimbal_SetPitchAutoRef(float ref);
+float Gimbal_LimitYaw(float ref);
 void Gimbal_SetYawRef(float ref);
 void Gimbal_SetYawRefDelta(float ref);
 void Gimbal_SetYawAutoRef(float ref);

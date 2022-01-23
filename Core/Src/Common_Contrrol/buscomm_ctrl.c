@@ -277,7 +277,7 @@ void BusComm_ResetBusCommData() {
     buscomm->robot_id = 0;
     buscomm->heat_17mm = 0;
     buscomm->power_limit = 0;
-    buscomm->heat_cooling_rate = 0;
+    buscomm->speed_17mm = 0;
     buscomm->heat_cooling_limit = 0;
     buscomm->heat_speed_limit = 0;
     buscomm->main_shooter_power = 0;
@@ -359,7 +359,7 @@ void BusComm_Update() {
     data->power_limit = referee->max_chassis_power;
     data->heat_17mm = referee->shooter_heat0;
 
-    data->heat_cooling_rate = referee->shooter_heat0_cooling_rate; /*unused*/
+    data->speed_17mm = referee->bullet_speed;
     data->heat_cooling_limit = referee->shooter_heat0_cooling_limit;
     data->heat_speed_limit = referee->shooter_heat0_speed_limit;
     data->main_shooter_power = referee->mains_power_shooter_output;

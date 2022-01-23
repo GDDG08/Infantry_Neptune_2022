@@ -28,7 +28,7 @@ const uint16_t Const_MiniPC_RX_BUFF_LEN = 200;           // miniPC Receive buffe
 const uint16_t Const_MiniPC_TX_BUFF_LEN = 200;           // miniPC Transmit buffer length
 const uint16_t Const_MiniPC_MINIPC_OFFLINE_TIME = 1000;  // miniPC offline time
 const uint16_t Const_MiniPC_TX_HEART_FRAME_LEN = 10;     // miniPC heart transmit frame length
-const uint16_t Const_MiniPC_TX_DATA_FRAME_LEN = 16;      // miniPC data transmit frame length
+const uint16_t Const_MiniPC_TX_DATA_FRAME_LEN = 20;      // miniPC data transmit frame length
 
 const uint8_t Const_MiniPC_SLAVE_COMPUTER = 0x00;
 const uint8_t Const_MiniPC_INFANTRY_3 = 0x03;
@@ -50,7 +50,7 @@ const uint8_t Const_MiniPC_ARMOR_PACKET = 0x02;
 const uint8_t Const_MiniPC_DATA_PACKET = 0x08;
 
 const uint8_t Const_MiniPC_Heart_PACKET_DATA_LEN = 2;
-const uint8_t Const_MiniPC_Data_PACKET_DATA_LEN = 8;
+const uint8_t Const_MiniPC_Data_PACKET_DATA_LEN = 12;
 
 MiniPC_MiniPCDataTypeDef MiniPC_MiniPCData;  // miniPC data
 
@@ -137,10 +137,14 @@ void MiniPC_SendDataPacket() {
 
     MiniPC_MiniPCDataTypeDef* minipc = MiniPC_GetMiniPCDataPtr();
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
     int16_t yaw = imu->angle.yaw * 100;
     int16_t pitch = imu->angle.pitch * 100;
     int16_t row = imu->angle.row * 100;
+    
+    int16_t yaw_speed = imu->speed.yaw * 100;
+    uint16_t shooter_speed = buscomm->speed_17mm *100;
 
     minipc->state = MiniPC_PENDING;
 
@@ -158,8 +162,11 @@ void MiniPC_SendDataPacket() {
     i162buff(yaw, buff + 9);
     i162buff(pitch, buff + 11);
     i162buff(row, buff + 13);
+    i162buff(yaw_speed, buff + 15);
+    i162buff(shooter_speed, buff + 17);
+    
     //Must be even
-    buff[15] = 0x00;
+    buff[19] = 0x00;
 
     uint16_t checksum = 0;
     if (size % 2) {

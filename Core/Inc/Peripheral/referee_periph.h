@@ -154,8 +154,10 @@ typedef __packed struct {
     uint8_t hurt_type : 4;
 } ext_robot_hurt_t;
 
-typedef __packed struct {
+typedef __packed struct
+{
     uint8_t bullet_type;
+    uint8_t shooter_id;
     uint8_t bullet_freq;
     float bullet_speed;
 } ext_shoot_data_t;
@@ -292,6 +294,10 @@ typedef struct {
     uint16_t shooter_heat0_speed_limit;
     uint16_t shooter_heat1_speed_limit;
     uint16_t mobile_shooter_heat2;
+    
+    uint8_t shooter_id;
+    uint8_t bullet_freq;
+    float bullet_speed;
 
     float x;
     float y;
