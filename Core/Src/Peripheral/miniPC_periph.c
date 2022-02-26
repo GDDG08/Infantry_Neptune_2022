@@ -22,7 +22,7 @@ UART_HandleTypeDef* Const_MiniPC_UART_HANDLER = &huart5;
 
 /*              Mini_PC control constant            */
 const uint32_t Const_MiniPC_HEART_SENT_PERIOD = 100;  // (ms)
-const uint32_t Const_MiniPC_DATA_SENT_PERIOD = 5;   // (ms)
+const uint32_t Const_MiniPC_DATA_SENT_PERIOD = 10;   // (ms)
 
 const uint16_t Const_MiniPC_RX_BUFF_LEN = 200;           // miniPC Receive buffer length
 const uint16_t Const_MiniPC_TX_BUFF_LEN = 200;           // miniPC Transmit buffer length
