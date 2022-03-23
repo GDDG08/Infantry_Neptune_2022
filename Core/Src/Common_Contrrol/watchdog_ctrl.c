@@ -1,20 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Src\Common_Contrrol\watchdog_ctrl.c
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-18 21:24:22
- */
-/*
- *  Project      : Infantry_Neptune
- * 
- *  file         : watchdog_ctrl.c
- *  Description  : This is my lovely dog's home
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 09:12:11
+ * @LastEditTime : 2022-03-19 17:13:25
  */
 
 #include "watchdog_ctrl.h"
@@ -34,10 +25,10 @@
 #define WATCHDOG_TASK_PERIOD 1
 
 /**
-  * @brief          WatchDog task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          WatchDog task
+ * @param          NULL
+ * @retval         NULL
+ */
 void WatchDog_Task(void const* argument) {
     for (;;) {
         WatchDog_FeedDog();

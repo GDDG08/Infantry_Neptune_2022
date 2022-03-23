@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : buscomm_ctrl.h
- *  Description  : This file contains Bus bus communication control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-28 22:39:26
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Common_Contrrol\buscomm_ctrl.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-20 12:05:53
  */
 
 #ifndef BUSCOMM_CTRL_H
@@ -44,9 +44,9 @@ extern const uint8_t CHASSIS_CTRL_GYRO;
 //      cap mode
 extern const uint8_t SUPERCAP_CTRL_OFF;
 extern const uint8_t SUPERCAP_CTRL_ON;
-//      cap charge mode
-extern const uint8_t SUPERCAP_CHARGE;
-extern const uint8_t SUPERCAP_UNCHARGE;
+//      cap boost mode
+extern const uint8_t SUPERCAP_BOOST;
+extern const uint8_t SUPERCAP_UNBOOST;
 //      cap state
 extern const uint8_t SUPERCAP_MODE_OFF;
 extern const uint8_t SUPERCAP_MODE_ON;
@@ -61,6 +61,9 @@ extern CAN_TxHeaderTypeDef BusComm_ChaYawAngleBasicData;
 extern CAN_TxHeaderTypeDef BusComm_Cha17mmData;
 
 extern CAN_TxHeaderTypeDef BusComm_CapState;
+extern CAN_TxHeaderTypeDef BusComm_CapMode;
+extern CAN_TxHeaderTypeDef BusComm_CapState_1;
+extern CAN_TxHeaderTypeDef BusComm_CapState_2;
 
 extern int yyy_love;
 
@@ -85,18 +88,23 @@ typedef struct {
     uint16_t heat_cooling_limit;
     uint16_t heat_speed_limit;
     uint8_t main_shooter_power;
+    uint8_t cap_mode_fnl;
+    uint8_t cap_boost_mode_fnl;
+    uint8_t chassis_power_limit;
+    uint8_t chassis_power_buffer;
+    float chassis_power;
 
     // Gimbal up stream
-    uint8_t gimbal_yaw_mode;   // Yaw mode of gimbal
-    float gimbal_yaw_ref;      // gimbal yaw target value
-    float gimbal_imu_pos;      // gimbal yaw IMU angle feedback value
-    float gimbal_imu_spd;      // Speed feedback value of gimbal yaw IMU
-    uint8_t chassis_mode;      // Chassis mode
-    float chassis_fb_ref;      // Target value of forward and back speed of chassis
-    float chassis_lr_ref;      // Target value of chassis left and right speed
-    uint8_t cap_mode;          // Capacitance mode
-    uint8_t power_limit_mode;  // Force to change power limit mode
-    uint8_t cap_charge_mode;   // cap charge mode
+    uint8_t gimbal_yaw_mode;      // Yaw mode of gimbal
+    float gimbal_yaw_ref;         // gimbal yaw target value
+    float gimbal_imu_pos;         // gimbal yaw IMU angle feedback value
+    float gimbal_imu_spd;         // Speed feedback value of gimbal yaw IMU
+    uint8_t chassis_mode;         // Chassis mode
+    float chassis_fb_ref;         // Target value of forward and back speed of chassis
+    float chassis_lr_ref;         // Target value of chassis left and right speed
+    uint8_t cap_mode_user;        // Capacitance mode
+    uint8_t cap_boost_mode_user;  // cap boost mode
+    uint8_t power_limit_mode;     // Force to change power limit mode
     float pitch_angle;
     uint8_t ui_cmd;
     uint8_t infantry_code;
@@ -105,8 +113,11 @@ typedef struct {
     uint32_t power_path_change_flag;
     uint8_t cap_state;
     uint8_t cap_rest_energy;
-
     float cap_rest_energy_display;
+
+    float Cap_power;    // Chassis Power
+    float Cap_voltage;  // Chassis Voltage
+    float Cap_current;  // Chassis Current
 } BusComm_BusCommDataTypeDef;
 
 extern BusComm_BusCommDataTypeDef BusComm_BusCommData;

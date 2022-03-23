@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : filter_alg.c
- *  Description  : This document contains digital filter correlation function
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 11:02:50
- *  LastEditTime : 2021-07-10 01:36:46
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Src\Algorithm\filter_alg.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2022-01-14 21:12:23
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-19 16:53:41
  */
 
 #include "filter_alg.h"
@@ -13,23 +13,23 @@
 #include "const.h"
 
 /**
-  * @brief      low_pass_filter_init
-  * @param      param :Low pass filter param
-  * @param      Filter_LowPassParamTypeDef: low pass filter param stuct
-  * @retval     filtering result
-  */
+ * @brief      low_pass_filter_init
+ * @param      param :Low pass filter param
+ * @param      Filter_LowPassParamTypeDef: low pass filter param stuct
+ * @retval     filtering result
+ */
 void Filter_LowPassInit(float param, Filter_LowPassParamTypeDef* pparam) {
     pparam->filt_para = param;
     pparam->last_tick = 0;
 }
 
 /**
-  * @brief      low_pass_filter
-  * @param      val: inital value 
-  * @param      pparam : the low pass filter param sturct
-  * @param      filt: low pass filter sturct
-  * @retval     filtering result
-  */
+ * @brief      low_pass_filter
+ * @param      val: inital value
+ * @param      pparam : the low pass filter param sturct
+ * @param      filt: low pass filter sturct
+ * @retval     filtering result
+ */
 float Filter_LowPass(float val, Filter_LowPassParamTypeDef* pparam, Filter_LowPassTypeDef* filt) {
     // calculate cut off frequence
     uint32_t period = HAL_GetTick() - pparam->last_tick;
@@ -46,29 +46,40 @@ float Filter_LowPass(float val, Filter_LowPassParamTypeDef* pparam, Filter_LowPa
 }
 
 /**
-  * @brief      average_filter
-  * @param      val  :inital value 
-  * @param      filt :average_filter sturct
-  * @retval     filtering result
-  */
-float Filter_Aver(float val, Filter_WindowTypeDef* filt) {
+ * @brief      average_filter_init
+ * @param      filt :average_filter sturct
+ * @param      length  :buff len
+ * @retval     filtering result
+ */
+void Filter_AverInit(Filter_WindowTypeDef* filt, uint8_t length) {
+    filt->length = length;
     filt->sum = 0;
-    for (int i = 0; i < MAX_LENGTH - 1; i++) {
-        filt->val[i] = filt->val[i + 1];
-    }
-    filt->val[MAX_LENGTH - 1] = val;
-    for (int i = 0; i < MAX_LENGTH; i++) {
-        filt->sum += filt->val[i];
-    }
-    return filt->sum / MAX_LENGTH;
 }
 
 /**
-  * @brief      bessel_filter
-  * @param      val  :inital value 
-  * @param      filt :bessel_filter sturct
-  * @retval     filtering result
-  */
+ * @brief      average_filter
+ * @param      val  :inital value
+ * @param      filt :average_filter sturct
+ * @retval     filtering result
+ */
+float Filter_Aver(float val, Filter_WindowTypeDef* filt) {
+    filt->sum = 0;
+    for (int i = 0; i < filt->length - 1; i++) {
+        filt->val[i] = filt->val[i + 1];
+    }
+    filt->val[filt->length - 1] = val;
+    for (int i = 0; i < filt->length; i++) {
+        filt->sum += filt->val[i];
+    }
+    return filt->sum / filt->length;
+}
+
+/**
+ * @brief      bessel_filter
+ * @param      val  :inital value
+ * @param      filt :bessel_filter sturct
+ * @retval     filtering result
+ */
 float Filter_Bessel(float val, Filter_Bessel_TypeDef* filt) {
     for (int i = 3; i > 0; i--) {
         filt->xbuf[i] = filt->xbuf[i - 1];

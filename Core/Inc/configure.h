@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : configure.h
- *  Description  : This file contains all functions enable
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-06-10 11:03:55
- *  LastEditTime : 2021-07-26 21:41:55
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\configure.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2022-01-14 22:16:51
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-20 12:00:03
  */
 
 // Note:
@@ -24,7 +24,7 @@ extern "C" {
 
 /* Main Control program       */
 
-#define __FN_BOARD_TYPE __FN_BOARD_TYPE_GIMBAL
+#define __FN_BOARD_TYPE __FN_BOARD_TYPE_CHASSIS
 #define __FN_BOARD_TYPE_CHASSIS 1
 #define __FN_BOARD_TYPE_GIMBAL 2
 #define __FN_BOARD_TYPE_SUPERCAP 3

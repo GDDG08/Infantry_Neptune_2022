@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : motor_periph.c
- *  Description  : This file contains motor control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-05-14 11:57:35
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\motor_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-20 12:01:35
  */
 
 #include "motor_periph.h"
@@ -20,23 +20,23 @@ const int Const_CURRENT_PID_FREQ_DIV = 5;
 /********** ENCODER CALLBACK FUNCTION **********/
 
 /**
-  * @brief      Chassis motor encoder callback
-  * @param      pmotor: Pointer to motor object
-  * @retval     NULL
-  */
+ * @brief      Chassis motor encoder callback
+ * @param      pmotor: Pointer to motor object
+ * @retval     NULL
+ */
 void chassis_encoder_callback(Motor_MotorTypeDef* pmotor) {
     Motor_SetMotorFdb(pmotor, 1, (float)pmotor->encoder.speed / 19.0f);
 }
 
 /**
-  * @brief      Gimbal motor encoder callback
-  * @param      pmotor: Pointer to motor object
-  * @retval     NULL
-  */
+ * @brief      Gimbal motor encoder callback
+ * @param      pmotor: Pointer to motor object
+ * @retval     NULL
+ */
 void gimbal_encoder_callback(Motor_MotorTypeDef* pmotor) {
     Motor_SetMotorFdb(pmotor, 0, Filter_LowPass((float)pmotor->encoder.current, &pmotor->fdb_fil_param, &pmotor->fdb_fil));
     // Calculate angle difference and number of cycles
-    int diff = pmotor->encoder.angle - pmotor->encoder.last_angle;  //The increase of mechanical angle is positive
+    int diff = pmotor->encoder.angle - pmotor->encoder.last_angle;  // The increase of mechanical angle is positive
     if (diff < -5500)                                               // Make a positive turn
         pmotor->encoder.round_count++;
     else if (diff > 5500)  // Turn around in the opposite direction
@@ -56,10 +56,10 @@ void gimbal_encoder_callback(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Feeder motor encoder callback
-  * @param      pmotor: Pointer to motor object
-  * @retval     NULL
-  */
+ * @brief      Feeder motor encoder callback
+ * @param      pmotor: Pointer to motor object
+ * @retval     NULL
+ */
 void feeder_encoder_callback(Motor_MotorTypeDef* pmotor) {
     Motor_SetMotorFdb(pmotor, 1, (float)pmotor->encoder.speed / 36.0f);
     Motor_SetMotorFdb(pmotor, 2, (float)pmotor->encoder.consequent_angle);
@@ -91,10 +91,10 @@ void feeder_encoder_callback(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Shooter encoder callback (pwm motor)
-  * @param      pmotor: Pointer to motor object
-  * @retval     NULL
-  */
+ * @brief      Shooter encoder callback (pwm motor)
+ * @param      pmotor: Pointer to motor object
+ * @retval     NULL
+ */
 void shooter_encoder_callback(Motor_MotorTypeDef* pmotor) {
 }
 
@@ -127,12 +127,12 @@ Motor_MotorTypeDef Motor_shooterMotorRight;
 
 // float GimbalMotorYaw_INIT_Offset = 0.0f;
 /**
-  * @brief      Motor encoder decoding callback function
-  * @param      canid: CAN Handle number
-  * @param      stdid: CAN identifier
-  * @param      rxdata: CAN rx data buff
-  * @retval     NULL
-  */
+ * @brief      Motor encoder decoding callback function
+ * @param      canid: CAN Handle number
+ * @param      stdid: CAN identifier
+ * @param      rxdata: CAN rx data buff
+ * @retval     NULL
+ */
 // uint8_t gimbalYawINIT = 0;
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len) {
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
@@ -192,10 +192,10 @@ void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8
 /********** VOLATILE USER CODE END **********/
 
 /**
-  * @brief      Initialize all motors
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initialize all motors
+ * @param      NULL
+ * @retval     NULL
+ */
 void Motor_InitAllMotors() {
     Motor_groupHandle[0] = &Motor_chassisMotors;
     Motor_InitMotorGroup(&Motor_chassisMotors, Motor_TYPE_CAN_MOTOR, 4, &hcan1, 0x200);
@@ -229,14 +229,14 @@ void Motor_InitAllMotors() {
 }
 
 /**
-  * @brief      Initialize motor parameters
-  * @param      pparam: Pointer to the motor parameter object
-  * @param      pid_num: Pid ring number
-  * @param      pidpara: PID parameter array
-  * @param      acc: slope function parameters of acc
-  * @param      dec: slope function parameters of dec
-  * @retval     NULL
-  */
+ * @brief      Initialize motor parameters
+ * @param      pparam: Pointer to the motor parameter object
+ * @param      pid_num: Pid ring number
+ * @param      pidpara: PID parameter array
+ * @param      acc: slope function parameters of acc
+ * @param      dec: slope function parameters of dec
+ * @retval     NULL
+ */
 void Motor_InitMotorParam(Motor_MotorParamTypeDef* pparam, float pidpara[][4][5], PID_ModeEnum cur_mode, PID_ModeEnum spd_mode, PID_ModeEnum pos_mode) {
     if (pparam == NULL)
         return;
@@ -246,17 +246,17 @@ void Motor_InitMotorParam(Motor_MotorParamTypeDef* pparam, float pidpara[][4][5]
 }
 
 /**
-  * @brief      Initialize the motor
-  * @param      pmotor: Pointer to motor object
-  * @param      type: Type of motor (pwm or can)
-  * @param      pid_num: Pid ring number
-  * @param      cur_pid: Current ring (1 for presence)
-  * @param      htim: Pwm motor timer handle
-  * @param      ch: Pwm motor timer channel
-  * @param      htim_enc: Pwm motor encoder handle
-  * @param      callback: Motor callback function
-  * @retval     NULL
-  */
+ * @brief      Initialize the motor
+ * @param      pmotor: Pointer to motor object
+ * @param      type: Type of motor (pwm or can)
+ * @param      pid_num: Pid ring number
+ * @param      cur_pid: Current ring (1 for presence)
+ * @param      htim: Pwm motor timer handle
+ * @param      ch: Pwm motor timer channel
+ * @param      htim_enc: Pwm motor encoder handle
+ * @param      callback: Motor callback function
+ * @retval     NULL
+ */
 void Motor_InitMotor(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint8_t pid_num, uint8_t cur_pid, float fdb_param, TIM_HandleTypeDef* htim, uint32_t ch, TIM_HandleTypeDef* htim_enc, Motor_EncoderCallbackFuncTypeDef callback) {
     if (pmotor == NULL)
         return;
@@ -283,14 +283,14 @@ void Motor_InitMotor(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint8
 }
 
 /**
-  * @brief      Initialization of motor group
-  * @param      pgroup: Pointer to motor group
-  * @param      type: Type of motor (pwm or can)
-  * @param      motor_num: Number of motor group
-  * @param      phcan: Pointer of can handle
-  * @param      stdid: Motor id
-  * @retval     NULL
-  */
+ * @brief      Initialization of motor group
+ * @param      pgroup: Pointer to motor group
+ * @param      type: Type of motor (pwm or can)
+ * @param      motor_num: Number of motor group
+ * @param      phcan: Pointer of can handle
+ * @param      stdid: Motor id
+ * @retval     NULL
+ */
 void Motor_InitMotorGroup(Motor_MotorGroupTypeDef* pgroup, Motor_MotorTypeEnum type, uint8_t motor_num, CAN_HandleTypeDef* phcan, uint16_t stdid) {
     if (pgroup == NULL)
         return;
@@ -308,10 +308,10 @@ void Motor_InitMotorGroup(Motor_MotorGroupTypeDef* pgroup, Motor_MotorTypeEnum t
 }
 
 /**
-  * @brief      Reset motor PID
-  * @param      pmotor: Pointer to motor object
-  * @retval     NULL
-  */
+ * @brief      Reset motor PID
+ * @param      pmotor: Pointer to motor object
+ * @retval     NULL
+ */
 void Motor_ResetMotorPID(Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return;
@@ -323,10 +323,10 @@ void Motor_ResetMotorPID(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Empty motor group PID
-  * @param      pmotor_group: Pointer to motor group object
-  * @retval     NULL
-  */
+ * @brief      Empty motor group PID
+ * @param      pmotor_group: Pointer to motor group object
+ * @retval     NULL
+ */
 void Motor_ResetMotorGroupPID(Motor_MotorGroupTypeDef* pmotor_group) {
     if (pmotor_group == NULL)
         return;
@@ -336,10 +336,10 @@ void Motor_ResetMotorGroupPID(Motor_MotorGroupTypeDef* pmotor_group) {
 }
 
 /**
-  * @brief      Get the target value of motor PID
-  * @param      pmotor: Pointer to motor object
-  * @retval     tagart value
-  */
+ * @brief      Get the target value of motor PID
+ * @param      pmotor: Pointer to motor object
+ * @retval     tagart value
+ */
 float Motor_GetMotorRef(Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return 0.0f;
@@ -354,10 +354,10 @@ float Motor_GetMotorRef(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Get motor PID feedback value
-  * @param      pmotor: Pointer to motor object
-  * @retval     Feedback value
-  */
+ * @brief      Get motor PID feedback value
+ * @param      pmotor: Pointer to motor object
+ * @retval     Feedback value
+ */
 float Motor_GetMotorFdb(Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return 0.0f;
@@ -372,10 +372,10 @@ float Motor_GetMotorFdb(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Get motor PID output value
-  * @param      pmotor: Pointer to motor object
-  * @retval     Output value
-  */
+ * @brief      Get motor PID output value
+ * @param      pmotor: Pointer to motor object
+ * @retval     Output value
+ */
 float Motor_GetMotorOutput(Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return 0.0f;
@@ -389,12 +389,12 @@ float Motor_GetMotorOutput(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Set motor PID feedback value
-  * @param      pmotor: Pointer to motor object
-  * @param      pid_no: PID Serial number
-  * @param      fdb: Feedback value
-  * @retval     NULL
-  */
+ * @brief      Set motor PID feedback value
+ * @param      pmotor: Pointer to motor object
+ * @param      pid_no: PID Serial number
+ * @param      fdb: Feedback value
+ * @retval     NULL
+ */
 void Motor_SetMotorFdb(Motor_MotorTypeDef* pmotor, uint8_t pid_no, float fdb) {
     if (pmotor == NULL)
         return;
@@ -411,11 +411,11 @@ void Motor_SetMotorFdb(Motor_MotorTypeDef* pmotor, uint8_t pid_no, float fdb) {
 }
 
 /**
-  * @brief      Set motor PID target value (no slope function)
-  * @param      pmotor: Pointer to motor object
-  * @param      ref: target value
-  * @retval     NULL
-  */
+ * @brief      Set motor PID target value (no slope function)
+ * @param      pmotor: Pointer to motor object
+ * @param      ref: target value
+ * @retval     NULL
+ */
 void Motor_SetMotorRef(Motor_MotorTypeDef* pmotor, float ref) {
     if (pmotor == NULL)
         return;
@@ -429,11 +429,29 @@ void Motor_SetMotorRef(Motor_MotorTypeDef* pmotor, float ref) {
 }
 
 /**
-  * @brief      Calculation of motor PID output
-  * @param      pmotor: Pointer to motor object
-  * @param      pparam: Pointer to motor parameter object
-  * @retval     NULL
-  */
+ * @brief      Set motor PID output value
+ * @param      pmotor: Pointer to motor object
+ * @param      output: target value
+ * @retval     NULL
+ */
+void Motor_SetMotorOutput(Motor_MotorTypeDef* pmotor, float output) {
+    if (pmotor == NULL)
+        return;
+    if (pmotor->type == Motor_TYPE_NOT_CONNECTED)
+        return;
+    if (pmotor->cur_pid) {
+        pmotor->pid_cur.output = output;
+    } else {
+        pmotor->pid_spd.output = output;
+    }
+}
+
+/**
+ * @brief      Calculation of motor PID output
+ * @param      pmotor: Pointer to motor object
+ * @param      pparam: Pointer to motor parameter object
+ * @retval     NULL
+ */
 void Motor_CalcMotorOutput(Motor_MotorTypeDef* pmotor, Motor_MotorParamTypeDef* pparam) {
     if (pmotor == NULL || pparam == NULL)
         return;
@@ -459,12 +477,12 @@ void Motor_CalcMotorOutput(Motor_MotorTypeDef* pmotor, Motor_MotorParamTypeDef* 
 }
 
 /**
-  * @brief      Set motor PID target value overriding pid_num set
-  * @param      pmotor: Pointer to motor object
-  * @param      pid_no: Force pid ring number
-  * @param      pparam: Pointer to motor parameter object
-  * @retval     NULL
-  */
+ * @brief      Set motor PID target value overriding pid_num set
+ * @param      pmotor: Pointer to motor object
+ * @param      pid_no: Force pid ring number
+ * @param      pparam: Pointer to motor parameter object
+ * @retval     NULL
+ */
 void Motor_CalcMotorOutputRingOverrided(Motor_MotorTypeDef* pmotor, uint8_t pid_no, Motor_MotorParamTypeDef* pparam) {
     if (pmotor == NULL || pparam == NULL)
         return;
@@ -484,11 +502,11 @@ void Motor_CalcMotorOutputRingOverrided(Motor_MotorTypeDef* pmotor, uint8_t pid_
 }
 
 /**
-  * @brief      Calculate PID output of motor group
-  * @param      pgroup: Pointer to motor group object
-  * @param      pparam: Pointer to motor parameter object
-  * @retval     NULL
-  */
+ * @brief      Calculate PID output of motor group
+ * @param      pgroup: Pointer to motor group object
+ * @param      pparam: Pointer to motor parameter object
+ * @retval     NULL
+ */
 void Motor_CalcMotorGroupOutput(Motor_MotorGroupTypeDef* pgroup, Motor_MotorParamTypeDef* pparam) {
     if (pgroup == NULL || pparam == NULL)
         return;
@@ -498,10 +516,10 @@ void Motor_CalcMotorGroupOutput(Motor_MotorGroupTypeDef* pgroup, Motor_MotorPara
 }
 
 /**
-  * @brief      Sending motor PWM output
-  * @param      pmotor: The pointer points to the motor to be sent
-  * @retval     NULL
-  */
+ * @brief      Sending motor PWM output
+ * @param      pmotor: The pointer points to the motor to be sent
+ * @retval     NULL
+ */
 void Motor_SendMotorPWMOutput(Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return;
@@ -509,10 +527,10 @@ void Motor_SendMotorPWMOutput(Motor_MotorTypeDef* pmotor) {
         return;
     float output = Motor_GetMotorOutput(pmotor);
     // satori
-    //float duty = output * 0.00011136f + 0.53522f;
+    // float duty = output * 0.00011136f + 0.53522f;
     float duty = output * 0.00011136f + 0.47522f;
     pmotor->duty = duty;
-    //if (duty < 0.58f) duty = 0.58f;
+    // if (duty < 0.58f) duty = 0.58f;
     if (duty < 0.5f)
         duty = 0.5f;
     if (duty > 0.98f)
@@ -521,10 +539,10 @@ void Motor_SendMotorPWMOutput(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Transmitter output
-  * @param      pgroup: Pointer to the motor group to send
-  * @retval     NULL
-  */
+ * @brief      Transmitter output
+ * @param      pgroup: Pointer to the motor group to send
+ * @retval     NULL
+ */
 void Motor_SendMotorGroupOutput(Motor_MotorGroupTypeDef* pgroup) {
     if (pgroup == NULL)
         return;
@@ -548,10 +566,10 @@ void Motor_SendMotorGroupOutput(Motor_MotorGroupTypeDef* pgroup) {
 }
 
 /**
-  * @brief      Read motor PWM encoder
-  * @param      pmotor: The pointer points to the motor group to be sent
-  * @retval     NULL
-  */
+ * @brief      Read motor PWM encoder
+ * @param      pmotor: The pointer points to the motor group to be sent
+ * @retval     NULL
+ */
 void Motor_ReadPWMEncoder(Motor_MotorTypeDef* pmotor) {
     static int fdb = 0;
 
@@ -574,10 +592,10 @@ void Motor_ReadPWMEncoder(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Judge whether any motor is offline
-  * @param      NULL
-  * @retval     Offline or not (1 is yes, 0 is no)
-  */
+ * @brief      Judge whether any motor is offline
+ * @param      NULL
+ * @retval     Offline or not (1 is yes, 0 is no)
+ */
 uint8_t Motor_IsAnyMotorOffline() {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 4; ++j) {
@@ -591,10 +609,10 @@ uint8_t Motor_IsAnyMotorOffline() {
 }
 
 /**
-  * @brief      Judge whether the motor is offline
-  * @param      pmotor: Pointer to motor object
-  * @retval     Offline or not (1 is yes, 0 is no)
-  */
+ * @brief      Judge whether the motor is offline
+ * @param      pmotor: Pointer to motor object
+ * @retval     Offline or not (1 is yes, 0 is no)
+ */
 uint8_t Motor_IsMotorOffline(Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return 0;
@@ -605,11 +623,11 @@ uint8_t Motor_IsMotorOffline(Motor_MotorTypeDef* pmotor) {
 }
 
 /**
-  * @brief      Decoding motor encoder feedback data
-  * @param      rxdata: Information received by can
-  * @param      pmotor: Pointer to motor object
-  * @retval     NULL
-  */
+ * @brief      Decoding motor encoder feedback data
+ * @param      rxdata: Information received by can
+ * @param      pmotor: Pointer to motor object
+ * @retval     NULL
+ */
 void Motor_DecodeEncoder(uint8_t rxdata[], Motor_MotorTypeDef* pmotor) {
     if (pmotor == NULL)
         return;

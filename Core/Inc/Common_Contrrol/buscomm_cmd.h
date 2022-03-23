@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : buscomm_cmd.h
- *  Description  : This file is for idiot Can communication
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-09 03:52:53
- *  LastEditTime : 2021-07-11 08:14:24
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Common_Contrrol\buscomm_cmd.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-19 18:07:45
  */
 
 #ifndef BUSCOMM_CMD_H
@@ -28,6 +28,9 @@ extern const uint32_t CMD_SET_IMU_YAW;
 extern const uint32_t CMD_SET_CHA_REF;
 
 extern const uint32_t CMD_SEND_CAP_STATE;
+extern const uint32_t CMD_SET_CAP_MODE;
+extern const uint32_t CMD_SET_CAP_STATE_1;
+extern const uint32_t CMD_SET_CAP_STATE_2;
 
 extern const uint32_t CMD_CHASSIS_SEND_PACK_1;
 extern const uint32_t CMD_CHASSIS_SEND_PACK_2;
@@ -44,9 +47,9 @@ typedef struct {
     void (*bus_func)(uint8_t buff[]);
 } BusCmd_TableEntry;
 
-extern BusCmd_TableEntry Buscmd_Receive[8];
+extern BusCmd_TableEntry Buscmd_Receive[10];
 extern BusCmd_TableEntry Buscmd_GimSend[4];
-extern BusCmd_TableEntry Buscmd_ChaSend[2];
+extern BusCmd_TableEntry Buscmd_ChaSend[3];
 extern BusCmd_TableEntry Buscmd_CapSend[1];
 
 #endif

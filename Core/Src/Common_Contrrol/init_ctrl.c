@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : init_ctrl.c
- *  Description  : This file contains Initialize control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-16 09:15:22
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Src\Common_Contrrol\init_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-20 12:01:18
  */
 
 #include "init_ctrl.h"
@@ -47,10 +47,10 @@
 int GLOBAL_INIT_FLAG = 0;
 
 /**
-  * @brief      Initialize all peripherals
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initialize all peripherals
+ * @param      NULL
+ * @retval     NULL
+ */
 void Init_Task(void const* argument) {
     LED_InitAllLEDs();
 
@@ -113,11 +113,10 @@ void Init_Task(void const* argument) {
     Can_InitFilterAndStart(&hcan2);
 
     Const_Init();
-
+    Cap_Init();
     Chassis_InitChassis();
-    Power_InitPower();
     GimbalYaw_InitGimbalYaw();
-    
+
 #if __FN_IF_ENABLE(__FN_DEBUG_BTLOG)
     BTlog_Init();
 #endif
@@ -133,9 +132,9 @@ void Init_Task(void const* argument) {
 }
 
 /**
-  * @brief      Initialization delay
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initialization delay
+ * @param      NULL
+ * @retval     NULL
+ */
 void Init_MainLoop() {
 }

@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : buscomm_cmd.c
- *  Description  : This file is for idiot Can communication
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-09 03:52:32
- *  LastEditTime : 2021-07-28 22:40:46
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Src\Common_Contrrol\buscomm_cmd.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-20 12:01:07
  */
 
 #include "buscomm_cmd.h"
@@ -36,9 +36,13 @@ const uint32_t CMD_SET_IMU_YAW = 0x203;
 const uint32_t CMD_SET_CHA_REF = 0x204;
 
 const uint32_t CMD_SEND_CAP_STATE = 0x207;
+const uint32_t CMD_SET_CAP_MODE = 0x98;
+const uint32_t CMD_SET_CAP_STATE_1 = 0x299;
+const uint32_t CMD_SET_CAP_STATE_2 = 0x298;
 
 const uint32_t CMD_CHASSIS_SEND_PACK_1 = 0xA1;
 const uint32_t CMD_CHASSIS_SEND_PACK_2 = 0xA2;
+const uint32_t CMD_CHASSIS_SEND_PACK_3 = 0xA3;
 
 const uint32_t CMD_GIMBAL_SEND_PACK_1 = 0xB1;
 const uint32_t CMD_GIMBAL_SEND_PACK_2 = 0xB2;
@@ -54,6 +58,7 @@ static void _send_gimbal_data(uint8_t buff[]);
 static void _send_imu_yaw(uint8_t buff[]);
 static void _send_chassis_ref(uint8_t buff[]);
 static void _send_cap_state(uint8_t buff[]);
+static void _send_cap_mode(uint8_t buff[]);
 static void _set_yaw_angle_basic_data(uint8_t buff[]);
 static void _set_17mm_data(uint8_t buff[]);
 static void _set_mode(uint8_t buff[]);
@@ -61,8 +66,10 @@ static void _set_gimbal_data(uint8_t buff[]);
 static void _set_imu_yaw(uint8_t buff[]);
 static void _set_cha_ref(uint8_t buff[]);
 static void _set_cap_state(uint8_t buff[]);
+static void _set_cap_state_1(uint8_t buff[]);
+static void _set_cap_state_2(uint8_t buff[]);
 
-BusCmd_TableEntry Buscmd_Receive[8] = {
+BusCmd_TableEntry Buscmd_Receive[10] = {
     {0xff, NULL},
     {CMD_SET_YAW_ANGLE_BASIC_DATA, &_set_yaw_angle_basic_data},
     {CMD_SET_17MM_DATA, &_set_17mm_data},
@@ -70,7 +77,9 @@ BusCmd_TableEntry Buscmd_Receive[8] = {
     {CMD_SET_GIMBAL_DATA, &_set_gimbal_data},
     {CMD_SET_IMU_YAW, &_set_imu_yaw},
     {CMD_SET_CHA_REF, &_set_cha_ref},
-    {CMD_SEND_CAP_STATE, &_set_cap_state}};
+    {CMD_SEND_CAP_STATE, &_set_cap_state},
+    {CMD_SET_CAP_STATE_1, &_set_cap_state_1},
+    {CMD_SET_CAP_STATE_2, &_set_cap_state_2}};
 
 BusCmd_TableEntry Buscmd_GimSend[4] = {
     {CMD_GIMBAL_SEND_PACK_1, &_send_mode},
@@ -78,15 +87,16 @@ BusCmd_TableEntry Buscmd_GimSend[4] = {
     {CMD_GIMBAL_SEND_PACK_3, &_send_imu_yaw},
     {CMD_GIMBAL_SEND_PACK_4, &_send_chassis_ref}};
 
-BusCmd_TableEntry Buscmd_ChaSend[2] = {
+BusCmd_TableEntry Buscmd_ChaSend[3] = {
     {CMD_CHASSIS_SEND_PACK_1, &_send_yaw_angle_basic_data},
-    {CMD_CHASSIS_SEND_PACK_2, &_send_17mm_data}};
+    {CMD_CHASSIS_SEND_PACK_2, &_send_17mm_data},
+    {CMD_CHASSIS_SEND_PACK_3, &_send_cap_mode}};
 
 BusCmd_TableEntry Buscmd_CapSend[1] = {
     {CMD_SUPERCAP_SEND_PACK_1, &_send_cap_state}};
 
-int count1a, count2a, count3a, count4a, count5a, count6a, count7a;
-float rate1a, rate2a, rate3a, rate4a, rate5a, rate6a, rate7a;
+int count1a, count2a, count3a, count4a, count5a, count6a, count7a, count8a;
+float rate1a, rate2a, rate3a, rate4a, rate5a, rate6a, rate7a, rate8a;
 
 /*      send functions driver       */
 static void _send_yaw_angle_basic_data(uint8_t buff[]) {
@@ -123,8 +133,8 @@ static void _send_mode(uint8_t buff[]) {
     memset(buff, 0, 8);
     buff[0] = buscomm->gimbal_yaw_mode;
     buff[1] = buscomm->power_limit_mode;
-    buff[2] = buscomm->cap_charge_mode;
-    buff[3] = buscomm->cap_mode;
+    buff[2] = buscomm->cap_boost_mode_user;
+    buff[3] = buscomm->cap_mode_user;
     buff[4] = buscomm->chassis_mode;
     buff[5] = buscomm->ui_cmd;
     buff[6] = buscomm->infantry_code;
@@ -175,6 +185,20 @@ static void _send_cap_state(uint8_t buff[]) {
     Can_SendMessage(Const_BusComm_CAN_HANDLER, pheader, buff);
 }
 
+static void _send_cap_mode(uint8_t buff[]) {
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+    CAN_TxHeaderTypeDef* pheader = &BusComm_CapMode;
+    count8a++;
+    rate8a = 1000 * count8a / HAL_GetTick();
+    memset(buff, 0, 8);
+    buff[0] = buscomm->cap_mode_fnl;
+    buff[1] = buscomm->cap_boost_mode_fnl;
+    buff[2] = buscomm->chassis_power_limit;
+    buff[3] = buscomm->chassis_power_buffer;
+    float2buff(buscomm->chassis_power, buff + 4);
+    Can_SendMessage(Const_BusComm_CAN_HANDLER, pheader, buff);
+}
+
 int count1;
 float rate1;
 /*          function driver      */
@@ -205,14 +229,15 @@ static void _set_mode(uint8_t buff[]) {
     rate3 = 1000 * count3 / HAL_GetTick();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
-    if ((buscomm->cap_mode == SUPERCAP_CTRL_ON) && (buff[3] == SUPERCAP_CTRL_OFF)) {
+    // Todo
+    if ((buscomm->cap_mode_user == SUPERCAP_CTRL_ON) && (buff[3] == SUPERCAP_CTRL_OFF)) {
         buscomm->power_path_change_flag = HAL_GetTick();
     }
 
     buscomm->gimbal_yaw_mode = buff[0];
     buscomm->power_limit_mode = buff[1];
-    buscomm->cap_charge_mode = buff[2];
-    buscomm->cap_mode = buff[3];
+    buscomm->cap_boost_mode_user = buff[2];
+    buscomm->cap_mode_user = buff[3];
     buscomm->chassis_mode = buff[4];
     buscomm->ui_cmd = buff[5];
     buscomm->infantry_code = buff[6];
@@ -255,4 +280,24 @@ static void _set_cap_state(uint8_t buff[]) {
     buscomm->cap_state = buff[0];
     buscomm->cap_rest_energy = buff[1];
     buscomm->cap_rest_energy_display = (float)buscomm->cap_rest_energy;
+}
+int count8;
+float rate8;
+static void _set_cap_state_1(uint8_t buff[]) {
+    count8++;
+    rate8 = 1000 * count8 / HAL_GetTick();
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+
+    buscomm->Cap_power = buff2float(buff);
+    buscomm->cap_rest_energy = buff[4];
+}
+int count9;
+float rate9;
+static void _set_cap_state_2(uint8_t buff[]) {
+    count9++;
+    rate9 = 1000 * count9 / HAL_GetTick();
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+
+    buscomm->Cap_voltage = buff2float(buff);
+    buscomm->Cap_current = buff2float(buff + 4);
 }

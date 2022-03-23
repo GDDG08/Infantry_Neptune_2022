@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : motor_periph.h
- *  Description  : This file contains motor control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-05-14 11:56:42
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\motor_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-20 12:00:37
  */
 
 #ifndef MOTOR_PERIPH_H
@@ -116,6 +116,7 @@ void Motor_CalcMotorOutputRingOverrided(Motor_MotorTypeDef* pmotor, uint8_t pid_
 void Motor_SetMotorRef(Motor_MotorTypeDef* pmotor, float ref);
 void Motor_SetMotorFdb(Motor_MotorTypeDef* pmotor, uint8_t pid_no, float fdb);
 void Motor_SetMotorSlopeRef(Motor_MotorTypeDef* pmotor, float ref, Motor_MotorParamTypeDef* pparam);
+void Motor_SetMotorOutput(Motor_MotorTypeDef* pmotor, float output);
 void Motor_CalcMotorOutput(Motor_MotorTypeDef* pmotor, Motor_MotorParamTypeDef* pparam);
 void Motor_CalcMotorGroupOutput(Motor_MotorGroupTypeDef* pmotor_group, Motor_MotorParamTypeDef* pparam);
 void Motor_SendMotorPWMOutput(Motor_MotorTypeDef* pmotor);
