@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_login_ctrl.c
- *  Description  : Login control file
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-13 12:17:44
- *  LastEditTime : 2021-07-11 11:03:00
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Gimbal_Control\gim_login_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:28
  */
 
 #include "gim_login_ctrl.h"
@@ -22,10 +22,10 @@ uint16_t LOGIN_PASSWORD = 0;
 #define LOGIN_STATIC_KEY_END 0xc6
 
 /**
-  * @brief      Login initialization
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Login initialization
+ * @param      NULL
+ * @retval     NULL
+ */
 void Login_Init() {
     LOGIN_ON_FLAG = 0;
     LOGIN_CODE = Login_CreateCode();
@@ -33,10 +33,10 @@ void Login_Init() {
 }
 
 /**
-  * @brief      Login code generation
-  * @param      NULL
-  * @retval     Login code
-  */
+ * @brief      Login code generation
+ * @param      NULL
+ * @retval     Login code
+ */
 uint32_t Login_CreateCode() {
     uint16_t rand_code = rand() & 0xffff;
     uint32_t code = LOGIN_STATIC_KEY_END | (rand_code << 16);
@@ -45,19 +45,19 @@ uint32_t Login_CreateCode() {
 }
 
 /**
-  * @brief      Login password generation
-  * @param      code :Login code
-  * @retval     Login password
-  */
+ * @brief      Login password generation
+ * @param      code :Login code
+ * @retval     Login password
+ */
 uint32_t Login_GetCode() {
     return LOGIN_CODE;
 }
 
 /**
-  * @brief      Login password generation
-  * @param      code :Login code
-  * @retval     Login password
-  */
+ * @brief      Login password generation
+ * @param      code :Login code
+ * @retval     Login password
+ */
 uint16_t Login_GetPassword(uint32_t code) {
     uint8_t buff[4];
     uint16_t decode;
@@ -80,10 +80,10 @@ uint16_t Login_GetPassword(uint32_t code) {
 }
 
 /**
-  * @brief      Login password verification
-  * @param      password :Verified password
-  * @retval      1 : code match 2 : not match
-  */
+ * @brief      Login password verification
+ * @param      password :Verified password
+ * @retval      1 : code match 2 : not match
+ */
 uint32_t Login_CheckCode(uint16_t password) {
     if (password == Login_GetPassword(LOGIN_CODE)) {
         return CODE_MATCH;
@@ -92,19 +92,19 @@ uint32_t Login_CheckCode(uint16_t password) {
 }
 
 /**
-  * @brief      Login On
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Login On
+ * @param      NULL
+ * @retval     NULL
+ */
 void Login_LoginOn() {
     LOGIN_ON_FLAG = LOGIN_ON;
 }
 
 /**
-  * @brief      Login control command
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Login control command
+ * @param      NULL
+ * @retval     NULL
+ */
 void Login_LoginCmd() {
     if (LOGIN_ON_FLAG != 0)
         return;

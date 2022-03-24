@@ -1,20 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Algorithm\kalman_alg.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-13 21:14:13
- */
-/*
- *  Project      : Infantry_Neptune
- * 
- *  file         : kalman_alg.h
- *  Description  : This file contains the kalman filter functions (whx designed)
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-06-10 11:03:12
- *  LastEditTime : 2021-07-26 21:22:48
+ * @LastEditTime : 2022-03-23 21:38:32
  */
 
 #ifndef KALMAN_ALG_H
@@ -89,7 +80,6 @@ void Kalman_FilterInit(Kalman_KalmanTypeDef* kf, uint8_t xhatSize, uint8_t uSize
 float* Kalman_FilterUpdate(Kalman_KalmanTypeDef* kf);
 static void Kalman_Adjustment_H_K_R(Kalman_KalmanTypeDef* kf);
 
-
 typedef struct {
     // KF Filter Parameters:
     mat KF_A, KF_C;
@@ -99,7 +89,7 @@ typedef struct {
     mat Kf;
 
     // Cycle Time
-    //float cvkf_t;
+    // float cvkf_t;
     float angle, angle_p_err, max_speed, min_speed;
     int switch_mode,
         measure_mode,
@@ -112,12 +102,12 @@ typedef struct {
     float PLast[4], Ppre[4], Popt[4];
     float Q[4], R[1];
     float Kf[2];
-    //float cvkf_t;
+    // float cvkf_t;
 } Kalman_CVKalmanInitDataTypeDef;
 
 typedef struct {
     int total;         //???:????????
-    int basicprocess;  //CVKF??????(????)
+    int basicprocess;  // CVKF??????(????)
     int predict;       //??????????????
     int limit;         //?????????????
     int jumpjudge;     //????????
@@ -128,11 +118,11 @@ typedef struct {
 
 } Kalman_CVKalmanControlTypeDef;
 
-//CVKF Inner Function:
+// CVKF Inner Function:
 void Kalman_CVKalmanInitYawParam(Kalman_CVKalmanInitDataTypeDef* cvkf_data, float KF_T, float init_angle_yaw, float init_angle_speed);
-//void Kalman_CVKalmanInitYawParam(Kalman_CVKalmanInitDataTypeDef *cvkf_data, float KF_T, float init_angle_yaw);
+// void Kalman_CVKalmanInitYawParam(Kalman_CVKalmanInitDataTypeDef *cvkf_data, float KF_T, float init_angle_yaw);
 void Kalman_CVKalmanInitPitchParam(Kalman_CVKalmanInitDataTypeDef* cvkf_data, float KF_T, float init_angle_pitch, float init_angle_speed);
-//void Kalman_CVKalmanInitPitchParam(Kalman_CVKalmanInitDataTypeDef *cvkf_data, float KF_T, float init_angle_pitch);
+// void Kalman_CVKalmanInitPitchParam(Kalman_CVKalmanInitDataTypeDef *cvkf_data, float KF_T, float init_angle_pitch);
 void Kalman_CVInitSetYaw(Kalman_CVKalmanInitDataTypeDef* cvkf_data, float init_angle_yaw, float init_angle_speed);
 void Kalman_CVInitSetPitch(Kalman_CVKalmanInitDataTypeDef* cvkf_data, float init_angle_pitch, float init_angle_speed);
 void Kalman_CVKalmanInit(Kalman_CVKalmanTypeDef* cvkf, Kalman_CVKalmanInitDataTypeDef* cvkf_data);

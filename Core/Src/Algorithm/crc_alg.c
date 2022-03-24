@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : crc_alg.c
- *  Description  : This file contains crc check function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-09 05:29:10
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Algorithm\crc_alg.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-07-24 10:27:08
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:22
  */
 
 #include "crc_alg.h"
@@ -36,11 +36,11 @@ const unsigned char CRC8_TAB[256] = {
     0x74, 0x2a, 0xc8, 0x96, 0x15, 0x4b, 0xa9, 0xf7, 0xb6, 0xe8, 0x0a, 0x54, 0xd7, 0x89, 0x6b, 0x35};
 
 /**
-  * @brief :  The calibration data of CRC8 is calculated according to the data
-  * @param :  pchMessage��A more accurate array pointer is required  dwLength��data length
-  * @retval:  NULL
-  * @note  :  NULL
-  */
+ * @brief :  The calibration data of CRC8 is calculated according to the data
+ * @param :  pchMessage��A more accurate array pointer is required  dwLength��data length
+ * @retval:  NULL
+ * @note  :  NULL
+ */
 unsigned char CRC_GetCRC8CheckSum(unsigned char* pchMessage, unsigned int dwLength, char ucCRC8) {
     unsigned char ucIndex;
     while (dwLength--) {
@@ -51,12 +51,12 @@ unsigned char CRC_GetCRC8CheckSum(unsigned char* pchMessage, unsigned int dwLeng
 }
 
 /**
-  * @brief    CRC16 Verify function
-  * @param    pchMessage    Data to Verify
-  * @param    dwLength    Stream length = Data + checksum
-  * @retvel    0    Don't match
-  *            1    Match
-  */
+ * @brief    CRC16 Verify function
+ * @param    pchMessage    Data to Verify
+ * @param    dwLength    Stream length = Data + checksum
+ * @retvel    0    Don't match
+ *            1    Match
+ */
 unsigned int CRC_VerifyCRC8CheckSum(unsigned char* pchMessage, unsigned int dwLength) {
     unsigned char ucExpected = 0;
     if ((pchMessage == 0) || (dwLength <= 2))
@@ -66,11 +66,11 @@ unsigned int CRC_VerifyCRC8CheckSum(unsigned char* pchMessage, unsigned int dwLe
 }
 
 /**
-  * @brief    append CRC8 to the end of data
-  * @param    pchMessage    Data to CRC and append
-  * @param    dwLength    Stream length = Data + checksum
-  * @retvel   NULL
-  */
+ * @brief    append CRC8 to the end of data
+ * @param    pchMessage    Data to CRC and append
+ * @param    dwLength    Stream length = Data + checksum
+ * @retvel   NULL
+ */
 void CRC_AppendCRC8CheckSum(unsigned char* pchMessage, unsigned int dwLength) {
     unsigned char ucCRC = 0;
     if ((pchMessage == 0) || (dwLength <= 2))
@@ -79,7 +79,7 @@ void CRC_AppendCRC8CheckSum(unsigned char* pchMessage, unsigned int dwLength) {
     pchMessage[dwLength - 1] = ucCRC;
 }
 
-//CRC16 part
+// CRC16 part
 uint16_t CRC16_INIT = 0xffff;
 const uint16_t CRC16_Table[256] = {
     0x0000, 0x1189, 0x2312, 0x329b, 0x4624, 0x57ad, 0x6536, 0x74bf,
@@ -116,11 +116,11 @@ const uint16_t CRC16_Table[256] = {
     0x7bc7, 0x6a4e, 0x58d5, 0x495c, 0x3de3, 0x2c6a, 0x1ef1, 0x0f78};
 
 /**
-  * @brief :  The calibration data of CRC16 is calculated according to the data
-  * @param :  pchMessage��A more accurate array pointer is required  dwLength��data length
-  * @retval:  NULL
-  * @note  :  NULL
-  */
+ * @brief :  The calibration data of CRC16 is calculated according to the data
+ * @param :  pchMessage��A more accurate array pointer is required  dwLength��data length
+ * @retval:  NULL
+ * @note  :  NULL
+ */
 uint16_t CRC_GetCRC16CheckSum(uint8_t* pchMessage, uint32_t dwLength, uint16_t wCRC) {
     uint8_t chData;
     if (pchMessage == NULL)
@@ -133,12 +133,12 @@ uint16_t CRC_GetCRC16CheckSum(uint8_t* pchMessage, uint32_t dwLength, uint16_t w
 }
 
 /**
-  * @brief    CRC16 Verify function
-  * @param    pchMessage    Data to Verify
-  * @param    dwLength    Stream length = Data + checksum
-  * @retvel    0    Don't match
-  *            1    Match
-  */
+ * @brief    CRC16 Verify function
+ * @param    pchMessage    Data to Verify
+ * @param    dwLength    Stream length = Data + checksum
+ * @retvel    0    Don't match
+ *            1    Match
+ */
 uint32_t CRC_VerifyCRC16CheckSum(uint8_t* pchMessage, uint32_t dwLength) {
     uint16_t wExpected = 0;
     if ((pchMessage == NULL) || (dwLength <= 2))
@@ -149,11 +149,11 @@ uint32_t CRC_VerifyCRC16CheckSum(uint8_t* pchMessage, uint32_t dwLength) {
 }
 
 /**
-  * @brief    append CRC16 to the end of data
-  * @param    pchMessage    Data to CRC and append
-  * @param    dwLength    Stream length = Data + checksum
-  * @retvel   NULL
-  */
+ * @brief    append CRC16 to the end of data
+ * @param    pchMessage    Data to CRC and append
+ * @param    dwLength    Stream length = Data + checksum
+ * @retvel   NULL
+ */
 void CRC_AppendCRC16CheckSum(uint8_t* pchMessage, uint32_t dwLength) {
     uint16_t wCRC = 0;
     if ((pchMessage == NULL) || (dwLength <= 2))
@@ -164,12 +164,12 @@ void CRC_AppendCRC16CheckSum(uint8_t* pchMessage, uint32_t dwLength) {
 }
 
 /**
-  * @brief    Hi229 CRC Verify
-  * @param    *currectCrc    Pointer to crc data
-  * @param    lengthInBytes    Stream length
-  * @retvel    0    Don't match
-  *            1    Match
-  */
+ * @brief    Hi229 CRC Verify
+ * @param    *currectCrc    Pointer to crc data
+ * @param    lengthInBytes    Stream length
+ * @retvel    0    Don't match
+ *            1    Match
+ */
 CRC_MatchEnum CRC_VerifyIMU_HI229(uint8_t* buff) {
     uint16_t imu_crc = 0,
              tmp,
@@ -185,11 +185,11 @@ CRC_MatchEnum CRC_VerifyIMU_HI229(uint8_t* buff) {
 }
 
 /**
-  * @brief    Hi229 CRC calculate
-  * @param    *currectCrc    Pointer to crc data
-  * @param    lengthInBytes    Stream length
-  * @retvel   NULL
-  */
+ * @brief    Hi229 CRC calculate
+ * @param    *currectCrc    Pointer to crc data
+ * @param    lengthInBytes    Stream length
+ * @retvel   NULL
+ */
 void crc16_verify(uint16_t* currectCrc, const uint8_t* src, uint32_t lengthInBytes) {
     uint32_t crc = *currectCrc;
     uint32_t j;

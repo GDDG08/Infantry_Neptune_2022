@@ -1,11 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Common_Contrrol\debug_BTlog.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:17:07
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-18 14:26:07
+ * @LastEditTime : 2022-03-23 21:38:49
  */
 
 #ifndef DEBUG_BTLOG_H

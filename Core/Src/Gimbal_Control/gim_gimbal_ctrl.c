@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_gimbal_ctrl.c
- *  Description  : This file contains Gimbal control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-25 11:55:00
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Gimbal_Control\gim_gimbal_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2022-01-14 22:16:51
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:22
  */
 
 #include "gim_gimbal_ctrl.h"
@@ -31,10 +31,10 @@ Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamNoAuto;
 Gimbal_GimbalTypeDef Gimbal_gambalControlData;
 
 /**
-  * @brief          Gimbal task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Gimbal task
+ * @param          NULL
+ * @retval         NULL
+ */
 void Gimbal_Task(void const* argument) {
     for (;;) {
         while (!GLOBAL_INIT_FLAG) {
@@ -51,10 +51,10 @@ void Gimbal_Task(void const* argument) {
 }
 
 /**
-* @brief      Gimbal initialization offset and mode
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Gimbal initialization offset and mode
+ * @param      NULL
+ * @retval     NULL
+ */
 void Gimbal_InitOffset() {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
@@ -77,19 +77,19 @@ void Gimbal_InitOffset() {
 }
 
 /**
-  * @brief      Gets the pointer to the gimbal control object
-  * @param      NULL
-  * @retval     The pointer points to the gimbal control object
-  */
+ * @brief      Gets the pointer to the gimbal control object
+ * @param      NULL
+ * @retval     The pointer points to the gimbal control object
+ */
 Gimbal_GimbalTypeDef* Gimbal_GetGimbalControlPtr() {
     return &Gimbal_gambalControlData;
 }
 
 /**
-* @brief      Change Gimbal mode
-* @param      mode: Gimbal mode enum
-* @retval     NULL
-*/
+ * @brief      Change Gimbal mode
+ * @param      mode: Gimbal mode enum
+ * @retval     NULL
+ */
 void Gimbal_ChangeMode(Gimbal_ModeEnum mode) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
     gimbal->mode.last_mode = gimbal->mode.present_mode;
@@ -100,10 +100,10 @@ void Gimbal_ChangeMode(Gimbal_ModeEnum mode) {
 }
 
 /**
-* @brief      Yaw state control
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Yaw state control
+ * @param      NULL
+ * @retval     NULL
+ */
 void Gimbal_CtrlYaw() {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
@@ -130,10 +130,10 @@ void Gimbal_CtrlYaw() {
 }
 
 /**
-* @brief      Pitch state control
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Pitch state control
+ * @param      NULL
+ * @retval     NULL
+ */
 void Gimbal_CtrlPitch() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
@@ -185,10 +185,10 @@ void Gimbal_CtrlPitch() {
 }
 
 /**
-* @brief      Pitch angle limit
-* @param      ref: Pitch set ref
-* @retval     Limited pitch ref
-*/
+ * @brief      Pitch angle limit
+ * @param      ref: Pitch set ref
+ * @retval     Limited pitch ref
+ */
 float Gimbal_LimitPitch(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
@@ -209,10 +209,10 @@ float Gimbal_LimitPitch(float ref) {
 }
 
 /**
-* @brief      Set pitch ref
-* @param      ref: Pitch set ref
-* @retval     NULL
-*/
+ * @brief      Set pitch ref
+ * @param      ref: Pitch set ref
+ * @retval     NULL
+ */
 void Gimbal_SetPitchRef(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
@@ -220,10 +220,10 @@ void Gimbal_SetPitchRef(float ref) {
 }
 
 /**
-* @brief      Aoto aim mode set pitch ref
-* @param      ref: Yaw set ref
-* @retval     NULL
-*/
+ * @brief      Aoto aim mode set pitch ref
+ * @param      ref: Yaw set ref
+ * @retval     NULL
+ */
 // float AutoControl_ratio_pitch = 1.8f;
 float AutoControl_offset_pitch = -0.4f;
 void Gimbal_SetPitchAutoRef(float ref) {
@@ -242,7 +242,7 @@ void Gimbal_SetPitchAutoRef(float ref) {
     else
         limited_ref = ref;
     // Out of depression set maximum ref
-    gimbal->angle.pitch_angle_ref = limited_ref;  //imu->angle.pitch + ref
+    gimbal->angle.pitch_angle_ref = limited_ref;  // imu->angle.pitch + ref
 }
 
 // /**
@@ -264,10 +264,10 @@ void Gimbal_SetPitchAutoRef(float ref) {
 // }
 
 /**
-* @brief      Yaw angle limit
-* @param      ref: Yaw set ref
-* @retval     Limited ywa ref
-*/
+ * @brief      Yaw angle limit
+ * @param      ref: Yaw set ref
+ * @retval     Limited ywa ref
+ */
 float Gimbal_LimitYaw(float ref) {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
@@ -298,10 +298,10 @@ float Gimbal_LimitYaw(float ref) {
 }
 
 /**
-* @brief      Set yaw ref
-* @param      ref: Pitch set ref
-* @retval     NULL
-*/
+ * @brief      Set yaw ref
+ * @param      ref: Pitch set ref
+ * @retval     NULL
+ */
 void Gimbal_SetYawRef(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
@@ -309,10 +309,10 @@ void Gimbal_SetYawRef(float ref) {
 }
 
 /**
-* @brief      Set yaw ref delta
-* @param      ref: Pitch set ref
-* @retval     NULL
-*/
+ * @brief      Set yaw ref delta
+ * @param      ref: Pitch set ref
+ * @retval     NULL
+ */
 void Gimbal_SetYawRefDelta(float ref) {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 
@@ -320,10 +320,10 @@ void Gimbal_SetYawRefDelta(float ref) {
 }
 
 /**
-* @brief      Aoto aim mode set yaw ref
-* @param      ref: Yaw set ref
-* @retval     NULL
-*/
+ * @brief      Aoto aim mode set yaw ref
+ * @param      ref: Yaw set ref
+ * @retval     NULL
+ */
 
 // float AutoControl_ratio_yaw = 80.0f;
 float AutoControl_offset_yaw = -0.65f;
@@ -350,10 +350,10 @@ void Gimbal_SetYawAutoRef(float ref /*, int isDelta*/) {
 }
 
 /**
-  * @brief      Gimbal pitch output function
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Gimbal pitch output function
+ * @param      NULL
+ * @retval     NULL
+ */
 void GimbalPitch_Output() {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
 

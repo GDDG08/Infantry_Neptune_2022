@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : init_ctrl.h
- *  Description  : This file contains Initialize control function
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-16 09:07:33
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Common_Contrrol\init_ctrl.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:49:45
  */
 
 #ifndef INIT_CTRL_H

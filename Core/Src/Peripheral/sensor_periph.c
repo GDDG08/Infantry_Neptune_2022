@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : sensor_periph.c
- *  Description  : This file contains analog sensor function(Only for Super Cap)
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-05-08 09:16:55
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\sensor_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:25
  */
 
 #include "sensor_periph.h"
@@ -19,28 +19,28 @@ Sen_PowerValueTypeDef Sen_powerValue;
 Sen_FilterTypeDef Sen_Filter;
 
 /**
-  * @brief      Gets the pointer to the sensor power data object
-  * @param      NULL
-  * @retval     Pointer to sensor power data object
-  */
+ * @brief      Gets the pointer to the sensor power data object
+ * @param      NULL
+ * @retval     Pointer to sensor power data object
+ */
 Sen_PowerValueTypeDef* Sen_GetPowerDataPtr() {
     return &Sen_powerValue;
 }
 
 /**
-  * @brief      Gets the pointer to the sensor basis data object
-  * @param      NULL
-  * @retval     Pointer to sensor basis data object
-  */
+ * @brief      Gets the pointer to the sensor basis data object
+ * @param      NULL
+ * @retval     Pointer to sensor basis data object
+ */
 Sen_CAPBasisValueTypeDef* Sen_GetBasisDataPtr() {
     return &Sen_basisValue;
 }
 
 /**
-  * @brief      Sen initialization
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Sen initialization
+ * @param      NULL
+ * @retval     NULL
+ */
 void Sen_Init() {
     Adc_Init();
     Filter_LowPassInit(0.1, &Sen_Filter.CapVoltageParam);
@@ -49,23 +49,23 @@ void Sen_Init() {
 }
 
 /**
-  * @brief      Filtering data
-  * @param      Sen_Filter: Filter structure
-  * @param      Sen_basisValue: Filter data
-  * @retval     NULL
-  */
+ * @brief      Filtering data
+ * @param      Sen_Filter: Filter structure
+ * @param      Sen_basisValue: Filter data
+ * @retval     NULL
+ */
 void Sen_Filtering(Sen_FilterTypeDef* Sen_Filter, Sen_CAPBasisValueTypeDef* Sen_basisValue) {
-    //ADC Filter
+    // ADC Filter
     Sen_basisValue->CapVoltage = Filter_LowPass(Sen_basisValue->CapVoltage, &Sen_Filter->CapVoltageParam, &Sen_Filter->CapVoltage);
     Sen_basisValue->VccVoltage = Filter_LowPass(Sen_basisValue->VccVoltage, &Sen_Filter->VccVoltageParam, &Sen_Filter->VccVoltage);
     Sen_basisValue->ChasissVoltage = Filter_LowPass(Sen_basisValue->ChasissVoltage, &Sen_Filter->ChasissVoltageParam, &Sen_Filter->ChasissVoltage);
 }
 
 /**
-  * @brief      Decode Sen data
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Decode Sen data
+ * @param      NULL
+ * @retval     NULL
+ */
 void Sensor_Decode() {
     Sen_CAPBasisValueTypeDef* basisValue = Sen_GetBasisDataPtr();
     Sen_PowerValueTypeDef* powerValue = Sen_GetPowerDataPtr();

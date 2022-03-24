@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : log_lib.c
- *  Description  : Error log and system error parameters functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 11:02:50
- *  LastEditTime : 2021-07-11 06:38:00
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Library\log_lib.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:54:59
  */
 
 #include "log_lib.h"

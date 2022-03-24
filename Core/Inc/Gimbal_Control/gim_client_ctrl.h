@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_client_ctrl.h
- *  Description  : This file contains the client functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:50:33
- *  LastEditTime : 2021-07-16 12:04:29
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Gimbal_Control\gim_client_ctrl.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:57:31
  */
 
 #ifndef GIM_CLIENT_CTRL_H

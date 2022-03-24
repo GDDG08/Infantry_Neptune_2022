@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : cha_gimbal_ctrl.c
- *  Description  : This file contains Gimbal Yaw control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 09:20:59
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Chassis_Control\cha_gimbal_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:41
  */
 
 #include "cha_gimbal_ctrl.h"
@@ -28,10 +28,10 @@ Motor_MotorParamTypeDef GimbalYaw_gimbalYawMotorParamNoAuto;
 GimbalYaw_GimbalYawTypeDef GimbalYaw_gimbalYawControlData;
 
 /**
-  * @brief          Gimbal task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Gimbal task
+ * @param          NULL
+ * @retval         NULL
+ */
 void Gimbal_Task(void const* argument) {
     for (;;) {
         while (!GLOBAL_INIT_FLAG) {
@@ -44,10 +44,10 @@ void Gimbal_Task(void const* argument) {
 }
 
 /**
-  * @brief      Gimbal yaw control initialization
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Gimbal yaw control initialization
+ * @param      NULL
+ * @retval     NULL
+ */
 void GimbalYaw_InitGimbalYaw() {
     HAL_Delay(2000);
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
@@ -68,19 +68,19 @@ void GimbalYaw_InitGimbalYaw() {
 }
 
 /**
-  * @brief      Get the pointer of gimbal control object
-  * @param      NULL
-  * @retval     Pointer to gimbal control object
-  */
+ * @brief      Get the pointer of gimbal control object
+ * @param      NULL
+ * @retval     Pointer to gimbal control object
+ */
 GimbalYaw_GimbalYawTypeDef* GimbalYaw_GetGimbalYawPtr() {
     return &GimbalYaw_gimbalYawControlData;
 }
 
 /**
-  * @brief      Set the gimbal control output calculation enabled state
-  * @param      state: Enabled, 1 is enabled, 0 is disabled
-  * @retval     NULL
-  */
+ * @brief      Set the gimbal control output calculation enabled state
+ * @param      state: Enabled, 1 is enabled, 0 is disabled
+ * @retval     NULL
+ */
 void GimbalYaw_SetGimbalYawControlState(uint8_t state) {
     GimbalYaw_GimbalYawTypeDef* gimbalYaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -88,10 +88,10 @@ void GimbalYaw_SetGimbalYawControlState(uint8_t state) {
 }
 
 /**
-  * @brief      Set gimbal control output enable status
-  * @param      state: Enabled, 1 is enabled, 0 is disabled
-  * @retval     NULL
-  */
+ * @brief      Set gimbal control output enable status
+ * @param      state: Enabled, 1 is enabled, 0 is disabled
+ * @retval     NULL
+ */
 void GimbalYaw_SetGimbalYawOutputState(uint8_t state) {
     GimbalYaw_GimbalYawTypeDef* gimbalYaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -99,10 +99,10 @@ void GimbalYaw_SetGimbalYawOutputState(uint8_t state) {
 }
 
 /**
-  * @brief      Set up the yaw mode of gimbal
-  * @param      mode: gimbal yaw mode
-  * @retval     NULL
-  */
+ * @brief      Set up the yaw mode of gimbal
+ * @param      mode: gimbal yaw mode
+ * @retval     NULL
+ */
 void GimbalYaw_SetMode(GimbalYaw_GimbalYawModeEnum mode) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -114,10 +114,10 @@ void GimbalYaw_SetMode(GimbalYaw_GimbalYawModeEnum mode) {
 }
 
 /**
-  * @brief      Set the motor encoder as yaw fb
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Set the motor encoder as yaw fb
+ * @param      NULL
+ * @retval     NULL
+ */
 void GimbalYaw_SetEncoderFdb() {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -126,10 +126,10 @@ void GimbalYaw_SetEncoderFdb() {
 }
 
 /**
-* @brief      Yaw angle limit
-* @param      ref: Yaw set ref
-* @retval     Limited ywa ref
-*/
+ * @brief      Yaw angle limit
+ * @param      ref: Yaw set ref
+ * @retval     Limited ywa ref
+ */
 float GimbalYaw_Limit(float ref) {
     Chassis_ChassisTypeDef* chassis = Chassis_GetChassisControlPtr();
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
@@ -159,10 +159,10 @@ float GimbalYaw_Limit(float ref) {
 }
 
 /**
-  * @brief      Set the target value of gimbal yaw
-  * @param      yaw_ref: gimbal yaw target value
-  * @retval     NULL
-  */
+ * @brief      Set the target value of gimbal yaw
+ * @param      yaw_ref: gimbal yaw target value
+ * @retval     NULL
+ */
 void GimbalYaw_SetYawRef(float yaw_ref) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -170,10 +170,10 @@ void GimbalYaw_SetYawRef(float yaw_ref) {
 }
 
 /**
-  * @brief      Setting IMU yaw position feedback
-  * @param      imu_yaw_position_fdb: IMU Yaw Position feedback
-  * @retval     NULL
-  */
+ * @brief      Setting IMU yaw position feedback
+ * @param      imu_yaw_position_fdb: IMU Yaw Position feedback
+ * @retval     NULL
+ */
 void GimbalYaw_SetIMUYawPositionFdb(float imu_yaw_position_fdb) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -181,10 +181,10 @@ void GimbalYaw_SetIMUYawPositionFdb(float imu_yaw_position_fdb) {
 }
 
 /**
-  * @brief      Setting IMU yaw speed feedback
-  * @param      imu_yaw_speed_fdb: IMU Yaw Speed feedback
-  * @retval     NULL
-  */
+ * @brief      Setting IMU yaw speed feedback
+ * @param      imu_yaw_speed_fdb: IMU Yaw Speed feedback
+ * @retval     NULL
+ */
 void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb) {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -192,10 +192,10 @@ void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb) {
 }
 
 /**
-  * @brief      Control function of gimbal yaw
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Control function of gimbal yaw
+ * @param      NULL
+ * @retval     NULL
+ */
 void GimbalYaw_Control() {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 
@@ -240,10 +240,10 @@ void GimbalYaw_Control() {
 }
 
 /**
-  * @brief      Gimbal yaw output function
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Gimbal yaw output function
+ * @param      NULL
+ * @retval     NULL
+ */
 void GimbalYaw_Output() {
     GimbalYaw_GimbalYawTypeDef* gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 

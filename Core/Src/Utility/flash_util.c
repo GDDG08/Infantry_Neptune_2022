@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : flash_util.c
- *  Description  : This file contains the flash write and read fuctions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-18 15:57:40
- *  LastEditTime : 2021-07-16 04:06:12
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Utility\flash_util.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:52
  */
 
 #include "flash_util.h"
@@ -13,11 +13,11 @@
 #if __FN_IF_ENABLE(__FN_UTIL_FLASH)
 
 /**
-  * @brief          Erase flash
-  * @param          address: Flash address
-  * @param          len: Page num
-  * @retval         NULL
-  */
+ * @brief          Erase flash
+ * @param          address: Flash address
+ * @param          len: Page num
+ * @retval         NULL
+ */
 void Flash_EraseAddress(uint32_t address, uint16_t page) {
     FLASH_EraseInitTypeDef flash_erase;
     uint32_t error;
@@ -33,12 +33,12 @@ void Flash_EraseAddress(uint32_t address, uint16_t page) {
 }
 
 /**
-  * @brief          Write data to one page of flash
-  * @param          start_address: flash address
-  * @param          buff: data point
-  * @param          len: data num
-  * @retval         success 1, fail 0
-  */
+ * @brief          Write data to one page of flash
+ * @param          start_address: flash address
+ * @param          buff: data point
+ * @param          len: data num
+ * @retval         success 1, fail 0
+ */
 uint8_t Flash_WriteSingleAddress(uint32_t start_address, uint32_t* buff, uint32_t len) {
     if (buff == NULL)
         return 0;
@@ -78,13 +78,13 @@ uint8_t Flash_WriteSingleAddress(uint32_t start_address, uint32_t* buff, uint32_
 }
 
 /**
-  * @brief          Write data to some pages of flash
-  * @param          start_address: flash start address
-  * @param          end_address: flash end address
-  * @param          buff: data point
-  * @param          len: data num
-  * @retval         success 1, fail 0
-  */
+ * @brief          Write data to some pages of flash
+ * @param          start_address: flash start address
+ * @param          end_address: flash end address
+ * @param          buff: data point
+ * @param          len: data num
+ * @retval         success 1, fail 0
+ */
 uint8_t Flash_WriteMuliAddress(uint32_t start_address, uint32_t end_address, uint32_t* buff, uint32_t len) {
     if (buff == NULL)
         return 0;
@@ -118,21 +118,21 @@ uint8_t Flash_WriteMuliAddress(uint32_t start_address, uint32_t end_address, uin
 }
 
 /**
-  * @brief          Read data for flash
-  * @param[in]      address: flash address
-  * @param[out]     buff: data point
-  * @param[in]      len: data num
-  * @retval         none
-  */
+ * @brief          Read data for flash
+ * @param[in]      address: flash address
+ * @param[out]     buff: data point
+ * @param[in]      len: data num
+ * @retval         none
+ */
 void Flash_ReadData(uint32_t address, uint32_t* buff, uint32_t len) {
     memcpy(buff, (void*)address, len * 4);
 }
 
 /**
-  * @brief          Get the sector number of flash
-  * @param          address: Flash address
-  * @retval         Sector number
-  */
+ * @brief          Get the sector number of flash
+ * @param          address: Flash address
+ * @retval         Sector number
+ */
 uint32_t Flash_GetSector(uint32_t address) {
     uint32_t sector = 0;
 
@@ -168,10 +168,10 @@ uint32_t Flash_GetSector(uint32_t address) {
 }
 
 /**
-  * @brief          Get the next page flash address
-  * @param          address: Flash address
-  * @retval         Next page flash address
-  */
+ * @brief          Get the next page flash address
+ * @param          address: Flash address
+ * @retval         Next page flash address
+ */
 uint32_t Flash_GetNextSector(uint32_t address) {
     uint32_t sector = 0;
 

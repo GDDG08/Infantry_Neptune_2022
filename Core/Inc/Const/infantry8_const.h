@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : infantry8_const.h
- *  Description  : This file contains 8 infantry constants
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:27:32
- *  LastEditTime : 2021-07-11 10:54:25
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Const\infantry8_const.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:50:41
  */
 
 #ifndef INFANTRY8_CONST_H

@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : infantry5_const.c
- *  Description  : This file contains 5 infantry constants
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-26 21:39:54
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Const\infantry5_const.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:06
  */
 
 #include "configure.h"
@@ -125,7 +125,7 @@ void Const_Infantry_5_Init(Const_ConstTypeDef* x) {
     x->CVKF_NT_YAW = 150;
 
     /*          Gimbal pitch limit                  */
-    x->YAW_MOTOR_INIT_OFFSET = -150.0f;  //59.0f;
+    x->YAW_MOTOR_INIT_OFFSET = -150.0f;  // 59.0f;
 
     x->ShooterLockedCurrent = 3000.0f;
     x->ShooterLockedSpeed = 20.0f;

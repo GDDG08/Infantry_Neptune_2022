@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : adc_util.h
- *  Description  : This file contains the ADC functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 11:03:12
- *  LastEditTime : 2021-06-18 21:48:30
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Utility\adc_util.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:58:27
  */
 
 #ifndef ADC_UTIL_H

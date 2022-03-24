@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : can_util.h
- *  Description  : This file contains the CAN functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-06-15 14:07:29
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Utility\can_util.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:52:28
  */
+
 
 #ifndef CAN_UTIL_H
 #define CAN_UTIL_H

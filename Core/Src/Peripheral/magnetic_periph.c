@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : magnetic_peiph.c
- *  Description  : This file contains the magnetic type of ist8310
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
- *  Date         : 2021-06-19 10:45:11
- *  LastEditTime : 2021-07-11 11:05:00
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\magnetic_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:16
  */
 
 #include "magnetic_periph.h"
@@ -24,10 +24,10 @@ static const uint8_t MAG_WriteRegDataError[IST8310_WRITE_REG_NUM][3] = {
     {0x0A, 0x0B, 0x04}};
 
 /**
-  * @brief          Magnetic init
-  * @param          NULL
-  * @retval         Magnetic init state
-  */
+ * @brief          Magnetic init
+ * @param          NULL
+ * @retval         Magnetic init state
+ */
 void MAG_Init() {
     MAG_MAGDataTypeDef* mag_data = MAG_GetMAGDataPtr();
 
@@ -70,10 +70,10 @@ void MAG_Init() {
 }
 
 /**
-  * @brief      Reset MAG data object
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Reset MAG data object
+ * @param      NUULL
+ * @retval     NUL
+ */
 void MAG_ResetMAGData() {
     MAG_MAGDataTypeDef* mag = MAG_GetMAGDataPtr();
 
@@ -84,19 +84,19 @@ void MAG_ResetMAGData() {
 }
 
 /**
-  * @brief      Get pinter to the MAG data object
-  * @param      NULL
-  * @retval     Pointer to MAG data object
-  */
+ * @brief      Get pinter to the MAG data object
+ * @param      NULL
+ * @retval     Pointer to MAG data object
+ */
 MAG_MAGDataTypeDef* MAG_GetMAGDataPtr() {
     return &MAG_MAGData;
 }
 
 /**
-  * @brief      Judge Magnetic offline
-  * @param      NULL
-  * @retval     Offline or not£¨1 is offline£¬0 is not£©
-  */
+ * @brief      Judge Magnetic offline
+ * @param      NULL
+ * @retval     Offline or notï¿½ï¿½1 is offlineï¿½ï¿½0 is notï¿½ï¿½
+ */
 uint8_t MAG_IsMAGOffline() {
     MAG_MAGDataTypeDef* mag_data = MAG_GetMAGDataPtr();
 
@@ -107,10 +107,10 @@ uint8_t MAG_IsMAGOffline() {
 }
 
 /**
-  * @brief          Magnetic init
-  * @param          NULL
-  * @retval         Magnetic Update
-  */
+ * @brief          Magnetic init
+ * @param          NULL
+ * @retval         Magnetic Update
+ */
 void MAG_MAGUpdate() {
     MAG_MAGDataTypeDef* mag_data = MAG_GetMAGDataPtr();
 

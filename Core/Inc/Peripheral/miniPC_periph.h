@@ -1,21 +1,13 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\miniPC_periph.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-17 20:23:36
+ * @LastEditTime : 2022-03-23 22:22:23
  */
-/*
- *  Project      : Infantry_Neptune
- * 
- *  file         : miniPC_periph.h
- *  Description  : This file contains mini_PC data transceiver related auxiliary functions
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-22 07:05:01
- */
+
 
 #ifndef MINIPC_PERIPH_H
 #define MINIPC_PERIPH_H

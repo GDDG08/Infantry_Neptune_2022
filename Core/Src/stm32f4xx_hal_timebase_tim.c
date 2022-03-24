@@ -1,21 +1,21 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    stm32f4xx_hal_timebase_TIM.c
-  * @brief   HAL time base based on the hardware TIM.
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    stm32f4xx_hal_timebase_TIM.c
+ * @brief   HAL time base based on the hardware TIM.
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -31,14 +31,14 @@ TIM_HandleTypeDef htim7;
 /* Private functions ---------------------------------------------------------*/
 
 /**
-  * @brief  This function configures the TIM7 as a time base source.
-  *         The time source is configured  to have 1ms time base with a dedicated
-  *         Tick interrupt priority.
-  * @note   This function is called  automatically at the beginning of program after
-  *         reset by HAL_Init() or at any time when clock is configured, by HAL_RCC_ClockConfig().
-  * @param  TickPriority: Tick interrupt priority.
-  * @retval HAL status
-  */
+ * @brief  This function configures the TIM7 as a time base source.
+ *         The time source is configured  to have 1ms time base with a dedicated
+ *         Tick interrupt priority.
+ * @note   This function is called  automatically at the beginning of program after
+ *         reset by HAL_Init() or at any time when clock is configured, by HAL_RCC_ClockConfig().
+ * @param  TickPriority: Tick interrupt priority.
+ * @retval HAL status
+ */
 HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
     RCC_ClkInitTypeDef clkconfig;
     uint32_t uwTimclock = 0;
@@ -83,22 +83,22 @@ HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority) {
 }
 
 /**
-  * @brief  Suspend Tick increment.
-  * @note   Disable the tick increment by disabling TIM7 update interrupt.
-  * @param  None
-  * @retval None
-  */
+ * @brief  Suspend Tick increment.
+ * @note   Disable the tick increment by disabling TIM7 update interrupt.
+ * @param  None
+ * @retval None
+ */
 void HAL_SuspendTick(void) {
     /* Disable TIM7 update Interrupt */
     __HAL_TIM_DISABLE_IT(&htim7, TIM_IT_UPDATE);
 }
 
 /**
-  * @brief  Resume Tick increment.
-  * @note   Enable the tick increment by Enabling TIM7 update interrupt.
-  * @param  None
-  * @retval None
-  */
+ * @brief  Resume Tick increment.
+ * @note   Enable the tick increment by Enabling TIM7 update interrupt.
+ * @param  None
+ * @retval None
+ */
 void HAL_ResumeTick(void) {
     /* Enable TIM7 Update interrupt */
     __HAL_TIM_ENABLE_IT(&htim7, TIM_IT_UPDATE);

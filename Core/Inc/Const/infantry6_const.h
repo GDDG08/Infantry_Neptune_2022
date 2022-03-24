@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : infantry6_const.h
- *  Description  : This file contains 6 infantry constants
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 06:15:24
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Const\infantry6_const.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-23 21:38:56
  */
 
 #ifndef INFANTRY6_CONST_H

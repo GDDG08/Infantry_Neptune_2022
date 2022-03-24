@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : remote_periph.h
- *  Description  : This file contains remote relevant function
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-09 05:51:51
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\remote_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:52:15
  */
 
 #ifndef REMOTE_PERIPH_H
@@ -42,19 +42,19 @@ typedef struct {
 
 typedef struct {
     struct {
-        int16_t ch[5];                //Channel 0 channel 1 channel 2 channel 3 paddle wheel
-        Remote_SwitchStateEnum s[2];  //Switch 0 switch 1
+        int16_t ch[5];                // Channel 0 channel 1 channel 2 channel 3 paddle wheel
+        Remote_SwitchStateEnum s[2];  // Switch 0 switch 1
     } remote;
 
     struct {
-        int16_t x;  //mouse x
-        int16_t y;  //mouse y
-        int16_t z;  //mouse z
-        uint8_t l;  //mouse Left key
-        uint8_t r;  //mouse Right key
+        int16_t x;  // mouse x
+        int16_t y;  // mouse y
+        int16_t z;  // mouse z
+        uint8_t l;  // mouse Left key
+        uint8_t r;  // mouse Right key
     } mouse;
 
-    Remote_KeyboardTypeDef key;  //key board
+    Remote_KeyboardTypeDef key;  // key board
     Remote_RemoteStateEnum state;
     uint32_t last_update_time;
 } Remote_RemoteDataTypeDef;

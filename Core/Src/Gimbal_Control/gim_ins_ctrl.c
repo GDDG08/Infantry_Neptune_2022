@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : Using gyroscope, geomagnetic pole completes attitude calculation
- *  Description  : gim_ins_ctrl.c
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-07-09 00:00:22
- *  LastEditTime : 2021-07-28 23:00:02
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Gimbal_Control\gim_ins_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:25
  */
 
 #include "gim_ins_ctrl.h"
@@ -39,10 +39,10 @@ float ins_yaw_bias = 0;
 INS_IMUDataTypeDef INS_IMUData;
 
 /**
-  * @brief          INS task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          INS task
+ * @param          NULL
+ * @retval         NULL
+ */
 void Ins_Task(void const* argument) {
     INS_task_local_handler = xTaskGetHandle(pcTaskGetName(NULL));
     while (!GLOBAL_INIT_FLAG) {
@@ -113,13 +113,13 @@ void Ins_Task(void const* argument) {
 }
 
 /**
-  * @brief          Ins Spi Init
-  * @param          pvParameters: NULL
-  * @retval         NULL
-  */
+ * @brief          Ins Spi Init
+ * @param          pvParameters: NULL
+ * @retval         NULL
+ */
 void Ins_InsInit() {
     // wait a time
-     HAL_Delay(INS_TASK_INIT_TIME);
+    HAL_Delay(INS_TASK_INIT_TIME);
 
     Ins_InitIMU();
 
@@ -185,10 +185,10 @@ void Ins_InsInit() {
 }
 
 /**
-  * @brief      Initialization IMU
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initialization IMU
+ * @param      NULL
+ * @retval     NULL
+ */
 void Ins_InitIMU() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     uint8_t err = 0;
@@ -212,19 +212,19 @@ void Ins_InitIMU() {
 }
 
 /**
-  * @brief      Get pinter to the IMU data object
-  * @param      NULL
-  * @retval     Pointer to IMU data object
-  */
+ * @brief      Get pinter to the IMU data object
+ * @param      NULL
+ * @retval     Pointer to IMU data object
+ */
 INS_IMUDataTypeDef* Ins_GetIMUDataPtr() {
     return &INS_IMUData;
 }
 
 /**
-  * @brief      Judge IMU offline
-  * @param      NULL
-  * @retval     Offline or not��1 is offline��0 is not��
-  */
+ * @brief      Judge IMU offline
+ * @param      NULL
+ * @retval     Offline or not��1 is offline��0 is not��
+ */
 uint8_t Ins_IsIMUOffline() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
 
@@ -246,10 +246,10 @@ uint8_t Ins_IsIMUOffline() {
 }
 
 /**
-  * @brief      IMU decode data function    ��For BMI0xx)
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      IMU decode data function    ��For BMI0xx)
+ * @param      NULL
+ * @retval     NULL
+ */
 void Ins_DecodeIMUData() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     MAG_MAGDataTypeDef* mag = MAG_GetMAGDataPtr();
@@ -290,10 +290,10 @@ void Ins_DecodeIMUData() {
 }
 
 /**
-  * @brief          Control the temperature of IMU
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Control the temperature of IMU
+ * @param          NULL
+ * @retval         NULL
+ */
 void Ins_TempControl() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
 
@@ -310,10 +310,10 @@ void Ins_TempControl() {
 }
 
 /**
-  * @brief          Ins Gpio Exit Callbcak
-  * @param          GPIO_Pin :Specifies the pins connected EXTI line
-  * @retval         NULL
-  */
+ * @brief          Ins Gpio Exit Callbcak
+ * @param          GPIO_Pin :Specifies the pins connected EXTI line
+ * @retval         NULL
+ */
 void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio) {
     if (gpio == BMI_INT1) {
         if (ins_flag & (1 << INS_INIT_SHIFT)) {
@@ -346,10 +346,10 @@ void Ins_GPIOExitCallback(GPIO_GPIOTypeDef* gpio) {
 }
 
 /**
-  * @brief          Ins Spi DMA Recive Control
-  * @param          pvParameters: NULL
-  * @retval         NULL
-  */
+ * @brief          Ins Spi DMA Recive Control
+ * @param          pvParameters: NULL
+ * @retval         NULL
+ */
 static void Ins_ImuDMACmd() {
 #if __FN_IF_ENABLE(__IMU_HI22X)
 #else
@@ -367,10 +367,10 @@ static void Ins_ImuDMACmd() {
 }
 
 /**
-  * @brief          Ins Spi DMA Recive interrupt Control
-  * @param          pvParameters: NULL
-  * @retval         NULL
-  */
+ * @brief          Ins Spi DMA Recive interrupt Control
+ * @param          pvParameters: NULL
+ * @retval         NULL
+ */
 void Ins_DMAIRQHandler() {
 #if __FN_IF_ENABLE(__IMU_HI22X)
 #else

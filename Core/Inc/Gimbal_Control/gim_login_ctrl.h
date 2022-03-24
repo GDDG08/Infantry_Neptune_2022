@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_login_ctrl.h
- *  Description  : Login control file
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-13 12:17:44
- *  LastEditTime : 2021-07-11 11:03:22
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Gimbal_Control\gim_login_ctrl.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:50:57
  */
 
 #ifndef GIM_LOGIN_CTRL_H

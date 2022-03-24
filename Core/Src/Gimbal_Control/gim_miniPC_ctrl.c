@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_miniPC_ctrl.c
- *  Description  : This file contains MiniPC control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-28 23:18:06
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Gimbal_Control\gim_miniPC_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2022-01-14 22:16:51
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:35
  */
 
 #include "gim_miniPC_ctrl.h"
@@ -49,26 +49,26 @@ float autoaim_yaw_dead = 0.05f;
 float autoaim_pitch_limit = 5.0f;
 float autoaim_yaw_limit = 10.0f;
 
-float energy_yaw_offset = 1.0f;    //LEFT + RIGHT -
+float energy_yaw_offset = 1.0f;    // LEFT + RIGHT -
 float energy_pitch_offset = 0.2f;  // UP - DOWN +
 
 float delta_predict = 0.0f;
 float pitch_angle = 0;
 
 /**
-  * @brief      Gets the pointer to the MiniPC data object
-  * @param      NULL
-  * @retval     Pointer to MiniPC data object
-  */
+ * @brief      Gets the pointer to the MiniPC data object
+ * @param      NULL
+ * @retval     Pointer to MiniPC data object
+ */
 MiniPC_MiniPCControlTypeDef* MiniPC_GetMiniPCControlDataPtr() {
     return &MiniPC_MiniPCContrlData;
 }
 
 /**
-  * @brief          MiniPC task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          MiniPC task
+ * @param          NULL
+ * @retval         NULL
+ */
 void MiniPC_Task(void const* argument) {
     for (;;) {
         while (!GLOBAL_INIT_FLAG) {
@@ -82,10 +82,10 @@ void MiniPC_Task(void const* argument) {
 }
 
 /**
-* @brief      Init minipc data
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Init minipc data
+ * @param      NULL
+ * @retval     NULL
+ */
 void MiniPC_ControlInit() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
 
@@ -96,10 +96,10 @@ void MiniPC_ControlInit() {
     Filter_LowPassInit(0.1, &minipc->yaw_cvkf_fil_param);
     Filter_LowPassInit(0.01, &minipc->distance_fil_param);
 
-    //CVKF Init Variables:
+    // CVKF Init Variables:
     minipc->cvkf_control.total = 0;
     minipc->cvkf_control.basicprocess = 1;
-    minipc->cvkf_control.jumpjudge = 0;  //no function
+    minipc->cvkf_control.jumpjudge = 0;  // no function
     minipc->cvkf_control.limit = 0;
     minipc->cvkf_control.offset = 0;
     minipc->cvkf_control.output = 1;
@@ -107,19 +107,19 @@ void MiniPC_ControlInit() {
     minipc->cvkf_control.lowfilter = 1;
     minipc->cvkf_control.dead_domain_delta_ref = 1;
 
-    //CVKF for Yaw Angle:
+    // CVKF for Yaw Angle:
     Kalman_CVKalmanInitYawParam(&minipc->cvkf_data_yaw, 1 / 1000.0f, 0.0f, 0.0f);
     Kalman_CVKalmanInit(&minipc->cvkf_yaw, &minipc->cvkf_data_yaw);
-    //CVKF for Pitch Angle:
+    // CVKF for Pitch Angle:
     Kalman_CVKalmanInitPitchParam(&minipc->cvkf_data_pitch, 1 / 1000.0f, 0.0f, 0.0f);
     Kalman_CVKalmanInit(&minipc->cvkf_pitch, &minipc->cvkf_data_pitch);
 }
 
 /**
-* @brief      Change aiming mode
-* @param      mode: MiniPC aim mode enum
-* @retval     NULL
-*/
+ * @brief      Change aiming mode
+ * @param      mode: MiniPC aim mode enum
+ * @retval     NULL
+ */
 void MiniPC_ChangeAimMode(MiniPC_AutoAimModeEnum mode) {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
@@ -129,10 +129,10 @@ void MiniPC_ChangeAimMode(MiniPC_AutoAimModeEnum mode) {
 }
 
 /**
-* @brief      MiniPC auto aim decode control
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      MiniPC auto aim decode control
+ * @param      NULL
+ * @retval     NULL
+ */
 void MiniPC_CalcAutoAim() {
     Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
@@ -142,29 +142,29 @@ void MiniPC_CalcAutoAim() {
 }
 
 /**
-* @brief      MiniPC auto aim decode control
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      MiniPC auto aim decode control
+ * @param      NULL
+ * @retval     NULL
+ */
 void MiniPC_UpdateAutoAim() {
     MiniPC_UpdateControlData();
 }
 
 /**
-* @brief      Set gimbal following mode
-* @param      mode: MiniPC target follow mode enum
-* @retval     NULL
-*/
+ * @brief      Set gimbal following mode
+ * @param      mode: MiniPC target follow mode enum
+ * @retval     NULL
+ */
 void MiniPC_SetFollowMode(MiniPC_TargetFollowModeEnum mode) {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     minipc->target_state = mode;
 }
 
 /**
-* @brief      Set the state of the target being recognized 
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Set the state of the target being recognized
+ * @param      NULL
+ * @retval     NULL
+ */
 void MiniPC_SetTargetFollowMode() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
 
@@ -177,18 +177,18 @@ void MiniPC_SetTargetFollowMode() {
 }
 
 /**
-* @brief      Kalman prediction
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Kalman prediction
+ * @param      NULL
+ * @retval     NULL
+ */
 
 void MiniPC_KalmanPrediction() {
     static MiniPC_TargetFollowModeEnum last_target_state = MiniPC_TARGET_LOST;
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
 
-    float angle_yaw = 0.0f;    //imu->angle.yaw - minipc->yaw_angle;
-    float angle_pitch = 0.0f;  //imu->angle.pitch + minipc->pitch_angle;
+    float angle_yaw = 0.0f;    // imu->angle.yaw - minipc->yaw_angle;
+    float angle_pitch = 0.0f;  // imu->angle.pitch + minipc->pitch_angle;
 
     //********
     if (minipc->cvkf_control.lowfilter == 1) {
@@ -202,18 +202,18 @@ void MiniPC_KalmanPrediction() {
 
     //********
     if (minipc->target_state == MiniPC_TARGET_FOLLOWING && (last_target_state == MiniPC_TARGET_LOST)) {
-        //Get New Target: Init CVKF Yaw
+        // Get New Target: Init CVKF Yaw
         angle_yaw = imu->angle.yaw - minipc->yaw_angle;
         angle_pitch = imu->angle.pitch + minipc->pitch_angle;
-        //float angle_yaw = imu->angle.yaw - minipc->yaw_angle;//????
+        // float angle_yaw = imu->angle.yaw - minipc->yaw_angle;//????
         Kalman_CVInitSetYaw(&minipc->cvkf_data_yaw, angle_yaw, Kalman_CV_CalInitSpeed(-minipc->yaw_angle));
         Kalman_CVKalmanInit(&minipc->cvkf_yaw, &minipc->cvkf_data_yaw);
-        Kalman_TurnOnCVKF(&minipc->cvkf_yaw);  //Start Filtering
-        //Get New Target: Init CVKF Pitch
-        Kalman_CVInitSetPitch(&minipc->cvkf_data_pitch, angle_pitch, 0.0f);  //Kalman_CV_CalInitSpeed(minipc->pitch_angle));
+        Kalman_TurnOnCVKF(&minipc->cvkf_yaw);  // Start Filtering
+        // Get New Target: Init CVKF Pitch
+        Kalman_CVInitSetPitch(&minipc->cvkf_data_pitch, angle_pitch, 0.0f);  // Kalman_CV_CalInitSpeed(minipc->pitch_angle));
         Kalman_CVKalmanInit(&minipc->cvkf_pitch, &minipc->cvkf_data_pitch);
-        Kalman_TurnOnCVKF(&minipc->cvkf_pitch);  //Start Filtering
-        //ReStart LowFilter for income Speed:
+        Kalman_TurnOnCVKF(&minipc->cvkf_pitch);  // Start Filtering
+        // ReStart LowFilter for income Speed:
 
         minipc->yaw_fil.filted_last_val = minipc->yaw_angle;
         minipc->pitch_fil.filted_last_val = minipc->pitch_angle;
@@ -227,7 +227,7 @@ void MiniPC_KalmanPrediction() {
             before_cvkf_yaw = angle_yaw;
             Kalman_MeasurementCalc(&minipc->cvkf_yaw, angle_yaw);
         } else {
-            //Using CVKF Without Measurements For Tracking:
+            // Using CVKF Without Measurements For Tracking:
             Kalman_NonMeasurementCalc(&minipc->cvkf_yaw);
         }
 
@@ -235,13 +235,13 @@ void MiniPC_KalmanPrediction() {
             before_cvkf_pitch = angle_pitch;
             Kalman_MeasurementCalc(&minipc->cvkf_pitch, angle_pitch);
         } else {
-            //Using CVKF Without Measurements For Tracking:
+            // Using CVKF Without Measurements For Tracking:
             Kalman_NonMeasurementCalc(&minipc->cvkf_pitch);
         }
     }
 
     else {
-        //No Targets: Close CVKF
+        // No Targets: Close CVKF
         Kalman_TurnOffCVKF(&minipc->cvkf_yaw);
         Kalman_CVInitSetYaw(&minipc->cvkf_data_yaw, 0.0f, 0.0f);
         Kalman_TurnOffCVKF(&minipc->cvkf_pitch);
@@ -256,10 +256,10 @@ void MiniPC_KalmanPrediction() {
 }
 
 /**
-* @brief      Update minipc data
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Update minipc data
+ * @param      NULL
+ * @retval     NULL
+ */
 void MiniPC_UpdateControlData() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();
@@ -273,7 +273,7 @@ void MiniPC_UpdateControlData() {
         minipc->get_target_time = HAL_GetTick();
 
     if (minipc_data->is_get_target == 1 && gimbal->mode.present_mode == Gimbal_ARMOR) {
-        //minipc->get_target_time = HAL_GetTick();
+        // minipc->get_target_time = HAL_GetTick();
 
         if (minipc->cvkf_control.limit == 1) {
             if (minipc_data->yaw_angle > autoaim_yaw_limit)
@@ -313,10 +313,10 @@ void MiniPC_UpdateControlData() {
 }
 
 /**
-* @brief      Set gimbal autoaim reference
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Set gimbal autoaim reference
+ * @param      NULL
+ * @retval     NULL
+ */
 
 void MiniPC_SetAutoAimRef() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
@@ -380,16 +380,16 @@ void MiniPC_SetAutoAimRef() {
         Gimbal_SetYawAutoRef(ref_cvkf_yaw_angle + autoaim_yaw_offset);
         Gimbal_SetPitchAutoRef(ref_cvkf_pitch_angle + autoaim_pitch_offset);
     } else {
-        Gimbal_SetYawAutoRef(/*-imu->angle.yaw + */minipc->yaw_ref_filtered);
-        Gimbal_SetPitchAutoRef(/*imu->angle.pitch + */minipc->pitch_ref_filtered);
+        Gimbal_SetYawAutoRef(/*-imu->angle.yaw + */ minipc->yaw_ref_filtered);
+        Gimbal_SetPitchAutoRef(/*imu->angle.pitch + */ minipc->pitch_ref_filtered);
     }
 }
 
 /**
-* @brief      Set gimbal reference
-* @param      NULL
-* @retval     NULL
-*/
+ * @brief      Set gimbal reference
+ * @param      NULL
+ * @retval     NULL
+ */
 void MiniPC_SetGimbalRef() {
     MiniPC_MiniPCControlTypeDef* minipc = MiniPC_GetMiniPCControlDataPtr();
     MiniPC_MiniPCDataTypeDef* minipc_data = MiniPC_GetMiniPCDataPtr();

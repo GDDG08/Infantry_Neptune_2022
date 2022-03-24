@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains AHRS algorithm functions
- *  Description  : ahrs_alg.c
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:36:09
- *  LastEditTime : 2021-07-16 00:39:59
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Algorithm\ahrs_alg.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:19
  */
 
 #include "ahrs_alg.h"
@@ -22,10 +22,10 @@ float sampleFreq;  // sample frequency in Hz
 volatile float integralFBx = 0.0f, integralFBy = 0.0f, integralFBz = 0.0f;  // integral error terms scaled by Ki
 
 /**
-  * @brief      AHRS Quad Array initnation
-  * @param      q[4] :The Quad Array needs to be updated
-  * @retval     NULL
-  */
+ * @brief      AHRS Quad Array initnation
+ * @param      q[4] :The Quad Array needs to be updated
+ * @retval     NULL
+ */
 void AHRS_Init(float quat[4]) {
     quat[0] = 1.0f;
     quat[1] = 0.0f;
@@ -34,13 +34,13 @@ void AHRS_Init(float quat[4]) {
 }
 
 /**
-  * @brief      AHRS Quad Array initnation
-  * @param      q[4] :The Quad Array 
-  * @param      yaw :Yaw axis data pointer
-  * @param      pitch :Pitch axis data pointer
-  * @param      roll :roll axis data pointer
-  * @retval     NULL
-  */
+ * @brief      AHRS Quad Array initnation
+ * @param      q[4] :The Quad Array
+ * @param      yaw :Yaw axis data pointer
+ * @param      pitch :Pitch axis data pointer
+ * @param      roll :roll axis data pointer
+ * @retval     NULL
+ */
 void AHRS_GetAngle(float q[4], float* yaw, float* pitch, float* roll) {
     float yaw_rad, pitch_rad, roll_rad;
     yaw_rad = atan2f(2.0f * (q[0] * q[3] + q[1] * q[2]), 2.0f * (q[0] * q[0] + q[1] * q[1]) - 1.0f);
@@ -51,20 +51,20 @@ void AHRS_GetAngle(float q[4], float* yaw, float* pitch, float* roll) {
     *roll = -Math_RadToAngle(roll_rad);
 }
 
-/* * 
-  * @brief      AHRS data update function
-  * @param      q[4] :The Quad Array needs to be updated
-  * @param      gx :x-axis data of gyroscope
-  * @param      gy :y-axis data of gyroscope
-  * @param      gz :z-axis data of gyroscope
-  * @param      ax :Accelerometer x-axis data
-  * @param      ay :Accelerometer y-axis data
-  * @param      za :Accelerometer z-axis data
-  * @param      mx :Geomagnetic pole x-axis data
-  * @param      my :Geomagnetic pole y-axis data
-  * @param      mz :Geomagnetic pole z-axis data
-  * @retval     NULL
-  */
+/* *
+ * @brief      AHRS data update function
+ * @param      q[4] :The Quad Array needs to be updated
+ * @param      gx :x-axis data of gyroscope
+ * @param      gy :y-axis data of gyroscope
+ * @param      gz :z-axis data of gyroscope
+ * @param      ax :Accelerometer x-axis data
+ * @param      ay :Accelerometer y-axis data
+ * @param      za :Accelerometer z-axis data
+ * @param      mx :Geomagnetic pole x-axis data
+ * @param      my :Geomagnetic pole y-axis data
+ * @param      mz :Geomagnetic pole z-axis data
+ * @retval     NULL
+ */
 void AHRS_MahonyUpdate(float q[4], float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz) {
     float recipNorm;
     float q0q0, q0q1, q0q2, q0q3, q1q1, q1q2, q1q3, q2q2, q2q3, q3q3;
@@ -173,16 +173,16 @@ void AHRS_MahonyUpdate(float q[4], float gx, float gy, float gz, float ax, float
 }
 
 /**
-  * @brief      AHRS data update function (There is no geomagnetic pole)
-  * @param      q[4] :The Quad Array needs to be updated
-  * @param      gx :x-axis data of gyroscope
-  * @param      gy :y-axis data of gyroscope
-  * @param      gz :z-axis data of gyroscope
-  * @param      ax :Accelerometer x-axis data
-  * @param      ay :Accelerometer y-axis data
-  * @param      za :Accelerometer z-axis data
-  * @retval     NULL
-  */
+ * @brief      AHRS data update function (There is no geomagnetic pole)
+ * @param      q[4] :The Quad Array needs to be updated
+ * @param      gx :x-axis data of gyroscope
+ * @param      gy :y-axis data of gyroscope
+ * @param      gz :z-axis data of gyroscope
+ * @param      ax :Accelerometer x-axis data
+ * @param      ay :Accelerometer y-axis data
+ * @param      za :Accelerometer z-axis data
+ * @retval     NULL
+ */
 void AHRS_MahonyUpdateIMU(float q[4], float gx, float gy, float gz, float ax, float ay, float az) {
     float recipNorm;
     float halfvx, halfvy, halfvz;
@@ -246,20 +246,20 @@ void AHRS_MahonyUpdateIMU(float q[4], float gx, float gy, float gz, float ax, fl
     q[3] *= recipNorm;
 }
 
-/* * 
-  * @brief      AHRS Madgwick data update function
-  * @param      q[4] :The Quad Array needs to be updated
-  * @param      gx :x-axis data of gyroscope
-  * @param      gy :y-axis data of gyroscope
-  * @param      gz :z-axis data of gyroscope
-  * @param      ax :Accelerometer x-axis data
-  * @param      ay :Accelerometer y-axis data
-  * @param      za :Accelerometer z-axis data
-  * @param      mx :Geomagnetic pole x-axis data
-  * @param      my :Geomagnetic pole y-axis data
-  * @param      mz :Geomagnetic pole z-axis data
-  * @retval     NULL
-  */
+/* *
+ * @brief      AHRS Madgwick data update function
+ * @param      q[4] :The Quad Array needs to be updated
+ * @param      gx :x-axis data of gyroscope
+ * @param      gy :y-axis data of gyroscope
+ * @param      gz :z-axis data of gyroscope
+ * @param      ax :Accelerometer x-axis data
+ * @param      ay :Accelerometer y-axis data
+ * @param      za :Accelerometer z-axis data
+ * @param      mx :Geomagnetic pole x-axis data
+ * @param      my :Geomagnetic pole y-axis data
+ * @param      mz :Geomagnetic pole z-axis data
+ * @retval     NULL
+ */
 void AHRS_MadgwickUpdate(float q[4], float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz) {
     float recipNorm;
     float s0, s1, s2, s3;
@@ -364,16 +364,16 @@ void AHRS_MadgwickUpdate(float q[4], float gx, float gy, float gz, float ax, flo
 }
 
 /**
-  * @brief      AHRS Madgwick data update function (There is no geomagnetic pole)
-  * @param      q[4] :The Quad Array needs to be updated
-  * @param      gx :x-axis data of gyroscope
-  * @param      gy :y-axis data of gyroscope
-  * @param      gz :z-axis data of gyroscope
-  * @param      ax :Accelerometer x-axis data
-  * @param      ay :Accelerometer y-axis data
-  * @param      za :Accelerometer z-axis data
-  * @retval     NULL
-  */
+ * @brief      AHRS Madgwick data update function (There is no geomagnetic pole)
+ * @param      q[4] :The Quad Array needs to be updated
+ * @param      gx :x-axis data of gyroscope
+ * @param      gy :y-axis data of gyroscope
+ * @param      gz :z-axis data of gyroscope
+ * @param      ax :Accelerometer x-axis data
+ * @param      ay :Accelerometer y-axis data
+ * @param      za :Accelerometer z-axis data
+ * @retval     NULL
+ */
 void AHRS_MadgwickUpdateIMU(float q[4], float gx, float gy, float gz, float ax, float ay, float az) {
     float recipNorm;
     float s0, s1, s2, s3;

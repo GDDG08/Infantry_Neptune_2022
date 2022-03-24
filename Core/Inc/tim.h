@@ -1,30 +1,30 @@
 /*
- * @Project      : RM_Infantry_Neptune_frame
+ * @Project      : RM_Infantry_Neptune
  * @FilePath     : \infantry_-neptune\Core\Inc\tim.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
- * @Date         : 2021-10-31 17:14:31
+ * @Date         : 2021-12-31 17:41:28
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-08 00:05:01
+ * @LastEditTime : 2022-03-24 19:59:09
  */
 /**
-  ******************************************************************************
-  * @file    tim.h
-  * @brief   This file contains all the function prototypes for
-  *          the tim.c file
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    tim.h
+ * @brief   This file contains all the function prototypes for
+ *          the tim.c file
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __TIM_H__
 #define __TIM_H__

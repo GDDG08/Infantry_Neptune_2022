@@ -1,21 +1,21 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : str_lib.c
- *  Description  : This file contains information about string handling functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-11 03:22:21
- *  LastEditTime : 2021-07-11 03:33:30
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Library\str_lib.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:55:15
  */
 
 #include "str_lib.h"
 
 /**
-  * @brief      Converts a integer to an string (Decimal only)
-  * @param      value ：To be coverted value
-  * @param      string: Pointer to converted String
-  * @retval     NULL
-  */
+ * @brief      Converts a integer to an string (Decimal only)
+ * @param      value 锟斤拷To be coverted value
+ * @param      string: Pointer to converted String
+ * @retval     NULL
+ */
 char* Str_Itoa(int value, char* string) {
     int i, d;
     int flag = 0;
@@ -46,10 +46,10 @@ char* Str_Itoa(int value, char* string) {
 }
 
 /**
-  * @brief      Converts a string to an integer
-  * @param      str: Pointer to converted String
-  * @retval     NULL
-  */
+ * @brief      Converts a string to an integer
+ * @param      str: Pointer to converted String
+ * @retval     NULL
+ */
 int Str_Atoi(const char* str) {
     int s = 0;
     uint8_t falg = 0;
@@ -76,10 +76,10 @@ int Str_Atoi(const char* str) {
 }
 
 /**
-  * @brief      Hex transform to ascii string
-  * @param      str: Pointer to converted String
-  * @retval     NULL
-  */
+ * @brief      Hex transform to ascii string
+ * @param      str: Pointer to converted String
+ * @retval     NULL
+ */
 void Str_HexToAscii(uint8_t* src, char* dest, int len) {
     char dh, dl;
     int i;

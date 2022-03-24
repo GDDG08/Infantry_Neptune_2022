@@ -1,11 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Gimbal_Control\gim_miniPC_ctrl.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-07-27 15:19:09
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-13 21:02:32
+ * @LastEditTime : 2022-03-23 21:38:59
  */
 
 #ifndef GIM_MINIPC_CTRL_H
@@ -58,9 +58,9 @@ typedef struct {
     Filter_LowPassParamTypeDef distance_fil_param;
     Filter_LowPassTypeDef distance_fil;
 
-    Kalman_CVKalmanInitDataTypeDef cvkf_data_yaw, cvkf_data_pitch;  //For CVKF:
+    Kalman_CVKalmanInitDataTypeDef cvkf_data_yaw, cvkf_data_pitch;  // For CVKF:
     Kalman_CVKalmanTypeDef cvkf_yaw, cvkf_pitch;
-    Kalman_CVKalmanControlTypeDef cvkf_control;  //For Debug: Start Which Function
+    Kalman_CVKalmanControlTypeDef cvkf_control;  // For Debug: Start Which Function
 
     uint32_t get_target_time;
     MiniPC_AutoAimModeEnum aim_mode;

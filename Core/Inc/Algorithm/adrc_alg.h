@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains the ADRC control algorithm
- *  Description  : adrc_alg.h
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-13 13:38:03
- *  LastEditTime : 2021-07-09 05:28:19
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Algorithm\adrc_alg.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:49:12
  */
 
 #ifndef ADRC_ALG_H

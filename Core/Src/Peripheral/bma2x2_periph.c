@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bma2x2_periph.c
- *  Description  : This file contains the bma2xx API  (by bosch)
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-13 06:03:54
- *  LastEditTime : 2021-07-16 02:50:41
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\bma2x2_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:55:06
  */
 
 #include "bma2x2_periph.h"
@@ -35,7 +35,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_burst_read(uint8_t addr_uint8_t,
                                               uint8_t* data_uint8_t,
                                               uint32_t len_uint32_t) {
     /* Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -69,10 +69,10 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_burst_read(uint8_t addr_uint8_t,
  *	affect the reference value of the parameter
  *	(Better case don't change the reference value of the parameter)
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_init(struct bma2x2_t* bma2x2) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     uint8_t config_data_uint8_t = BMA2x2_INIT_VALUE;
@@ -89,7 +89,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_init(struct bma2x2_t* bma2x2) {
                                               BMA2x2_CHIP_ID_REG, &data_uint8_t, BMA2x2_GEN_READ_WRITE_LENGTH);
     p_bma2x2->chip_id = data_uint8_t; /* get bit slice */
     /* read the fifo config register and update
-	the value to the fifo_config*/
+        the value to the fifo_config*/
     com_rslt += bma2x2_read_reg(BMA2x2_FIFO_MODE_REG,
                                 &config_data_uint8_t, BMA2x2_GEN_READ_WRITE_LENGTH);
     p_bma2x2->fifo_config = config_data_uint8_t;
@@ -112,12 +112,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_init(struct bma2x2_t* bma2x2) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_write_reg(uint8_t adr_uint8_t,
                                              uint8_t* data_uint8_t,
                                              uint8_t len_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -145,12 +145,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_write_reg(uint8_t adr_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_reg(uint8_t adr_uint8_t,
                                             uint8_t* data_uint8_t,
                                             uint8_t len_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -184,12 +184,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_reg(uint8_t adr_uint8_t,
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_x(int16_t* accel_x_int16_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     /* Array holding the accel x value
-	data_uint8_t[0] - x->LSB
-	data_uint8_t[1] - x->MSB
-	*/
+        data_uint8_t[0] - x->LSB
+        data_uint8_t[1] - x->MSB
+        */
     uint8_t data_uint8_t[BMA2x2_ACCEL_DATA_SIZE] = {
         BMA2x2_INIT_VALUE, BMA2x2_INIT_VALUE};
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -261,7 +261,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_x(int16_t* accel_x_int16_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_x(
     int8_t* accel_x_int8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data = BMA2x2_INIT_VALUE;
 
@@ -296,15 +296,15 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_x(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_y(int16_t* accel_y_int16_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     /* Array holding the accel y value
-	data_uint8_t[0] - y->LSB
-	data_uint8_t[1] - y->MSB
-	*/
+        data_uint8_t[0] - y->LSB
+        data_uint8_t[1] - y->MSB
+        */
     uint8_t data_uint8_t[BMA2x2_ACCEL_DATA_SIZE] = {BMA2x2_INIT_VALUE,
                                                     BMA2x2_INIT_VALUE};
 
@@ -374,11 +374,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_y(int16_t* accel_y_int16_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_y(
     int8_t* accel_y_int8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data = BMA2x2_INIT_VALUE;
 
@@ -412,15 +412,15 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_y(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_z(int16_t* accel_z_int16_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     /* Array holding the accel z value
-	data_uint8_t[0] - z->LSB
-	data_uint8_t[1] - z->MSB
-	*/
+        data_uint8_t[0] - z->LSB
+        data_uint8_t[1] - z->MSB
+        */
     uint8_t data_uint8_t[BMA2x2_ACCEL_DATA_SIZE] = {BMA2x2_INIT_VALUE,
                                                     BMA2x2_INIT_VALUE};
 
@@ -487,11 +487,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_z(int16_t* accel_z_int16_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_z(
     int8_t* accel_z_int8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data = BMA2x2_INIT_VALUE;
 
@@ -523,20 +523,20 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_z(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyz(
     struct bma2x2_accel_data_temp* accel) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     /* Array holding the accel xyz value
-	data_uint8_t[0] - x->LSB
-	data_uint8_t[1] - x->MSB
-	data_uint8_t[2] - y->MSB
-	data_uint8_t[3] - y->MSB
-	data_uint8_t[4] - z->MSB
-	data_uint8_t[5] - z->MSB
-	*/
+        data_uint8_t[0] - x->LSB
+        data_uint8_t[1] - x->MSB
+        data_uint8_t[2] - y->MSB
+        data_uint8_t[3] - y->MSB
+        data_uint8_t[4] - z->MSB
+        data_uint8_t[5] - z->MSB
+        */
     uint8_t data_uint8_t[BMA2x2_ACCEL_XYZ_DATA_SIZE] = {
         BMA2x2_INIT_VALUE, BMA2x2_INIT_VALUE,
         BMA2x2_INIT_VALUE, BMA2x2_INIT_VALUE,
@@ -652,11 +652,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyz(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_xyz(
     struct bma2x2_accel_eight_resolution* accel) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -698,11 +698,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_xyz(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_tap_stat(
     uint8_t* stat_tap_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -733,7 +733,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_tap_stat(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_orient_stat(
     uint8_t* stat_orient_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -763,7 +763,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_orient_stat(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_stat(
     uint8_t* stat_fifo_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -796,7 +796,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_stat(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_frame_count(
     uint8_t* frame_count_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -832,7 +832,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_frame_count(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_overrun(
     uint8_t* fifo_overrun_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -865,11 +865,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_overrun(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_stat(
     uint8_t* intr_stat_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -907,7 +907,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_stat(
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_range(uint8_t* range_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -947,7 +947,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_range(uint8_t* range_uint8_t) {
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_range(uint8_t range_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1020,10 +1020,10 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_range(uint8_t range_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_bw(uint8_t* bw_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1065,7 +1065,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_bw(uint8_t* bw_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_bw(uint8_t bw_uint8_t) {
     /*  Variable used to return value of
 communication routine*/
@@ -1221,7 +1221,7 @@ communication routine*/
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_power_mode(
     uint8_t* power_mode_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     uint8_t data2_uint8_t = BMA2x2_INIT_VALUE;
@@ -1320,7 +1320,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_power_mode(
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_power_mode(uint8_t power_mode_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t mode_ctr_eleven_reg = BMA2x2_INIT_VALUE;
     uint8_t mode_ctr_twel_reg = BMA2x2_INIT_VALUE;
@@ -1343,15 +1343,15 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_power_mode(uint8_t power_mode_uint8_t) {
         mode_ctr_eleven_reg = p_bma2x2->ctrl_mode_reg;
         mode_ctr_twel_reg = p_bma2x2->low_mode_reg;
         /* write the power mode to
-		register 0x12*/
+                register 0x12*/
         data2_uint8_t = BMA2x2_SET_BITSLICE(data2_uint8_t, BMA2x2_LOW_POWER_MODE,
                                             mode_ctr_twel_reg);
         com_rslt += p_bma2x2->BMA2x2_BUS_WRITE_FUNC(p_bma2x2->dev_addr, BMA2x2_LOW_POWER_MODE_REG,
                                                     &data2_uint8_t, BMA2x2_GEN_READ_WRITE_LENGTH);
         /*A minimum delay of
-		atleast 450us is required for
-		the low power modes,
-		as per the data sheet.*/
+                atleast 450us is required for
+                the low power modes,
+                as per the data sheet.*/
         p_bma2x2->delay_msec(BMA2x2_GEN_READ_WRITE_LENGTH);
         /* Enter the power mode to suspend*/
         data_uint8_t = BMA2x2_SET_BITSLICE(data_uint8_t, BMA2x2_MODE_CTRL,
@@ -1360,18 +1360,18 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_power_mode(uint8_t power_mode_uint8_t) {
         com_rslt += p_bma2x2->BMA2x2_BUS_WRITE_FUNC(p_bma2x2->dev_addr, BMA2x2_MODE_CTRL_REG,
                                                     &data_uint8_t, BMA2x2_GEN_READ_WRITE_LENGTH);
         /*A minimum delay of
-		atleast 450us is required for
-		the low power modes,
-		as per the data sheet.*/
+                atleast 450us is required for
+                the low power modes,
+                as per the data sheet.*/
         p_bma2x2->delay_msec(BMA2x2_GEN_READ_WRITE_LENGTH);
         /* write the previous FIFO mode and data select*/
         pre_fifo_config_data = p_bma2x2->fifo_config;
         com_rslt += bma2x2_write_reg(BMA2x2_FIFO_MODE_REG,
                                      &pre_fifo_config_data, BMA2x2_GEN_READ_WRITE_LENGTH);
         /*A minimum delay of
-		atleast 450us is required for
-		the low power modes,
-		as per the data sheet.*/
+                atleast 450us is required for
+                the low power modes,
+                as per the data sheet.*/
         p_bma2x2->delay_msec(BMA2x2_GEN_READ_WRITE_LENGTH);
         com_rslt += p_bma2x2->BMA2x2_BUS_READ_FUNC(p_bma2x2->dev_addr,
                                                    BMA2x2_MODE_CTRL_REG,
@@ -1382,9 +1382,9 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_power_mode(uint8_t power_mode_uint8_t) {
         com_rslt += p_bma2x2->BMA2x2_BUS_WRITE_FUNC(p_bma2x2->dev_addr, BMA2x2_MODE_CTRL_REG,
                                                     &data_uint8_t, BMA2x2_GEN_READ_WRITE_LENGTH);
         /*A minimum delay of
-		atleast 450us is required for
-		the low power modes,
-		as per the data sheet.*/
+                atleast 450us is required for
+                the low power modes,
+                as per the data sheet.*/
         p_bma2x2->delay_msec(BMA2x2_GEN_READ_WRITE_LENGTH);
     }
     return com_rslt;
@@ -1496,7 +1496,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_mode_value(uint8_t power_mode_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_sleep_durn(uint8_t* sleep_durn_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -1544,7 +1544,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_sleep_durn(uint8_t* sleep_durn_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_sleep_durn(uint8_t sleep_durn_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_sleep_durn_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1649,7 +1649,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_sleep_timer_mode(
     uint8_t* sleep_timer_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -1686,7 +1686,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_sleep_timer_mode(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_sleep_timer_mode(uint8_t sleep_timer_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -1725,7 +1725,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_sleep_timer_mode(uint8_t sleep_timer_uint
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_high_bw(uint8_t* high_bw_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1758,7 +1758,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_high_bw(uint8_t* high_bw_uint8_t) {
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_high_bw(uint8_t high_bw_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1796,7 +1796,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_high_bw(uint8_t high_bw_uint8_t) {
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_shadow_dis(uint8_t* shadow_dis_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1831,7 +1831,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_shadow_dis(uint8_t* shadow_dis_uint8_t) {
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_shadow_dis(uint8_t shadow_dis_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1864,7 +1864,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_shadow_dis(uint8_t shadow_dis_uint8_t) {
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_soft_rst(void) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_ENABLE_SOFT_RESET_VALUE;
 
@@ -1873,7 +1873,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_soft_rst(void) {
         return E_BMA2x2_NULL_PTR;
     } else {
         /*! To reset the sensor
-			0xB6 value_uint8_t will be written */
+                        0xB6 value_uint8_t will be written */
         com_rslt = p_bma2x2->BMA2x2_BUS_WRITE_FUNC(p_bma2x2->dev_addr, BMA2x2_RST_ADDR,
                                                    &data_uint8_t, BMA2x2_GEN_READ_WRITE_LENGTH);
     }
@@ -1897,7 +1897,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_soft_rst(void) {
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_update_image(void) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -1962,7 +1962,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_enable(uint8_t intr_type_uint8_t,
                                                    uint8_t* value_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2096,7 +2096,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_enable(uint8_t intr_type_uint8_t,
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_enable(uint8_t intr_type_uint8_t,
                                                    uint8_t value_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     uint8_t data2_uint8_t = BMA2x2_INIT_VALUE;
@@ -2205,7 +2205,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_enable(uint8_t intr_type_uint8_t,
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_fifo_full(uint8_t* fifo_full_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -2245,7 +2245,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_fifo_full(uint8_t* fifo_full_uint8_t
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_fifo_full(uint8_t fifo_full_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2293,7 +2293,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_fifo_full(uint8_t fifo_full_uint8_t)
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_fifo_wm(uint8_t* fifo_wm_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2333,7 +2333,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_fifo_wm(uint8_t* fifo_wm_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_fifo_wm(uint8_t fifo_wm_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2387,7 +2387,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_slow_no_motion(uint8_t channel_uint8_t,
                                                       uint8_t* slow_no_motion_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2460,7 +2460,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_slow_no_motion(uint8_t channel_uint8_t,
                                                       uint8_t slow_no_motion_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2553,7 +2553,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_low_g(uint8_t channel_uint8_t,
                                                   uint8_t* intr_low_g_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2614,7 +2614,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_low_g(uint8_t channel_uint8_t,
                                                   uint8_t intr_low_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2679,7 +2679,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_high_g(uint8_t channel_uint8_t,
                                                    uint8_t* intr_high_g_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2737,7 +2737,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_high_g(uint8_t channel_uint8_t,
                                                    uint8_t intr_high_g_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2805,7 +2805,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_slope(uint8_t channel_uint8_t,
                                                   uint8_t* intr_slope_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2865,7 +2865,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_slope(uint8_t channel_uint8_t,
                                                   uint8_t intr_slope_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2934,7 +2934,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_slow_no_motion(uint8_t channel_uint8
                                                            uint8_t* intr_slow_no_motion_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -2995,7 +2995,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_slow_no_motion(uint8_t channel_uint8
                                                            uint8_t intr_slow_no_motion_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3065,7 +3065,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_double_tap(uint8_t channel_uint8_t,
                                                        uint8_t* intr_double_tap_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3125,7 +3125,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_double_tap(uint8_t channel_uint8_t,
                                                        uint8_t intr_double_tap_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3194,7 +3194,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_single_tap(uint8_t channel_uint8_t,
                                                        uint8_t* intr_single_tap_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3253,7 +3253,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_single_tap(uint8_t channel_uint8_t,
                                                        uint8_t intr_single_tap_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3316,12 +3316,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_single_tap(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_orient(uint8_t channel_uint8_t,
                                                    uint8_t* intr_orient_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3374,12 +3374,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_orient(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_orient(uint8_t channel_uint8_t,
                                                    uint8_t intr_orient_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3442,12 +3442,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_orient(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_flat(uint8_t channel_uint8_t,
                                                  uint8_t* intr_flat_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3502,12 +3502,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_flat(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_flat(uint8_t channel_uint8_t,
                                                  uint8_t intr_flat_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3574,7 +3574,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_new_data(uint8_t channel_uint8_t,
                                                 uint8_t* intr_newdata_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3633,7 +3633,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_new_data(uint8_t channel_uint8_t,
                                                 uint8_t intr_newdata_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3686,11 +3686,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_new_data(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr1_fifo_wm(uint8_t* intr1_fifo_wm_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3722,11 +3722,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr1_fifo_wm(uint8_t* intr1_fifo_wm_uint
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr1_fifo_wm(uint8_t intr1_fifo_wm_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3771,7 +3771,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr1_fifo_wm(uint8_t intr1_fifo_wm_uint8
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr2_fifo_wm(uint8_t* intr2_fifo_wm_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3807,7 +3807,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr2_fifo_wm(uint8_t* intr2_fifo_wm_uint
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr2_fifo_wm(uint8_t intr2_fifo_wm_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3854,7 +3854,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr2_fifo_wm(uint8_t intr2_fifo_wm_uint8
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr1_fifo_full(uint8_t* intr1_fifo_full_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3892,7 +3892,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr1_fifo_full(uint8_t* intr1_fifo_full_
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr1_fifo_full(uint8_t intr1_fifo_full_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3940,7 +3940,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr1_fifo_full(uint8_t intr1_fifo_full_u
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr2_fifo_full(uint8_t* intr2_fifo_full_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -3979,7 +3979,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr2_fifo_full(uint8_t* intr2_fifo_full_
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr2_fifo_full(uint8_t intr2_fifo_full_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4037,7 +4037,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_source(uint8_t channel_uint8_t,
                                               uint8_t* intr_source_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4121,7 +4121,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_source(uint8_t channel_uint8_t,
                                               uint8_t intr_source_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     if (p_bma2x2 == BMA2x2_NULL) {
         com_rslt = E_BMA2x2_NULL_PTR;
@@ -4226,7 +4226,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_output_type(uint8_t channel_uint8_t,
                                                         uint8_t* intr_output_type_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-		communication routine*/
+                communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4283,7 +4283,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_output_type(uint8_t channel_uint8_t,
                                                         uint8_t intr_output_type_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-		communication routine*/
+                communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4347,7 +4347,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_level(uint8_t channel_uint8_t,
                                                   uint8_t* intr_level_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-		communication routine*/
+                communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4403,7 +4403,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_level(uint8_t channel_uint8_t,
                                                   uint8_t intr_level_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-		communication routine*/
+                communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4460,7 +4460,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_level(uint8_t channel_uint8_t,
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_rst_intr(uint8_t rst_intr_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4510,7 +4510,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_rst_intr(uint8_t rst_intr_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_latch_intr(uint8_t* latch_intr_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4706,7 +4706,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_durn(uint8_t channel_uint8_t,
                                             uint8_t* durn_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4790,7 +4790,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_durn(uint8_t channel_uint8_t,
                                             uint8_t durn_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -4903,7 +4903,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_thres(uint8_t channel_uint8_t,
                                              uint8_t* thres_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5010,7 +5010,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_thres(uint8_t channel_uint8_t,
                                              uint8_t thres_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5090,7 +5090,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_low_high_g_hyst(uint8_t channel_uint8_t,
                                                        uint8_t* hyst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5154,7 +5154,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_low_high_g_hyst(uint8_t channel_uint8_t,
                                                        uint8_t hyst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5204,11 +5204,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_low_high_g_hyst(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_low_g_mode(uint8_t* low_g_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5240,11 +5240,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_low_g_mode(uint8_t* low_g_mode_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_low_g_mode(uint8_t low_g_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5290,7 +5290,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_low_g_mode(uint8_t low_g_mode_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_durn(uint8_t* tap_durn_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5333,7 +5333,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_durn(uint8_t* tap_durn_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_durn(uint8_t tap_durn_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5370,11 +5370,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_durn(uint8_t tap_durn_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_shock(uint8_t* tap_shock_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5408,11 +5408,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_shock(uint8_t* tap_shock_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_shock(uint8_t tap_shock_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5452,7 +5452,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_shock(uint8_t tap_shock_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_quiet(uint8_t* tap_quiet_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5488,7 +5488,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_quiet(uint8_t* tap_quiet_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_quiet(uint8_t tap_quiet_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5533,7 +5533,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_quiet(uint8_t tap_quiet_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_thres(uint8_t* tap_thres_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5573,7 +5573,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_thres(uint8_t* tap_thres_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_thres(uint8_t tap_thres_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5614,7 +5614,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_thres(uint8_t tap_thres_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_sample(uint8_t* tap_sample_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5653,7 +5653,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_sample(uint8_t* tap_sample_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_sample(uint8_t tap_sample_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5691,11 +5691,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_sample(uint8_t tap_sample_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_mode(uint8_t* orient_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5732,11 +5732,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_mode(uint8_t* orient_mode_uint8_t)
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_mode(uint8_t orient_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5785,7 +5785,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_block(
     uint8_t* orient_block_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5830,7 +5830,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_block(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_block(uint8_t orient_block_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5867,7 +5867,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_block(uint8_t orient_block_uint8_t
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_hyst(uint8_t* orient_hyst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5901,7 +5901,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_hyst(uint8_t* orient_hyst_uint8_t)
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_hyst(uint8_t orient_hyst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -5949,7 +5949,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_theta(uint8_t channel_uint8_t,
                                              uint8_t* theta_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6007,7 +6007,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_theta(uint8_t channel_uint8_t,
                                              uint8_t theta_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6063,7 +6063,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_theta(uint8_t channel_uint8_t,
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_enable(uint8_t* orient_enable_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6099,7 +6099,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_enable(uint8_t* orient_enable_uint
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_enable(uint8_t orient_enable_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6138,7 +6138,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_enable(uint8_t orient_enable_uint8
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_flat_hyst(uint8_t* flat_hyst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6173,7 +6173,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_flat_hyst(uint8_t* flat_hyst_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_flat_hyst(uint8_t flat_hyst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6217,7 +6217,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_flat_hold_time(
     uint8_t* flat_hold_time_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6258,7 +6258,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_flat_hold_time(
     uint8_t flat_hold_time_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6297,7 +6297,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_wml_trig(
     uint8_t* fifo_wml_trig) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6333,7 +6333,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_wml_trig(
     uint8_t fifo_wml_trig) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6381,7 +6381,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_selftest_axis(
     uint8_t* selftest_axis_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6421,7 +6421,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_selftest_axis(
     uint8_t selftest_axis_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6466,7 +6466,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_selftest_sign(
     uint8_t* selftest_sign_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6504,7 +6504,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_selftest_sign(
     uint8_t selftest_sign_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6548,7 +6548,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_nvmprog_mode(
     uint8_t* nvmprog_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6582,7 +6582,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_nvmprog_mode(
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_nvmprog_mode(uint8_t nvmprog_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6623,7 +6623,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_nvmprog_mode(uint8_t nvmprog_mode_uint8_t
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_nvprog_trig(uint8_t nvprog_trig_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6662,7 +6662,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_nvprog_trig(uint8_t nvprog_trig_uint8_t) 
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_nvmprog_ready(uint8_t* nvprog_ready_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -6699,7 +6699,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_nvmprog_ready(uint8_t* nvprog_ready_uint8
  */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_nvmprog_remain(uint8_t* nvprog_remain_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /* Check the struct p_bma2x2 is empty */
@@ -6737,7 +6737,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_nvmprog_remain(uint8_t* nvprog_remain_uin
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_spi3(uint8_t* spi3_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6775,7 +6775,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_spi3(uint8_t* spi3_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_spi3(uint8_t spi3_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6828,7 +6828,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_i2c_wdt(uint8_t channel_uint8_t,
                                                uint8_t* i2c_wdt_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6891,7 +6891,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_i2c_wdt(uint8_t channel_uint8_t,
                                                uint8_t i2c_wdt_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -6959,7 +6959,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_slow_comp(uint8_t channel_uint8_t,
                                                  uint8_t* slow_comp_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7028,7 +7028,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_slow_comp(uint8_t channel_uint8_t,
                                                  uint8_t slow_comp_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7097,7 +7097,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_slow_comp(uint8_t channel_uint8_t,
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_cal_rdy(uint8_t* cal_rdy_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7133,7 +7133,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_cal_rdy(uint8_t* cal_rdy_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_cal_trigger(uint8_t cal_trigger_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7171,7 +7171,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_cal_trigger(uint8_t cal_trigger_uint8_t) 
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_offset_rst(uint8_t offset_rst_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7231,7 +7231,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_offset_target(uint8_t channel_uint8_t,
                                                      uint8_t* offset_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7319,7 +7319,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_offset_target(uint8_t channel_uint8_t,
                                                      uint8_t offset_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7403,7 +7403,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_offset(uint8_t channel_uint8_t,
                                               int8_t* offset_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7465,7 +7465,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_offset(uint8_t channel_uint8_t,
                                               int8_t offset_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7518,10 +7518,10 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_offset(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_mode(uint8_t* fifo_mode_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -7558,11 +7558,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_mode(uint8_t* fifo_mode_uint8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_mode(uint8_t fifo_mode_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t config_data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -7616,7 +7616,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_mode(uint8_t fifo_mode_uint8_t) {
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_data_select(
     uint8_t* fifo_data_select_uint8_t) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -7658,7 +7658,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_data_select(
     uint8_t fifo_data_select_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t config_data_uint8_t = BMA2x2_INIT_VALUE;
 
@@ -7702,12 +7702,12 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_data_select(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_data_output_reg(
     uint8_t* output_reg_uint8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7738,11 +7738,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_data_output_reg(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_temp(int8_t* temp_int8_t) {
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
 
     if (p_bma2x2 == BMA2x2_NULL) {
@@ -7771,11 +7771,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_temp(int8_t* temp_int8_t) {
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyzt(
     struct bma2x2_accel_data_temp* accel) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t[BMA2x2_ACCEL_XYZ_TEMP_DATA_SIZE] = {
         BMA2x2_INIT_VALUE, BMA2x2_INIT_VALUE,
@@ -7882,7 +7882,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyzt_over(
     struct bma2x2_accel_data_temp* accel,
     uint8_t* buf) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t[BMA2x2_ACCEL_XYZ_TEMP_DATA_SIZE];
 
@@ -7992,11 +7992,11 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyzt_over(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_xyzt(
     struct bma2x2_accel_eight_resolution_temp* accel) {
     /*  Variable used to return value of
-	communication routine*/
+        communication routine*/
     BMA2x2_RETURN_FUNCTION_TYPE com_rslt = ERROR;
     uint8_t data_uint8_t = BMA2x2_INIT_VALUE;
 

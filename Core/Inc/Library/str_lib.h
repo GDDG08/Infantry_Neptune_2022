@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : str_lib.h
- *  Description  : This file contains information about string handling functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-11 03:22:31
- *  LastEditTime : 2021-07-11 03:33:52
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Library\str_lib.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:51:37
  */
+
 
 #ifndef STR_LIB_H
 #define STR_LIB_H

@@ -1,22 +1,22 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains the ADRC control algorithm(From anonymous technology team)
- *  Description  : adrc_alg.c
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-13 13:37:25
- *  LastEditTime : 2021-07-09 05:28:59
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Algorithm\adrc_alg.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:16
  */
 
 #include "adrc_alg.h"
 
 /**
-  * @brief      ADRC parameter initialization
-  * @param      fhan_input1 :Fhan function input 1
-  * @param      fhan_input2 :Fhan function input 2
-  * @param      adrc_unit :Initialize array
-  * @retval     NULL
-  */
+ * @brief      ADRC parameter initialization
+ * @param      fhan_input1 :Fhan function input 1
+ * @param      fhan_input2 :Fhan function input 2
+ * @param      adrc_unit :Initialize array
+ * @retval     NULL
+ */
 void ADRC_Init(ADRC_FhanDataTypeDef* fhan_input1, ADRC_FhanDataTypeDef* fhan_input2, float adrc_unit[][15]) {
     fhan_input1->r = adrc_unit[0][0];
     fhan_input1->h = adrc_unit[0][1];
@@ -54,11 +54,11 @@ void ADRC_Init(ADRC_FhanDataTypeDef* fhan_input1, ADRC_FhanDataTypeDef* fhan_inp
 }
 
 /**
-  * @brief      ADRC Fhan function
-  * @param      fhan_input :Fhan function input
-  * @param      expect_ADRC :adrc expect para
-  * @retval     NULL
-  */
+ * @brief      ADRC Fhan function
+ * @param      fhan_input :Fhan function input
+ * @param      expect_ADRC :adrc expect para
+ * @retval     NULL
+ */
 void Fhan_ADRC(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC) {
     float d = 0, a0 = 0, y = 0, a1 = 0, a2 = 0, a = 0;
     float x1_delta = 0;
@@ -78,10 +78,10 @@ void Fhan_ADRC(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC) {
 }
 
 /**
-  * @brief      ADRC extended state observer
-  * @param      fhan_input :Fhan function input
-  * @retval     NULL
-  */
+ * @brief      ADRC extended state observer
+ * @param      fhan_input :Fhan function input
+ * @retval     NULL
+ */
 void ADRS_ESO(ADRC_FhanDataTypeDef* fhan_input) {
     fhan_input->e = fhan_input->z1 - fhan_input->y;
 
@@ -95,10 +95,10 @@ void ADRS_ESO(ADRC_FhanDataTypeDef* fhan_input) {
 }
 
 /**
-  * @brief      Nonlinear combination calculation of ADRC
-  * @param      fhan_input :Fhan function input
-  * @retval     NULL
-  */
+ * @brief      Nonlinear combination calculation of ADRC
+ * @param      fhan_input :Fhan function input
+ * @retval     NULL
+ */
 void ADRC_NolinearConbination(ADRC_FhanDataTypeDef* fhan_input) {
     float d = 0, a0 = 0, y = 0, a1 = 0, a2 = 0, a = 0;
     float Sy = 0, Sa = 0;
@@ -122,12 +122,12 @@ void ADRC_NolinearConbination(ADRC_FhanDataTypeDef* fhan_input) {
 }
 
 /**
-  * @brief      ADRC calculation function
-  * @param      fhan_input :Fhan function input
-  * @param      expect_ADRC :Expected value
-  * @param      feedback_ADRC :Feedback value
-  * @retval     Output with disturbance compensation
-  */
+ * @brief      ADRC calculation function
+ * @param      fhan_input :Fhan function input
+ * @param      expect_ADRC :Expected value
+ * @param      feedback_ADRC :Feedback value
+ * @retval     Output with disturbance compensation
+ */
 float ADRC_Calc(ADRC_FhanDataTypeDef* fhan_input, float expect_ADRC, float feedback_ADRC) {
     Fhan_ADRC(fhan_input, expect_ADRC);
     fhan_input->y = feedback_ADRC;

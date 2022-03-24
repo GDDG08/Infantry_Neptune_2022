@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : i2c_util.h
- *  Description  : This file containss the I2C functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 11:23:11
- *  LastEditTime : 2021-07-03 21:46:36
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Utility\i2c_util.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:53:34
  */
+
 
 #ifndef I2C_UTIL_H
 #define I2C_UTIL_H

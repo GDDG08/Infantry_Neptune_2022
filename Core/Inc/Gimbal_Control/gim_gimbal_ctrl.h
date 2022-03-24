@@ -1,20 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Gimbal_Control\gim_gimbal_ctrl.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-10-29 20:20:13
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-19 18:34:35
- */
-/*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_gimbal_ctrl.h
- *  Description  : This file contains Gimbal control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 10:32:36
+ * @LastEditTime : 2022-03-23 21:38:57
  */
 
 #ifndef GIM_GIMBAL_CTRL_H
@@ -84,7 +75,6 @@ extern Motor_MotorParamTypeDef GimbalPitch_gimbalPitchMotorParamNoAuto;
 extern Gimbal_GimbalTypeDef Gimbal_gambalControlData;
 extern float AutoControl_offset_pitch;
 extern float AutoControl_offset_yaw;
-
 
 Gimbal_GimbalTypeDef*
 Gimbal_GetGimbalControlPtr(void);

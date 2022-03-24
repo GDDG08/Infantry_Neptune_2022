@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : flash_util.h
- *  Description  : This file conatins the flash read and write functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-18 15:57:40
- *  LastEditTime : 2021-07-16 04:12:33
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Utility\flash_util.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:52:34
  */
+
 
 #ifndef FLASH_UTIL_H
 #define FLASH_UTIL_H

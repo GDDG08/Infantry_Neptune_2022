@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains 0.96 inch OLED driver function
- *  Description  : oled_periph.h
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:49:13
- *  LastEditTime : 2021-07-16 11:54:49
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\oled_periph.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:52:08
  */
+
 
 #ifndef OLED_PERIPH_H
 #define OLED_PERIPH_H

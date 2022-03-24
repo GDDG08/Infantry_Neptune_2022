@@ -1,33 +1,33 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : pid_alg.c
- *  Description  : This file contains PID algorithm function
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-05-08 03:34:36
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Algorithm\pid_alg.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:33
  */
 
 #include "pid_alg.h"
 
 /**
-  * @brief      Initialize PID control parameters
-  * @param      param: The pointer points to PID control parameters
-  * @param      kp: P factor
-  * @param      ki: I factor
-  * @param      kd: D factor
-  * @param      sum_max: Integral limiting
-  * @param      output_max: Output limiting
-  * @param      kd_fil_frq : PID Kd out filter
-  * @param      delta_fil_frq: Delta PID ref filter
-  * @param      kf_1: Feedforward of first order param
-  * @param      kf_2: Feedforward of second order param
-  * @param      kf1_fil_frq: Feedforward first order filter
-  * @param      kf2_fil_frq: Feedforward second order filter
-  * @param      period: PID calculate period
-  * @param      pid_mode: PID calculate mode
-  * @retval     NULL
-  */
+ * @brief      Initialize PID control parameters
+ * @param      param: The pointer points to PID control parameters
+ * @param      kp: P factor
+ * @param      ki: I factor
+ * @param      kd: D factor
+ * @param      sum_max: Integral limiting
+ * @param      output_max: Output limiting
+ * @param      kd_fil_frq : PID Kd out filter
+ * @param      delta_fil_frq: Delta PID ref filter
+ * @param      kf_1: Feedforward of first order param
+ * @param      kf_2: Feedforward of second order param
+ * @param      kf1_fil_frq: Feedforward first order filter
+ * @param      kf2_fil_frq: Feedforward second order filter
+ * @param      period: PID calculate period
+ * @param      pid_mode: PID calculate mode
+ * @retval     NULL
+ */
 void PID_InitPIDParam(PID_PIDParamTypeDef* pparam, float kp, float ki, float kd, float sum_max, float output_max, float kd_fil_param, float delta_fil_param, float kf_1, float kf_2, float kf1_fil_param, float kf2_fil_param, PID_ModeEnum pid_mode) {
     pparam->pid_mode = pid_mode;
     pparam->kp = kp;
@@ -48,67 +48,67 @@ void PID_InitPIDParam(PID_PIDParamTypeDef* pparam, float kp, float ki, float kd,
 }
 
 /**
-  * @brief      Get PID control value
-  * @param      pid: The pointer points to the PID controller
-  * @retval     Set value of PID control quantity
-  */
+ * @brief      Get PID control value
+ * @param      pid: The pointer points to the PID controller
+ * @retval     Set value of PID control quantity
+ */
 float PID_GetPIDRef(PID_PIDTypeDef* pid) {
     return pid->ref;
 }
 
 /**
-  * @brief      Setting PID control value
-  * @param      pid: The pointer points to the PID controller
-  * @param      ref: set value
-  * @retval     NULL
-  */
+ * @brief      Setting PID control value
+ * @param      pid: The pointer points to the PID controller
+ * @param      ref: set value
+ * @retval     NULL
+ */
 void PID_SetPIDRef(PID_PIDTypeDef* pid, float ref) {
     pid->ref = ref;
 }
 
 /**
-  * @brief      Increase the set value of PID control value (the increment can be negative)
-  * @param      pid: The pointer points to the PID controller
-  * @param      inc: Increment value
-  * @retval     NULL
-  */
+ * @brief      Increase the set value of PID control value (the increment can be negative)
+ * @param      pid: The pointer points to the PID controller
+ * @param      inc: Increment value
+ * @retval     NULL
+ */
 void PID_AddPIDRef(PID_PIDTypeDef* pid, float inc) {
     pid->ref += inc;
 }
 
 /**
-  * @brief      Obtaining feedback value of PID control quantity
-  * @param      pid: The pointer points to the PID controller
-  * @retval     Feedback value of PID control quantity
-  */
+ * @brief      Obtaining feedback value of PID control quantity
+ * @param      pid: The pointer points to the PID controller
+ * @retval     Feedback value of PID control quantity
+ */
 float PID_GetPIDFdb(PID_PIDTypeDef* pid) {
     return pid->fdb;
 }
 
 /**
-  * @brief      Setting feedback value of PID control quantity
-  * @param      pid: The pointer points to the PID controller
-  * @param      fdb: Feedback value
-  * @retval     NULL
-  */
+ * @brief      Setting feedback value of PID control quantity
+ * @param      pid: The pointer points to the PID controller
+ * @param      fdb: Feedback value
+ * @retval     NULL
+ */
 void PID_SetPIDFdb(PID_PIDTypeDef* pid, float fdb) {
     pid->fdb = fdb;
 }
 
 /**
-  * @brief      Obtain PID control output value
-  * @param      pid: The pointer points to the PID controller
-  * @retval     Output value of PID control quantity
-  */
+ * @brief      Obtain PID control output value
+ * @param      pid: The pointer points to the PID controller
+ * @retval     Output value of PID control quantity
+ */
 float PID_GetPIDOutput(PID_PIDTypeDef* pid) {
     return pid->output;
 }
 
 /**
-  * @brief      Initialize PID controller
-  * @param      pid: The pointer points to the PID controller
-  * @retval     NULL
-  */
+ * @brief      Initialize PID controller
+ * @param      pid: The pointer points to the PID controller
+ * @retval     NULL
+ */
 void PID_ClearPID(PID_PIDTypeDef* pid) {
     pid->ref = 0;
     pid->fdb = 0;
@@ -127,11 +127,11 @@ void PID_ClearPID(PID_PIDTypeDef* pid) {
 }
 
 /**
-  * @brief      Calculation of PID control quantity
-  * @param      pid: The pointer points to the PID controller
-  * @param      para: The pointer points to PID control parameters
-  * @retval     NULL
-  */
+ * @brief      Calculation of PID control quantity
+ * @param      pid: The pointer points to the PID controller
+ * @param      para: The pointer points to PID control parameters
+ * @retval     NULL
+ */
 void PID_CalcPID(PID_PIDTypeDef* pid, PID_PIDParamTypeDef* pparam) {
     // Position Pid calculate
     if (pparam->pid_mode == PID_POSITION) {

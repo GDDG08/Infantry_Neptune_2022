@@ -1,30 +1,30 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Src\freertos.c
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-10-31 17:14:29
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-11-08 00:05:06
+ * @LastEditTime : 2022-03-23 21:29:28
  */
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * File Name          : freertos.c
-  * Description        : Code for freertos applications
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under Ultimate Liberty license
-  * SLA0044, the "License"; You may not use this file except in compliance with
-  * the License. You may obtain a copy of the License at:
-  *                             www.st.com/SLA0044
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * File Name          : freertos.c
+ * Description        : Code for freertos applications
+ ******************************************************************************
+ * @attention
+ *
+ * <h2><center>&copy; Copyright (c) 2021 STMicroelectronics.
+ * All rights reserved.</center></h2>
+ *
+ * This software component is licensed by ST under Ultimate Liberty license
+ * SLA0044, the "License"; You may not use this file except in compliance with
+ * the License. You may obtain a copy of the License at:
+ *                             www.st.com/SLA0044
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -116,10 +116,10 @@ void vApplicationGetIdleTaskMemory(StaticTask_t** ppxIdleTaskTCBBuffer, StackTyp
 /* USER CODE END GET_IDLE_TASK_MEMORY */
 
 /**
-  * @brief  FreeRTOS initialization
-  * @param  None
-  * @retval None
-  */
+ * @brief  FreeRTOS initialization
+ * @param  None
+ * @retval None
+ */
 void MX_FREERTOS_Init(void) {
     /* USER CODE BEGIN Init */
 
@@ -202,10 +202,10 @@ void MX_FREERTOS_Init(void) {
 
 /* USER CODE BEGIN Header_StartDefaultTask */
 /**
-  * @brief  Function implementing the defaultTask thread.
-  * @param  argument: Not used
-  * @retval None
-  */
+ * @brief  Function implementing the defaultTask thread.
+ * @param  argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void const* argument) {
     /* USER CODE BEGIN StartDefaultTask */
@@ -218,10 +218,10 @@ void StartDefaultTask(void const* argument) {
 
 /* USER CODE BEGIN Header_Gimbal_Task */
 /**
-* @brief Function implementing the Gimbal thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Gimbal thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Gimbal_Task */
 __weak void Gimbal_Task(void const* argument) {
     /* USER CODE BEGIN Gimbal_Task */
@@ -236,10 +236,10 @@ __weak void Gimbal_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_BusComm_Task */
 /**
-* @brief Function implementing the BusComm thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the BusComm thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_BusComm_Task */
 __weak void BusComm_Task(void const* argument) {
     /* USER CODE BEGIN BusComm_Task */
@@ -252,10 +252,10 @@ __weak void BusComm_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_Chassis_Task */
 /**
-* @brief Function implementing the Chassis thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Chassis thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Chassis_Task */
 __weak void Chassis_Task(void const* argument) {
     /* USER CODE BEGIN Chassis_Task */
@@ -270,10 +270,10 @@ __weak void Chassis_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_SuperCap_Task */
 /**
-* @brief Function implementing the SuperCap thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the SuperCap thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_SuperCap_Task */
 __weak void SuperCap_Task(void const* argument) {
     /* USER CODE BEGIN SuperCap_Task */
@@ -288,10 +288,10 @@ __weak void SuperCap_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_Shoot_Task */
 /**
-* @brief Function implementing the Shoot thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Shoot thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Shoot_Task */
 __weak void Shoot_Task(void const* argument) {
     /* USER CODE BEGIN Shoot_Task */
@@ -306,10 +306,10 @@ __weak void Shoot_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_MiniPC_Task */
 /**
-* @brief Function implementing the MiniPC thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the MiniPC thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_MiniPC_Task */
 __weak void MiniPC_Task(void const* argument) {
     /* USER CODE BEGIN MiniPC_Task */
@@ -324,10 +324,10 @@ __weak void MiniPC_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_Referee_Task */
 /**
-* @brief Function implementing the Referee thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Referee thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Referee_Task */
 __weak void Referee_Task(void const* argument) {
     /* USER CODE BEGIN Referee_Task */
@@ -342,10 +342,10 @@ __weak void Referee_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_WatchDog_Task */
 /**
-* @brief Function implementing the WatchDog thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the WatchDog thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_WatchDog_Task */
 __weak void WatchDog_Task(void const* argument) {
     /* USER CODE BEGIN WatchDog_Task */
@@ -358,10 +358,10 @@ __weak void WatchDog_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_Client_Task */
 /**
-* @brief Function implementing the Client thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Client thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Client_Task */
 __weak void Client_Task(void const* argument) {
     /* USER CODE BEGIN Client_Task */
@@ -376,10 +376,10 @@ __weak void Client_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_Ins_Task */
 /**
-* @brief Function implementing the Ins thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Ins thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Ins_Task */
 __weak void Ins_Task(void const* argument) {
     /* USER CODE BEGIN Ins_Task */
@@ -394,10 +394,10 @@ __weak void Ins_Task(void const* argument) {
 
 /* USER CODE BEGIN Header_Init_Task */
 /**
-* @brief Function implementing the Init thread.
-* @param argument: Not used
-* @retval None
-*/
+ * @brief Function implementing the Init thread.
+ * @param argument: Not used
+ * @retval None
+ */
 /* USER CODE END Header_Init_Task */
 __weak void Init_Task(void const* argument) {
     /* USER CODE BEGIN Init_Task */

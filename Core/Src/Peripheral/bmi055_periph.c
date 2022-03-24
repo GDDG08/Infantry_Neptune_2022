@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bmi055_periph.c
- *  Description  : This file contains the bmi055 API
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
- *  Date         : 2021-07-14 06:56:30
- *  LastEditTime : 2021-07-23 21:21:52
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\bmi055_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:03
  */
 
 #include "bmi055_periph.h"
@@ -34,10 +34,10 @@ const uint16_t Const_BMI055_OFFLINE_TIME = 200;
 BMI055_BMI055DataTypeDef BMI055_BMI055Data;
 
 /**
-  * @brief      Reset bmi055 init
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Reset bmi055 init
+ * @param      NUULL
+ * @retval     NUL
+ */
 uint8_t BMI055_Init() {
     BMI055_BMI055DataTypeDef* bmi055 = BMI055_GetBMI055DataPtr();
 
@@ -64,19 +64,19 @@ uint8_t BMI055_Init() {
 }
 
 /**
-  * @brief      Get pinter to the BMI055 data object
-  * @param      NULL
-  * @retval     Pointer to BMI055 data object
-  */
+ * @brief      Get pinter to the BMI055 data object
+ * @param      NULL
+ * @retval     Pointer to BMI055 data object
+ */
 BMI055_BMI055DataTypeDef* BMI055_GetBMI055DataPtr() {
     return &BMI055_BMI055Data;
 }
 
 /**
-  * @brief      Judge bmi055 offline
-  * @param      NULL
-  * @retval     Offline or not£¨1 is offline£¬0 is not£©
-  */
+ * @brief      Judge bmi055 offline
+ * @param      NULL
+ * @retval     Offline or notï¿½ï¿½1 is offlineï¿½ï¿½0 is notï¿½ï¿½
+ */
 uint8_t BMI055_IsBMI055Offline() {
     BMI055_BMI055DataTypeDef* bmi055 = BMI055_GetBMI055DataPtr();
 
@@ -87,10 +87,10 @@ uint8_t BMI055_IsBMI055Offline() {
 }
 
 /**
-  * @brief      Gyro bmg160 data object
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Gyro bmg160 data object
+ * @param      NUULL
+ * @retval     NUL
+ */
 int8_t BMI055_BMGInit() {
     int32_t com_rslt;
 
@@ -120,10 +120,10 @@ int8_t BMI055_BMGInit() {
 }
 
 /**
-  * @brief      Gyro bmg160 data bus write
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Gyro bmg160 data bus write
+ * @param      NUULL
+ * @retval     NUL
+ */
 int8_t BMI055_BMGSpiBusWrite(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_data, uint8_t cnt) {
     int32_t iError = BMG160_INIT_VALUE;
     uint8_t array[SPI_BUFFER_LEN * C_BMG160_TWO_U8X];
@@ -145,10 +145,10 @@ int8_t BMI055_BMGSpiBusWrite(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_da
 }
 
 /**
-  * @brief      Gyro bmg160 data bus read
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Gyro bmg160 data bus read
+ * @param      NUULL
+ * @retval     NUL
+ */
 int8_t BMI055_BMGSpiBusRead(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_data, uint8_t cnt) {
     int32_t iError = BMG160_INIT_VALUE;
     uint8_t array[SPI_BUFFER_LEN] = {MASK_DATA1};
@@ -168,10 +168,10 @@ int8_t BMI055_BMGSpiBusRead(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_dat
 }
 
 /**
-  * @brief      Gyro bmg160 read over and decode data
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Gyro bmg160 read over and decode data
+ * @param      NUULL
+ * @retval     NUL
+ */
 uint32_t gyro_cont = 0;
 float gyro_rate;
 void BMI055_GyroReadOver(uint8_t* rx_buf) {
@@ -190,10 +190,10 @@ void BMI055_GyroReadOver(uint8_t* rx_buf) {
 }
 
 /**
-  * @brief      Gyro bmg160 read and decode data
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Gyro bmg160 read and decode data
+ * @param      NUULL
+ * @retval     NUL
+ */
 void BMI055_GyroRead() {
     BMI055_BMI055DataTypeDef* bmi055 = BMI055_GetBMI055DataPtr();
 
@@ -207,10 +207,10 @@ void BMI055_GyroRead() {
 }
 
 /**
-  * @brief      Accel bma2x2 init
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Accel bma2x2 init
+ * @param      NUULL
+ * @retval     NUL
+ */
 int8_t BMI055_BMAInit() {
     int32_t com_rslt = ERROR;
     uint8_t bw_value_uint8_t = BMA2x2_BW_250HZ; /* set bandwidth of 1000 Hz*/
@@ -237,10 +237,10 @@ int8_t BMI055_BMAInit() {
 }
 
 /**
-  * @brief      Accel bma2x2 bus write
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Accel bma2x2 bus write
+ * @param      NUULL
+ * @retval     NUL
+ */
 int8_t BMI055_BMASpiBusWrite(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_data, uint8_t cnt) {
     int32_t iError = BMA2x2_INIT_VALUE;
     uint8_t array[SPI_BUFFER_LEN * 2];
@@ -261,10 +261,10 @@ int8_t BMI055_BMASpiBusWrite(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_da
 }
 
 /**
-  * @brief      Accel bma2x2 bus read
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Accel bma2x2 bus read
+ * @param      NUULL
+ * @retval     NUL
+ */
 int8_t BMI055_BMASpiBusRead(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_data, uint8_t cnt) {
     int32_t iError = BMA2x2_INIT_VALUE;
     uint8_t array_read[SPI_BUFFER_LEN];
@@ -283,10 +283,10 @@ int8_t BMI055_BMASpiBusRead(uint8_t dev_addr, uint8_t reg_addr, uint8_t* reg_dat
 }
 
 /**
-  * @brief      Accel bma2x2 read over and decode data
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Accel bma2x2 read over and decode data
+ * @param      NUULL
+ * @retval     NUL
+ */
 uint32_t acc_cont = 0;
 float acc_rate;
 void BMI055_AccelReadOver(uint8_t* rx_buf) {
@@ -306,10 +306,10 @@ void BMI055_AccelReadOver(uint8_t* rx_buf) {
 }
 
 /**
-  * @brief      Accel bma2x2 read and decode data
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Accel bma2x2 read and decode data
+ * @param      NUULL
+ * @retval     NUL
+ */
 void BMI055_AccelRead() {
     BMI055_BMI055DataTypeDef* bmi055 = BMI055_GetBMI055DataPtr();
 
@@ -323,10 +323,10 @@ void BMI055_AccelRead() {
 }
 
 /**
-  * @brief      BMI055 for us delay
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      BMI055 for us delay
+ * @param      NUULL
+ * @retval     NUL
+ */
 void BMI055_usDelay(uint32_t msek) {
     uint32_t Delay = msek * 168 / 4;
     do {

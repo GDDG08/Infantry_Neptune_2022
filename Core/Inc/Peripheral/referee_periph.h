@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : referee_periph.h
- *  Description  : This document contains the data receiving and sending of the referee system
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-09 05:52:35
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\referee_periph.h
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-23 22:22:25
  */
+
 
 #ifndef REFEREE_PERIPH_H
 #define REFEREE_PERIPH_H
@@ -97,7 +98,7 @@ typedef __packed struct {
 
 /* ��obsolete��
 typedef __packed struct {
-    uint8_t supply_projectile_id; 
+    uint8_t supply_projectile_id;
     uint8_t supply_robot_id;
     uint8_t supply_num;
 } ext_supply_projectile_booking_t;
@@ -178,9 +179,9 @@ typedef __packed struct {
     uint16_t receiver_ID;
 } ext_student_interactive_header_data_t;
 
-//typedef __packed struct {
-//    uint8_t data[];
-//} robot_interactive_data_t;
+// typedef __packed struct {
+//     uint8_t data[];
+// } robot_interactive_data_t;
 
 typedef __packed struct {
     uint8_t operate_type;
@@ -294,7 +295,7 @@ typedef struct {
     uint16_t shooter_heat0_speed_limit;
     uint16_t shooter_heat1_speed_limit;
     uint16_t mobile_shooter_heat2;
-    
+
     uint8_t shooter_id;
     uint8_t bullet_freq;
     float bullet_speed;

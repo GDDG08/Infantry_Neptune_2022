@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : Using gyroscope, geomagnetic pole completes attitude calculation
- *  Description  : gim_ins_ctrl.h
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-07-09 00:00:36
- *  LastEditTime : 2021-07-23 22:39:35
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Gimbal_Control\gim_ins_ctrl.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:50:51
  */
 
 #ifndef GIM_INS_CTRL_H

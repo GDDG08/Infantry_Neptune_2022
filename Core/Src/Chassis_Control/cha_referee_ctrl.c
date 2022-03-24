@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : cha_referee_ctrl.c
- *  Description  : �¿���д��~
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-26 18:09:17
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Chassis_Control\cha_referee_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:44
  */
 
 #include "cha_referee_ctrl.h"
@@ -16,17 +16,17 @@
 #include "cmsis_os.h"
 
 #if !__FN_IF_ENABLE(__FN_CTRL_REFEREE)
-void Referee_SetWidthMode(uint8_t mode){}
+void Referee_SetWidthMode(uint8_t mode) {}
 
-void Referee_SetAimMode(uint8_t mode){}
+void Referee_SetAimMode(uint8_t mode) {}
 
-void Referee_SetCapState(uint8_t state){}
+void Referee_SetCapState(uint8_t state) {}
 
-void Referee_SetPitchAngle(float angle){}
+void Referee_SetPitchAngle(float angle) {}
 
-void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode){}
+void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode) {}
 
-void Referee_Setup(){}
+void Referee_Setup() {}
 
 #else
 
@@ -35,10 +35,10 @@ void Referee_Setup(){}
 uint8_t referee_setup_flag = 0;
 
 /**
-  * @brief          Referee draw task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Referee draw task
+ * @param          NULL
+ * @retval         NULL
+ */
 void Referee_Task(void const* argument) {
     for (;;) {
         while (!GLOBAL_INIT_FLAG) {
@@ -66,24 +66,24 @@ const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {
     // ID, Width, X1, Y1, X2, Y2
     {
         // Mode 0: 15 m/s
-        {0x101, 2, 960, 500, 960, 620},  // Vertical Line
-        {0x102, 4, 910, 610, 1010, 610},     // Horizontal Line 1
-        {0x103, 2, 820, 560, 1100, 560},     // Horizontal Line 2
-        {0x104, 2, 910, 510, 1010, 510}      // Horizontal Line 3
+        {0x101, 2, 960, 500, 960, 620},   // Vertical Line
+        {0x102, 4, 910, 610, 1010, 610},  // Horizontal Line 1
+        {0x103, 2, 820, 560, 1100, 560},  // Horizontal Line 2
+        {0x104, 2, 910, 510, 1010, 510}   // Horizontal Line 3
     },
     {
         // Mode 1: 18 m/s
-        {0x101, 2, 960, 500, 960, 620},  // Vertical Line
-        {0x102, 4, 910, 610, 1010, 600},     // Horizontal Line 1
-        {0x103, 2, 820, 560, 1100, 560},     // Horizontal Line 2
-        {0x104, 2, 910, 520, 1010, 520}      // Horizontal Line 3
+        {0x101, 2, 960, 500, 960, 620},   // Vertical Line
+        {0x102, 4, 910, 610, 1010, 600},  // Horizontal Line 1
+        {0x103, 2, 820, 560, 1100, 560},  // Horizontal Line 2
+        {0x104, 2, 910, 520, 1010, 520}   // Horizontal Line 3
     },
     {
         // Mode 2: 30 m/s
-        {0x101, 2, 960, 500, 960, 620},  // Vertical Line
-        {0x102, 4, 910, 600, 1010, 600},     // Horizontal Line 1
-        {0x103, 2, 820, 560, 1100, 560},     // Horizontal Line 2
-        {0x104, 2, 910, 520, 1010, 520}      // Horizontal Line 3
+        {0x101, 2, 960, 500, 960, 620},   // Vertical Line
+        {0x102, 4, 910, 600, 1010, 600},  // Horizontal Line 1
+        {0x103, 2, 820, 560, 1100, 560},  // Horizontal Line 2
+        {0x104, 2, 910, 520, 1010, 520}   // Horizontal Line 3
     }};
 
 const uint8_t CROSSHAIR_LAYER = 2;
@@ -118,47 +118,47 @@ const char* CAP_STATE_TEXT_STR = "CAP";
 
 const uint8_t PITCH_METER_LAYER = 2;
 const Draw_Color PITCH_METER_COLOR = Draw_COLOR_GREEN;
-const uint16_t PITCH_METER_TEXT[5]  = {0x501, 20, 2, 1600, 500};     // ID, Font Size, Width, X, Y
+const uint16_t PITCH_METER_TEXT[5] = {0x501, 20, 2, 1600, 500};  // ID, Font Size, Width, X, Y
 const char* PITCH_METER_TEXT_STR = "PITCH:";
 const uint16_t PITCH_METER_VALUE[6] = {0x502, 20, 3, 2, 1600, 540};  // ID, Font Size, Precision, Width, X, Y
 
 const uint8_t AIM_MODE_LAYER = 2;
 const Draw_Color AIM_MODE_COLOR = Draw_COLOR_GREEN;
-const uint16_t AIM_MODE_TEXT[5]     = {0x503, 20, 2, 200, 800};     // ID, Font Size, Width, X, Y
-const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x504, 20, 2, 600, 900};     // ID, Font Size, Width, X, Y
-const char *AIM_MODE_TEXT_STR       = "AIM_MODE:\0";
-const char *NORMAL_AIM_TEXT_STR     = "AIM_MODE: NORMAL\0";
-const char *ARMOR_AIM_TEXT_STR      = "AIM_MODE: ARMOR\0";
-const char *BIG_BUFF_AIM_TEXT_STR   = "AIM_MODE: BIG_BUF\0";
-const char *SMALL_BUFF_AIM_TEXT_STR = "AIM_MODE: SMALL_BUF\0";
+const uint16_t AIM_MODE_TEXT[5] = {0x503, 20, 2, 200, 800};        // ID, Font Size, Width, X, Y
+const uint16_t AIM_MODE_VALUE_TEXT[5] = {0x504, 20, 2, 600, 900};  // ID, Font Size, Width, X, Y
+const char* AIM_MODE_TEXT_STR = "AIM_MODE:\0";
+const char* NORMAL_AIM_TEXT_STR = "AIM_MODE: NORMAL\0";
+const char* ARMOR_AIM_TEXT_STR = "AIM_MODE: ARMOR\0";
+const char* BIG_BUFF_AIM_TEXT_STR = "AIM_MODE: BIG_BUF\0";
+const char* SMALL_BUFF_AIM_TEXT_STR = "AIM_MODE: SMALL_BUF\0";
 
 const uint8_t CHASSIS_MODE_LAYER = 2;
 const Draw_Color CHASSIS_MODE_COLOR = Draw_COLOR_GREEN;
-const uint16_t CHASSIS_MODE_TEXT[5] = {0x505, 20, 2, 200, 600};     // ID, Font Size, Width, X, Y
-const uint16_t CHASSIS_MODE_VALUE_TEXT[5]  = {0x506, 20, 2, 600, 850};     // ID, Font Size, Width, X, Y
-const char *CHASSIS_MODE_TEXT_STR  = "CHASSIS_MODE:\0";
-const char *NORMAL_RUN_TEXT_STR    = "CHASSIS_MODE: NORMAL\0";
-const char *GYRO_RUN_TEXT_STR      = "CHASSIS_MODE: GYRO\0";
+const uint16_t CHASSIS_MODE_TEXT[5] = {0x505, 20, 2, 200, 600};        // ID, Font Size, Width, X, Y
+const uint16_t CHASSIS_MODE_VALUE_TEXT[5] = {0x506, 20, 2, 600, 850};  // ID, Font Size, Width, X, Y
+const char* CHASSIS_MODE_TEXT_STR = "CHASSIS_MODE:\0";
+const char* NORMAL_RUN_TEXT_STR = "CHASSIS_MODE: NORMAL\0";
+const char* GYRO_RUN_TEXT_STR = "CHASSIS_MODE: GYRO\0";
 
 /********** END OF Drawing Constants **********/
 
 Referee_DrawDataTypeDef Referee_DrawData;
 
 /**
-  * @brief      ���ó�����ģʽ
-  * @param      mode: ������ģʽ��1ΪС���ݣ�0Ϊ��ͨ��
-  * @retval     ��
-  */
+ * @brief      ���ó�����ģʽ
+ * @param      mode: ������ģʽ��1ΪС���ݣ�0Ϊ��ͨ��
+ * @retval     ��
+ */
 void Referee_SetWidthMode(uint8_t mode) {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     draw->width_mode = mode;
 }
 
 /**
-  * @brief      ������׼��ģʽ
-  * @param      mode: ��׼��ģʽ��0 ~ 2��Ӧ���� 15,18,30 m/s��
-  * @retval     ��
-  */
+ * @brief      ������׼��ģʽ
+ * @param      mode: ��׼��ģʽ��0 ~ 2��Ӧ���� 15,18,30 m/s��
+ * @retval     ��
+ */
 void Referee_SetAimMode(uint8_t mode) {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     if (mode > 2)
@@ -167,30 +167,30 @@ void Referee_SetAimMode(uint8_t mode) {
 }
 
 /**
-  * @brief      ���õ��ݵ���
-  * @param      state: ���ݵ�����0 ~ 100����λ�ٷֱȣ�
-  * @retval     ��
-  */
+ * @brief      ���õ��ݵ���
+ * @param      state: ���ݵ�����0 ~ 100����λ�ٷֱȣ�
+ * @retval     ��
+ */
 void Referee_SetCapState(uint8_t state) {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     draw->cap_state = state;
 }
 
 /**
-  * @brief      ����Pitch���
-  * @param      angle: Pitch���
-  * @retval     ��
-  */
+ * @brief      ����Pitch���
+ * @param      angle: Pitch���
+ * @retval     ��
+ */
 void Referee_SetPitchAngle(float angle) {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     draw->pitch_angle = angle;
 }
 
 /**
-  * @brief      ��׼�߻��ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ��׼�߻��ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupAimLine() {
     // draw_cnt: 4
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -202,10 +202,10 @@ void Referee_SetupAimLine() {
 }
 
 /**
-  * @brief      ��׼�߻��ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ��׼�߻��ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdateAimLine() {
     // draw_cnt: 4 when mode changed, 0 when mode not change
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -219,29 +219,29 @@ void Referee_UpdateAimLine() {
 }
 
 /**
-  * @brief      ׼�Ļ��ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ׼�Ļ��ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupCrosshair() {
     // draw_cnt: 1
     Draw_AddCircle(CROSSHAIR[0], CROSSHAIR_LAYER, CROSSHAIR_COLOR, CROSSHAIR[1], CROSSHAIR[2], CROSSHAIR[3], CROSSHAIR[4]);
 }
 
 /**
-  * @brief      ׼�Ļ��ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ׼�Ļ��ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdateCrosshair() {
     // nothing
 }
 
 /**
-  * @brief      �����߻��ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      �����߻��ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupWidthMark() {
     // draw_cnt: 2
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -253,10 +253,10 @@ void Referee_SetupWidthMark() {
 }
 
 /**
-  * @brief      �����߻��ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      �����߻��ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdateWidthMark() {
     // draw_cnt: 2 when mode changed, 0 when mode not change
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -270,10 +270,10 @@ void Referee_UpdateWidthMark() {
 }
 
 /**
-  * @brief      ����״̬���ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ����״̬���ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupCapState() {
     // draw_cnt: 2
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -302,10 +302,10 @@ void Referee_SetupCapState() {
 }
 
 /**
-  * @brief      ����״̬���ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ����״̬���ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdateCapState() {
     // draw_cnt: 1
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -332,10 +332,10 @@ void Referee_UpdateCapState() {
 }
 
 /**
-  * @brief      Pitch��Ǽƻ��ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      Pitch��Ǽƻ��ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupPitchMeter() {
     // draw_cnt: 1
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
@@ -344,24 +344,24 @@ void Referee_SetupPitchMeter() {
 }
 
 /**
-  * @brief      Pitch��Ǽƻ��ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      Pitch��Ǽƻ��ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdatePitchMeter() {
     // draw_cnt: 1
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     float value = -draw->pitch_angle;
     Draw_ModifyFloat(PITCH_METER_VALUE[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_VALUE[1], PITCH_METER_VALUE[2], PITCH_METER_VALUE[3], PITCH_METER_VALUE[4], PITCH_METER_VALUE[5], value);
-    //Draw_ModifyInt(PITCH_METER_VALUE[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_VALUE[1], PITCH_METER_VALUE[3], PITCH_METER_VALUE[4], PITCH_METER_VALUE[5], (int32_t) (value * 1000));
+    // Draw_ModifyInt(PITCH_METER_VALUE[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_VALUE[1], PITCH_METER_VALUE[3], PITCH_METER_VALUE[4], PITCH_METER_VALUE[5], (int32_t) (value * 1000));
 }
 
 /**
-  * @brief      ���õ��̺�����ģʽ
-  * @param      auto_aim_mode: ����ģʽ��0 ~ 3��Ӧ �����顢װ�װ����顢С�������顢���������飩
-  * @param      cha_mode: ����ģʽ ��0 ~ 1��Ӧ ���������˶� �� С����ģʽ��
-  * @retval     ��
-  */
+ * @brief      ���õ��̺�����ģʽ
+ * @param      auto_aim_mode: ����ģʽ��0 ~ 3��Ӧ �����顢װ�װ����顢С�������顢���������飩
+ * @param      cha_mode: ����ģʽ ��0 ~ 1��Ӧ ���������˶� �� С����ģʽ��
+ * @retval     ��
+ */
 void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode) {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     if (auto_aim_mode <= 3)
@@ -371,10 +371,10 @@ void Referee_SetMode(uint8_t auto_aim_mode, uint8_t cha_mode) {
 }
 
 /**
-  * @brief      ģʽ��ʾ���ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ģʽ��ʾ���ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupModeDisplay() {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     draw->auto_aim_mode_last = draw->auto_aim_mode;
@@ -385,10 +385,10 @@ void Referee_SetupModeDisplay() {
 }
 
 /**
-  * @brief      ģʽ��ʾ���ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ģʽ��ʾ���ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdateModeDisplay() {
     Referee_DrawDataTypeDef* draw = &Referee_DrawData;
     if (draw->auto_aim_mode_last != draw->auto_aim_mode) {
@@ -427,42 +427,42 @@ void Referee_UpdateModeDisplay() {
 }
 
 /**
-  * @brief      ������ʾ���ƣ���ʼ���׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ������ʾ���ƣ���ʼ���׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupErrorDisplay() {
 }
 
 /**
-  * @brief      ������ʾ���ƣ����½׶�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ������ʾ���ƣ����½׶�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_UpdateErrorDisplay() {
 }
 
 /**
-  * @brief      �����ܳ�ʼ���׶����ֻ���
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      �����ܳ�ʼ���׶����ֻ���
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_SetupAllString() {
     // cmd_cnt: 2
-    //Referee_RefereeDataTypeDef *Referee = &Referee_DrawData;
+    // Referee_RefereeDataTypeDef *Referee = &Referee_DrawData;
 
-//    Draw_AddString(CAP_STATE_TEXT[0], CAP_STATE_LAYER[1], CAP_STATE_COLOR[1], CAP_STATE_TEXT[1], CAP_STATE_TEXT[2], CAP_STATE_TEXT[3], CAP_STATE_TEXT[4], CAP_STATE_TEXT_STR);
-//    Draw_AddString(PITCH_METER_TEXT[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_TEXT[1], PITCH_METER_TEXT[2], PITCH_METER_TEXT[3], PITCH_METER_TEXT[4], PITCH_METER_TEXT_STR);
+    //    Draw_AddString(CAP_STATE_TEXT[0], CAP_STATE_LAYER[1], CAP_STATE_COLOR[1], CAP_STATE_TEXT[1], CAP_STATE_TEXT[2], CAP_STATE_TEXT[3], CAP_STATE_TEXT[4], CAP_STATE_TEXT_STR);
+    //    Draw_AddString(PITCH_METER_TEXT[0], PITCH_METER_LAYER, PITCH_METER_COLOR, PITCH_METER_TEXT[1], PITCH_METER_TEXT[2], PITCH_METER_TEXT[3], PITCH_METER_TEXT[4], PITCH_METER_TEXT_STR);
 
     Draw_AddString(AIM_MODE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_TEXT[1], AIM_MODE_TEXT[2], AIM_MODE_TEXT[3], AIM_MODE_TEXT[4], AIM_MODE_TEXT_STR);
     Draw_AddString(CHASSIS_MODE_TEXT[0], CHASSIS_MODE_LAYER, CHASSIS_MODE_COLOR, CHASSIS_MODE_TEXT[1], CHASSIS_MODE_TEXT[2], CHASSIS_MODE_TEXT[3], CHASSIS_MODE_TEXT[4], CHASSIS_MODE_TEXT_STR);
 }
 
 /**
-  * @brief      ��ʼ�������ƹ���
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ��ʼ�������ƹ���
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_Setup() {
     static int last_time = -1000;
     int now = HAL_GetTick();
@@ -487,10 +487,10 @@ void Referee_Setup() {
 }
 
 /**
-  * @brief      ���¸����ƹ���
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ���¸����ƹ���
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_Update() {
     Referee_UpdateAimLine();       // draw_cnt: if bullet speed changed 4, else 0
     Referee_UpdateCrosshair();     // draw_cnt: 0

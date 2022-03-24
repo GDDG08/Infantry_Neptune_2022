@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : magnetic_peiph.h
- *  Description  : This file contains the magnetic type of ist8310
- *  LastEditors  : ???????
- *  Date         : 2021-06-19 10:45:40
- *  LastEditTime : 2021-07-09 02:41:07
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\magnetic_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:52:01
  */
 
 #ifndef MAG_PERIPH_H
@@ -23,7 +23,7 @@ extern "C" {
 #include "gpio_util.h"
 
 #define MAG_SEN 0.3f                // change to uT
-#define IST8310_CHIP_ID 0x00        // IST8310 who am I ¼Ä´æÆ÷
+#define IST8310_CHIP_ID 0x00        // IST8310 who am I ï¿½Ä´ï¿½ï¿½ï¿½
 #define IST8310_CHIP_ID_VALUE 0x10  // ID
 #define IST8310_WRITE_REG_NUM 4
 #define IST8310_IIC_ADDRESS (0x0E << 1)

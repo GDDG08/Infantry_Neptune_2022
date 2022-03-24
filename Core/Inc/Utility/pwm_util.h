@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : pwm_util.h
- *  Description  : This file contains the PWM functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-11 14:19:14
- *  LastEditTime : 2021-06-13 23:39:09
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Utility\pwm_util.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-23 22:22:39
  */
+
 
 #ifndef PWM_UTIL_H
 #define PWM_UTIL_H

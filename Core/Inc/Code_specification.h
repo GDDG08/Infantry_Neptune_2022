@@ -1,30 +1,30 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : Code_specification.h
- *  Description  : This document contains code specification requirements
- *  LastEditors  : ???????
- *  Date         : 2021-06-10 11:03:55
- *  LastEditTime : 2021-06-13 13:33:17
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Code_specification.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:49:00
  */
 
 /*
 
 No.1  Language usage standard
     Try to use English or English spelling for naming, and prohibit the use of Pinyin.
-    Such as 
+    Such as
         Chassis �����̣�
         Remote  ��ң������
     You can't name it that way.
     Such as
         TUOLUO  �����ݣ�
         YunTai  ����̨��
-    
+
 No.2 Naming standard
     Variable:
         1��The global variables in the module are named by the format of "module name_variable name".
         2��The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3��The variable name is a noun phrase beginning with a small letter. Except for the first word, each word begins with 
+        3��The variable name is a noun phrase beginning with a small letter. Except for the first word, each word begins with
             a capital letter, and the variable function should be expressed with a concise modifier��
         4��Non global variables in the module are named in lowercase.
             what you need to take care is:
@@ -36,17 +36,17 @@ No.2 Naming standard
             Motor_chasisMotor       // Chassis motor object, global variable
             Remote_remoteData       // Remote control data object, global variable
             ref                     // PID set point, local variable
-    
+
     Const:
-        1��Macro definition should be avoided as far as possible in the module, and const definition 
+        1��Macro definition should be avoided as far as possible in the module, and const definition
            should be used instead. Constants are named using the "Const" module name.
         2��The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3��The constant name is a noun phrase, each word is capitalized, the words are divided by underscores, and simple 
+        3��The constant name is a noun phrase, each word is capitalized, the words are divided by underscores, and simple
            modifiers are used to express the function.
         4��Const in front of the name_ Prefix, indicating that the name is a constant name.
         Such as
             Const_ShooterLockedReverseSpeed   = -50.0f;     // Shooter motor locked reverse speed
-        
+
     Custom type:
         struct:
         1��The module name is used to name the structure type in the module_ Structure name "TypeDef".
@@ -54,7 +54,7 @@ No.2 Naming standard
         3��The structure name is a noun phrase. Each word begins with a capital letter and uses a concise modifier to express its function.
         4��If the structure name is followed by typedef, it means that this name is the structure type name.
         5��The naming rules of structural elements are the same as that of local variables, which are separated by lowercase underscores.
-        
+
         Enum:
         1��Enumeration types within a module are named using the module name_ The format of the enumerator "Enum".
         2��The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
@@ -65,11 +65,11 @@ No.2 Naming standard
         Such as
             Motor_MotorTypeDef      // Motor object struct
             Remote_RemoteStateEnum  // Remote state enum
-    
+
     Function:
         1��Functions are named using the "module name_ Function name".
         2��The module name is a word beginning with a capital letter, which should be consistent with the name of the file.
-        3��The function name is a predicate phrase, each word is capitalized, and a concise modifier is used to express the 
+        3��The function name is a predicate phrase, each word is capitalized, and a concise modifier is used to express the
            function function and data characteristics (get / change).
         4��The naming rules of function parameters are the same as those of local variables.
         Such as
@@ -87,10 +87,10 @@ No.2 Naming standard
                      { dac_util.c(h)
                      { uart_util.c(h)
 
-No.3 Notes 
+No.3 Notes
     In line note requirements:
         You can use / * comment * /, or / / comment, but there should be a space between the comment number and the comment content.
-    
+
     Variable declaration comment requirements:
         As above, the function and application scope of variables shall be indicated.
 
@@ -98,11 +98,11 @@ No.3 Notes
         Format:
 */
 /**
-             * @brief      Function action
-             * @param      Parameter 1: parameter function
-             * @param      Parameter 2: parameter function
-             * @retval     Function of return value
-             */
+ * @brief      Function action
+ * @param      Parameter 1: parameter function
+ * @param      Parameter 2: parameter function
+ * @retval     Function of return value
+ */
 /*
     File header annotation requirements:
         Format:
@@ -125,41 +125,41 @@ No.4 Writing standard
         2��Each function definition is followed by a blank line.
         3��Add blank lines between functions of different levels in the same function.
         4��Leave two empty lines between two function definitions.
-        5��The header comment and header file keep a blank line, 
+        5��The header comment and header file keep a blank line,
            and a blank line between the header file and other definitions and functions.
         6��ect
-    
+
     Space��
         1��Leave a space after the keyword(lick��const��case).
         2��For example, if, for, while and other keywords should be followed by a space and left parenthesis"(".
-        3��Do not leave a space after the function name, it should be followed by the left bracket "(", 
+        3��Do not leave a space after the function name, it should be followed by the left bracket "(",
            to distinguish it from the keyword.
         4��"," followed by a space. If ";" is not the end of a line, leave a space after it.
-        5��Assignment operators, relational operators, arithmetic operators, logical operators, 
+        5��Assignment operators, relational operators, arithmetic operators, logical operators,
            bit operators, such as =, =! =The following binocular operators, + =, - =, * =, / =,
-           % =, > =, < < =, & =, ^ =, | =, >, < =, >, > =, +, -, *, /,%, &, |, <, >, ^, should 
+           % =, > =, < < =, & =, ^ =, | =, >, < =, >, > =, +, -, *, /,%, &, |, <, >, ^, should
            be preceded by spaces.
-        6��The operator "%" is a complement operator, which is different from the "%" of% d in printf, 
+        6��The operator "%" is a complement operator, which is different from the "%" of% d in printf,
            so there is no need to add spaces before and after the "%" in %d.
         7��Single operator!, ~, + +, -, -, *, & etc. without spaces before and after.
-        8��array symbol, struct member operator, and struct member operator - >, 
+        8��array symbol, struct member operator, and struct member operator - >,
            there are no spaces before and after these operators.
         9��
-    
+
     Indent��
-        1��Indentation is realized by tab on the keyboard, which can make the program more hierarchical. 
-           The principle is that if the status is equal, indent is not required; if the internal code belongs to a code, 
+        1��Indentation is realized by tab on the keyboard, which can make the program more hierarchical.
+           The principle is that if the status is equal, indent is not required; if the internal code belongs to a code,
            it needs to be indented.
         2��Indents align units automatically. Do not mix indentation with space.
-    
+
     Alignment:
         1��"{}" in function, "{" needs to be aligned with the function named line and a space is reserved.
-           "}" needs to have the last line alone.   
+           "}" needs to have the last line alone.
            Such as
            int main(void) {
                return 0;
            }
-        2��The code within {} should be indented by a tab, and those in the same position should be left aligned, 
+        2��The code within {} should be indented by a tab, and those in the same position should be left aligned,
            while those in different positions should continue to be indented.
            Such as
             int main(void) {

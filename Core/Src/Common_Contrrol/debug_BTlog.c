@@ -1,11 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Src\Common_Contrrol\debug_BTlog.c
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-23 15:48:51
+ * @LastEditTime : 2022-03-23 22:22:48
  */
 
 #include "debug_BTlog.h"
@@ -60,10 +60,10 @@ uint8_t BTlog_startFlag = 0xfa;
 char BTlog_endFlag[] = "@\r\n";
 uint8_t BTlog_Recv_endFlag = 0x5a;
 
-//StartFlag, Head and EndFlag
+// StartFlag, Head and EndFlag
 uint16_t BTlog_TX_BUFF_LEN = 3 + 1 + 3;
 uint16_t BTlog_TX_DATA_LEN = 0;
-//Head Checksum and EndFlag
+// Head Checksum and EndFlag
 uint16_t BTlog_RX_BUFF_LEN = 1 + 1 + 1;
 uint16_t BTlog_RX_DATA_LEN = 0;
 
@@ -71,7 +71,7 @@ uint32_t BTlog_time = 0;
 
 /**
  * @name: anonymous
- * @msg: 
+ * @msg:
  * @param {void*} ptr
  * @param {uint8_t} size
  * @param {BTlog_TypeEnum} type
@@ -89,7 +89,7 @@ void AddSendData(void* ptr, uint8_t size, BTlog_TypeEnum type, char* tag) {
 
 /**
  * @name: anonymous
- * @msg: 
+ * @msg:
  * @param {void*} ptr
  * @param {uint8_t} size
  * @param {BTlog_TypeEnum} type
@@ -107,7 +107,7 @@ void AddRecvData(void* ptr, uint8_t size, BTlog_TypeEnum type) {
 /**
  * @name: INIT
  * @test: TODO: Add to init
- * @msg: 
+ * @msg:
  * @param {*}
  * @return {*}
  */
@@ -129,7 +129,7 @@ void BTlog_Init() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     // Motor_MotorTypeDef Motor_chassisMotor1, Motor_chassisMotor2, Motor_chassisMotor3, Motor_chassisMotor4, Motor_gimbalMotorYaw, Motor_gimbalMotorPitch, Motor_feederMotor, Motor_shooterMotorLeft, Motor_shooterMotorRight;
 
-    //Log Data Send
+    // Log Data Send
     ADD_SEND_DATA(BTlog_time, uInt32, "current_time");
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     ADD_SEND_DATA(imu->angle.pitch, Float, "imu->angle.pitch");
@@ -158,7 +158,7 @@ void BTlog_Init() {
 
 #endif
 
-//Customize Remote Control Receive
+// Customize Remote Control Receive
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
 
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
@@ -220,7 +220,7 @@ const uint8_t CMD_SET_CUSTOMIZE = 0xA5;
 const uint8_t CMD_SET_AUTO_OFFSET = 0xB1;
 /**
  * @name: DECODE
- * @msg: 
+ * @msg:
  * @param {uint8_t*} BTlog_RxData
  * @param {uint16_t} rxdatalen
  * @return {*}
@@ -254,7 +254,7 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
     } else {
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
         if (BTlog_RxData[0] == CMD_SET_GYRO_COMPENSATE) {
-            //float * 4
+            // float * 4
             Chassis_Gyro_compensate[0] = buff2float(BTlog_RxData + 1);
             Chassis_Gyro_compensate[1] = buff2float(BTlog_RxData + 5);
             Chassis_Gyro_compensate[2] = buff2float(BTlog_RxData + 9);
@@ -269,7 +269,7 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
 #endif
 
         if (BTlog_RxData[0] == CMD_SET_CUSTOMIZE) {
-            //check
+            // check
             if (BTLog_VerifyData(BTlog_RxData, rxdatalen)) {
                 uint8_t* buff = BTlog_RxData;
                 int cur_pos = 1;
@@ -283,11 +283,11 @@ void BTlog_DecodeData(uint8_t* BTlog_RxData, uint16_t rxdatalen) {
     }
 }
 /**
-  * @brief      Data Checksum Verify
-  * @param      buff: Data buffer
-  * @param      rxdatalen: recevie data length
-  * @retval     Match is 1  not match is 0
-  */
+ * @brief      Data Checksum Verify
+ * @param      buff: Data buffer
+ * @param      rxdatalen: recevie data length
+ * @retval     Match is 1  not match is 0
+ */
 
 uint8_t BTLog_VerifyData(uint8_t* buff, uint16_t rxdatalen) {
     if (rxdatalen != BTlog_RX_BUFF_LEN)

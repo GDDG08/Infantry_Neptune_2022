@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gpio_util.c
- *  Description  : This file contains the GPIO functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-11 04:19:11
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Utility\gpio_util.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:55
  */
 
 #include "gpio_util.h"
@@ -63,19 +63,19 @@ GPIO_GPIOTypeDef* CAP = &CAP_START;
 #endif
 
 /**
-  * @brief      Get the GPIO pin trigger tick
-  * @param      gpio :Mark of peripheral
-  * @retval     trigger tick
-  */
+ * @brief      Get the GPIO pin trigger tick
+ * @param      gpio :Mark of peripheral
+ * @retval     trigger tick
+ */
 uint32_t GPIO_GetTriggerTick(GPIO_GPIOTypeDef* gpio) {
     return gpio->tick;
 }
 
 /**
-  * @brief      Set GPIO
-  * @param      gpio :Mark of peripheral
-  * @retval     NULL
-  */
+ * @brief      Set GPIO
+ * @param      gpio :Mark of peripheral
+ * @retval     NULL
+ */
 void GPIO_Set(GPIO_GPIOTypeDef* gpio) {
     gpio->tick = HAL_GetTick();
     HAL_GPIO_WritePin(gpio->gpio_handle, gpio->gpio_pin, GPIO_PIN_SET);
@@ -83,10 +83,10 @@ void GPIO_Set(GPIO_GPIOTypeDef* gpio) {
 }
 
 /**
-  * @brief      Reset GPIO
-  * @param      gpio :Mark of peripheral
-  * @retval     NULL
-  */
+ * @brief      Reset GPIO
+ * @param      gpio :Mark of peripheral
+ * @retval     NULL
+ */
 void GPIO_Reset(GPIO_GPIOTypeDef* gpio) {
     gpio->tick = HAL_GetTick();
     HAL_GPIO_WritePin(gpio->gpio_handle, gpio->gpio_pin, GPIO_PIN_RESET);
@@ -94,20 +94,20 @@ void GPIO_Reset(GPIO_GPIOTypeDef* gpio) {
 }
 
 /**
-  * @brief      Reset GPIO
-  * @param      gpio :Mark of peripheral
-  * @retval     The state of goio
-  */
+ * @brief      Reset GPIO
+ * @param      gpio :Mark of peripheral
+ * @retval     The state of goio
+ */
 GPIO_PinState GPIO_ReadPin(GPIO_GPIOTypeDef* gpio) {
     gpio->pin_state = HAL_GPIO_ReadPin(gpio->gpio_handle, gpio->gpio_pin);
     return gpio->pin_state;
 }
 
 /**
-  * @brief      HAL GPIO interrupt call back
-  * @param      GPIO_Pin :Specifies the pins connected EXTI line
-  * @retval     NULL
-  */
+ * @brief      HAL GPIO interrupt call back
+ * @param      GPIO_Pin :Specifies the pins connected EXTI line
+ * @retval     NULL
+ */
 void GPIO_IRQCallback(uint16_t GPIO_Pin) {
     uint32_t trigger_time = HAL_GetTick();
 

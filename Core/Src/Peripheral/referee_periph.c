@@ -1,31 +1,31 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : referee_periph.c
- *  Description  : This document contains the data receiving and sending of the referee system
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-09 05:47:17
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\referee_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:55:47
  */
 
 #include "referee_periph.h"
-#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE_NOHW) || __FN_IF_ENABLE(__FN_PERIPH_REFEREE) 
+#if __FN_IF_ENABLE(__FN_PERIPH_REFEREE_NOHW) || __FN_IF_ENABLE(__FN_PERIPH_REFEREE)
 Referee_RefereeDataTypeDef Referee_RefereeData;
 
 /**
-  * @brief      ��ȡ����ϵͳ���ݶ����ָ��
-  * @param      ��
-  * @retval     ָ��ָ�����ϵͳ���ݶ���
-  */
+ * @brief      ��ȡ����ϵͳ���ݶ����ָ��
+ * @param      ��
+ * @retval     ָ��ָ�����ϵͳ���ݶ���
+ */
 Referee_RefereeDataTypeDef* Referee_GetRefereeDataPtr() {
     return &Referee_RefereeData;
 }
 
 /**
-  * @brief      ���ò���ϵͳ���ݶ���
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ���ò���ϵͳ���ݶ���
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_ResetRefereeData() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     Referee_RefereeStateEnum state = referee->state;        // backup state
@@ -37,10 +37,10 @@ void Referee_ResetRefereeData() {
 
 #if __FN_IF_ENABLE(__FN_PERIPH_REFEREE_NOHW)
 /**
-  * @brief      ��ʼ������ϵͳ
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ��ʼ������ϵͳ
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_InitReferee() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     Referee_ResetRefereeData();
@@ -85,19 +85,19 @@ uint8_t P_ext_game_status(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
 }
 
 uint8_t P_ext_game_result(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_game_result_t *struct_ptr = data_ptr;
+    // ext_game_result_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
 
 uint8_t P_ext_game_robot_HP(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_game_robot_HP_t *struct_ptr = data_ptr;
+    // ext_game_robot_HP_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
 
 uint8_t P_ext_dart_status(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_dart_status_t *struct_ptr = data_ptr;
+    // ext_dart_status_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
@@ -111,19 +111,19 @@ uint8_t P_ext_event_data(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
 }
 
 uint8_t P_ext_supply_projectile_action(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_supply_projectile_action_t *struct_ptr = data_ptr;
+    // ext_supply_projectile_action_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
 
 uint8_t P_ext_referee_warning(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_referee_warning_t *struct_ptr = data_ptr;
+    // ext_referee_warning_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
 
 uint8_t P_ext_dart_remaining_time(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_dart_remaining_time_t *struct_ptr = data_ptr;
+    // ext_dart_remaining_time_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
@@ -193,7 +193,7 @@ uint8_t P_aerial_robot_energy(Referee_RefereeDataTypeDef* referee, void* data_pt
 }
 
 uint8_t P_ext_robot_hurt(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_robot_hurt_t *struct_ptr = data_ptr;
+    // ext_robot_hurt_t *struct_ptr = data_ptr;
 
     // Hurt Callback
 
@@ -201,7 +201,7 @@ uint8_t P_ext_robot_hurt(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
 }
 
 uint8_t P_ext_shoot_data(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    ext_shoot_data_t *struct_ptr = data_ptr;
+    ext_shoot_data_t* struct_ptr = data_ptr;
 
     referee->shooter_id = struct_ptr->shooter_id;
     referee->bullet_freq = struct_ptr->bullet_freq;
@@ -211,19 +211,19 @@ uint8_t P_ext_shoot_data(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
 }
 
 uint8_t P_ext_bullet_remaining(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_bullet_remaining_t *struct_ptr = data_ptr;
+    // ext_bullet_remaining_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
 
 uint8_t P_ext_rfid_status(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_rfid_status_t *struct_ptr = data_ptr;
+    // ext_rfid_status_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
 
 uint8_t P_ext_dart_cmd(Referee_RefereeDataTypeDef* referee, void* data_ptr) {
-    //ext_dart_client_cmd_t *struct_ptr = data_ptr;
+    // ext_dart_client_cmd_t *struct_ptr = data_ptr;
 
     return PARSE_SUCCEEDED;
 }
@@ -274,7 +274,7 @@ const Referee_RefereeCmdTypeDef Const_Referee_CMD_LIST[Const_Referee_CMD_NUM] = 
 
 const Referee_RefereeCmdTypeDef Const_Referee_CMD_INTERACTIVE = {0x0301, 8, NULL};  // �����˼佻�����ݣ����ͷ���������
 // ע�������6�ǽ�������֡ͷ�ĳ��ȣ���Ϊ��������֡�ǲ�������
-//const uint16_t Const_Referee_DATA_CMD_ID_CLIENT_CUSTOM_DATA       = 0xD180;               // ���ѷ������ͻ����Զ�����������ID
+// const uint16_t Const_Referee_DATA_CMD_ID_CLIENT_CUSTOM_DATA       = 0xD180;               // ���ѷ������ͻ����Զ�����������ID
 const uint16_t Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_LBOUND = 0x0200;  // �����˼佻����������ID�½�
 const uint16_t Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_UBOUND = 0x02FF;  // �����˼佻����������ID�Ͻ�
 const uint16_t Const_Referee_DATA_INTERACTIVE_DATA_MAX_LENGTH = 113 - 1;    // �����˼佻������������󳤶�
@@ -292,10 +292,10 @@ const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6] = {
 graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 /**
-  * @brief      ��ʼ������ϵͳ
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ��ʼ������ϵͳ
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_InitReferee() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     Referee_ResetRefereeData();
@@ -305,10 +305,10 @@ void Referee_InitReferee() {
 }
 
 /**
-  * @brief      ͨ��������ID��ȡ��Ӧ�ͻ���ID
-  * @param      robot_id: ������ID
-  * @retval     �ͻ���ID
-  */
+ * @brief      ͨ��������ID��ȡ��Ӧ�ͻ���ID
+ * @param      robot_id: ������ID
+ * @retval     �ͻ���ID
+ */
 uint16_t Referee_GetClientIDByRobotID(uint8_t robot_id) {
     if (robot_id == 7 || robot_id == 107)
         return 0;
@@ -318,13 +318,13 @@ uint16_t Referee_GetClientIDByRobotID(uint8_t robot_id) {
 }
 
 /**
-  * @brief      ����ϵͳ�������ݷ��ͺ�����������
-  * @param      data_cmd_id: ��������ID
-  * @param      receiver_ID: ������ID
-  * @param      interactive_data: ��������֡
-  * @param      interactive_data_length: ��������֡����
-  * @retval     ��
-  */
+ * @brief      ����ϵͳ�������ݷ��ͺ�����������
+ * @param      data_cmd_id: ��������ID
+ * @param      receiver_ID: ������ID
+ * @param      interactive_data: ��������֡
+ * @param      interactive_data_length: ��������֡����
+ * @retval     ��
+ */
 void Referee_SendInteractiveData(uint16_t data_cmd_id, uint16_t receiver_ID, const uint8_t* interactive_data, uint16_t interactive_data_length) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     static uint8_t seq = 0;
@@ -359,11 +359,11 @@ void Referee_SendInteractiveData(uint16_t data_cmd_id, uint16_t receiver_ID, con
 }
 
 /**
-  * @brief      ���ѷ��������ÿͻ����Զ�������LED
-  * @param      led_no: �ͻ����Զ�������LED���
-  * @param      led_state: �ͻ����Զ�������LED״̬��1Ϊ�̣�0Ϊ�죩
-  */
-/* 
+ * @brief      ���ѷ��������ÿͻ����Զ�������LED
+ * @param      led_no: �ͻ����Զ�������LED���
+ * @param      led_state: �ͻ����Զ�������LED״̬��1Ϊ�̣�0Ϊ�죩
+ */
+/*
 void Referee_SetClientCustomDataLED(uint8_t led_no, uint8_t led_state) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     if (led_no > 5) return;
@@ -373,26 +373,26 @@ void Referee_SetClientCustomDataLED(uint8_t led_no, uint8_t led_state) {
 */
 
 /**
-  * @brief      ���ѷ������ͻ����Զ������ݷ��ͺ���
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ���ѷ������ͻ����Զ������ݷ��ͺ���
+ * @param      ��
+ * @retval     ��
+ */
 /*
 void Referee_SendClientCustomData() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
-    Referee_SendInteractiveData(Const_Referee_DATA_CMD_ID_CLIENT_CUSTOM_DATA, referee->client_id, 
+    Referee_SendInteractiveData(Const_Referee_DATA_CMD_ID_CLIENT_CUSTOM_DATA, referee->client_id,
                                 (void *) &(referee->custom_data), sizeof(referee->custom_data));
 }
 */
 
 /**
-  * @brief      �����˼佻�����ݷ��ͺ���
-  * @param      data_cmd_id: ��������ID
-  * @param      receiver_ID: ������ID
-  * @param      data: ����֡
-  * @param      data_length: ����֡����
-  * @retval     ��
-  */
+ * @brief      �����˼佻�����ݷ��ͺ���
+ * @param      data_cmd_id: ��������ID
+ * @param      receiver_ID: ������ID
+ * @param      data: ����֡
+ * @param      data_length: ����֡����
+ * @retval     ��
+ */
 void Referee_SendRobotCustomData(uint16_t data_cmd_id, uint16_t receiver_ID, const uint8_t* data, uint16_t data_length) {
     if (data_cmd_id < Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_LBOUND ||
         data_cmd_id > Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_UBOUND)
@@ -405,24 +405,24 @@ void Referee_SendRobotCustomData(uint16_t data_cmd_id, uint16_t receiver_ID, con
 }
 
 /**
-  * @brief      ���ѷ������ͻ����Զ���ͼ�η��ͺ���
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ���ѷ������ͻ����Զ���ͼ�η��ͺ���
+ * @param      ��
+ * @retval     ��
+ */
 /*
 void Referee_SendClientGraphicDraw() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
-    Referee_SendInteractiveData(Const_Referee_DATA_CMD_ID_CLIENT_GRAPHIC_DRAW, referee->client_id, 
+    Referee_SendInteractiveData(Const_Referee_DATA_CMD_ID_CLIENT_GRAPHIC_DRAW, referee->client_id,
                                 (void *) &(referee->graphic_draw), sizeof(referee->graphic_draw));
 }
 */
 
 /**
-  * @brief      ���Ϳͻ����Զ���ͼ��������
-  * @param      graph: �������ָ��������ͼ������
-  * @param      mode: ����ģʽ��1��2��3��4��Ӧ1��2��5��7��һ��
-  * @retval     ��
-  */
+ * @brief      ���Ϳͻ����Զ���ͼ��������
+ * @param      graph: �������ָ��������ͼ������
+ * @param      mode: ����ģʽ��1��2��3��4��Ӧ1��2��5��7��һ��
+ * @retval     ��
+ */
 void Referee_SendDrawingCmd(graphic_data_struct_t graph[], uint8_t mode) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     if (mode == 0 || mode >= 5)
@@ -450,11 +450,11 @@ void Referee_SendDrawingCmd(graphic_data_struct_t graph[], uint8_t mode) {
 }
 
 /**
-  * @brief      ���Ϳͻ����Զ���ͼ����ʾ�ַ�������
-  * @param      pgraph: ָ��ָ����ʾ�ַ���ͼ������
-  * @param      str: �ַ���������Ϊ30��
-  * @retval     ��
-  */
+ * @brief      ���Ϳͻ����Զ���ͼ����ʾ�ַ�������
+ * @param      pgraph: ָ��ָ����ʾ�ַ���ͼ������
+ * @param      str: �ַ���������Ϊ30��
+ * @retval     ��
+ */
 void Referee_SendDrawingStringCmd(graphic_data_struct_t* pgraph, const uint8_t str[]) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
 
@@ -467,20 +467,20 @@ void Referee_SendDrawingStringCmd(graphic_data_struct_t* pgraph, const uint8_t s
 }
 
 /**
-  * @brief      �ͻ����Զ���ͼ�λ������Ƿ�Ϊ��
-  * @param      ��
-  * @retval     1Ϊ�գ�0Ϊ�ǿ�
-  */
+ * @brief      �ͻ����Զ���ͼ�λ������Ƿ�Ϊ��
+ * @param      ��
+ * @retval     1Ϊ�գ�0Ϊ�ǿ�
+ */
 uint8_t Referee_IsDrawingBufferEmpty() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     return referee->graphic_buf_len == 0;
 }
 
 /**
-  * @brief      �ͻ����Զ���ͼ�λ�����ˢд����
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      �ͻ����Զ���ͼ�λ�����ˢд����
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_DrawingBufferFlush() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     if (Referee_IsDrawingBufferEmpty())
@@ -508,10 +508,10 @@ void Referee_DrawingBufferFlush() {
 }
 
 /**
-  * @brief      ����ͼ���������ͻ����Զ���ͼ�λ�������ռλ�ã�
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ����ͼ���������ͻ����Զ���ͼ�λ�������ռλ�ã�
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_DrawingBufferPushDummy() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     memcpy(referee->graphic_buf + referee->graphic_buf_len, &Referee_dummyGraphicCmd, sizeof(graphic_data_struct_t));
@@ -519,10 +519,10 @@ void Referee_DrawingBufferPushDummy() {
 }
 
 /**
-  * @brief      ��ͼ���������ͻ����Զ���ͼ�λ�����
-  * @param      pgraph: ָ��ָ��ͼ������
-  * @retval     ��
-  */
+ * @brief      ��ͼ���������ͻ����Զ���ͼ�λ�����
+ * @param      pgraph: ָ��ָ��ͼ������
+ * @retval     ��
+ */
 void Referee_DrawingBufferPush(graphic_data_struct_t* pgraph) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     memcpy(referee->graphic_buf + referee->graphic_buf_len, pgraph, sizeof(graphic_data_struct_t));
@@ -533,10 +533,10 @@ void Referee_DrawingBufferPush(graphic_data_struct_t* pgraph) {
 }
 
 /**
-  * @brief      �ͻ����Զ���ͼ��ʱ������
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      �ͻ����Զ���ͼ��ʱ������
+ * @param      ��
+ * @retval     ��
+ */
 void Referee_DrawingTimeBaseCallback() {
     static uint8_t tick = 0;
     ++tick;
@@ -547,10 +547,10 @@ void Referee_DrawingTimeBaseCallback() {
 }
 
 /**
-  * @brief      ���ͼ������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
-  */
+ * @brief      ���ͼ������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
+ */
 uint32_t Referee_PackGraphicData(graphic_data_struct_t* pgraph, uint32_t graph_id, Draw_OperateType operate_type, Draw_GraphicType graphic_type, uint8_t layer, Draw_Color color, uint16_t start_angle, uint16_t end_angle, uint8_t width, uint16_t start_x, uint16_t start_y, uint16_t radius, uint16_t end_x, uint16_t end_y) {
     if (graph_id > 0xffffff)
         return PARSE_FAILED;
@@ -586,10 +586,10 @@ uint32_t Referee_PackGraphicData(graphic_data_struct_t* pgraph, uint32_t graph_i
 }
 
 /**
-  * @brief      �����ʾ������ͼ������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
-  */
+ * @brief      �����ʾ������ͼ������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
+ */
 uint32_t Referee_PackFloatGraphicData(graphic_data_struct_t* pgraph, uint32_t graph_id, Draw_OperateType operate_type, uint8_t layer, Draw_Color color, uint16_t font_size, uint16_t decimal_digit, uint8_t width, uint16_t start_x, uint16_t start_y, float value) {
     Referee_GraphicDataConverterUnion conv;
     conv.int_data = (int32_t)(value * 1000.0f);
@@ -601,10 +601,10 @@ uint32_t Referee_PackFloatGraphicData(graphic_data_struct_t* pgraph, uint32_t gr
 }
 
 /**
-  * @brief      �����ʾ����ͼ������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
-  */
+ * @brief      �����ʾ����ͼ������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
+ */
 uint32_t Referee_PackIntGraphicData(graphic_data_struct_t* pgraph, uint32_t graph_id, Draw_OperateType operate_type, uint8_t layer, Draw_Color color, uint16_t font_size, uint8_t width, uint16_t start_x, uint16_t start_y, int value) {
     Referee_GraphicDataConverterUnion conv;
     conv.int_data = value;
@@ -616,10 +616,10 @@ uint32_t Referee_PackIntGraphicData(graphic_data_struct_t* pgraph, uint32_t grap
 }
 
 /**
-  * @brief      �����ʾ�ַ���ͼ������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
-  */
+ * @brief      �����ʾ�ַ���ͼ������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     �Ƿ�Ϸ���1Ϊ�ǣ�0Ϊ��
+ */
 uint32_t Referee_PackStringGraphicData(graphic_data_struct_t* pgraph, uint32_t graph_id, Draw_OperateType operate_type, uint8_t layer, Draw_Color color, uint16_t font_size, uint8_t length, uint8_t width, uint16_t start_x, uint16_t start_y) {
     if (length > Const_Referee_DATA_CMD_ID_LIST[5].data_length - sizeof(graphic_data_struct_t))
         return PARSE_FAILED;
@@ -630,10 +630,10 @@ uint32_t Referee_PackStringGraphicData(graphic_data_struct_t* pgraph, uint32_t g
 /********** REFEREE CUSTOM GRAPHIC DRAWING FUNCTION **********/
 
 /**
-  * @brief      ��ͼ���������ָ��ͼ��
-  * @param      layer: ͼ��ţ�0~9��
-  * @retval     ��
-  */
+ * @brief      ��ͼ���������ָ��ͼ��
+ * @param      layer: ͼ��ţ�0~9��
+ * @retval     ��
+ */
 void Draw_ClearLayer(uint8_t layer) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     Referee_DrawingBufferFlush();
@@ -645,13 +645,13 @@ void Draw_ClearLayer(uint8_t layer) {
 }
 
 /**
-  * @brief      ��ͼ���������ȫ��
-  * @param      ��
-  * @retval     ��
-  */
+ * @brief      ��ͼ���������ȫ��
+ * @param      ��
+ * @retval     ��
+ */
 void Draw_ClearAll() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
-    //Referee_DrawingBufferFlush();
+    // Referee_DrawingBufferFlush();
     referee->graphic_buf_len = 0;  // ֱ�������������еĻ�ͼָ��
     uint8_t buf[2];
     buf[0] = 2;
@@ -661,10 +661,10 @@ void Draw_ClearAll() {
 }
 
 /**
-  * @brief      ��ͼ���������ָ��ͼ��
-  * @param      graph_id: ͼ��ID
-  * @retval     ��
-  */
+ * @brief      ��ͼ���������ָ��ͼ��
+ * @param      graph_id: ͼ��ID
+ * @retval     ��
+ */
 void Draw_Delete(uint32_t graph_id) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_DELETE, (Draw_GraphicType)0, 0,
@@ -674,10 +674,10 @@ void Draw_Delete(uint32_t graph_id) {
 }
 
 /**
-  * @brief      ��ͼ��������ֱ�ߣ�������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ֱ�ߣ�������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_ADD, Draw_TYPE_LINE, layer, color,
@@ -687,10 +687,10 @@ void Draw_AddLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t wi
 }
 
 /**
-  * @brief      ��ͼ��������ֱ�ߣ��޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ֱ�ߣ��޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, Draw_TYPE_LINE, layer, color,
@@ -700,10 +700,10 @@ void Draw_ModifyLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t
 }
 
 /**
-  * @brief      ��ͼ�����������Σ�������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ�����������Σ�������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddRectangle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_ADD, Draw_TYPE_RECTANGLE, layer, color,
@@ -713,10 +713,10 @@ void Draw_AddRectangle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8
 }
 
 /**
-  * @brief      ��ͼ�����������Σ��޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ�����������Σ��޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyRectangle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, Draw_TYPE_RECTANGLE, layer, color,
@@ -726,10 +726,10 @@ void Draw_ModifyRectangle(uint32_t graph_id, uint8_t layer, Draw_Color color, ui
 }
 
 /**
-  * @brief      ��ͼ��������Բ��������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������Բ��������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddCircle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_ADD, Draw_TYPE_CIRCLE, layer, color,
@@ -739,10 +739,10 @@ void Draw_AddCircle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t 
 }
 
 /**
-  * @brief      ��ͼ��������Բ���޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������Բ���޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyCircle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, Draw_TYPE_CIRCLE, layer, color,
@@ -752,10 +752,10 @@ void Draw_ModifyCircle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8
 }
 
 /**
-  * @brief      ��ͼ����������Բ��������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ����������Բ��������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddEllipse(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_ADD, Draw_TYPE_ELLIPSE, layer, color,
@@ -765,10 +765,10 @@ void Draw_AddEllipse(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t
 }
 
 /**
-  * @brief      ��ͼ����������Բ���޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ����������Բ���޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyEllipse(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, Draw_TYPE_ELLIPSE, layer, color,
@@ -778,10 +778,10 @@ void Draw_ModifyEllipse(uint32_t graph_id, uint8_t layer, Draw_Color color, uint
 }
 
 /**
-  * @brief      ��ͼ��������Բ����������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������Բ����������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddArc(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t start_angle, uint16_t end_angle, uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_ADD, Draw_TYPE_ARC, layer, color,
@@ -791,10 +791,10 @@ void Draw_AddArc(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t st
 }
 
 /**
-  * @brief      ��ͼ��������Բ�����޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������Բ�����޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyArc(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t start_angle, uint16_t end_angle, uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y) {
     graphic_data_struct_t graph;
     if (Referee_PackGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, Draw_TYPE_ARC, layer, color,
@@ -804,10 +804,10 @@ void Draw_ModifyArc(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t
 }
 
 /**
-  * @brief      ��ͼ��������ʾ��������������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ʾ��������������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddFloat(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint16_t decimal_digit, uint8_t width, uint16_t start_x, uint16_t start_y, float value) {
     graphic_data_struct_t graph;
     if (Referee_PackFloatGraphicData(&graph, graph_id, Draw_OPERATE_ADD, layer, color,
@@ -817,10 +817,10 @@ void Draw_AddFloat(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t 
 }
 
 /**
-  * @brief      ��ͼ��������ʾ���������޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ʾ���������޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyFloat(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint16_t decimal_digit, uint8_t width, uint16_t start_x, uint16_t start_y, float value) {
     graphic_data_struct_t graph;
     if (Referee_PackFloatGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, layer, color,
@@ -830,10 +830,10 @@ void Draw_ModifyFloat(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16
 }
 
 /**
-  * @brief      ��ͼ��������ʾ������������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ʾ������������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddInt(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint8_t width, uint16_t start_x, uint16_t start_y, int value) {
     graphic_data_struct_t graph;
     if (Referee_PackIntGraphicData(&graph, graph_id, Draw_OPERATE_ADD, layer, color,
@@ -843,10 +843,10 @@ void Draw_AddInt(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t fo
 }
 
 /**
-  * @brief      ��ͼ��������ʾ�������޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ʾ�������޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyInt(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint8_t width, uint16_t start_x, uint16_t start_y, int value) {
     graphic_data_struct_t graph;
     if (Referee_PackIntGraphicData(&graph, graph_id, Draw_OPERATE_MODIFY, layer, color,
@@ -856,10 +856,10 @@ void Draw_ModifyInt(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t
 }
 
 /**
-  * @brief      ��ͼ��������ʾ�ַ�����������
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ʾ�ַ�����������
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_AddString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint8_t width, uint16_t start_x, uint16_t start_y, const char str[]) {
     graphic_data_struct_t graph;
     //    Referee_DrawingBufferFlush();
@@ -873,10 +873,10 @@ void Draw_AddString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t
 }
 
 /**
-  * @brief      ��ͼ��������ʾ�ַ������޸ģ�
-  * @param      ���Э�鼰ͷ�ļ�����
-  * @retval     ��
-  */
+ * @brief      ��ͼ��������ʾ�ַ������޸ģ�
+ * @param      ���Э�鼰ͷ�ļ�����
+ * @retval     ��
+ */
 void Draw_ModifyString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint8_t width, uint16_t start_x, uint16_t start_y, const char str[]) {
     graphic_data_struct_t graph;
     //    Referee_DrawingBufferFlush();
@@ -892,10 +892,10 @@ void Draw_ModifyString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint1
 /********** END OF REFEREE CUSTOM GRAPHIC DRAWING FUNCTION **********/
 
 /**
-  * @brief      �жϲ���ϵͳ�Ƿ�����
-  * @param      ��
-  * @retval     �Ƿ����ߣ�1Ϊ�ǣ�0Ϊ��
-  */
+ * @brief      �жϲ���ϵͳ�Ƿ�����
+ * @param      ��
+ * @retval     �Ƿ����ߣ�1Ϊ�ǣ�0Ϊ��
+ */
 uint8_t Referee_IsRefereeOffline() {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
     uint32_t now = HAL_GetTick();
@@ -905,15 +905,15 @@ uint8_t Referee_IsRefereeOffline() {
 }
 
 /**
-  * @brief      �����˼佻�����ݽ�������
-  * @param      data: ����֡
-  * @param      data_length: ����֡����
-  * @retval     ���������0Ϊʧ�ܣ�1Ϊ�ɹ���
-  */
+ * @brief      �����˼佻�����ݽ�������
+ * @param      data: ����֡
+ * @param      data_length: ����֡����
+ * @retval     ���������0Ϊʧ�ܣ�1Ϊ�ɹ���
+ */
 uint8_t Referee_ParseRobotCustomData(uint8_t* data, uint16_t data_length) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
 
-    //if (data_length != Const_Referee_CMD_INTERACTIVE.data_length) return PARSE_FAILED;      // wrong data length
+    // if (data_length != Const_Referee_CMD_INTERACTIVE.data_length) return PARSE_FAILED;      // wrong data length
 
     ext_student_interactive_header_data_t* header_struct_ptr = (void*)data;
     if (header_struct_ptr->data_cmd_id < Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_LBOUND ||
@@ -922,7 +922,7 @@ uint8_t Referee_ParseRobotCustomData(uint8_t* data, uint16_t data_length) {
     if (header_struct_ptr->receiver_ID != referee->robot_id)
         return PARSE_FAILED;  // wrong receiver id
 
-    //uint8_t interactive_data_ptr = data + Const_Referee_CMD_INTERACTIVE.data_length;
+    // uint8_t interactive_data_ptr = data + Const_Referee_CMD_INTERACTIVE.data_length;
 
     // Interactive Data Recieve Callback
 
@@ -930,12 +930,12 @@ uint8_t Referee_ParseRobotCustomData(uint8_t* data, uint16_t data_length) {
 }
 
 /**
-  * @brief      ����ϵͳ���ݽ�������
-  * @param      cmd_id: ����ID
-  * @param      data: ����֡
-  * @param      data_length: ����֡����
-  * @retval     ���������0Ϊʧ�ܣ�1Ϊ�ɹ���
-  */
+ * @brief      ����ϵͳ���ݽ�������
+ * @param      cmd_id: ����ID
+ * @param      data: ����֡
+ * @param      data_length: ����֡����
+ * @retval     ���������0Ϊʧ�ܣ�1Ϊ�ɹ���
+ */
 uint8_t Referee_ParseRefereeCmd(uint16_t cmd_id, uint8_t* data, uint16_t data_length) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
 
@@ -944,7 +944,7 @@ uint8_t Referee_ParseRefereeCmd(uint16_t cmd_id, uint8_t* data, uint16_t data_le
 
     for (int i = 0; i < Const_Referee_CMD_NUM; ++i) {
         if (cmd_id == Const_Referee_CMD_LIST[i].cmd_id) {
-            //if (data_length != Const_Referee_CMD_LIST[i].data_length) return PARSE_FAILED;  // wrong data length
+            // if (data_length != Const_Referee_CMD_LIST[i].data_length) return PARSE_FAILED;  // wrong data length
             if (Const_Referee_CMD_LIST[i].parse_func == NULL)
                 return PARSE_FAILED;                                          // unsupported cmd
             return (*(Const_Referee_CMD_LIST[i].parse_func))(referee, data);  // parse cmd
@@ -955,11 +955,11 @@ uint8_t Referee_ParseRefereeCmd(uint16_t cmd_id, uint8_t* data, uint16_t data_le
 }
 
 /**
-  * @brief      ����ϵͳ�������ݽ��뺯��
-  * @param      buff: ���ݻ�����
-  * @param      rxdatalen: ���ݳ���
-  * @retval     ��
-  */
+ * @brief      ����ϵͳ�������ݽ��뺯��
+ * @param      buff: ���ݻ�����
+ * @param      rxdatalen: ���ݳ���
+ * @retval     ��
+ */
 void Referee_DecodeRefereeData(uint8_t* buff, uint16_t rxdatalen) {
     Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
 
@@ -979,8 +979,8 @@ void Referee_DecodeRefereeData(uint8_t* buff, uint16_t rxdatalen) {
     uint16_t data_length = (uint16_t)buff[2] << 8 | buff[1];
     uint8_t seq = buff[3];
     if (seq == 0) {
-        //referee->state          = Referee_STATE_ERROR;
-        //return;
+        // referee->state          = Referee_STATE_ERROR;
+        // return;
     }
     if (!CRC_VerifyCRC16CheckSum(buff, data_length + 9)) {
         referee->state = Referee_STATE_ERROR;
@@ -997,10 +997,10 @@ void Referee_DecodeRefereeData(uint8_t* buff, uint16_t rxdatalen) {
 }
 
 /**
-  * @brief      ����ϵͳ���ڻص�����
-  * @param      huart: ָ��ָ�򴮿ھ��
-  * @retval     ��
-  */
+ * @brief      ����ϵͳ���ڻص�����
+ * @param      huart: ָ��ָ�򴮿ھ��
+ * @retval     ��
+ */
 void Referee_RXCallback(UART_HandleTypeDef* huart) {
     /* clear DMA transfer complete flag */
     __HAL_DMA_DISABLE(huart->hdmarx);
@@ -1013,11 +1013,11 @@ void Referee_RXCallback(UART_HandleTypeDef* huart) {
             Referee_DecodeRefereeData(Referee_RxData + i, rxdatalen - i);
         }
     }
-    //Referee_DecodeRefereeData(Referee_RxData, rxdatalen);
+    // Referee_DecodeRefereeData(Referee_RxData, rxdatalen);
 
     /* restart dma transmission */
     __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_Referee_RX_BUFF_LEN);
-    //HAL_DMA_Start(huart->hdmarx,(uint32_t)&huart->Instance->DR,(uint32_t)Referee_RxData,Const_Referee_RX_BUFF_LEN);
+    // HAL_DMA_Start(huart->hdmarx,(uint32_t)&huart->Instance->DR,(uint32_t)Referee_RxData,Const_Referee_RX_BUFF_LEN);
     __HAL_DMA_ENABLE(huart->hdmarx);
 }
 

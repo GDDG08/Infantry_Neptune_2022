@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : spi_util.c
- *  Description  : This file containss the Spi functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 11:23:57
- *  LastEditTime : 2021-07-14 06:54:34
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Utility\spi_util.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:56:44
  */
 
 #include "spi_util.h"
@@ -16,10 +16,10 @@ extern DMA_HandleTypeDef hdma_spi1_rx;
 extern DMA_HandleTypeDef hdma_spi1_tx;
 
 /**
-  * @brief          Initnation SPI
-  * @param          hspi: The spi handle
-  * @retval         NULL
-  */
+ * @brief          Initnation SPI
+ * @param          hspi: The spi handle
+ * @retval         NULL
+ */
 void Spi_Init(SPI_HandleTypeDef* hspi) {
     hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
     uint32_t ret;
@@ -30,13 +30,13 @@ void Spi_Init(SPI_HandleTypeDef* hspi) {
 }
 
 /**
-  * @brief          Initnation SPI for DMA receive data
-  * @param          hspi: The spi handle
-  * @param          tx_buff: Transmit data buff
-  * @param          rx_buff: Recive data buff
-  * @param          num: The data length
-  * @retval         NULL
-  */
+ * @brief          Initnation SPI for DMA receive data
+ * @param          hspi: The spi handle
+ * @param          tx_buff: Transmit data buff
+ * @param          rx_buff: Recive data buff
+ * @param          num: The data length
+ * @retval         NULL
+ */
 void Spi_DMAInit(SPI_HandleTypeDef* hspi, uint32_t tx_buf, uint32_t rx_buf, uint16_t num) {
     SET_BIT(hspi->Instance->CR2, SPI_CR2_TXDMAEN);
     SET_BIT(hspi->Instance->CR2, SPI_CR2_RXDMAEN);
@@ -73,13 +73,13 @@ void Spi_DMAInit(SPI_HandleTypeDef* hspi, uint32_t tx_buf, uint32_t rx_buf, uint
 }
 
 /**
-  * @brief          SPI for DMA receive data
-  * @param          hspi: The spi handle
-  * @param          tx_buff: Transmit data buff
-  * @param          rx_buff: Recive data buff
-  * @param          ndtr: The data length
-  * @retval         NULL
-  */
+ * @brief          SPI for DMA receive data
+ * @param          hspi: The spi handle
+ * @param          tx_buff: Transmit data buff
+ * @param          rx_buff: Recive data buff
+ * @param          ndtr: The data length
+ * @retval         NULL
+ */
 void Spi_DMAEnable(SPI_HandleTypeDef* hspi, uint32_t tx_buff, uint32_t rx_buff, uint16_t ndtr) {
     // disable DMA
 
@@ -115,12 +115,12 @@ void Spi_DMAEnable(SPI_HandleTypeDef* hspi, uint32_t tx_buff, uint32_t rx_buff, 
 }
 
 /**
-  * @brief          Receive data or command to spi address(For DMA)
-  * @param          hspi: The spi handle
-  * @param          pData: To be received data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Receive data or command to spi address(For DMA)
+ * @param          hspi: The spi handle
+ * @param          pData: To be received data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_ReceiveDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
@@ -132,12 +132,12 @@ void Spi_ReceiveDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
 }
 
 /**
-  * @brief          Receive data or command to spi address
-  * @param          hspi: The spi handle
-  * @param          pData: To be received data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Receive data or command to spi address
+ * @param          hspi: The spi handle
+ * @param          pData: To be received data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_ReceiveData(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
@@ -149,12 +149,12 @@ void Spi_ReceiveData(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
 }
 
 /**
-  * @brief          Send data or command to spi address(For DMA)
-  * @param          hspi: The spi handle
-  * @param          pData: To be transmit data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Send data or command to spi address(For DMA)
+ * @param          hspi: The spi handle
+ * @param          pData: To be transmit data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_TransmitDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
@@ -166,12 +166,12 @@ void Spi_TransmitDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) 
 }
 
 /**
-  * @brief          Send data or command to spi address
-  * @param          hspi: The spi handle
-  * @param          pData: To be transmit data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Send data or command to spi address
+ * @param          hspi: The spi handle
+ * @param          pData: To be transmit data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_TransmitData(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
     if ((hspi == NULL) || (pData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
@@ -183,12 +183,12 @@ void Spi_TransmitData(SPI_HandleTypeDef* hspi, uint8_t* pData, uint16_t len) {
 }
 
 /**
-  * @brief          Swap a data or command to spi address
-  * @param          hspi: The spi handle
-  * @param          pData: To be transmit data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Swap a data or command to spi address
+ * @param          hspi: The spi handle
+ * @param          pData: To be transmit data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 uint8_t Spi_SwapAbyteData(SPI_HandleTypeDef* hspi, uint8_t txdata) {
     uint8_t rx_data;
     uint32_t ret = HAL_SPI_TransmitReceive(hspi, &txdata, &rx_data, 1, 100000);
@@ -199,12 +199,12 @@ uint8_t Spi_SwapAbyteData(SPI_HandleTypeDef* hspi, uint8_t txdata) {
 }
 
 /**
-  * @brief          Swap muli data or command to spi address
-  * @param          hspi: The spi handle
-  * @param          pData: To be transmit data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Swap muli data or command to spi address
+ * @param          hspi: The spi handle
+ * @param          pData: To be transmit data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_ReadMuliReg(SPI_HandleTypeDef* hspi, uint8_t* rx_data, uint8_t len) {
     while (len != 0) {
         *rx_data = Spi_SwapAbyteData(hspi, 0x55);
@@ -214,12 +214,12 @@ void Spi_ReadMuliReg(SPI_HandleTypeDef* hspi, uint8_t* rx_data, uint8_t len) {
 }
 
 /**
-  * @brief          Swap data or command to spi address(For DMA)
-  * @param          hspi: The spi handle
-  * @param          pData: To be transmit data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Swap data or command to spi address(For DMA)
+ * @param          hspi: The spi handle
+ * @param          pData: To be transmit data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_SwapDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pTxData, uint8_t* pRxData, uint16_t len) {
     if ((hspi == NULL) || (pTxData == NULL) || (pRxData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
@@ -231,12 +231,12 @@ void Spi_SwapDataDMA(SPI_HandleTypeDef* hspi, uint8_t* pTxData, uint8_t* pRxData
 }
 
 /**
-  * @brief          Swap data or command to spi address
-  * @param          hspi: The spi handle
-  * @param          pData: To be transmit data
-  * @param          len: The data length
-  * @retval         NULL
-  */
+ * @brief          Swap data or command to spi address
+ * @param          hspi: The spi handle
+ * @param          pData: To be transmit data
+ * @param          len: The data length
+ * @retval         NULL
+ */
 void Spi_SwapData(SPI_HandleTypeDef* hspi, uint8_t* pTxData, uint8_t* pRxData, uint16_t len) {
     if ((hspi == NULL) || (pTxData == NULL) || (pRxData == NULL)) {
         Spi_ErrorHandler(HAL_ERROR);
@@ -248,10 +248,10 @@ void Spi_SwapData(SPI_HandleTypeDef* hspi, uint8_t* pTxData, uint8_t* pRxData, u
 }
 
 /**
-  * @brief      Spi error handler
-  * @param      ret: error data
-  * @retval     NULL
-  */
+ * @brief      Spi error handler
+ * @param      ret: error data
+ * @retval     NULL
+ */
 void Spi_ErrorHandler(uint32_t ret) {
     while (1) {
         return;

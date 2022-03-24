@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bmi055_periph.c
- *  Description  : This file contains the bmi055 API
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-14 06:56:43
- *  LastEditTime : 2021-07-16 02:50:08
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\bmi055_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:58:03
  */
 
 #ifndef BMI055_PERIPH_H

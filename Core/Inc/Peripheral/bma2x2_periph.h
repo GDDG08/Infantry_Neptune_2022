@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bma2x2_periph.h
- *  Description  : This file contains the bma2xx API  (by bosch)
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-13 06:03:54
- *  LastEditTime : 2021-07-16 02:50:34
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\bma2x2_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-23 22:22:10
  */
 
 #ifndef BMA2X2_PERIPH_H
@@ -127,24 +127,24 @@ typedef unsigned long long int u64;  /**< used for unsigned 64bit */
 /**\name	I2C ADDRESS DEFINITIONS    */
 /**************************************************************/
 /**< The following definition of I2C address is used for the following sensors
-* BMA255
-* BMA355
-* BMA280
-* BMA282
-* BMA223
-* BMA254
-* BMA284
-* BMA250E
-* BMA222E
-*/
+ * BMA255
+ * BMA355
+ * BMA280
+ * BMA282
+ * BMA223
+ * BMA254
+ * BMA284
+ * BMA250E
+ * BMA222E
+ */
 #define BMA2x2_I2C_ADDR1 (0x18)
 #define BMA2x2_I2C_ADDR2 (0x19)
 
 /**< The following definition of I2C address is used for the following sensors
-* BMC150
-* BMC056
-* BMC156
-*/
+ * BMC150
+ * BMC056
+ * BMC156
+ */
 #define BMA2x2_I2C_ADDR3 (0x10)
 #define BMA2x2_I2C_ADDR4 (0x11)
 
@@ -278,17 +278,17 @@ typedef unsigned long long int u64;  /**< used for unsigned 64bit */
 /**\name	STRUCTURE DEFINITIONS    */
 /**************************************************************/
 /*!
-*	@brief read accel xyz data for 10,14 and 12 bit resolution
-*/
+ *	@brief read accel xyz data for 10,14 and 12 bit resolution
+ */
 struct bma2x2_accel_data {
     int16_t x, /**< accel x data 10,14 and 12 resolution*/
         y,     /**< accel y data 10,14 and 12 resolution*/
         z;     /**< accel z data 10,14 and 12 resolution*/
 };
 /*!
-*	@brief read accel xyz data for 10,14 and 12 bit resolution
-*	and temperature output
-*/
+ *	@brief read accel xyz data for 10,14 and 12 bit resolution
+ *	and temperature output
+ */
 typedef struct bma2x2_accel_data_temp {
     int16_t x,   /**< accel x data 10,14 and 12 resolution*/
         y,       /**< accel y data 10,14 and 12 resolution*/
@@ -297,16 +297,16 @@ typedef struct bma2x2_accel_data_temp {
 } bma2x2_accel_data_typedef;
 
 /*!
-*	@brief read accel xyz data for 8 bit resolution
-*/
+ *	@brief read accel xyz data for 8 bit resolution
+ */
 struct bma2x2_accel_eight_resolution {
     int8_t x, /**< accel x data with eight bit resolution*/
         y,    /**< accel y data with eight bit resolution*/
         z;    /**< accel z data with eight bit resolution*/
 };
 /*!
-*	@brief read accel xyz data for 8 bit resolution and temperature
-*/
+ *	@brief read accel xyz data for 8 bit resolution and temperature
+ */
 struct bma2x2_accel_eight_resolution_temp {
     int8_t x,    /**< accel x data with eight bit resolution*/
         y,       /**< accel y data with eight bit resolution*/
@@ -324,7 +324,7 @@ struct bma2x2_accel_eight_resolution_temp {
  *
  *	I2C address: dev_addr
  *	Chip id of the sensor: chip_id
-*/
+ */
 struct bma2x2_t {
     uint8_t power_mode_uint8_t; /**< save current bma2x2 operation mode */
     uint8_t chip_id;            /**< chip_id of bma2x2 */
@@ -337,7 +337,7 @@ struct bma2x2_t {
     BMA2x2_BRD_FUNC_PTR;        /**< function pointer to the SPI/I2C burst read function */
     void (*delay_msec)(BMA2x2_MDELAY_DATA_TYPE);
     /**< function pointer to a pause in mili seconds function
- */
+     */
 };
 
 /*********************************************************************/
@@ -1834,7 +1834,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_burst_read(uint8_t addr_uint8_t,
  *	affect the reference value of the parameter
  *	(Better case don't change the reference value of the parameter)
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_init(struct bma2x2_t* bma2x2);
 /*!
  * @brief
@@ -1853,7 +1853,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_init(struct bma2x2_t* bma2x2);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_write_reg(uint8_t adr_uint8_t,
                                              uint8_t* data_uint8_t,
                                              uint8_t len_uint8_t);
@@ -1873,7 +1873,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_write_reg(uint8_t adr_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_reg(uint8_t adr_uint8_t,
                                             uint8_t* data_uint8_t,
                                             uint8_t len_uint8_t);
@@ -1937,7 +1937,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_x(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_y(int16_t* accel_y_int16_t);
 /*!
  * @brief This API reads acceleration data Y values of
@@ -1955,7 +1955,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_y(int16_t* accel_y_int16_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_y(
     int8_t* accel_y_int8_t);
 /*!
@@ -1976,7 +1976,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_y(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_z(int16_t* accel_z_int16_t);
 /*!
  * @brief
@@ -1994,7 +1994,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_z(int16_t* accel_z_int16_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_z(
     int8_t* accel_z_int8_t);
 /*!
@@ -2013,7 +2013,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_z(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyz(
     struct bma2x2_accel_data_temp* accel);
 /*!
@@ -2033,7 +2033,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyz(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_xyz(
     struct bma2x2_accel_eight_resolution* accel);
 /******************************************/
@@ -2053,7 +2053,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_xyz(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_tap_stat(
     uint8_t* stat_tap_uint8_t);
 /*!
@@ -2141,7 +2141,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_overrun(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_stat(
     uint8_t* intr_stat_uint8_t);
 /*!
@@ -2215,7 +2215,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_range(uint8_t range_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_bw(uint8_t* bw_uint8_t);
 /*!
  *	@brief This API is used to set the bandwidth of the sensor in the register
@@ -2241,7 +2241,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_bw(uint8_t* bw_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_bw(uint8_t bw_uint8_t);
 /******************************************/
 /**\name FUNCTION FOR   POWER MODE*/
@@ -3171,7 +3171,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_single_tap(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_orient(uint8_t channel_uint8_t,
                                                    uint8_t* intr_orient_uint8_t);
 /*!
@@ -3199,7 +3199,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_orient(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_orient(uint8_t channel_uint8_t,
                                                    uint8_t intr_orient_uint8_t);
 /*!
@@ -3229,7 +3229,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_orient(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_flat(uint8_t channel_uint8_t,
                                                  uint8_t* intr_flat_uint8_t);
 /*!
@@ -3259,7 +3259,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr_flat(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr_flat(uint8_t channel_uint8_t,
                                                  uint8_t intr_flat_uint8_t);
 /*!
@@ -3340,7 +3340,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_new_data(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr1_fifo_wm(uint8_t* intr1_fifo_wm_uint8_t);
 /*!
  * @brief This API is used to set the fifo watermark interrupt1 data
@@ -3359,7 +3359,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_intr1_fifo_wm(uint8_t* intr1_fifo_wm_uint
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_intr1_fifo_wm(uint8_t intr1_fifo_wm_uint8_t);
 /*!
  * @brief This API is used to get the fifo watermark interrupt2 data
@@ -4079,7 +4079,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_low_g_mode(uint8_t* low_g_mode_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_low_g_mode(uint8_t low_g_mode_uint8_t);
 /******************************************/
 /**\name FUNCTION FOR  TAP DURATION */
@@ -4157,7 +4157,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_durn(uint8_t tap_durn_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_shock(uint8_t* tap_shock_uint8_t);
 /*!
  *	@brief This API is used to set
@@ -4177,7 +4177,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_tap_shock(uint8_t* tap_shock_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_shock(uint8_t tap_shock_uint8_t);
 /******************************************/
 /**\name FUNCTION FOR  TAP QUIET */
@@ -4342,7 +4342,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_tap_sample(uint8_t tap_sample_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_mode(uint8_t* orient_mode_uint8_t);
 /*!
  *	@brief This API is used to set
@@ -4365,7 +4365,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_orient_mode(uint8_t* orient_mode_uint8_t)
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_orient_mode(uint8_t orient_mode_uint8_t);
 /******************************************/
 /**\name FUNCTION FOR  ORIENT BLOCK*/
@@ -5277,7 +5277,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_offset(uint8_t channel_uint8_t,
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_mode(uint8_t* fifo_mode_uint8_t);
 /*!
  *	@brief This API is used to set
@@ -5299,7 +5299,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_mode(uint8_t* fifo_mode_uint8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_mode(uint8_t fifo_mode_uint8_t);
 /*!
  * @brief This API is used to get
@@ -5361,7 +5361,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_set_fifo_data_select(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_data_output_reg(
     uint8_t* output_reg_uint8_t);
 /******************************************/
@@ -5382,7 +5382,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_get_fifo_data_output_reg(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_temp(int8_t* temp_int8_t);
 /******************************************/
 /**\name FUNCTION FOR  DATA XYZ WITH TEMPERATURE */
@@ -5401,7 +5401,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_temp(int8_t* temp_int8_t);
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyzt(
     struct bma2x2_accel_data_temp* accel);
 /*!
@@ -5418,7 +5418,7 @@ BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_xyzt(
  *	@retval -1 -> Error
  *
  *
-*/
+ */
 BMA2x2_RETURN_FUNCTION_TYPE bma2x2_read_accel_eight_resolution_xyzt(
     struct bma2x2_accel_eight_resolution_temp* accel);
 

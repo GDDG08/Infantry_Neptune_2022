@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : hi22x_periph.h
- *  Description  : This file contains HI22X HI22X function
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 11:03:12
- *  LastEditTime : 2021-07-14 11:13:01
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\hi22x_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:58:07
  */
 
 #ifndef HI22X_PERIPH_H

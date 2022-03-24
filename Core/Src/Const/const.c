@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains Constant setting function
- *  Description  : const.c
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-06-15 01:39:35
- *  LastEditTime : 2021-07-26 21:56:02
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Const\const.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:55
  */
 
 #include "const.h"
@@ -35,10 +35,10 @@ Const_ConstTypeDef Const_Infantry;
 
 uint8_t yyy;
 /**
-  * @brief      Initializing constant parameters based on infantry encoding
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initializing constant parameters based on infantry encoding
+ * @param      NULL
+ * @retval     NULL
+ */
 void Const_Init() {
     Const_Infantry_3_Init(&Infantry_3_Const);
     Const_Infantry_4_Init(&Infantry_4_Const);
@@ -123,10 +123,10 @@ void Const_SetShooterPIDParam() {
 }
 
 /**
-  * @brief      Copy corresponding constants
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Copy corresponding constants
+ * @param      NULL
+ * @retval     NULL
+ */
 static void Const_Copy() {
     /*      Super Cap Const         */
 
@@ -177,7 +177,7 @@ static void Const_Copy() {
 
     Const_MiniPC_Follow_Target_Time = Const_Infantry.MiniPC_Follow_Target_Time;
     Const_MiniPC_Lost_Target_Time = Const_Infantry.MiniPC_Lost_Target_Time;
-    //const uint32_t Const_MiniPC_New_Target_Time;
+    // const uint32_t Const_MiniPC_New_Target_Time;
 
     memcpy(Const_gimbalPitchMotorParam, Const_Infantry.gimbalPitchMotorParam, sizeof(Const_Infantry.gimbalPitchMotorParam));
     memcpy(Const_ShooterMotorParam, Const_Infantry.ShooterMotorParam, sizeof(Const_Infantry.ShooterMotorParam));
@@ -266,7 +266,7 @@ float MOUSE_CHASSIS_MAX_SPEED;
 float MOUSE_CHASSIS_MAX_GYRO_SPEED;
 uint32_t Const_MiniPC_Follow_Target_Time;
 uint32_t Const_MiniPC_Lost_Target_Time;
-//const uint32_t Const_MiniPC_New_Target_Time;
+// const uint32_t Const_MiniPC_New_Target_Time;
 
 /*          Gimbal pitch limit                  */
 float Const_PITCH_UMAXANGLE;

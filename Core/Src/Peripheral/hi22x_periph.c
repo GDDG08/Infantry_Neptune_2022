@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : hi22x_periph.c
- *  Description  : This file contains HI22X function (For HI229 and BMI0XX)
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
- *  Date         : 2021-06-10 11:02:50
- *  LastEditTime : 2021-07-26 17:11:49
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\hi22x_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:09
  */
 
 #include "hi22x_periph.h"
@@ -31,19 +31,19 @@ float speed[3];
 float angle[3];
 
 /**
-  * @brief      Get pinter to the hi22x data object
-  * @param      NULL
-  * @retval     Pointer to hi22x data object
-  */
+ * @brief      Get pinter to the hi22x data object
+ * @param      NULL
+ * @retval     Pointer to hi22x data object
+ */
 HI22X_HI22XDataTypeDef* HI22X_GetHI22XDataPtr() {
     return &HI22X_HI22XData;
 }
 
 /**
-  * @brief      Initialization hi22x
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initialization hi22x
+ * @param      NULL
+ * @retval     NULL
+ */
 uint8_t HI22X_Init() {
     HI22X_HI22XDataTypeDef* hi22x = HI22X_GetHI22XDataPtr();
 
@@ -58,10 +58,10 @@ uint8_t HI22X_Init() {
 }
 
 /**
-  * @brief      Initialization offset and set mode
-  * @param      NULL
-  * @retval     NULL
-*/
+ * @brief      Initialization offset and set mode
+ * @param      NULL
+ * @retval     NULL
+ */
 void HI22X_InitAngelOffset() {
     HI22X_HI22XDataTypeDef* hi22x = HI22X_GetHI22XDataPtr();
 
@@ -73,10 +73,10 @@ void HI22X_InitAngelOffset() {
 }
 
 /**
-  * @brief      Judge hi22x offline
-  * @param      NULL
-  * @retval     Offline or not£¨1 is offline£¬0 is not£©
-  */
+ * @brief      Judge hi22x offline
+ * @param      NULL
+ * @retval     Offline or notï¿½ï¿½1 is offlineï¿½ï¿½0 is notï¿½ï¿½
+ */
 uint8_t HI22X_IsHI22XOffline() {
     HI22X_HI22XDataTypeDef* hi22x = HI22X_GetHI22XDataPtr();
 
@@ -87,10 +87,10 @@ uint8_t HI22X_IsHI22XOffline() {
 }
 
 /**
-  * @brief      Reset hi22x data object
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Reset hi22x data object
+ * @param      NUULL
+ * @retval     NUL
+ */
 void HI22X_ResetHI22XData() {
     HI22X_HI22XDataTypeDef* hi22x = HI22X_GetHI22XDataPtr();
 
@@ -105,12 +105,12 @@ void HI22X_ResetHI22XData() {
 }
 
 /**
-  * @brief      hi22x decode data function    £¨For HI229)
-  * @param      referee: Pinter to the hi22x data object
-  * @param      buff: Data buffer
-  * @param      rxdatalen: Data length
-  * @retval     NULL
-  */
+ * @brief      hi22x decode data function    ï¿½ï¿½For HI229)
+ * @param      referee: Pinter to the hi22x data object
+ * @param      buff: Data buffer
+ * @param      rxdatalen: Data length
+ * @retval     NULL
+ */
 void HI22X_HI22xDecodeHI22XData(uint8_t* buff, int rxdatalen) {
     HI22X_HI22XDataTypeDef* hi22x = HI22X_GetHI22XDataPtr();
 
@@ -180,10 +180,10 @@ void HI22X_HI22xDecodeHI22XData(uint8_t* buff, int rxdatalen) {
 #endif
 
 /**
-  * @brief      hi22x UART callback function
-  * @param      huart: Point to serial port handle
-  * @retval     NULL
-  */
+ * @brief      hi22x UART callback function
+ * @param      huart: Point to serial port handle
+ * @retval     NULL
+ */
 void HI22X_RXCallback(UART_HandleTypeDef* huart) {
     /* clear DMA transfer complete flag */
     __HAL_DMA_DISABLE(huart->hdmarx);

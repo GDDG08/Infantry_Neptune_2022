@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains AHRS algorithm functions
- *  Description  : ahrs_alg.h
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:36:27
- *  LastEditTime : 2021-07-09 00:51:40
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Algorithm\ahrs_alg.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:49:07
  */
 
 #ifndef AHRS_ALG_H

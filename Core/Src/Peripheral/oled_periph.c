@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains 0.96 inch OLED driver function
- *  Description  : oled_periph.c
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:48:09
- *  LastEditTime : 2021-07-16 11:56:35
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\oled_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:55:41
  */
 
 #include "oled_periph.h"
@@ -22,11 +22,11 @@ I2C_HandleTypeDef* Const_OLED_I2C_HANDLER = &hi2c1;
 static uint8_t OLED_GRAM[128][8];
 
 /**
-  * @brief          Write data/command to OLED, if you use spi, please rewrite the function
-  * @param          date: the data ready to write
-  * @param          cmd: OLED_CMD means command; OLED_DATA means data
-  * @retval         NULL
-  */
+ * @brief          Write data/command to OLED, if you use spi, please rewrite the function
+ * @param          date: the data ready to write
+ * @param          cmd: OLED_CMD means command; OLED_DATA means data
+ * @retval         NULL
+ */
 void Oled_Writebyte(uint8_t date, uint8_t cmd) {
     static uint8_t cmd_data[2];
     if (cmd == OLED_CMD) {
@@ -39,10 +39,10 @@ void Oled_Writebyte(uint8_t date, uint8_t cmd) {
 }
 
 /**
-  * @brief          Initialize the oled device
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Initialize the oled device
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_init() {
     Oled_Writebyte(0xAE, OLED_CMD);  // display off
     Oled_Writebyte(0x20, OLED_CMD);  // Set Memory Addressing Mode
@@ -75,10 +75,10 @@ void OLED_init() {
 }
 
 /**
-  * @brief          Turn on OLED display
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Turn on OLED display
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_DisplayOn() {
     Oled_Writebyte(0x8d, OLED_CMD);
     Oled_Writebyte(0x14, OLED_CMD);
@@ -86,10 +86,10 @@ void OLED_DisplayOn() {
 }
 
 /**
-  * @brief          Turn off OLED display
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Turn off OLED display
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_DisplayOff() {
     Oled_Writebyte(0x8d, OLED_CMD);
     Oled_Writebyte(0x10, OLED_CMD);
@@ -97,13 +97,13 @@ void OLED_DisplayOff() {
 }
 
 /**
-  * @brief          Operate the graphic ram(size: 128*8 char)
-  * @param          pen: the type of operate.
-  * @param          PEN_CLEAR: set ram to 0x00
-  * @param          PEN_WRITE: set ram to 0xff
-  * @param          PEN_INVERSION: bit inversion 
-  * @retval         NULL
-  */
+ * @brief          Operate the graphic ram(size: 128*8 char)
+ * @param          pen: the type of operate.
+ * @param          PEN_CLEAR: set ram to 0x00
+ * @param          PEN_WRITE: set ram to 0xff
+ * @param          PEN_INVERSION: bit inversion
+ * @retval         NULL
+ */
 void OLED_OperateGram(Oled_PenEnum pen) {
     uint8_t i, n;
     for (i = 0; i < 8; i++) {
@@ -120,11 +120,11 @@ void OLED_OperateGram(Oled_PenEnum pen) {
 }
 
 /**
-  * @brief          Cursor set to (x,y) point
-  * @param          x:X-axis, from 0 to 127
-  * @param          y:Y-axis, from 0 to 7
-  * @retval         NULL
-  */
+ * @brief          Cursor set to (x,y) point
+ * @param          x:X-axis, from 0 to 127
+ * @param          y:Y-axis, from 0 to 7
+ * @retval         NULL
+ */
 void OLED_SetPos(uint8_t x, uint8_t y) {
     Oled_Writebyte((0xb0 + y), OLED_CMD);                // set page address y
     Oled_Writebyte(((x & 0xf0) >> 4) | 0x10, OLED_CMD);  // set column high address
@@ -132,15 +132,15 @@ void OLED_SetPos(uint8_t x, uint8_t y) {
 }
 
 /**
-  * @brief          Draw one bit of graphic raw, operate one point of screan(128*64)
-  * @param          x: x-axis, [0, X_WIDTH-1]
-  * @param          y: y-axis, [0, Y_WIDTH-1]
-  * @param          pen: type of operation,
-  * @param          PEN_CLEAR: set (x,y) to 0
-  * @param          PEN_WRITE: set (x,y) to 1
-  * @param          PEN_INVERSION: (x,y) value inversion 
-  * @retval         NULL
-  */
+ * @brief          Draw one bit of graphic raw, operate one point of screan(128*64)
+ * @param          x: x-axis, [0, X_WIDTH-1]
+ * @param          y: y-axis, [0, Y_WIDTH-1]
+ * @param          pen: type of operation,
+ * @param          PEN_CLEAR: set (x,y) to 0
+ * @param          PEN_WRITE: set (x,y) to 1
+ * @param          PEN_INVERSION: (x,y) value inversion
+ * @retval         NULL
+ */
 void OLED_DrawPoint(int8_t x, int8_t y, Oled_PenEnum pen) {
     uint8_t page = 0, row = 0;
 
@@ -161,14 +161,14 @@ void OLED_DrawPoint(int8_t x, int8_t y, Oled_PenEnum pen) {
 }
 
 /**
-  * @brief          Draw a line from (x1, y1) to (x2, y2)
-  * @param          x1: the start point of line
-  * @param          y1: the start point of line
-  * @param          x2: the end point of line
-  * @param          y2: the end point of line
-  * @param          pen: type of operation,PEN_CLEAR,PEN_WRITE,PEN_INVERSION.
-  * @retval         NULL
-  */
+ * @brief          Draw a line from (x1, y1) to (x2, y2)
+ * @param          x1: the start point of line
+ * @param          y1: the start point of line
+ * @param          x2: the end point of line
+ * @param          y2: the end point of line
+ * @param          pen: type of operation,PEN_CLEAR,PEN_WRITE,PEN_INVERSION.
+ * @retval         NULL
+ */
 void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, Oled_PenEnum pen) {
     uint8_t col = 0, row = 0;
     uint8_t x_st = 0, x_ed = 0, y_st = 0, y_ed = 0;
@@ -202,12 +202,12 @@ void OLED_DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, Oled_PenEnum 
 }
 
 /**
-  * @brief          Show a character
-  * @param          row: start row of character
-  * @param          col: start column of character
-  * @param          chr: the character ready to show
-  * @retval         NULL
-  */
+ * @brief          Show a character
+ * @param          row: start row of character
+ * @param          col: start column of character
+ * @param          chr: the character ready to show
+ * @retval         NULL
+ */
 void OLED_ShowChar(uint8_t row, uint8_t col, char chr) {
     uint8_t x = col * 6;
     uint8_t y = row * 12;
@@ -236,12 +236,12 @@ void OLED_ShowChar(uint8_t row, uint8_t col, char chr) {
 }
 
 /**
-  * @brief          Show a character string
-  * @param          row: row of character string begin
-  * @param          col: column of character string begin
-  * @param          chr: the pointer to character string
-  * @retval         NULL
-  */
+ * @brief          Show a character string
+ * @param          row: row of character string begin
+ * @param          col: column of character string begin
+ * @param          chr: the pointer to character string
+ * @retval         NULL
+ */
 void OLED_ShowString(uint8_t row, uint8_t col, char* chr) {
     uint8_t n = 0;
 
@@ -258,13 +258,13 @@ void OLED_ShowString(uint8_t row, uint8_t col, char* chr) {
 }
 
 /**
-  * @brief          Formatted output in oled 128*64
-  * @param          row: row of character string begin, 0 <= row <= 4;
-  * @param          col: column of character string begin, 0 <= col <= 20;
-  * @param          *fmt: the pointer to format character string
-  * @note           if the character length is more than one row at a time, the extra characters will be truncated
-  * @retval         NULL
-  */
+ * @brief          Formatted output in oled 128*64
+ * @param          row: row of character string begin, 0 <= row <= 4;
+ * @param          col: column of character string begin, 0 <= col <= 20;
+ * @param          *fmt: the pointer to format character string
+ * @note           if the character length is more than one row at a time, the extra characters will be truncated
+ * @retval         NULL
+ */
 void OLED_Printf(uint8_t row, uint8_t col, const char* fmt, ...) {
     static char LCD_BUF[128] = {0};
     static va_list ap;
@@ -287,10 +287,10 @@ void OLED_Printf(uint8_t row, uint8_t col, const char* fmt, ...) {
 }
 
 /**
-  * @brief          Send the data of gram to oled sreen
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Send the data of gram to oled sreen
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_RefreshGram() {
     uint8_t i, n;
 
@@ -303,10 +303,10 @@ void OLED_RefreshGram() {
 }
 
 /**
-  * @brief          Show the logo of RoboMaster
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Show the logo of RoboMaster
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_DisplayLogo() {
     uint8_t temp_char = 0;
     uint8_t x = 0, y = 0;
@@ -330,10 +330,10 @@ void OLED_DisplayLogo() {
 }
 
 /**
-  * @brief          Show the BMG
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Show the BMG
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_DisplayBMG(const unsigned char* buf) {
     uint8_t j, i;
     uint16_t n = 0;
@@ -345,10 +345,10 @@ void OLED_DisplayBMG(const unsigned char* buf) {
 }
 
 /**
-  * @brief          Show the GIF
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Show the GIF
+ * @param          NULL
+ * @retval         NULL
+ */
 void OLED_DisplayGIF(const unsigned char gif[][1024]) {
     static uint32_t frames_period = 0;
     static uint8_t cur_frame = 0;

@@ -1,20 +1,20 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : list_lib.c
- *  Description  : This document contains linked list related functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-10 15:44:48
- *  LastEditTime : 2021-07-16 11:18:07
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Library\list_lib.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:54:52
  */
 
 #include "list_lib.h"
 
 /**
-  * @brief          Initialize linked list
-  * @param          pxList: Pointer to the initialized list structure
-  * @retval         NULL
-  */
+ * @brief          Initialize linked list
+ * @param          pxList: Pointer to the initialized list structure
+ * @retval         NULL
+ */
 void List_InitList(List_ListTypeDef* pxList, void* pxStruct) {
     if (pxList == NULL)
         return;
@@ -34,11 +34,11 @@ void List_InitList(List_ListTypeDef* pxList, void* pxStruct) {
 }
 
 /**
-  * @brief          Insert a node at the end of the list
-  * @param          pxList: Pointer to the initialized list structure
-  * @param          pxStruct :Inserted struct pointer
-  * @retval         NULL
-  */
+ * @brief          Insert a node at the end of the list
+ * @param          pxList: Pointer to the initialized list structure
+ * @param          pxStruct :Inserted struct pointer
+ * @retval         NULL
+ */
 void List_InsertEnd(List_ListTypeDef* pxList, void* pxStruct) {
     if ((pxList == NULL) || (pxStruct == NULL))
         return;
@@ -57,11 +57,11 @@ void List_InsertEnd(List_ListTypeDef* pxList, void* pxStruct) {
 }
 
 /**
-  * @brief          Get the nth node pointer
-  * @param          pxList: Pointer to the insert list structure
-  * @param          pxNewListItem :Node pointer
-  * @retval         nth node pointer
-  */
+ * @brief          Get the nth node pointer
+ * @param          pxList: Pointer to the insert list structure
+ * @param          pxNewListItem :Node pointer
+ * @retval         nth node pointer
+ */
 List_NodeTypeDef* List_GetListPtr(List_ListTypeDef* pxList, uint32_t num) {
     if (pxList == NULL)
         return NULL;
@@ -81,11 +81,11 @@ List_NodeTypeDef* List_GetListPtr(List_ListTypeDef* pxList, uint32_t num) {
 }
 
 /**
-  * @brief          Get the nth node data pointer
-  * @param          pxList: Pointer to the insert list structure
-  * @param          pxNewListItem :Node pointer
-  * @retval         nth node pointer
-  */
+ * @brief          Get the nth node data pointer
+ * @param          pxList: Pointer to the insert list structure
+ * @param          pxNewListItem :Node pointer
+ * @retval         nth node pointer
+ */
 void* List_GetListDataPtr(List_ListTypeDef* pxList, uint32_t num) {
     if (pxList == NULL)
         return NULL;
@@ -97,11 +97,11 @@ void* List_GetListDataPtr(List_ListTypeDef* pxList, uint32_t num) {
 }
 
 /**
-  * @brief          Get the current node data pointer
-  * @param          pxList: Pointer to the insert list structure
-  * @param          pxNewListItem :Node pointer
-  * @retval         nth node pointer
-  */
+ * @brief          Get the current node data pointer
+ * @param          pxList: Pointer to the insert list structure
+ * @param          pxNewListItem :Node pointer
+ * @retval         nth node pointer
+ */
 void* List_GetCurrentListDataPtr(List_ListTypeDef* pxList) {
     if (pxList == NULL)
         return NULL;
@@ -113,11 +113,11 @@ void* List_GetCurrentListDataPtr(List_ListTypeDef* pxList) {
 }
 
 /**
-  * @brief          Get the Next node pointer
-  * @param          pxList: Pointer to the insert list structure
-  * @param          pxNewListItem :Node pointer
-  * @retval         nth node pointer
-  */
+ * @brief          Get the Next node pointer
+ * @param          pxList: Pointer to the insert list structure
+ * @param          pxNewListItem :Node pointer
+ * @retval         nth node pointer
+ */
 void* List_GetNextListDataPtr(List_ListTypeDef* pxList) {
     if (pxList == NULL)
         return NULL;
@@ -129,11 +129,11 @@ void* List_GetNextListDataPtr(List_ListTypeDef* pxList) {
 }
 
 /**
-  * @brief          Get the Previous node pointer
-  * @param          pxList: Pointer to the insert list structure
-  * @param          pxNewListItem :Node pointer
-  * @retval         nth node pointer
-  */
+ * @brief          Get the Previous node pointer
+ * @param          pxList: Pointer to the insert list structure
+ * @param          pxNewListItem :Node pointer
+ * @retval         nth node pointer
+ */
 void* List_GetPreviousListDataPtr(List_ListTypeDef* pxList) {
     if (pxList == NULL)
         return NULL;
@@ -145,12 +145,12 @@ void* List_GetPreviousListDataPtr(List_ListTypeDef* pxList) {
 }
 
 /**
-  * @brief          Insert a node into the linked list
-  * @param          pxList: Pointer to the insert list structure
-  * @param          pxStruct :Inserted struct pointer
-  * @param          pxNewListItem :Inserted node pointer
-  * @retval         NULL
-  */
+ * @brief          Insert a node into the linked list
+ * @param          pxList: Pointer to the insert list structure
+ * @param          pxStruct :Inserted struct pointer
+ * @param          pxNewListItem :Inserted node pointer
+ * @retval         NULL
+ */
 void List_Insert(List_ListTypeDef* pxList, void* pxStruct, uint32_t insert_num) {
     if ((pxList == NULL) || (pxStruct == NULL))
         return;
@@ -178,10 +178,10 @@ void List_Insert(List_ListTypeDef* pxList, void* pxStruct, uint32_t insert_num) 
 }
 
 /**
-  * @brief          Remove a node
-  * @param          pxNewListItem :Removed node
-  * @retval         NULL
-  */
+ * @brief          Remove a node
+ * @param          pxNewListItem :Removed node
+ * @retval         NULL
+ */
 uint32_t List_Remove(List_ListTypeDef* pxList, uint32_t deleat_num) {
     if (pxList == NULL)
         return NULL;

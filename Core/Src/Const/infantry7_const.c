@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : infantry7_const.c
- *  Description  : This file contains 7 infantry constants
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-26 21:40:05
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Const\infantry7_const.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2022-01-14 22:16:51
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:12
  */
 
 #include "configure.h"

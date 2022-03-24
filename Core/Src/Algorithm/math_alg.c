@@ -1,29 +1,29 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : math_alg.c
- *  Description  : This file contains the math calculate tools
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-09 05:12:35
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Algorithm\math_alg.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:59:35
  */
 
 #include "math_alg.h"
 
 /**
-  * @brief      Radian to angle
-  * @param      Converted radian
-  * @retval     result
-  */
+ * @brief      Radian to angle
+ * @param      Converted radian
+ * @retval     result
+ */
 float Math_RadToAngle(float rad) {
     return (rad * 180.0f / PI);
 }
 
 /**
-  * @brief      Continuous power function with linear segment near the origin
-  * @param      NULL
-  * @retval     result
-  */
+ * @brief      Continuous power function with linear segment near the origin
+ * @param      NULL
+ * @retval     result
+ */
 float Math_Fal(float e, float alpha, float zeta) {
     int16_t s = 0;
     float fal_output = 0;
@@ -33,10 +33,10 @@ float Math_Fal(float e, float alpha, float zeta) {
 }
 
 /**
-  * @brief      Calculate fsg
-  * @param      x :Number to be calc
-  * @retval     result
-  */
+ * @brief      Calculate fsg
+ * @param      x :Number to be calc
+ * @retval     result
+ */
 int16_t Math_Fsg(float x, float d) {
     int16_t output = 0;
     output = (Math_Sign(x + d) - Math_Sign(x - d)) / 2;
@@ -44,10 +44,10 @@ int16_t Math_Fsg(float x, float d) {
 }
 
 /**
-  * @brief      Positive and negative judgment function
-  * @param      x :Number to be judged
-  * @retval     Positive output 1, negative output - 1, otherwise output 0
-  */
+ * @brief      Positive and negative judgment function
+ * @param      x :Number to be judged
+ * @retval     Positive output 1, negative output - 1, otherwise output 0
+ */
 int16_t Math_Sign(float x) {
     int16_t output = 0;
     if (x > 0) {
@@ -60,10 +60,10 @@ int16_t Math_Sign(float x) {
 }
 
 /**
-  * @brief      This shit is used to calculate the quick square root
-  * @param      x :Number of square root
-  * @retval     One third of the open results
-  */
+ * @brief      This shit is used to calculate the quick square root
+ * @param      x :Number of square root
+ * @retval     One third of the open results
+ */
 float Math_InvSqrt(float x) {
     float halfx = 0.5f * x;
     float y = x;
@@ -75,11 +75,11 @@ float Math_InvSqrt(float x) {
 }
 
 /**
-  * @brief      Calculation differential (only two order)(To be improved)
-  * @param      arr :point to be differential value
-  * @param      order :The differential order
-  * @retval     NULL
-  */
+ * @brief      Calculation differential (only two order)(To be improved)
+ * @param      arr :point to be differential value
+ * @param      order :The differential order
+ * @retval     NULL
+ */
 float Math_Differential(float arr[], uint8_t order) {
     float value;
     switch (order) {
@@ -97,27 +97,27 @@ float Math_Differential(float arr[], uint8_t order) {
 }
 
 /**
-  * @brief      Initialize ramp function control parameters
-  * @param      pparam: Pointer to ramp function control parameter
-  * @param      kp: P factor
-  * @param      ki: I factor
-  * @param      kd: D factor
-  * @param      sum_max: Integral limiting
-  * @param      output_max: Output limiting
-  * @retval     NULL
-  */
+ * @brief      Initialize ramp function control parameters
+ * @param      pparam: Pointer to ramp function control parameter
+ * @param      kp: P factor
+ * @param      ki: I factor
+ * @param      kd: D factor
+ * @param      sum_max: Integral limiting
+ * @param      output_max: Output limiting
+ * @retval     NULL
+ */
 void Math_InitSlopeParam(Math_SlopeParamTypeDef* pparam, float acc, float dec) {
     pparam->acc = acc;
     pparam->dec = dec;
 }
 
 /**
-  * @brief      Calculate slope function setting
-  * @param      rawref: Current setting value
-  * @param      targetref: Target set point
-  * @param      pparam: Pointer to ramp function control parameter
-  * @retval     Slope function setting value. If slope function is not enabled (parameter is 0), the target setting value is returned
-  */
+ * @brief      Calculate slope function setting
+ * @param      rawref: Current setting value
+ * @param      targetref: Target set point
+ * @param      pparam: Pointer to ramp function control parameter
+ * @retval     Slope function setting value. If slope function is not enabled (parameter is 0), the target setting value is returned
+ */
 float Math_CalcSlopeRef(float rawref, float targetref, Math_SlopeParamTypeDef* pparam) {
     float newref;
     if (pparam->acc == 0 | pparam->dec == 0)
@@ -133,12 +133,12 @@ float Math_CalcSlopeRef(float rawref, float targetref, Math_SlopeParamTypeDef* p
 }
 
 /**
-  * @brief      Calculate the absolute slope function setting value
-  * @param      rawref: Current setting value
-  * @param      targetref: Target set point
-  * @param      pparam: Pointer to ramp function control parameter
-  * @retval     Absolute value ramp function setting value. If ramp function is not enabled, the target setting value is returned
-  */
+ * @brief      Calculate the absolute slope function setting value
+ * @param      rawref: Current setting value
+ * @param      targetref: Target set point
+ * @param      pparam: Pointer to ramp function control parameter
+ * @retval     Absolute value ramp function setting value. If ramp function is not enabled, the target setting value is returned
+ */
 float Math_CalcAbsSlopeRef(float rawref, float targetref, Math_SlopeParamTypeDef* pparam) {
     float newref;
     if (pparam->acc == 0 | pparam->dec == 0)

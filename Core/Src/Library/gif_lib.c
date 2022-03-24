@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This document contains the OLED gif library
- *  Description  : gif_lib.c
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-16 07:17:41
- *  LastEditTime : 2021-07-16 07:19:27
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Library\gif_lib.c
+ * @Descripttion : 
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:01:50
  */
+
 
 #include "gif_lib.h"
 

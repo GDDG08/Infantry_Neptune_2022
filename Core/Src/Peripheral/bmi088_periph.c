@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bmi088_periph.c
- *  Description  : This file contains the bmi088 bmi088 API
- *  LastEditors  : ¶¯ÇéØ¼²·ìá¶¯ÐÄ
- *  Date         : 2021-07-14 06:44:21
- *  LastEditTime : 2021-07-23 21:22:35
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\bmi088_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:02:06
  */
 
 #include "bmi088_periph.h"
@@ -23,19 +23,19 @@ const uint16_t Const_BMI088_OFFLINE_TIME = 200;
 BMI088_BMI088DataTypeDef BMI088_BMI088Data;
 
 /**
-  * @brief      Get pinter to the bmi088 data object
-  * @param      NULL
-  * @retval     Pointer to bmi088 data object
-  */
+ * @brief      Get pinter to the bmi088 data object
+ * @param      NULL
+ * @retval     Pointer to bmi088 data object
+ */
 BMI088_BMI088DataTypeDef* BMI088_GetBMI088DataPtr() {
     return &BMI088_BMI088Data;
 }
 
 /**
-  * @brief      Initialization bmi088
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      Initialization bmi088
+ * @param      NULL
+ * @retval     NULL
+ */
 uint8_t BMI088_Init() {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
@@ -62,10 +62,10 @@ uint8_t BMI088_Init() {
 }
 
 /**
-  * @brief      BMI0XX bmi088 Accel Initial
-  * @param      NULL
-  * @retval     NULL
-*/
+ * @brief      BMI0XX bmi088 Accel Initial
+ * @param      NULL
+ * @retval     NULL
+ */
 static uint8_t BMI088_BMI0xxAccelInit() {
     volatile uint8_t res = 0;
     uint8_t write_reg_num = 0;
@@ -107,10 +107,10 @@ static uint8_t BMI088_BMI0xxAccelInit() {
 }
 
 /**
-  * @brief      BMI0XX bmi088 Gyro Initial
-  * @param      NULL
-  * @retval     NULL
-*/
+ * @brief      BMI0XX bmi088 Gyro Initial
+ * @param      NULL
+ * @retval     NULL
+ */
 static uint8_t BMI088_BMI0xxGyroInit() {
     uint8_t write_reg_num = 0;
     uint8_t res = 0;
@@ -152,10 +152,10 @@ static uint8_t BMI088_BMI0xxGyroInit() {
 }
 
 /**
-  * @brief      BMI0XX bmi088 Accel function test
-  * @param      NULL
-  * @retval     NULL
-*/
+ * @brief      BMI0XX bmi088 Accel function test
+ * @param      NULL
+ * @retval     NULL
+ */
 static uint8_t BMI088_BMI0xxAccelTest() {
     volatile uint8_t res = 0;
     int16_t self_test_accel[2][3];
@@ -257,10 +257,10 @@ static uint8_t BMI088_BMI0xxAccelTest() {
 }
 
 /**
-  * @brief      BMI0XX bmi088 Gyro function test
-  * @param      NULL
-  * @retval     NULL
-*/
+ * @brief      BMI0XX bmi088 Gyro function test
+ * @param      NULL
+ * @retval     NULL
+ */
 static uint8_t BMI088_BMI0xxGyroTest() {
     uint8_t res = 0;
     uint8_t retry = 0;
@@ -302,18 +302,18 @@ static uint8_t BMI088_BMI0xxGyroTest() {
 }
 
 /**
-  * @brief      Initialization offset and set mode
-  * @param      NULL
-  * @retval     NULL
-*/
+ * @brief      Initialization offset and set mode
+ * @param      NULL
+ * @retval     NULL
+ */
 void BMI088_InitAngelOffset() {
 }
 
 /**
-  * @brief      Judge bmi088 offline
-  * @param      NULL
-  * @retval     Offline or not£¨1 is offline£¬0 is not£©
-  */
+ * @brief      Judge bmi088 offline
+ * @param      NULL
+ * @retval     Offline or notï¿½ï¿½1 is offlineï¿½ï¿½0 is notï¿½ï¿½
+ */
 uint8_t BMI088_IsBMI088Offline() {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
@@ -324,10 +324,10 @@ uint8_t BMI088_IsBMI088Offline() {
 }
 
 /**
-  * @brief      Reset bmi088 data object
-  * @param      NUULL
-  * @retval     NUL
-  */
+ * @brief      Reset bmi088 data object
+ * @param      NUULL
+ * @retval     NUL
+ */
 void BMI088_ResetBMI088Data() {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
@@ -342,10 +342,10 @@ void BMI088_ResetBMI088Data() {
 }
 
 /**
-  * @brief      BMI088 decode data function    £¨For BMI0xx)
-  * @param      NULL
-  * @retval     NULL
-  */
+ * @brief      BMI088 decode data function    ï¿½ï¿½For BMI0xx)
+ * @param      NULL
+ * @retval     NULL
+ */
 void BMI088_BMI0xxDecodeData() {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
     uint8_t buff[8] = {0, 0, 0, 0, 0, 0};
@@ -379,10 +379,10 @@ void BMI088_BMI0xxDecodeData() {
 }
 
 /**
-  * @brief      BMI088 decode temperature data function    £¨For BMI0xx)
-  * @param      rx_buff :BMI088 SPI temperature buff
-  * @retval     NULL
-  */
+ * @brief      BMI088 decode temperature data function    ï¿½ï¿½For BMI0xx)
+ * @param      rx_buff :BMI088 SPI temperature buff
+ * @retval     NULL
+ */
 void BMI088_BMI0xxTempReadOver(uint8_t* rx_buff) {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
@@ -401,10 +401,10 @@ void BMI088_BMI0xxTempReadOver(uint8_t* rx_buff) {
 }
 
 /**
-  * @brief      BMI088 decode temperature data function    £¨For BMI0xx)
-  * @param      rx_buff :BMI088 SPI accel buff
-  * @retval     NULL
-  */
+ * @brief      BMI088 decode temperature data function    ï¿½ï¿½For BMI0xx)
+ * @param      rx_buff :BMI088 SPI accel buff
+ * @retval     NULL
+ */
 void BMI088_BMI0xxAccelReadOver(uint8_t* rx_buff) {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_GetBMI088DataPtr();
 
@@ -421,10 +421,10 @@ void BMI088_BMI0xxAccelReadOver(uint8_t* rx_buff) {
 }
 
 /**
-  * @brief      BMI088 decode temperature data function
-  * @param      rx_buff :bmi088 SPI gyro buff
-  * @retval     NULL
-  */
+ * @brief      BMI088 decode temperature data function
+ * @param      rx_buff :bmi088 SPI gyro buff
+ * @retval     NULL
+ */
 void BMI088_BMI088GyroReadOver(uint8_t* rx_buff) {
     BMI088_BMI088DataTypeDef* bmi088 = BMI088_Getbmi088DataPtr();
 

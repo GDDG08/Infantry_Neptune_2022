@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : gim_client_ctrl.c
- *  Description  : This file contains the client functions
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-06-10 23:50:33
- *  LastEditTime : 2021-07-16 13:10:35
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Gimbal_Control\gim_client_ctrl.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:20
  */
 
 #include "gim_client_ctrl.h"
@@ -39,10 +39,10 @@ Client_InterfaceEnum interface_flag = CLIENT_NULL;
 osEvent func_event;
 
 /**
-  * @brief          Client task
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Client task
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_Task(void const* argument) {
     static uint32_t page_stay_period = 0;
     // while (1) {
@@ -70,10 +70,10 @@ void Client_Task(void const* argument) {
 }
 
 /**
-  * @brief          Client initialization
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Client initialization
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_Init() {
     OLED_init();
     List_InitList(&Client_ScreenDisplay, &Client_ShootState);
@@ -85,10 +85,10 @@ void Client_Init() {
 }
 
 /**
-  * @brief          Initialize all displayed pages
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Initialize all displayed pages
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_PageInit() {
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     Shoot_StatusTypeDef* shooter = Shooter_GetShooterControlPtr();
@@ -96,14 +96,14 @@ void Client_PageInit() {
 
     Client_CreateNewPage(&Client_ShootState, "15mm_offset\0", &shooter->shoot_speed_offset.speed_15mm_offset, "18mm_offset\0", &shooter->shoot_speed_offset.speed_18mm_offset, "30mm_offset\0", &shooter->shoot_speed_offset.speed_30mm_offset, "shoot_Speed\0", shoot_state_func_short_press, shoot_state_func_long_press);
     Client_CreateNewPage(&Client_PeriphState, "pitch_ang____\0", &imu->angle.pitch, "yaw_ang____\0", &imu->angle.yaw, "row_ang____\0", &imu->angle.row, "imu_data___\0", periph_state_func_short_press, periph_state_func_long_press);
-    Client_CreateNewPage(&Client_CapState, "cap_precent\0", &buscomm->cap_rest_energy_display, "yaw_rel_ang\0", &buscomm->yaw_relative_angle, "heat_17mm\0", &buscomm->heat_17mm/*&buscomm->gimbal_yaw_ref*/, "Cap_Sta_Pag\0", cap_state_func_short_press, cap_state_func_long_press);
+    Client_CreateNewPage(&Client_CapState, "cap_precent\0", &buscomm->cap_rest_energy_display, "yaw_rel_ang\0", &buscomm->yaw_relative_angle, "heat_17mm\0", &buscomm->heat_17mm /*&buscomm->gimbal_yaw_ref*/, "Cap_Sta_Pag\0", cap_state_func_short_press, cap_state_func_long_press);
 }
 
 /**
-  * @brief          Cartoon interface display
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Cartoon interface display
+ * @param          NULL
+ * @retval         NULL
+ */
 static void Client_DisplayInterface() {
     if (interface_flag == CLIENT_NULL)
         return;
@@ -131,19 +131,19 @@ static void Client_DisplayInterface() {
 }
 
 /**
-  * @brief          Cartoon interface display
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Cartoon interface display
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_ChangeInterface(Client_InterfaceEnum intface) {
     interface_flag = intface;
 }
 
 /**
-  * @brief          Create a new display page
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Create a new display page
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_CreateNewPage(Client_PageTypeDef* page, const char* val1_name, void* val_1, const char* val2_name, void* val_2, const char* val3_name, void* val_3, const char* page_name, Client_KeyEventHandlerTypeDef key_short, Client_KeyEventHandlerTypeDef key_long) {
     page->lang_press_handler = key_long;
     page->short_press_handler = key_short;
@@ -161,10 +161,10 @@ void Client_CreateNewPage(Client_PageTypeDef* page, const char* val1_name, void*
 }
 
 /**
-  * @brief          Show a page
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Show a page
+ * @param          NULL
+ * @retval         NULL
+ */
 static void Client_DisplayCurrentPage() {
     static uint32_t page_period = 0;
 
@@ -195,10 +195,10 @@ static void Client_DisplayCurrentPage() {
 uint8_t gpio;
 uint8_t press_event;
 /**
-  * @brief          Back key Short press handling function
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Back key Short press handling function
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_KeytHandler(uint32_t message) {
     gpio = (uint8_t)(0xff & message);
     press_event = (uint8_t)(0xff & (message >> 8));
@@ -231,20 +231,20 @@ void Client_KeytHandler(uint32_t message) {
 }
 
 /**
-  * @brief          Back key Short press handling function
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Back key Short press handling function
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_BackKeyShortHandler() {
     Client_ChangeInterface(CLIENT_PAGE);
     next_page_flag = 1;
 }
 
 /**
-  * @brief          Back key Short press handling function
-  * @param          NULL
-  * @retval         NULL
-  */
+ * @brief          Back key Short press handling function
+ * @param          NULL
+ * @retval         NULL
+ */
 void Client_BackKeyLongHandler() {
     Client_ChangeInterface(CLIENT_CODE);
 }

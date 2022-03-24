@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains Constant setting function
- *  Description  : const.h
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-06-13 12:48:01
- *  LastEditTime : 2021-07-26 21:44:59
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Const\const.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-22 22:06:02
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:49:59
  */
 
 #ifndef CONST_H
@@ -20,17 +20,17 @@ extern "C" {
 
 typedef struct {
     /*          ADC Control related constants       */
-    float ADC_V_VGAIN;               //The voltage reading gain resistor divider ratio is 11
-    float ADC_V_C_HolzerGAIN;        //Hall current sensor gain (chassis current, referee system current)
-    float ADC_V_C_BuckOutResGAIN;    //Buck output current sensing gain (lt3790)
-    float ADC_V_C_BuckInputResGAIN;  //Buck input current sensing gain (lt3790)
-    float ADC_Cap_TotalEnergy;       //Total capacitance energy
-    float ADC_CapValue;              //Capacity of capacitor bank
-    float ADC_CurrentErrorVoltage;   //ACS712 error
+    float ADC_V_VGAIN;               // The voltage reading gain resistor divider ratio is 11
+    float ADC_V_C_HolzerGAIN;        // Hall current sensor gain (chassis current, referee system current)
+    float ADC_V_C_BuckOutResGAIN;    // Buck output current sensing gain (lt3790)
+    float ADC_V_C_BuckInputResGAIN;  // Buck input current sensing gain (lt3790)
+    float ADC_Cap_TotalEnergy;       // Total capacitance energy
+    float ADC_CapValue;              // Capacity of capacitor bank
+    float ADC_CurrentErrorVoltage;   // ACS712 error
 
     /*          DAC Control related constants       */
-    float DAC_GAIN;       //DAC Current setting gain (lt3790)
-    float DAC_DetectRES;  //DAC Current setting resistor (lt3790)
+    float DAC_GAIN;       // DAC Current setting gain (lt3790)
+    float DAC_DetectRES;  // DAC Current setting resistor (lt3790)
 
     /*          Super Cap control const             */
     float Cap_MinVoltage;
@@ -149,7 +149,7 @@ extern float MOUSE_CHASSIS_MAX_SPEED;
 extern float MOUSE_CHASSIS_MAX_GYRO_SPEED;
 extern uint32_t Const_MiniPC_Follow_Target_Time;
 extern uint32_t Const_MiniPC_Lost_Target_Time;
-//const uint32_t Const_MiniPC_New_Target_Time;
+// const uint32_t Const_MiniPC_New_Target_Time;
 
 /*          Gimbal pitch limit                  */
 extern float Const_PITCH_UMAXANGLE;

@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : list_lib.h
- *  Description  : This document contains linked list related functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-10 15:45:04
- *  LastEditTime : 2021-07-16 03:35:07
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Library\list_lib.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-23 21:39:06
  */
 
 #ifndef LIST_LIB_H

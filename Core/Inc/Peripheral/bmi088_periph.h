@@ -1,12 +1,13 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bmi088_periph.h
- *  Description  : This file contains the bmi088 IMU API
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-14 06:44:33
- *  LastEditTime : 2021-07-14 11:11:36
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\bmi088_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:51:48
  */
+
 
 #ifndef BMI088_PERIPH_H
 #define BMI088_PERIPH_H

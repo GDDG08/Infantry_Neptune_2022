@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : dac_util.h
- *  Description  : This file contains the DAC functions
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-11 14:19:14
- *  LastEditTime : 2021-06-18 21:49:42
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Utility\dac_util.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:58:35
  */
 
 #ifndef DAC_UTIL_H

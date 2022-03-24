@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains key basic functions
- *  Description  : key_periph.h
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:49:57
- *  LastEditTime : 2021-07-11 10:40:20
+ * @Project      : RM_Infantry_Neptune_frame
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\key_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:51:54
  */
 
 #ifndef KEY_PERIPH_H

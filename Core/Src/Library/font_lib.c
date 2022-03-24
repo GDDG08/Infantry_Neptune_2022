@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This document contains the OLED font library
- *  Description  : font_lib.c
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-09 03:37:58
- *  LastEditTime : 2021-07-16 10:31:47
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Library\font_lib.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 20:00:48
  */
 
 #include "font_lib.h"

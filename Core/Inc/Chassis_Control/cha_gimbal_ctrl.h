@@ -1,20 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Chassis_Control\cha_gimbal_ctrl.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-01-18 21:25:48
- */
-/*
- *  Project      : Infantry_Neptune
- * 
- *  file         : cha_gimbal_ctrl.h
- *  Description  : This file contains Gimbal control function
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-05-08 08:25:47
+ * @LastEditTime : 2022-03-24 19:49:42
  */
 
 #ifndef CHA_GIMBAL_CTRL_H

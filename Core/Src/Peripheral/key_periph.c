@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : This file contains key basic functions
- *  Description  : key_periph.c
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-06-10 23:49:33
- *  LastEditTime : 2021-07-09 04:41:33
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Src\Peripheral\key_periph.c
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:55:27
  */
 
 #include "key_periph.h"
@@ -19,10 +19,10 @@
 #define FLASE_TRIGGER_TIME 80
 
 /**
-  * @brief          Get infantry equipment code
-  * @param          NULL
-  * @retval         Infantry equipment code
-  */
+ * @brief          Get infantry equipment code
+ * @param          NULL
+ * @retval         Infantry equipment code
+ */
 uint8_t Key_GetEquipCode() {
     uint8_t code = 0x00;
 
@@ -46,10 +46,10 @@ uint8_t Key_GetEquipCode() {
 }
 
 /**
-  * @brief          Key event handler
-  * @param          gpio: interrupt header
-  * @retval         NULL
-  */
+ * @brief          Key event handler
+ * @param          gpio: interrupt header
+ * @retval         NULL
+ */
 void Key_KeyEventHandler(GPIO_GPIOTypeDef* gpio) {
     uint16_t event = 0;
     uint8_t trigger = 0;

@@ -1,20 +1,11 @@
 /*
  * @Project      : RM_Infantry_Neptune_frame
  * @FilePath     : \infantry_-neptune\Core\Inc\Chassis_Control\cha_referee_ctrl.h
- * @Descripttion : 
+ * @Descripttion :
  * @Author       : GDDG08
  * @Date         : 2021-07-24 10:27:08
  * @LastEditors  : GDDG08
- * @LastEditTime : 2021-10-29 21:29:54
- */
-/*
- *  Project      : Infantry_Neptune
- * 
- *  file         : cha_referee_ctrl.h
- *  Description  : User defined UI interface of referee system
- *  LastEditors  : ����ؼ���ᶯ��
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2021-07-26 18:09:27
+ * @LastEditTime : 2022-03-24 19:49:54
  */
 
 #ifndef CHA_REFEREE_CTRL_H

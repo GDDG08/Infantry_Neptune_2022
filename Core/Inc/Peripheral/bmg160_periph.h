@@ -1,11 +1,11 @@
 /*
- *  Project      : Infantry_Neptune
- * 
- *  file         : bmg160_periph.h
- *  Description  : This file contains the bmg160 API (by bosch)
- *  LastEditors  : 动情丶卜灬动心
- *  Date         : 2021-07-13 06:02:49
- *  LastEditTime : 2021-07-16 02:50:51
+ * @Project      : RM_Infantry_Neptune
+ * @FilePath     : \infantry_-neptune\Core\Inc\Peripheral\bmg160_periph.h
+ * @Descripttion :
+ * @Author       : GDDG08
+ * @Date         : 2021-12-31 17:37:14
+ * @LastEditors  : GDDG08
+ * @LastEditTime : 2022-03-24 19:57:57
  */
 
 #ifndef BMG160_PERIPH_H
