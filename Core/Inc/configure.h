@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-20 12:00:03
+ * @LastEditTime : 2022-03-29 23:20:23
  */
 
 // Note:
@@ -43,6 +43,7 @@ extern "C" {
 /*      ******************DEBUG********************      */
 #define __FN_DEBUG_NOREFEREEHW __FN_DISABLE
 #define __FN_DEBUG_BTLOG __FN_ENABLE
+#define __FN_MINIPC_CAPT __FN_DISABLE
 
 /*      **********************************************      */
 

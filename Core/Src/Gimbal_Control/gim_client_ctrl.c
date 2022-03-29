@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-24 20:00:20
+ * @LastEditTime : 2022-03-29 19:11:51
  */
 
 #include "gim_client_ctrl.h"
@@ -96,7 +96,7 @@ void Client_PageInit() {
 
     Client_CreateNewPage(&Client_ShootState, "15mm_offset\0", &shooter->shoot_speed_offset.speed_15mm_offset, "18mm_offset\0", &shooter->shoot_speed_offset.speed_18mm_offset, "30mm_offset\0", &shooter->shoot_speed_offset.speed_30mm_offset, "shoot_Speed\0", shoot_state_func_short_press, shoot_state_func_long_press);
     Client_CreateNewPage(&Client_PeriphState, "pitch_ang____\0", &imu->angle.pitch, "yaw_ang____\0", &imu->angle.yaw, "row_ang____\0", &imu->angle.row, "imu_data___\0", periph_state_func_short_press, periph_state_func_long_press);
-    Client_CreateNewPage(&Client_CapState, "cap_precent\0", &buscomm->cap_rest_energy_display, "yaw_rel_ang\0", &buscomm->yaw_relative_angle, "heat_17mm\0", &buscomm->heat_17mm /*&buscomm->gimbal_yaw_ref*/, "Cap_Sta_Pag\0", cap_state_func_short_press, cap_state_func_long_press);
+    // Client_CreateNewPage(&Client_CapState, "cap_precent\0", &buscomm->cap_rest_energy_display/*, "yaw_rel_ang\0", &buscomm->yaw_relative_angle*/ ,"heat_17mm\0", &buscomm->heat_17mm /*&buscomm->gimbal_yaw_ref*/, "Cap_Sta_Pag\0", cap_state_func_short_press, cap_state_func_long_press);
 }
 
 /**

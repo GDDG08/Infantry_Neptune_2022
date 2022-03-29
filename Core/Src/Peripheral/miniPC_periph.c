@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-24 20:02:19
+ * @LastEditTime : 2022-03-29 22:51:09
  */
 
 #include "minipc_periph.h"
@@ -21,14 +21,20 @@
 UART_HandleTypeDef* Const_MiniPC_UART_HANDLER = &huart5;
 
 /*              Mini_PC control constant            */
-const uint32_t Const_MiniPC_HEART_SENT_PERIOD = 100;  // (ms)
-const uint32_t Const_MiniPC_DATA_SENT_PERIOD = 10;    // (ms)
+/*const */ uint32_t Const_MiniPC_HEART_SENT_PERIOD = 100;  // (ms)
+/*const*/ uint32_t Const_MiniPC_DATA_SENT_PERIOD = 10;     // (ms)
+
+#if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
+/*const*/ uint32_t Const_MiniPC_CAPT_PRE = 10;  // (ms)
+/*const*/ uint32_t Const_MiniPC_CAPT_DUR = 2;   // (ms)
+/*const*/ uint32_t Const_MiniPC_CAPT_AFT = 7;   // (ms)
+#endif
 
 const uint16_t Const_MiniPC_RX_BUFF_LEN = 200;           // miniPC Receive buffer length
 const uint16_t Const_MiniPC_TX_BUFF_LEN = 200;           // miniPC Transmit buffer length
 const uint16_t Const_MiniPC_MINIPC_OFFLINE_TIME = 1000;  // miniPC offline time
 const uint16_t Const_MiniPC_TX_HEART_FRAME_LEN = 10;     // miniPC heart transmit frame length
-const uint16_t Const_MiniPC_TX_DATA_FRAME_LEN = 20;      // miniPC data transmit frame length
+const uint16_t Const_MiniPC_TX_DATA_FRAME_LEN = 24;      // miniPC data transmit frame length
 
 const uint8_t Const_MiniPC_SLAVE_COMPUTER = 0x00;
 const uint8_t Const_MiniPC_INFANTRY_3 = 0x03;
@@ -50,7 +56,7 @@ const uint8_t Const_MiniPC_ARMOR_PACKET = 0x02;
 const uint8_t Const_MiniPC_DATA_PACKET = 0x08;
 
 const uint8_t Const_MiniPC_Heart_PACKET_DATA_LEN = 2;
-const uint8_t Const_MiniPC_Data_PACKET_DATA_LEN = 12;
+const uint8_t Const_MiniPC_Data_PACKET_DATA_LEN = 16;
 
 MiniPC_MiniPCDataTypeDef MiniPC_MiniPCData;  // miniPC data
 
@@ -132,19 +138,31 @@ void MiniPC_SendHeartPacket() {
 
 void MiniPC_SendDataPacket() {
     static uint32_t data_count = 0;
+
+#if !__FN_IF_ENABLE(__FN_MINIPC_CAPT)
     if ((HAL_GetTick() - data_count) <= Const_MiniPC_DATA_SENT_PERIOD)
         return;
+#endif
 
     MiniPC_MiniPCDataTypeDef* minipc = MiniPC_GetMiniPCDataPtr();
     INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
+#if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
+    GPIO_Set(PC_CAM);
+    osDelay(Const_MiniPC_CAPT_PRE);
+#endif
+
+    //		COMM DEBUG
+    //		int16_t pitch = 50 * sin(HAL_GetTick()/200.0f);
+    //		sin_gen = pitch;
     int16_t yaw = imu->angle.yaw * 100;
     int16_t pitch = imu->angle.pitch * 100;
     int16_t row = imu->angle.row * 100;
 
     int16_t yaw_speed = imu->speed.yaw * 100;
-    uint16_t shooter_speed = buscomm->speed_17mm * 100;
+    int16_t pitch_speed = imu->speed.pitch * 100;
+    uint16_t shooter_speed = buscomm->speed_17mm_limit * 100;
 
     minipc->state = MiniPC_PENDING;
 
@@ -158,15 +176,18 @@ void MiniPC_SendDataPacket() {
     buff[5] = Const_MiniPC_Data_PACKET_DATA_LEN;
     buff[6] = 0;
     buff[7] = 0;
-    buff[8] = 0x01;
+    buff[8] = 0x01;  // game_status_tower
     i162buff(yaw, buff + 9);
     i162buff(pitch, buff + 11);
     i162buff(row, buff + 13);
     i162buff(yaw_speed, buff + 15);
     i162buff(shooter_speed, buff + 17);
+    i162buff(pitch_speed, buff + 19);
+    buff[21] = minipc->team_color;
+    buff[22] = minipc->mode;
 
     // Must be even
-    buff[19] = 0x00;
+    buff[23] = 0x00;
 
     uint16_t checksum = 0;
     if (size % 2) {
@@ -178,11 +199,19 @@ void MiniPC_SendDataPacket() {
     }
     ui162buff(checksum, buff + 6);
 
+#if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
+    osDelay(Const_MiniPC_CAPT_DUR);
     data_count = HAL_GetTick();
+#endif
 
     if (HAL_UART_GetState(Const_MiniPC_UART_HANDLER) & 0x01)
         return;  // tx busy
     Uart_SendMessage_IT(Const_MiniPC_UART_HANDLER, buff, Const_MiniPC_TX_DATA_FRAME_LEN);
+
+#if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
+    GPIO_ReSet(PC_CAM);
+    osDelay(Const_MiniPC_CAPT_AFT);
+#endif
 }
 
 /**

@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-23 21:20:53
+ * @LastEditTime : 2022-03-26 23:42:24
  */
 
 #include "cha_power_ctrl.h"
@@ -29,7 +29,7 @@ PID_PIDParamTypeDef Chassis_SpeedCWPIDParam;
 PID_PIDParamTypeDef Chassis_SpeedCCWPIDParam;
 // PID_PIDParamTypeDef Chassis_SpeedCWPIDParam = {.kp = 30, .ki = 0.05, .kd = 3500, .sum_max = 4000, .output_max = 13000};
 // PID_PIDParamTypeDef Chassis_SpeedCCWPIDParam = {.kp = 35, .ki = 0, .kd = 3700, .sum_max = 3000, .output_max = 16000};
-PID_PIDParamTypeDef PowerCtrl_CurrentParam = {.kp = 1.3, .ki = 0.1, .kd = 130, .sum_max = 5000, .output_max = 100};
+PID_PIDParamTypeDef PowerCtrl_CurrentParam = {.kp = 1.3, .ki = 0.1, .kd = 130, .sum_max = 5000, .output_max = 16000};
 PID_PIDParamTypeDef PowerCtrl_PIDParam = {.kp = 0.0045, .ki = 0.00057, .kd = 0, .sum_max = 1700, .output_max = 1};
 
 float Power_ref = 60.0f;

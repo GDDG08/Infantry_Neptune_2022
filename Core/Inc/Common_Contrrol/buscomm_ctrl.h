@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-20 12:05:53
+ * @LastEditTime : 2022-03-29 22:59:39
  */
 
 #ifndef BUSCOMM_CTRL_H
@@ -52,16 +52,15 @@ extern const uint8_t SUPERCAP_MODE_OFF;
 extern const uint8_t SUPERCAP_MODE_ON;
 extern const uint8_t SUPERCAP_MODE_ERROR;
 
-extern CAN_TxHeaderTypeDef BusComm_GimMode;
+extern CAN_TxHeaderTypeDef BusComm_GimControl;
 extern CAN_TxHeaderTypeDef BusComm_GimGimbalData;
 extern CAN_TxHeaderTypeDef BusComm_GimImuYaw;
 extern CAN_TxHeaderTypeDef BusComm_GimChassisRef;
 
-extern CAN_TxHeaderTypeDef BusComm_ChaYawAngleBasicData;
-extern CAN_TxHeaderTypeDef BusComm_Cha17mmData;
-
-extern CAN_TxHeaderTypeDef BusComm_CapState;
+extern CAN_TxHeaderTypeDef BusComm_ChaRefereeData;
 extern CAN_TxHeaderTypeDef BusComm_CapMode;
+
+// extern CAN_TxHeaderTypeDef BusComm_CapState;
 extern CAN_TxHeaderTypeDef BusComm_CapState_1;
 extern CAN_TxHeaderTypeDef BusComm_CapState_2;
 
@@ -84,9 +83,9 @@ typedef struct {
     uint8_t robot_id;          // Robot ID
     uint8_t power_limit;       // Super capacitor state
     uint16_t heat_17mm;        // Heat transfer of 17mm launching mechanism
-    float speed_17mm;
     uint16_t heat_cooling_limit;
-    uint16_t heat_speed_limit;
+    // uint16_t speed_17mm;
+    uint16_t speed_17mm_limit;
     uint8_t main_shooter_power;
     uint8_t cap_mode_fnl;
     uint8_t cap_boost_mode_fnl;
@@ -105,7 +104,7 @@ typedef struct {
     uint8_t cap_mode_user;        // Capacitance mode
     uint8_t cap_boost_mode_user;  // cap boost mode
     uint8_t power_limit_mode;     // Force to change power limit mode
-    float pitch_angle;
+    // float pitch_angle;
     uint8_t ui_cmd;
     uint8_t infantry_code;
 

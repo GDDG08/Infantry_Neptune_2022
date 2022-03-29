@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-24 20:02:55
+ * @LastEditTime : 2022-03-29 22:51:56
  */
 
 #include "gpio_util.h"
@@ -15,7 +15,7 @@
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
 
-GPIO_GPIOTypeDef LASER_START = {GPIOB, GPIO_PIN_1, 0xff, 0, GPIO_PIN_RESET};
+GPIO_GPIOTypeDef CAM_START = {GPIOB, GPIO_PIN_1, 0xff, 0, GPIO_PIN_RESET};
 GPIO_GPIOTypeDef BULLET_CHARGING_START = {GPIOB, GPIO_PIN_0, 0xff, 0, GPIO_PIN_RESET};
 GPIO_GPIOTypeDef CS_ACCEL_START = {GPIOC, GPIO_PIN_4, 0xff, 0, GPIO_PIN_RESET};
 GPIO_GPIOTypeDef CS_GYRO_START = {GPIOC, GPIO_PIN_5, 0xff, 0, GPIO_PIN_RESET};
@@ -30,7 +30,7 @@ GPIO_GPIOTypeDef BMI_INT3_START = {GPIOB, GPIO_PIN_14, 0xB2, 0, GPIO_PIN_RESET};
 GPIO_GPIOTypeDef KEY_FUNC_START = {GPIOC, GPIO_PIN_3, KEY_FUNC_EVENT_ID, 0, GPIO_PIN_RESET};
 GPIO_GPIOTypeDef KEY_BACK_START = {GPIOA, GPIO_PIN_15, KEY_BACK_EVENR_ID, 0, GPIO_PIN_RESET};
 
-GPIO_GPIOTypeDef* LASER = &LASER_START;
+GPIO_GPIOTypeDef* PC_CAM = &CAM_START;
 GPIO_GPIOTypeDef* BULLET_CHARGING = &BULLET_CHARGING_START;
 GPIO_GPIOTypeDef* CS_ACCEL = &CS_ACCEL_START;
 GPIO_GPIOTypeDef* CS_GYRO = &CS_GYRO_START;
@@ -121,8 +121,17 @@ void GPIO_IRQCallback(uint16_t GPIO_Pin) {
             break;
         case Func_Pin:
             pin_state = GPIO_ReadPin(KEY_FUNC);
+
+#if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
+            if (pin_state == GPIO_PIN_RESET) {
+                GPIO_Set(PC_CAM);
+            } else {
+                GPIO_Reset(PC_CAM);
+            }
+#else
             KEY_FUNC->tick = trigger_time;
             Key_KeyEventHandler(KEY_FUNC);
+#endif
             break;
         case Back_Pin:
             pin_state = GPIO_ReadPin(KEY_BACK);

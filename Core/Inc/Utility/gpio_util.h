@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-23 22:22:34
+ * @LastEditTime : 2022-03-27 09:44:04
  */
 
 #ifndef GPIO_UTIL_H
@@ -40,7 +40,7 @@ typedef struct {
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
 
-extern GPIO_GPIOTypeDef* LASER;
+extern GPIO_GPIOTypeDef* PC_CAM;
 extern GPIO_GPIOTypeDef* BULLET_CHARGING;
 extern GPIO_GPIOTypeDef* CS_ACCEL;
 extern GPIO_GPIOTypeDef* CS_GYRO;

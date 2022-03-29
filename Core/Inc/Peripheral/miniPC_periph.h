@@ -5,9 +5,8 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-23 22:22:23
+ * @LastEditTime : 2022-03-26 13:24:20
  */
-
 
 #ifndef MINIPC_PERIPH_H
 #define MINIPC_PERIPH_H
@@ -22,6 +21,7 @@ extern "C" {
 
 #include "uart_util.h"
 #include "buff_lib.h"
+#include "math.h"
 
 typedef enum {
     MiniPC_NULL = 0,

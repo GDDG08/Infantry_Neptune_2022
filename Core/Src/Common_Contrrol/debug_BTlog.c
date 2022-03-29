@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-23 22:22:48
+ * @LastEditTime : 2022-03-29 23:20:11
  */
 
 #include "debug_BTlog.h"
@@ -113,7 +113,9 @@ void AddRecvData(void* ptr, uint8_t size, BTlog_TypeEnum type) {
  */
 void BTlog_Init() {
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
-    GPIO_Set(LASER);
+#if !__FN_IF_ENABLE(__FN_MINIPC_CAPT)
+    GPIO_Set(PC_CAM);
+#endif
 #endif
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
@@ -123,6 +125,8 @@ void BTlog_Init() {
 #elif __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
     GimbalYaw_GimbalYawTypeDef* gimbal = GimbalYaw_GetGimbalYawPtr();
     Referee_RefereeDataTypeDef* referee = Referee_GetRefereeDataPtr();
+    PowerCtrl_Data_t* PowCtr = PowerCtrl_GetPowerDataPtr();
+    CAP_CtrlDataTypeDef* capctrl = Cap_GetCapDataPtr();
 #elif __FN_IF_ENABLE(__FN_SUPER_CAP)
     Sen_PowerValueTypeDef* powerValue = Sen_GetPowerDataPtr();
 #endif
@@ -141,7 +145,6 @@ void BTlog_Init() {
     ADD_SEND_DATA(minipc_data->pitch_angle, Float, "minipcD->pitch_angle");
     ADD_SEND_DATA(minipc_data->yaw_angle, Float, "minipcD->yaw_angle");
     ADD_SEND_DATA(gimbal->angle.yaw_angle_ref, Float, "yaw_ref");
-    ADD_SEND_DATA(buscomm->speed_17mm, Float, "bullet_speed");
     ADD_SEND_DATA(Motor_shooterMotorLeft.pid_spd.fdb, Float, "shooterL_spd");
     ADD_SEND_DATA(Motor_shooterMotorRight.pid_spd.fdb, Float, "shooterR_spd");
 
@@ -149,11 +152,21 @@ void BTlog_Init() {
     ADD_SEND_DATA(buscomm->yaw_relative_angle, Float, "yaw_relative_angle");
     ADD_SEND_DATA(gimbal->yaw_ref, Float, "yaw_ref");
     ADD_SEND_DATA(gimbal->yaw_position_fdb, Float, "yaw_fdb_pos");
-    ADD_SEND_DATA(gimbal->yaw_speed_fdb, Float, "yaw_fdb_spd");
-    ADD_SEND_DATA(Motor_chassisMotor1.encoder.speed, Int16, "Chassis_Motor1_spd");
-    ADD_SEND_DATA(Motor_chassisMotor2.encoder.speed, Int16, "Chassis_Motor2_spd");
-    ADD_SEND_DATA(Motor_chassisMotor3.encoder.speed, Int16, "Chassis_Motor3_spd");
-    ADD_SEND_DATA(Motor_chassisMotor4.encoder.speed, Int16, "Chassis_Motor4_spd");
+    // ADD_SEND_DATA(gimbal->yaw_speed_fdb, Float, "yaw_fdb_spd");
+    // ADD_SEND_DATA(Motor_chassisMotor1.encoder.speed, Int16, "Chassis_Motor1_spd");
+    // ADD_SEND_DATA(Motor_chassisMotor2.encoder.speed, Int16, "Chassis_Motor2_spd");
+    // ADD_SEND_DATA(Motor_chassisMotor3.encoder.speed, Int16, "Chassis_Motor3_spd");
+    // ADD_SEND_DATA(Motor_chassisMotor4.encoder.speed, Int16, "Chassis_Motor4_spd");
+    ADD_SEND_DATA(capctrl->Sum_PowerReally, Float, "Cap_Power");
+    ADD_SEND_DATA(capctrl->Chassis_voltage, Float, "Cap_Voltage");
+    ADD_SEND_DATA(capctrl->Sum_CurrentReally, Float, "Cap_Current");
+    // ADD_SEND_DATA(capctrl->, Float, "Cap_Voltage");
+    ADD_SEND_DATA(PowCtr->Power_offset, Float, "Power_offset");
+    ADD_SEND_DATA(PowCtr->Power_pid.output, Float, "Power_pid.output");
+    ADD_SEND_DATA(referee->bullet_speed, Float, "bullet_speed");
+    ADD_SEND_DATA(buscomm->cap_mode_user, uInt8, "cap_mode_user");
+    ADD_SEND_DATA(buscomm->cap_boost_mode_user, uInt8, "cap_boost_mode_user");
+
 #elif __FN_IF_ENABLE(__FN_SUPER_CAP)
 
 #endif

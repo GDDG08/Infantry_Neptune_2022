@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-24 20:00:35
+ * @LastEditTime : 2022-03-26 13:17:57
  */
 
 #include "gim_miniPC_ctrl.h"
@@ -75,7 +75,7 @@ void MiniPC_Task(void const* argument) {
             osDelay(1);
         }
 
-        MiniPC_SendHeartPacket();
+        // MiniPC_SendHeartPacket();
         MiniPC_SendDataPacket();
         osDelay(MINI_PC_TASK_PERIOD);
     }

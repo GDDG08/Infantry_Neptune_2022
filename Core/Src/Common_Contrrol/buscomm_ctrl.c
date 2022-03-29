@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-20 12:01:12
+ * @LastEditTime : 2022-03-29 23:14:36
  */
 
 #include "buscomm_ctrl.h"
@@ -40,9 +40,10 @@ const uint16_t Const_BusComm_RX_BUFF_LEN = 20;
 const uint16_t Const_BusComm_OFFLINE_TIME = 500;
 
 const uint8_t Const_BusComm_SIZE = 8;
-const uint8_t Const_BusComm_GIMBAL_BUFF_SIZE = 4;
-const uint8_t Const_BusComm_CHASSIS_BUFF_SIZE = 3;
-const uint8_t Const_BusComm_SUPERCAP_BUFF_SIZE = 1;
+const uint8_t Const_BusComm_GIMBAL_BUFF_SIZE = 3;
+const uint8_t Const_BusComm_CHASSIS_BUFF_SIZE = 2;
+// const uint8_t Const_BusComm_SUPERCAP_BUFF_SIZE = 1;
+const uint8_t Const_BusComm_RECEIVE_SIZE = 7;
 
 //      power limit mode
 const uint8_t POWER_LIMITED = 0x01;
@@ -76,16 +77,14 @@ BusComm_BusCommDataTypeDef BusComm_BusCommData;
 
 const uint32_t Const_BusComm_CAN_TX_EXTID = 0x01;
 
-CAN_TxHeaderTypeDef BusComm_GimMode;
-CAN_TxHeaderTypeDef BusComm_GimGimbalData;
+CAN_TxHeaderTypeDef BusComm_GimControl;
 CAN_TxHeaderTypeDef BusComm_GimImuYaw;
 CAN_TxHeaderTypeDef BusComm_GimChassisRef;
 
-CAN_TxHeaderTypeDef BusComm_ChaYawAngleBasicData;
-CAN_TxHeaderTypeDef BusComm_Cha17mmData;
-
-CAN_TxHeaderTypeDef BusComm_CapState;
+CAN_TxHeaderTypeDef BusComm_ChaRefereeData;
 CAN_TxHeaderTypeDef BusComm_CapMode;
+
+// CAN_TxHeaderTypeDef BusComm_CapState;
 CAN_TxHeaderTypeDef BusComm_CapState_1;
 CAN_TxHeaderTypeDef BusComm_CapState_2;
 
@@ -111,16 +110,15 @@ void BusComm_Task(void const* argument) {
  */
 void BusComm_InitBusComm() {
     BusComm_ResetBusCommData();
-    Can_InitTxHeader(&BusComm_GimMode, CMD_SET_MODE, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
-    Can_InitTxHeader(&BusComm_GimGimbalData, CMD_SET_GIMBAL_DATA, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
+    Can_InitTxHeader(&BusComm_GimControl, CMD_SET_CONTROL, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
     Can_InitTxHeader(&BusComm_GimImuYaw, CMD_SET_IMU_YAW, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
     Can_InitTxHeader(&BusComm_GimChassisRef, CMD_SET_CHA_REF, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
 
-    Can_InitTxHeader(&BusComm_ChaYawAngleBasicData, CMD_SET_YAW_ANGLE_BASIC_DATA, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
-    Can_InitTxHeader(&BusComm_Cha17mmData, CMD_SET_17MM_DATA, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
-
-    Can_InitTxHeader(&BusComm_CapState, CMD_SEND_CAP_STATE, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
+    Can_InitTxHeader(&BusComm_ChaRefereeData, CMD_SET_REFEREE_DATA, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
     Can_InitTxHeader(&BusComm_CapMode, CMD_SET_CAP_MODE, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
+
+    // Can_InitTxHeader(&BusComm_CapState, CMD_SEND_CAP_STATE, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
+
     Can_InitTxHeader(&BusComm_CapState_1, CMD_SET_CAP_STATE_1, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
     Can_InitTxHeader(&BusComm_CapState_2, CMD_SET_CAP_STATE_2, Const_BusComm_CAN_TX_EXTID, Const_BusComm_SIZE);
 }
@@ -206,18 +204,18 @@ void BusComm_SendBusCommData() {
 
 #endif
 
-#if __FN_IF_ENABLE(__FN_SUPER_CAP)
-    uint32_t out_time = HAL_GetTick();
+    // #if __FN_IF_ENABLE(__FN_SUPER_CAP)
+    //     uint32_t out_time = HAL_GetTick();
 
-    for (int i = 0; i < Const_BusComm_SUPERCAP_BUFF_SIZE; i++) {
-        while (HAL_CAN_GetTxMailboxesFreeLevel(Const_BusComm_CAN_HANDLER) == 0) {
-            if (HAL_GetTick() - out_time >= 2)
-                return;
-        }
-        if (Buscmd_CapSend[i].bus_func != NULL)
-            Buscmd_CapSend[i].bus_func(BusComm_TxData);
-    }
-#endif
+    //     for (int i = 0; i < Const_BusComm_SUPERCAP_BUFF_SIZE; i++) {
+    //         while (HAL_CAN_GetTxMailboxesFreeLevel(Const_BusComm_CAN_HANDLER) == 0) {
+    //             if (HAL_GetTick() - out_time >= 2)
+    //                 return;
+    //         }
+    //         if (Buscmd_CapSend[i].bus_func != NULL)
+    //             Buscmd_CapSend[i].bus_func(BusComm_TxData);
+    //     }
+    // #endif
     buscomm->state = BusComm_STATE_CONNECTED;
 }
 
@@ -237,12 +235,12 @@ void BusComm_DecodeBusCommData(uint8_t buff[], uint32_t stdid, uint16_t rxdatale
 
     memcpy(BusComm_RxData, buff, rxdatalen);
 
-    for (int i = 1; i <= (Const_BusComm_SUPERCAP_BUFF_SIZE + Const_BusComm_CHASSIS_BUFF_SIZE + Const_BusComm_GIMBAL_BUFF_SIZE); i++) {
+    for (int i = 1; i < (Const_BusComm_RECEIVE_SIZE + 1); i++) {
         if ((stdid == Buscmd_Receive[i].cmd_id) && (Buscmd_Receive[i].bus_func != NULL)) {
             Buscmd_Receive[i].bus_func(BusComm_RxData);
 
 #if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
-            if (stdid == CMD_SEND_CAP_STATE)
+            if (stdid == CMD_SET_CAP_STATE_1)
                 buscomm->last_update_time[1] = HAL_GetTick();
 
             else
@@ -283,9 +281,9 @@ void BusComm_ResetBusCommData() {
     buscomm->robot_id = 0;
     buscomm->heat_17mm = 0;
     buscomm->power_limit = 0;
-    buscomm->speed_17mm = 0;
+    // buscomm->speed_17mm = 0;
     buscomm->heat_cooling_limit = 0;
-    buscomm->heat_speed_limit = 0;
+    buscomm->speed_17mm_limit = 0;
     buscomm->main_shooter_power = 0;
     buscomm->cap_rest_energy_display = 0;
 #endif
@@ -294,28 +292,27 @@ void BusComm_ResetBusCommData() {
 #if __FN_IF_ENABLE(__FN_INFANTRY_GIMBAL)
     buscomm->last_update_time[1] = 0;
     buscomm->gimbal_yaw_mode = 0;
-    buscomm->gimbal_yaw_ref = 0.0f;
+    buscomm->gimbal_yaw_ref = 0;
     buscomm->gimbal_imu_pos = 0.0f;
     buscomm->gimbal_imu_spd = 0.0f;
     buscomm->chassis_mode = 0;
     buscomm->chassis_fb_ref = 0.0f;
     buscomm->chassis_lr_ref = 0.0f;
     buscomm->cap_mode_user = SUPERCAP_CTRL_OFF;
-    buscomm->power_limit_mode = POWER_LIMITED;
-    buscomm->cap_boost_mode = SUPERCAP_UNCHARGE;
-    buscomm->pitch_angle = 0.0f;
+    buscomm->power_limit_mode = POWER_UNLIMIT;
+    buscomm->cap_boost_mode_user = SUPERCAP_UNBOOST;
+    // buscomm->pitch_angle = 0.0f;
     buscomm->ui_cmd = 0;
-    buscomm->infantry_code = 0x00;
     buscomm->cap_rest_energy_display = 0;
 #endif
 
-// SuperCap stream
-#if __FN_IF_ENABLE(__FN_SUPER_CAP)
-    buscomm->last_update_time[1] = 0;
-    buscomm->cap_state = SUPERCAP_MODE_OFF;
-    buscomm->cap_rest_energy = 0;
-    buscomm->power_path_change_flag = 0;
-#endif
+    // // SuperCap stream
+    // #if __FN_IF_ENABLE(__FN_SUPER_CAP)
+    //     buscomm->last_update_time[1] = 0;
+    //     buscomm->cap_state = SUPERCAP_MODE_OFF;
+    //     buscomm->cap_rest_energy = 0;
+    //     buscomm->power_path_change_flag = 0;
+    // #endif
 }
 
 /**
@@ -331,7 +328,7 @@ void BusComm_Update() {
     GimbalYaw_GimbalYawTypeDef* gimbal = GimbalYaw_GetGimbalYawPtr();
     Referee_RefereeDataTypeDef* referee = Referee_GetRefereeDataPtr();
 
-    data->heat_speed_limit = referee->shooter_heat0_speed_limit;
+    data->speed_17mm_limit = referee->shooter_heat0_speed_limit;
     uint8_t mode = 0;
     if (referee->shooter_heat0_speed_limit == 15)
         mode = 0;
@@ -342,7 +339,7 @@ void BusComm_Update() {
     Referee_SetAimMode(mode);
 
     Referee_SetCapState(data->cap_rest_energy);
-    Referee_SetPitchAngle(data->pitch_angle);
+    //    Referee_SetPitchAngle(data->pitch_angle);
 
     uint8_t auto_aim_mode = 0, cha_mode = 0;
     if (data->chassis_mode == CHASSIS_CTRL_NORMAL)
@@ -365,9 +362,9 @@ void BusComm_Update() {
     data->power_limit = referee->max_chassis_power;
     data->heat_17mm = referee->shooter_heat0;
 
-    data->speed_17mm = referee->bullet_speed;
+    // data->speed_17mm = referee->bullet_speed;
     data->heat_cooling_limit = referee->shooter_heat0_cooling_limit;
-    data->heat_speed_limit = referee->shooter_heat0_speed_limit;
+    data->speed_17mm_limit = referee->shooter_heat0_speed_limit;
     data->main_shooter_power = referee->mains_power_shooter_output;
 #endif
 
@@ -380,20 +377,19 @@ void BusComm_Update() {
     data->gimbal_yaw_ref = gimbal->angle.yaw_angle_ref;
     data->gimbal_imu_pos = imu->angle.yaw;
     data->gimbal_imu_spd = imu->speed.yaw;
-    data->pitch_angle = imu->angle.pitch;
     data->infantry_code = Key_GetEquipCode();
 
 #endif
 
-    // Super Cap stream
-#if __FN_IF_ENABLE(__FN_SUPER_CAP)
-    Sen_PowerValueTypeDef* powerValue = Sen_GetPowerDataPtr();
+    //     // Super Cap stream
+    // #if __FN_IF_ENABLE(__FN_SUPER_CAP)
+    //     Sen_PowerValueTypeDef* powerValue = Sen_GetPowerDataPtr();
 
-    if (powerValue->CapPercent >= 100)
-        data->cap_rest_energy = 100;
-    else
-        data->cap_rest_energy = powerValue->CapPercent;
-#endif
+    //     if (powerValue->CapPercent >= 100)
+    //         data->cap_rest_energy = 100;
+    //     else
+    //         data->cap_rest_energy = powerValue->CapPercent;
+    // #endif
 }
 
 void _cmd_mode_control() {
@@ -421,7 +417,7 @@ void _cmd_mode_control() {
         }
         case GIMBAL_YAW_CTRL_ARMOR: {
             GimbalYaw_SetMode(GimbalYaw_MODE_ARMOR);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref);
+            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref );
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
             GimbalYaw_SetGimbalYawControlState(1);

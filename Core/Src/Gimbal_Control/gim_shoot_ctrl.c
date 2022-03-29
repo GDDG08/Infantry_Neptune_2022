@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-22 22:06:02
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-24 20:00:42
+ * @LastEditTime : 2022-03-29 20:25:14
  */
 
 #include "gim_shoot_ctrl.h"
@@ -123,7 +123,7 @@ float Shooter_GetShootSpeedOffset() {
     shooter->shoot_speed_offset.speed_18mm_offset = ((((float)(shooter->speed_offset_flash.speed_18mm_offset)) - 150.0f)) / 10.0f;
     shooter->shoot_speed_offset.speed_30mm_offset = ((((float)(shooter->speed_offset_flash.speed_30mm_offset)) - 150.0f)) / 10.0f;
 
-    switch (buscomm->heat_speed_limit) {
+    switch (buscomm->speed_17mm_limit) {
         case 15:
             offset_speed = shooter->shoot_speed_offset.speed_15mm_offset;
             break;
@@ -152,7 +152,7 @@ void Shooter_ModifySpeedOffset(int8_t multiple) {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     Shoot_StatusTypeDef* shooter = Shooter_GetShooterControlPtr();
     uint32_t offset_speed;
-    switch (buscomm->heat_speed_limit) {
+    switch (buscomm->speed_17mm_limit) {
         case 15:
             Flash_ReadData(SHOOT_15M_SPEED_ADDRESS, &offset_speed, 1);
             offset_speed += (SHOOTER_SPEED_INCREMENT * multiple);
@@ -276,7 +276,7 @@ float Shooter_GetRefereeSpeed() {
     Shoot_StatusTypeDef* shooter = Shooter_GetShooterControlPtr();
 
     float speed;
-    switch (buscomm->heat_speed_limit) {
+    switch (buscomm->speed_17mm_limit) {
         case 15:
             speed = shooter->shooter_speed_15mpers;
             break;
@@ -453,23 +453,23 @@ void Shooter_ShootControl() {
     switch (shooter->shooter_mode) {
         case Shoot_NULL:
 #if !__FN_IF_ENABLE(__FN_DEBUG_BTLOG)
-            GPIO_Reset(LASER);
+//            GPIO_Reset(LASER);
 #endif
             GPIO_Reset(BULLET_CHARGING);
             Shooter_SetShooterSpeed(0);
             break;
         case Shoot_FAST:
-            GPIO_Set(LASER);
+            //            GPIO_Set(LASER);
             GPIO_Set(BULLET_CHARGING);
             Shooter_SetShooterSpeed(Const_ShooterFastSpeed);
             break;
         case Shoot_SLOW:
-            GPIO_Set(LASER);
+            //            GPIO_Set(LASER);
             GPIO_Set(BULLET_CHARGING);
             Shooter_SetShooterSpeed(Const_ShooterSlowSpeed);
             break;
         case Shoot_REFEREE:
-            GPIO_Set(LASER);
+            //            GPIO_Set(LASER);
             GPIO_Set(BULLET_CHARGING);
             Shooter_SetShooterSpeed(Shooter_GetRefereeSpeed() + Shooter_GetShootSpeedOffset());
             break;
