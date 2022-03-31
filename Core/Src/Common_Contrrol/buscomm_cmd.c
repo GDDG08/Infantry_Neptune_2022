@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-22 22:06:02
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-29 23:16:05
+ * @LastEditTime : 2022-04-01 01:12:08
  */
 
 #include "buscomm_cmd.h"
@@ -47,8 +47,8 @@ const uint32_t CMD_GIMBAL_SEND_PACK_3 = 0xB3;
 
 // const uint32_t CMD_SUPERCAP_SEND_PACK_1 = 0xC1;
 
-/*const*/ uint32_t Const_Send_Period_Control = 5;
-/*const*/ uint32_t Const_Send_Period_IMU_Yaw = 3;
+/*const*/ uint32_t Const_Send_Period_Control = 0;
+/*const*/ uint32_t Const_Send_Period_IMU_Yaw = 0;
 /*const*/ uint32_t Const_Send_Period_Cha_ref = 5;
 /*const*/ uint32_t Const_Send_Period_Referee = 20;
 /*const*/ uint32_t Const_Send_Period_Cap_Mode = 40;
@@ -125,7 +125,7 @@ static void _send_cap_mode(uint8_t buff[]) {
     ratea[1] = 1000 * counta[1] / HAL_GetTick();
     memset(buff, 0, 8);
     buff[0] = buscomm->cap_mode_fnl | (0x77 << 1);
-    buff[1] = buscomm->cap_boost_mode_fnl;
+    buff[1] = buscomm->cap_boost_mode_fnl | 0x02;  // Todo bit1 error chassis
     buff[2] = buscomm->chassis_power_limit;
     buff[3] = buscomm->chassis_power_buffer;
     float2buff(buscomm->chassis_power, buff + 4);
@@ -144,10 +144,10 @@ static void _send_control(uint8_t buff[]) {
     counta[2]++;
     ratea[2] = 1000 * counta[2] / HAL_GetTick();
     memset(buff, 0, 8);
-    buff[0] = buscomm->gimbal_yaw_mode;
-    buff[1] = buscomm->power_limit_mode + buscomm->chassis_mode << 4;
-    buff[2] = buscomm->cap_mode_user + buscomm->cap_boost_mode_user << 4;
-    buff[3] = buscomm->ui_cmd + buscomm->infantry_code << 4;
+    buff[0] = (buscomm->gimbal_yaw_mode << 4) + (buscomm->chassis_mode << 2) + buscomm->power_limit_mode;
+    buff[1] = (buscomm->infantry_code << 4) + (buscomm->ui_cmd << 2) + (buscomm->cap_mode_user << 1) + buscomm->cap_boost_mode_user;
+
+    i162buff((int16_t)buscomm->yaw_relative_angle * 100, buff + 2);
     float2buff(buscomm->gimbal_yaw_ref, buff + 4);
     Can_SendMessage(Const_BusComm_CAN_HANDLER, pheader, buff);
 }
@@ -208,6 +208,8 @@ static void _set_referee_data(uint8_t buff[]) {
     buscomm->heat_cooling_limit = buff2ui16(buff + 2);
     buscomm->heat_17mm = buff2ui16(buff + 4);
     buscomm->speed_17mm_limit = buff2ui16(buff + 6);
+
+    buscomm->last_update_time[0] = HAL_GetTick();
 }
 
 static void _set_control(uint8_t buff[]) {
@@ -220,23 +222,27 @@ static void _set_control(uint8_t buff[]) {
         buscomm->power_path_change_flag = HAL_GetTick();
     }
 
-    buscomm->gimbal_yaw_mode = buff[0];
-    buscomm->power_limit_mode = buff[1];
-    buscomm->chassis_mode = buff[1] >> 4;
-    buscomm->cap_mode_user = buff[2];
-    buscomm->cap_boost_mode_user = buff[2] >> 4;
-    buscomm->ui_cmd = buff[3];
-    buscomm->infantry_code = buff[3] >> 4;
+    buscomm->gimbal_yaw_mode = buff[0] >> 4;
+    buscomm->chassis_mode = buff[0] & 0x0C >> 2;
+    buscomm->power_limit_mode = buff[0] & 0x01;
+    buscomm->infantry_code = buff[1] >> 4;
+    buscomm->ui_cmd = buff[1] & 0x04 >> 2;
+    buscomm->cap_mode_user = buff[1] & 0x02 >> 1;
+    buscomm->cap_boost_mode_user = buff[1] & 0x01;
+    buscomm->yaw_relative_angle = ((float)buff2i16(buff + 2)) / 100.0f;
     buscomm->gimbal_yaw_ref = buff2float(buff + 4);
     _cmd_mode_control();
+
+    buscomm->last_update_time[1] = HAL_GetTick();
 }
 
 static void _set_imu_yaw(uint8_t buff[]) {
-    countb[3]++;
-    rateb[3] = 1000 * countb[3] / HAL_GetTick();
+    countb[2]++;
+    rateb[2] = 1000 * countb[2] / HAL_GetTick();
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     buscomm->gimbal_imu_spd = buff2float(buff);
     buscomm->gimbal_imu_pos = buff2float(buff + 4);
+    buscomm->last_update_time[2] = HAL_GetTick();
 }
 
 static void _set_cha_ref(uint8_t buff[]) {
@@ -245,6 +251,8 @@ static void _set_cha_ref(uint8_t buff[]) {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
     buscomm->chassis_fb_ref = buff2float(buff);
     buscomm->chassis_lr_ref = buff2float(buff + 4);
+
+    buscomm->last_update_time[3] = HAL_GetTick();
 }
 // int count7;
 // float rate7;
@@ -265,6 +273,8 @@ static void _set_cap_state_1(uint8_t buff[]) {
 
     buscomm->Cap_power = buff2float(buff);
     buscomm->cap_rest_energy = buff[4];
+
+    buscomm->last_update_time[4] = HAL_GetTick();
 }
 
 static void _set_cap_state_2(uint8_t buff[]) {
@@ -274,4 +284,6 @@ static void _set_cap_state_2(uint8_t buff[]) {
 
     buscomm->Cap_voltage = buff2float(buff);
     buscomm->Cap_current = buff2float(buff + 4);
+
+    buscomm->last_update_time[5] = HAL_GetTick();
 }

@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-29 19:33:19
+ * @LastEditTime : 2022-03-30 21:55:15
  */
 
 #include "gim_gimbal_ctrl.h"
@@ -269,33 +269,32 @@ void Gimbal_SetPitchAutoRef(float ref) {
  * @retval     Limited ywa ref
  */
 float Gimbal_LimitYaw(float ref) {
-    // BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
-    // Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
-    // INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
+    BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
+    Gimbal_GimbalTypeDef* gimbal = Gimbal_GetGimbalControlPtr();
+    INS_IMUDataTypeDef* imu = Ins_GetIMUDataPtr();
 
-    // float yaw_relative_angle = buscomm->yaw_relative_angle;
-    // float yaw_relative_angle_ref = gimbal->angle.yaw_angle_ref - imu->angle.yaw + yaw_relative_angle;
-    // // float yaw_relative_angle_ref_to = ref - imu->angle.yaw + yaw_relative_angle;
+    float yaw_relative_angle = buscomm->yaw_relative_angle;
+    float yaw_relative_angle_ref = gimbal->angle.yaw_angle_ref - imu->angle.yaw + yaw_relative_angle;
+    // float yaw_relative_angle_ref_to = ref - imu->angle.yaw + yaw_relative_angle;
 
-    // float ref_limited;
-    // if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
-    //     ref_limited = ref;
-    // else if (((yaw_relative_angle_ref < -Const_YAW_MAXANGLE) && (ref < gimbal->angle.yaw_angle_ref)) ||
-    //          ((yaw_relative_angle_ref > Const_YAW_MAXANGLE) && (ref > gimbal->angle.yaw_angle_ref)))
-    //     ref_limited = gimbal->angle.yaw_angle_ref;
-    // // else if (yaw_relative_angle_ref_to < -Const_YAW_MAXANGLE) {
-    // //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle - Const_YAW_MAXANGLE;
-    // //     if (ref_limited > 0)
-    // //         ref_limited = 0.0f;
-    // // } else if (yaw_relative_angle_ref_to > Const_YAW_MAXANGLE) {
-    // //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle + Const_YAW_MAXANGLE;
-    // //     if (ref_limited > 0)
-    // //         ref_limited = 0.0f;
-    // else
-    //     ref_limited = ref;
+    float ref_limited;
+    if (buscomm->chassis_mode == CHASSIS_CTRL_GYRO)
+        ref_limited = ref;
+    else if (((yaw_relative_angle_ref < -Const_YAW_MAXANGLE) && (ref < gimbal->angle.yaw_angle_ref)) ||
+             ((yaw_relative_angle_ref > Const_YAW_MAXANGLE) && (ref > gimbal->angle.yaw_angle_ref)))
+        ref_limited = gimbal->angle.yaw_angle_ref;
+    // else if (yaw_relative_angle_ref_to < -Const_YAW_MAXANGLE) {
+    //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle - Const_YAW_MAXANGLE;
+    //     if (ref_limited > 0)
+    //         ref_limited = 0.0f;
+    // } else if (yaw_relative_angle_ref_to > Const_YAW_MAXANGLE) {
+    //     ref_limited = gimbalyaw->yaw_position_fdb - yaw_relative_angle + Const_YAW_MAXANGLE;
+    //     if (ref_limited > 0)
+    //         ref_limited = 0.0f;
+    else
+        ref_limited = ref;
 
-    // return ref_limited;
-    return ref;
+    return ref_limited;
 }
 
 /**

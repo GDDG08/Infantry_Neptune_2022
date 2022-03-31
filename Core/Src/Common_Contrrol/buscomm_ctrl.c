@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-29 23:14:36
+ * @LastEditTime : 2022-03-30 22:31:00
  */
 
 #include "buscomm_ctrl.h"
@@ -238,17 +238,6 @@ void BusComm_DecodeBusCommData(uint8_t buff[], uint32_t stdid, uint16_t rxdatale
     for (int i = 1; i < (Const_BusComm_RECEIVE_SIZE + 1); i++) {
         if ((stdid == Buscmd_Receive[i].cmd_id) && (Buscmd_Receive[i].bus_func != NULL)) {
             Buscmd_Receive[i].bus_func(BusComm_RxData);
-
-#if __FN_IF_ENABLE(__FN_INFANTRY_CHASSIS)
-            if (stdid == CMD_SET_CAP_STATE_1)
-                buscomm->last_update_time[1] = HAL_GetTick();
-
-            else
-                buscomm->last_update_time[0] = HAL_GetTick();
-
-#else
-            buscomm->last_update_time[0] = HAL_GetTick();
-#endif
             return;
         }
     }
@@ -417,7 +406,7 @@ void _cmd_mode_control() {
         }
         case GIMBAL_YAW_CTRL_ARMOR: {
             GimbalYaw_SetMode(GimbalYaw_MODE_ARMOR);
-            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref );
+            GimbalYaw_SetYawRef(buscomm->gimbal_yaw_ref);
             GimbalYaw_SetIMUYawPositionFdb(buscomm->gimbal_imu_pos);
             GimbalYaw_SetIMUYawSpeedFdb(buscomm->gimbal_imu_spd);
             GimbalYaw_SetGimbalYawControlState(1);

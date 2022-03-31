@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2022-01-14 22:16:51
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-29 22:51:09
+ * @LastEditTime : 2022-03-31 23:58:00
  */
 
 #include "minipc_periph.h"
@@ -149,8 +149,9 @@ void MiniPC_SendDataPacket() {
     BusComm_BusCommDataTypeDef* buscomm = BusComm_GetBusDataPtr();
 
 #if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
+	osDelay(Const_MiniPC_CAPT_PRE);
     GPIO_Set(PC_CAM);
-    osDelay(Const_MiniPC_CAPT_PRE);
+    
 #endif
 
     //		COMM DEBUG
@@ -202,6 +203,7 @@ void MiniPC_SendDataPacket() {
 #if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
     osDelay(Const_MiniPC_CAPT_DUR);
     data_count = HAL_GetTick();
+		
 #endif
 
     if (HAL_UART_GetState(Const_MiniPC_UART_HANDLER) & 0x01)
@@ -209,7 +211,7 @@ void MiniPC_SendDataPacket() {
     Uart_SendMessage_IT(Const_MiniPC_UART_HANDLER, buff, Const_MiniPC_TX_DATA_FRAME_LEN);
 
 #if __FN_IF_ENABLE(__FN_MINIPC_CAPT)
-    GPIO_ReSet(PC_CAM);
+   GPIO_Reset(PC_CAM);
     osDelay(Const_MiniPC_CAPT_AFT);
 #endif
 }

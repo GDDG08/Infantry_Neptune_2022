@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-24 19:56:37
+ * @LastEditTime : 2022-03-30 19:31:58
  */
 
 #include "uart_util.h"
@@ -148,6 +148,8 @@ void Uart_ErrorHandler(uint32_t ret) {
 uint16_t Uart_DMACurrentDataCounter(DMA_Stream_TypeDef* dma_stream) {
     /* Return the number of remaining data units for DMAy Streamx */
     return ((uint16_t)(dma_stream->NDTR));
+    //@Todo New board
+    // return ((uint16_t)(dma_stream->CNDTR));
 }
 
 /**

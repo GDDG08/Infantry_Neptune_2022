@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-12-31 17:37:14
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-29 22:59:39
+ * @LastEditTime : 2022-04-01 00:56:42
  */
 
 #ifndef BUSCOMM_CTRL_H
@@ -76,7 +76,7 @@ typedef enum {
 
 typedef struct {
     BusComm_BusCommStateEnum state;
-    uint32_t last_update_time[2];
+    uint32_t last_update_time[6];
 
     // Chassis up stream
     float yaw_relative_angle;  // Angle of chassis relative to pan tilt
@@ -94,19 +94,19 @@ typedef struct {
     float chassis_power;
 
     // Gimbal up stream
-    uint8_t gimbal_yaw_mode;      // Yaw mode of gimbal
+    uint8_t gimbal_yaw_mode;      // Yaw mode of gimbal    3bit
     float gimbal_yaw_ref;         // gimbal yaw target value
     float gimbal_imu_pos;         // gimbal yaw IMU angle feedback value
     float gimbal_imu_spd;         // Speed feedback value of gimbal yaw IMU
-    uint8_t chassis_mode;         // Chassis mode
+    uint8_t chassis_mode;         // Chassis mode    2bit
     float chassis_fb_ref;         // Target value of forward and back speed of chassis
     float chassis_lr_ref;         // Target value of chassis left and right speed
-    uint8_t cap_mode_user;        // Capacitance mode
-    uint8_t cap_boost_mode_user;  // cap boost mode
-    uint8_t power_limit_mode;     // Force to change power limit mode
+    uint8_t cap_mode_user;        // Capacitance mode   1bit
+    uint8_t cap_boost_mode_user;  // cap boost mode    1bit
+    uint8_t power_limit_mode;     // Force to change power limit mode 1bit
     // float pitch_angle;
-    uint8_t ui_cmd;
-    uint8_t infantry_code;
+    uint8_t ui_cmd;         // 1bit
+    uint8_t infantry_code;  // 4bit
 
     // Super Cap up stream
     uint32_t power_path_change_flag;

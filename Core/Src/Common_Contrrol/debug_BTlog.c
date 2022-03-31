@@ -5,7 +5,7 @@
  * @Author       : GDDG08
  * @Date         : 2021-10-31 09:16:32
  * @LastEditors  : GDDG08
- * @LastEditTime : 2022-03-29 23:20:11
+ * @LastEditTime : 2022-03-30 19:33:07
  */
 
 #include "debug_BTlog.h"
@@ -325,9 +325,13 @@ uint8_t BTLog_VerifyData(uint8_t* buff, uint16_t rxdatalen) {
 void BTlog_RXCallback(UART_HandleTypeDef* huart) {
     __HAL_DMA_DISABLE(huart->hdmarx);
     uint16_t rxdatalen = Const_BTlog_RX_BUFF_LEN_MAX - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
+    //@Todo New board
+//    uint16_t rxdatalen = Const_BTlog_RX_BUFF_LEN_MAX - Uart_DMACurrentDataCounter(huart->hdmarx);
 
     BTlog_DecodeData(BTlog_RxData, rxdatalen);
 
+    //@Todo New board
+    // del
     __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_BTlog_RX_BUFF_LEN_MAX);
     __HAL_DMA_ENABLE(huart->hdmarx);
 }
